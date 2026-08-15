@@ -154,6 +154,16 @@ A gap between the two is itself informative.
 **Do not review style.** Formatting and naming are not findings unless they
 violate a documented constraint.
 
+**Unnecessary code IS a finding**, and is not style. AGENTS.md documents
+smallest-change as a constraint, so the exception above applies. For anything
+added — file, function, parameter, option, dependency — ask: does it have a
+caller in this PR, and would removing it fail an acceptance criterion? If both
+answers are no, raise it and say which question it fails.
+
+Do not invert this into pressure to cut corners. Missing validation on untrusted
+input, absent negative tests, and error handling for conditions that can occur
+are findings in the other direction.
+
 **Do not scope-creep.** A finding must relate to this roadmap item.
 
 **Documentation is in scope.** A doc that now contradicts the code is a finding.

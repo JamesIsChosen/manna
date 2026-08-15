@@ -509,10 +509,10 @@
           diagRows([
             ['APP VERSION', meta.appVersion],
             ['BUILD ID', meta.buildId],
-            ['ARTIFACT SHA-256', meta.sha256Embedded],
+            ['SHA-256 (DIGEST FIELD BLANKED)', meta.sha256Embedded],
             ['SOURCE FILES', String(meta.sourceFiles)]
           ]),
-          el('p', { class: 'diag-note' }, '* Computed over the artifact with its digest field blanked — a file cannot contain its own SHA-256. The same value is recorded in BUILD-MANIFEST.json.')
+          el('p', { class: 'diag-note' }, '* Computed over the artifact with its digest field blanked — a file cannot contain its own SHA-256. The artifact\'s true SHA-256 is recorded in BUILD-MANIFEST.json and manna.html.sha256.')
         ]),
         el('section', { class: 'diag-card', 'aria-label': 'Runtime capabilities' }, [
           el('h2', {}, 'RUNTIME CAPABILITIES'),

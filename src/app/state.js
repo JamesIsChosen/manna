@@ -75,6 +75,17 @@
       changeListeners.forEach(function (fn) { fn(); });
     }
 
+    function emit(context) {
+      current = context;
+      dispatch();
+    }
+
+    // The DOM layer emits through the central SelectionService (§17); the
+    // state must be a subscriber so service.emit(ctx) drives the exact same
+    // dispatch as state.emit(ctx) — otherwise the production path never
+    // updates a pane.
+    if (service && typeof service.subscribe === 'function') service.subscribe(emit);
+
     return {
       metrics: metrics,
       currentContext: function () { return current; },

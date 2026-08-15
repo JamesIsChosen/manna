@@ -18,6 +18,25 @@ test('service: subscribers receive every emitted context', () => {
   assert.strictEqual(got[0], ctx);
 });
 
+test('state: service.emit drives the same dispatch as state.emit (§17)', () => {
+  // The production path: dom.js emits through the central SelectionService,
+  // and createState(service) must be subscribed so that emission reaches the
+  // panes. Before this wiring existed, service.emit() left current null and
+  // no pane ever updated.
+  const service = SEL.createService();
+  const state = APP.createState(service);
+  const received = {};
+  Object.keys(APP.render.panes).forEach((id) => { received[id] = []; });
+  Object.keys(APP.render.panes).forEach((id) => {
+    state.registerPane(APP.render.panes[id], (view) => received[id].push(view));
+  });
+  service.emit(H.verseCtx(16));
+  assert.strictEqual(state.currentContext().reference.verseStart, 16, 'state did not track a service emission');
+  assert.strictEqual(H.lastView(received, 'commentary').context.reference.verseStart, 16, 'commentary did not receive the service emission');
+  assert.strictEqual(H.lastView(received, 'xref').context.reference.verseStart, 16);
+  assert.strictEqual(H.lastView(received, 'word'), null);
+});
+
 test('service: unsubscribe stops delivery', () => {
   const service = SEL.createService();
   const got = [];

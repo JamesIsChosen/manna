@@ -33,7 +33,17 @@ const JS_FILES = [
   'src/app/boot.js'
 ];
 
-const INPUT_FILES = ['package.json', 'scripts/build.js'].concat(JS_FILES);
+// Every file that influences manna.html must be in the build-input set, or
+// the buildId will not change when the artifact does. index.html, styles.css,
+// and icons.svg are assembled into the artifact (assemble() reads them) and so
+// belong here alongside the JS modules.
+const INPUT_FILES = [
+  'package.json',
+  'scripts/build.js',
+  'src/index.html',
+  'src/ui/styles.css',
+  'src/ui/icons.svg'
+].concat(JS_FILES);
 const DIGEST_FIELD = 'sha256Embedded';
 const PLACEHOLDER = '0'.repeat(64);
 

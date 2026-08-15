@@ -10,11 +10,11 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const lint = require('../scripts/lint.js');
 const buildMod = require('../scripts/build.js');
-const H = require('./helpers.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const TMP = path.join(ROOT, '.tmp', 'failure');
 const LINT_CLI = path.join(ROOT, 'scripts', 'lint.js');
+const PROBE_CLI = path.join(ROOT, 'scripts', 'probe-selection.js');
 // Self-contained: the suite builds its own baseline artifact (CI runs tests
 // before the first build ever produced dist/).
 buildMod.build({ root: ROOT, outDir: path.join(TMP, 'dist') });
@@ -62,15 +62,13 @@ test('failure: missing artifact fails lint with exit != 0', () => {
 });
 
 test('failure: broken selection propagation is caught by the probe', () => {
-  const h = H.makeHarness('commentary-never-registered');
-  const problems = H.runScenario(h.state, h.received);
-  assert.ok(problems.length > 0, 'probe must catch an unregistered pane');
-  assert.ok(problems.some((p) => p.includes('commentary')));
+  const res = spawnSync(process.execPath, [PROBE_CLI, '--sabotage', 'commentary-never-registered'], { encoding: 'utf8' });
+  assert.notStrictEqual(res.status, 0, 'probe must fail closed with a non-zero exit');
+  assert.ok(res.stderr.includes('commentary'));
 });
 
 test('failure: a pinned pane that follows is caught by the probe', () => {
-  const h = H.makeHarness('no-pin');
-  const problems = H.runScenario(h.state, h.received);
-  assert.ok(problems.length > 0, 'probe must catch a pin that does not freeze');
-  assert.ok(problems.some((p) => p.includes('pin')));
+  const res = spawnSync(process.execPath, [PROBE_CLI, '--sabotage', 'no-pin'], { encoding: 'utf8' });
+  assert.notStrictEqual(res.status, 0, 'probe must fail closed with a non-zero exit');
+  assert.ok(res.stderr.includes('pin'));
 });

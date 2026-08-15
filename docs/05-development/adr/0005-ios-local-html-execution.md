@@ -1,6 +1,6 @@
 # ADR-0005 — iOS local-HTML execution
 
-**Status:** OPEN — execution and persistence resolved 2026-08-15; quota outstanding before P0.9 can close
+**Status:** accepted — execution and persistence resolved 2026-08-15; storage quota OUTSTANDING before P0.9 can close
 **Date:** 2026-08-15
 
 ## Context

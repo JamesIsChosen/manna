@@ -89,7 +89,7 @@ and is an R5 matter — see
 10. The artifact contains no absolute developer filesystem path, verified by an automated check.
 11. Deliberate failure fixtures — external JS, external CSS, fetched fixture, missing artifact, broken propagation, pinned pane that follows — each fail verification with a non-zero exit code.
 12. Build metadata (app version, build ID, artifact SHA-256) is visible in Diagnostics without exposing local paths.
-13. Validation covers desktop Chromium, desktop Firefox, an Android Chromium-class browser, and iPhone Safari.
+13. Validation covers desktop Chromium, desktop Firefox, and an Android Chromium-class browser. iOS is recorded as a status row, not a Safari pass/fail: supported via a named third-party viewer hosting Apple WebKit at a `file://` origin, with device and build recorded, storage quota explicitly outstanding (see ADR-0005).
 14. A reproducibility probe from two source directories records whether output is byte-identical, and documents any nondeterministic fields.
 15. Verse 15 renders the translator-supplied word `by` as visually distinct from translated text, and the distinction survives in the data model rather than being stripped at load. Scripture text matches the source module byte-for-byte once the supplied-word representation is accounted for.
 

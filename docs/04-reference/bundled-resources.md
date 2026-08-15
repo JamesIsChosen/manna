@@ -15,7 +15,7 @@ pinned, checksum recorded), `NEEDS-VERIFICATION`, `BLOCKED`.
 
 | Resource | Status | Notes |
 |---|---|---|
-| KJV — Pure Cambridge Edition | NEEDS-VERIFICATION | Default translation. Candidate source on hand: `PCE-KJV-BIBLE.md`, 4.64 MB, tab-separated `Book Chapter:Verse<TAB>text`, credited to BibleProtector.com. Needs a pinned version and SHA-256. |
+| KJV — Pure Cambridge Edition | NEEDS-VERIFICATION | **The** bundled translation — no other is shipped by default. Candidate source on hand: `PCE-KJV-BIBLE.md`, 4.64 MB, tab-separated `Book Chapter:Verse<TAB>text`, credited to BibleProtector.com. Needs a pinned version and SHA-256. |
 
 ### ⚠ The KJV is not public domain everywhere
 
@@ -55,10 +55,10 @@ Two things follow that matter here:
   library pack. Codex Bible then never distributes the KJV at all — the user
   brings it. This is an architectural answer to a legal question, and it fits the
   design already chosen.
-- **Bundle a worldwide-PD translation as the fallback default.** The World
-  English Bible is explicitly released to the public domain with no territorial
-  carve-out; the ASV (1901) likewise. Either can be the shipped default with KJV
-  PCE as the user's first import.
+- ~~Bundle a worldwide-PD translation as the fallback default.~~ **Rejected by
+  James, 2026-08-15.** The World English Bible is a user-imported module if
+  wanted, not bundled. This removes the fallback, which makes the CUP permission
+  route load-bearing rather than optional — see ADR-0004.
 
 **Not legal advice.** This records what was verified and what the options are.
 Confirming the route is James's decision, and worth a short conversation with

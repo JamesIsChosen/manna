@@ -75,6 +75,30 @@ Explicitly listed in the P0.1 packet §56 and they generalize:
 - Testing desktop only, or hiding mobile failures
 - Coupling a pane's click handler directly to another pane's DOM
 
+## Smallest change that works
+
+Implement **the smallest change that satisfies the acceptance criteria, and
+nothing more.** This is a scope rule, not a style rule — terse code that is
+harder to read is a worse answer, not a better one.
+
+- No abstraction for a single caller. Introduce the interface at the second caller.
+- No configuration option, flag, or hook nobody asked for.
+- No "we will need this later" code. Later is a roadmap item.
+- No speculative error handling for conditions that cannot occur here.
+- No new dependency where a few lines of existing code do the job.
+- Prefer deleting over adding.
+- Do not rewrite adjacent code you did not need to touch. Note it in the packet
+  and file it as a roadmap item.
+
+**The test a reviewer applies** to anything you add — file, function, parameter,
+option, dependency: does it have a caller in this PR, and would removing it fail
+an acceptance criterion? If both answers are no, it is a finding.
+
+**This never overrides** a documented requirement, a hard constraint, test
+coverage, input validation on untrusted data, or error handling for conditions
+that can actually occur. "We do not need that yet" is never a reason to leave a
+failure mode failing open.
+
 ## If the spec does not settle it
 
 Stop and ask. Do not guess. A guessed decision on a security or Scripture-integrity

@@ -29,8 +29,40 @@ editorial position on which printing is definitive. The underlying text's status
 and that publisher's own terms are two different questions. Both need answering
 before this is marked VERIFIED.
 
-**This is a decision for James, possibly with legal input. It is not an
-engineering judgement call.**
+**What the restriction actually is** (verified 2026-08-15): letters patent
+issued by King James, with no expiration, mean that **printing the KJV in the UK,
+or importing printed copies into the UK, requires permission**. Cambridge
+University Press, Oxford University Press and Collins hold those exclusive UK
+printing rights. The patent **has no effect outside the UK**, where the text is
+firmly public domain.
+
+Two things follow that matter here:
+
+1. The restriction is framed around **printing and importing printed copies**.
+   Whether it reaches purely electronic distribution is not settled by that
+   wording, and this project ships no printed copies.
+2. It is **UK-only**. Everywhere else, bundling the KJV is unambiguously fine.
+
+**Routes, in preference order** — see
+[ADR-0004](../05-development/adr/0004-kjv-uk-rights.md):
+
+- **Ask Cambridge University Press.** They operate a Bibles rights-and-permissions
+  process and grant KJV permissions routinely. A written permission removes the
+  question entirely and costs nothing but time.
+- **Ship KJV as a library-pack module, not bundled.** Under the two-file
+  architecture (ADR-0002 option E), the core artifact can bundle a
+  worldwide-public-domain translation and let the user load KJV PCE from the
+  library pack. Codex Bible then never distributes the KJV at all — the user
+  brings it. This is an architectural answer to a legal question, and it fits the
+  design already chosen.
+- **Bundle a worldwide-PD translation as the fallback default.** The World
+  English Bible is explicitly released to the public domain with no territorial
+  carve-out; the ASV (1901) likewise. Either can be the shipped default with KJV
+  PCE as the user's first import.
+
+**Not legal advice.** This records what was verified and what the options are.
+Confirming the route is James's decision, and worth a short conversation with
+CUP's permissions team before first public release.
 
 ## Original-language texts
 
@@ -54,14 +86,26 @@ inaccurate, and inaccuracy about the text is exactly what R5 exists to prevent.
 | Strong's Hebrew & Greek dictionaries | Strong, 1890 | Author d. 1894 | ~4–5 MB | NEEDS-VERIFICATION |
 | Strong's Exhaustive Concordance | Strong, 1890 | Author d. 1894 | **derive, do not bundle** | see below |
 | Matthew Henry's Complete Commentary | Henry, d. 1714 | Long PD | ~15–20 MB | NEEDS-VERIFICATION |
+| Matthew Henry's Concise Commentary | Henry, d. 1714 | Long PD | ~2–3 MB | NEEDS-VERIFICATION |
 | International Standard Bible Encyclopedia | 1915 | Pre-1929 US publication | ~12–15 MB | NEEDS-VERIFICATION |
 | Webster's Dictionary | 1828 | Pre-1929 US publication | ~7–10 MB | NEEDS-VERIFICATION |
 | Nave's Topical Bible | Nave, 1897 | Pre-1929 US publication | ~3–4 MB | NEEDS-VERIFICATION |
-| KJV Dictionary | — | Needs a specific edition named | ~1–2 MB | NEEDS-VERIFICATION |
+| Easton's Bible Dictionary | Easton, 1897 | Author d. 1894; pre-1929 | ~3–4 MB | NEEDS-VERIFICATION |
+| Smith's Bible Dictionary | Smith, 1863 | Pre-1929 | ~5–7 MB | OPTIONAL — overlaps Easton's |
 
-**Matthew Henry — which edition?** The *Complete* (unabridged, six volumes) is
-roughly an order of magnitude larger than the *Concise*. This single choice moves
-the bundle size more than any other on this list.
+**Matthew Henry — both editions ship.** The *Concise* is the sensible default
+view (fast, readable, ~2–3 MB); the *Complete* unabridged six volumes is the
+depth option (~15–20 MB) and belongs in the library pack rather than the core
+artifact. Offering both with a toggle is better than choosing for the user.
+
+**On "KJV Dictionary".** The work usually sold under that name is a
+Webster's-1828-derived list of English words as used in the KJV — which is
+already covered by bundling Webster's 1828 itself. What is almost certainly
+wanted instead is a **Bible dictionary**: entries for people, places, and
+concepts. The most widely bundled public-domain option across Bible software is
+**Easton's Bible Dictionary** (1897), with **Smith's** (1863) the common second.
+Easton's is recorded as the default; Smith's is marked optional because the two
+overlap heavily and the size cost is real.
 
 **The concordance should not be bundled.** Strong's Exhaustive Concordance is an
 index over the KJV keyed to Strong's numbers. Given the KJV text and Strong's

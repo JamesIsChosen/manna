@@ -45,10 +45,58 @@ most doubtful.
 **D. Library pack file.** Modules export to a single `.codexlibrary` container
 the user re-imports. Portable and browser-independent, but reload is manual.
 
+**E. Two files: HTML + auto-loading library pack.** `codex-bible.html` plus
+`codex-library.js` beside it. The app is two files; the library pack grows as the
+user imports modules. Proposed by James, 2026-08-15.
+
+## Probe results — 2026-08-15, headless Chromium, real `file://` origin
+
+Option E's viability turns on whether a local page can read a sibling file
+without the user selecting it every session. Measured rather than assumed:
+
+| Mechanism | Result |
+|---|---|
+| `<script src="library.js">` sibling classic script | **LOADED** |
+| `fetch("library.json")` sibling | **BLOCKED** — "Failed to fetch" |
+| IndexedDB on a `file://` origin | **OK, write + read** |
+
+Two consequences:
+
+1. **A library pack must be a classic JavaScript file, not a data file.**
+   `codex-library.js` assigning `window.__CODEX_LIBRARY__ = {...}` auto-loads.
+   The same content as `.json`, `.codexlibrary`, or any opaque extension read via
+   `fetch` does not — `file://` is an opaque origin and CORS blocks it. This is
+   the single design constraint that makes or breaks option E.
+2. **IndexedDB worked on `file://` here**, which is better than feared and makes
+   option A more viable than the spec's caution implies.
+
+**Scope of this evidence.** Headless Chromium in a Linux container. It is *not*
+desktop Chrome, Firefox, desktop Safari, or iOS Safari, and headless can differ
+from headed. iOS Safari remains the unmeasured risk and the reason P0.9 exists.
+Treat this as one data point that narrows the design space, not as the answer.
+
+## ⚠ Option E conflicts with R7
+
+R7 states imported modules must never gain executable capability. A library pack
+that is a `.js` file **is executable by definition** — the browser runs it before
+any application code inspects it. A hostile `codex-library.js` placed beside the
+HTML executes as application code.
+
+This is survivable but must be designed for, not waved through:
+
+- The pack is **written by the app**, never authored by the user. Untrusted
+  imports are parsed as data, validated, then re-serialized by the app into the pack.
+- The pack must contain **only a single data assignment** — no logic. The app
+  validates its shape on load and refuses anything unexpected.
+- Integrity: record a hash of the pack inside app storage, and warn loudly when
+  the pack changes outside the app.
+- The pack is still a trust boundary. It belongs in the threat model.
+
 ## Recommendation pending decision
 
-B as the product model, A as the runtime mechanism, D as the mandatory safety
-net. Personal study data (notes, sermons, highlights) must **never** live only
+E as the product model (two files, auto-loading pack), A as the runtime
+mechanism (IndexedDB, now measured to work on `file://` in at least one target),
+B as the portability escape hatch, D superseded by E. Personal study data (notes, sermons, highlights) must **never** live only
 inside a regenerated HTML — it changes constantly, and baking it into a
 downloaded artifact is a data-loss trap. It follows the backup path in §30–32.
 

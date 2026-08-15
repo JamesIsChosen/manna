@@ -189,3 +189,81 @@ test('browser: artifact boots and renders #app with the fixture verses', {
     try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
   }
 });
+
+/* Regression for the "reader footer unreachable" bug: a fixed bottom nav was
+ * overlaying interactive controls, and the reader's footer PREV/NEXT buttons
+ * sat below the viewport with no scroll room to reach them. The general form
+ * of the failure is: some visible button's bounding rect falls outside the
+ * viewport, or is overlapped by the fixed nav. Run on desktop (nav hidden by
+ * design) and phone (nav shown, reader must reserve clearance). */
+async function runNavReachabilityCheck(viewport, mobile, label) {
+  const { proc, profile } = launch(browserPath);
+  try {
+    const port = await waitForPort(proc, profile, 15000);
+    const cdp = await connect(await getPageWsUrl(port));
+    await cdp.send('Page.enable');
+    await cdp.send('Emulation.setDeviceMetricsOverride', {
+      width: viewport[0], height: viewport[1], deviceScaleFactor: 1, mobile: mobile
+    });
+    if (mobile) {
+      await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+      await cdp.send('Emulation.setUserAgentOverride', {
+        userAgent: 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
+      });
+    }
+    await cdp.send('Page.navigate', { url: pathToFileURL(ARTIFACT).href });
+    await poll(cdp, 'document.getElementById("app") && document.getElementById("app").children.length > 0',
+      (v) => v === true, 10000, label + ' boot');
+    await evaluate(cdp, 'document.querySelector(\'[data-nav="reader"]\').click()');
+    await poll(cdp, 'document.querySelectorAll(".reader-footer .nav-btn").length >= 2',
+      (v) => v === true, 10000, label + ' reader footer');
+
+    // Scroll to the very bottom — that is where a fixed nav would cover the
+    // last content, and where a missing bottom clearance is exposed.
+    await evaluate(cdp,
+      'window.scrollTo(0, Math.max(document.body.scrollHeight, document.documentElement.scrollHeight))');
+    await sleep(250);
+
+    const violations = await evaluate(cdp, `(function () {
+      var vh = window.innerHeight, vw = window.innerWidth;
+      var nav = document.querySelector('.bottomnav');
+      var navCs = nav ? getComputedStyle(nav) : null;
+      var navVisible = navCs && navCs.display !== 'none';
+      var navRect = navVisible ? nav.getBoundingClientRect() : null;
+      var bad = [];
+      [].forEach.call(document.querySelectorAll('button'), function (b) {
+        if (b.closest('.bottomnav')) return;               // the nav's own buttons
+        var cs = getComputedStyle(b);
+        if (cs.display === 'none' || cs.visibility === 'hidden') return;
+        var r = b.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) return;       // not rendered
+        var label = (b.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 26) || (b.className || '').slice(0, 26);
+        // Horizontal clip: no horizontal scroll is intended.
+        if (r.left < -0.5 || r.right > vw + 0.5) bad.push('hclip:' + label);
+        // Below the fold at maximum scroll — unreachable.
+        if (r.top >= 0 && r.bottom > vh + 0.5) bad.push('below-fold:' + label);
+        if (navRect) {
+          var overlap = !(r.right <= navRect.left || r.left >= navRect.right ||
+                          r.bottom <= navRect.top || r.top >= navRect.bottom);
+          if (overlap) bad.push('nav-overlap:' + label);
+        }
+      });
+      return bad;
+    })()`);
+
+    assert.deepStrictEqual(violations, [], label + ' has unreachable/overlapped buttons: ' + JSON.stringify(violations));
+    cdp.close();
+  } finally {
+    proc.kill();
+    await new Promise((r) => proc.once('exit', r)).catch(() => {});
+    await sleep(200);
+    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+  }
+}
+
+test('browser: no button is clipped by the viewport or overlapped by the fixed nav', {
+  skip: browserPath ? false : 'no Chromium-family browser found (set MANNA_BROWSER to the binary)'
+}, async () => {
+  await runNavReachabilityCheck([1280, 1032], false, 'desktop');
+  await runNavReachabilityCheck([360, 800], true, 'phone');
+});

@@ -544,7 +544,10 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex="0"]:focus-visibl
   right: 0;
   bottom: 0;
   z-index: 30;
-  display: flex;
+  /* display is governed by the media queries, not here: hidden by default
+   * (desktop/tablet use the top bar), shown only at phone width. An earlier
+   * `display: flex` here leaked the mobile nav onto every tier, where it
+   * pinned over the reader footer. */
   min-height: 62px;
   border-top: var(--bw) solid var(--ink);
   background: var(--panel);
@@ -589,7 +592,12 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex="0"]:focus-visibl
   .topnav { display: none; }
   .bottomnav { display: flex; }
   .desk-body { padding-bottom: 62px; }
-  .reader { padding: 8px 10px; }
+  /* The fixed bottom nav (62px + 3px border = 65px) overlays the bottom of the
+   * viewport. Reserve that space on the reader so the footer PREV/NEXT buttons
+   * clear it when scrolled to the bottom. env(safe-area-inset-bottom) adds the
+   * iOS home-indicator inset so those devices clear it too. The reader inside
+   * the desk keeps its larger 200px drawer clearance via .phone-body .reader. */
+  .reader { padding: 8px 10px calc(65px + env(safe-area-inset-bottom)); }
   .verse { font-size: 18px; line-height: 1.7; }
 }
 @media (max-width: 1149px) and (min-width: 640px) {

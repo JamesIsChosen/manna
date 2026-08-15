@@ -57,11 +57,14 @@ no external runtime files.
 **Design direction:** ACCEPTED 2026-08-15 —
 [../01-spec/study-desk-design.md](../01-spec/study-desk-design.md).
 
-**Still blocked by:** the prototype file `Study Desk.dc.html` was not included in
-the received bundle. Its logic objects are named as the fixture contract for the
-Commentary, Cross Refs, People, Topics and Notes strings. Those strings are
-undefined until it arrives. The KJV verses, Strong's entries and place records
-are fully specified in the design doc and are not blocked.
+**Prototype received** 2026-08-15 —
+[../01-spec/design-reference/](../01-spec/design-reference/). Fixture contract
+complete. **P0.1 is workable.**
+
+**Open question carried into P0.1:** the prototype drops the KJV supplied-word
+brackets in verse 15. How supplied words are stored and rendered is unresolved
+and is an R5 matter — see
+[../../fixtures/matthew-4-12-17.md](../../fixtures/matthew-4-12-17.md).
 
 **Deliverables:**
 - Deterministic build script producing `dist/manna.html`
@@ -88,6 +91,7 @@ are fully specified in the design doc and are not blocked.
 12. Build metadata (app version, build ID, artifact SHA-256) is visible in Diagnostics without exposing local paths.
 13. Validation covers desktop Chromium, desktop Firefox, an Android Chromium-class browser, and iPhone Safari.
 14. A reproducibility probe from two source directories records whether output is byte-identical, and documents any nondeterministic fields.
+15. Verse 15 renders the translator-supplied word `by` as visually distinct from translated text, and the distinction survives in the data model rather than being stripped at load. Scripture text matches the source module byte-for-byte once the supplied-word representation is accounted for.
 
 **Out of scope:** real SWORD or OSIS import, production IndexedDB persistence,
 production backup, notes, real Strong's datasets, Bible search, Verse Finder,

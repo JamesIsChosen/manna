@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><style>
+html,body{margin:0;padding:0;height:100%}
+@keyframes cbpulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+a{color:#b3271a}a:hover{color:#7d1a11}
+button{font-family:inherit}
+::selection{background:rgba(200,52,31,.25)}
+</style></helmet>
+
+<div ref="{{ rootRef }}" onClick="{{ onAct }}" style="{{ shellStyle }}">
+
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:8px 14px;background:#16130f;color:#f6ecd8;border-bottom:3px solid #000;flex:none">
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span style="font:400 22px/1 var(--fd);letter-spacing:.04em;text-transform:uppercase">Manna</span>
+      <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;opacity:.75;text-transform:uppercase">Study Desk · direction v3</span>
+    </div>
+
+    <div role="tablist" aria-label="Screen" style="display:flex;gap:0;border:2px solid currentColor;border-radius:3px;overflow:hidden">
+      <button data-act="screen" data-screen="desk" style="min-height:34px;padding:0 12px;border:0;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">DESK</button>
+      <button data-act="screen" data-screen="pinned" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">PINNED</button>
+      <button data-act="screen" data-screen="tablet" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">TABLET</button>
+      <button data-act="screen" data-screen="phone" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">PHONE</button>
+      <button data-act="screen" data-screen="home" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">HOME</button>
+      <button data-act="screen" data-screen="reading" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">READING</button>
+    </div>
+
+    <div style="flex:1"></div>
+
+    <div role="group" aria-label="Theme" style="display:flex;flex-wrap:wrap;gap:6px">
+      <button data-act="theme" data-theme="classic" title="Classic Comics" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">CLASSIC</button>
+      <button data-act="theme" data-theme="golden" title="Golden Age" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">GOLDEN</button>
+      <button data-act="theme" data-theme="graphic" title="Modern Graphic Novel" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">GRAPHIC</button>
+      <button data-act="theme" data-theme="parchment" title="Parchment" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">PARCHMENT</button>
+      <button data-act="theme" data-theme="study" title="Study Mode" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">STUDY</button>
+      <button data-act="theme" data-theme="night" title="Night Study" style="min-height:34px;padding:0 9px;border:2px solid currentColor;border-radius:3px;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">NIGHT</button>
+    </div>
+
+    <div role="group" aria-label="Words of Christ display" style="display:flex;border:2px solid currentColor;border-radius:3px;overflow:hidden">
+      <span style="padding:0 8px;font:600 9px/34px var(--fm);letter-spacing:.08em;opacity:.75">WoC</span>
+      <button data-act="woc" data-woc="red" style="min-height:34px;padding:0 9px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 10px/1 var(--fm);cursor:pointer">RED+MARK</button>
+      <button data-act="woc" data-woc="mark" style="min-height:34px;padding:0 9px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 10px/1 var(--fm);cursor:pointer">MARK ONLY</button>
+      <button data-act="woc" data-woc="off" style="min-height:34px;padding:0 9px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 10px/1 var(--fm);cursor:pointer">OFF</button>
+    </div>
+  </div>
+
+  <div ref="{{ hostRef }}" style="flex:1;min-height:0;overflow:auto;display:grid;place-items:center;padding:24px;background:var(--desk,#cdc3ae);background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:6px 6px">
+   <div style="{{ sizerStyle }}">
+   <div style="{{ stageStyle }}">
+
+    <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Study Desk</span>
+        <span style="font:600 10px/1 var(--fm);letter-spacing:.1em;padding:5px 8px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff)">ACTIVE · {{ selLabel }}</span>
+        <span style="flex:1"></span>
+        <div role="group" aria-label="Reader mode" style="display:flex;border:2px solid var(--ink,#16130f);border-radius:3px;overflow:hidden">
+          <button data-act="mode" data-mode="scroll" style="min-height:34px;padding:0 12px;border:0;background:transparent;color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">SCROLL MODE</button>
+          <button data-act="mode" data-mode="page" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PAGE MODE</button>
+        </div>
+        <button data-act="screen" data-screen="reading" style="min-height:34px;padding:0 12px;border:2px solid var(--ink,#16130f);background:var(--panel,#fffaf0);color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FULL-SCREEN READ</button>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:7px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--paper,#f6ecd8)">
+        <span style="font:700 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted,#6b6152)">LAYOUT</span>
+        <div role="group" aria-label="Saved layouts" style="display:flex;border:2px solid var(--ink,#16130f);overflow:hidden">
+          <button data-act="preset" data-preset="default" style="min-height:32px;padding:0 9px;border:0;background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">DEFAULT</button>
+          <button data-act="preset" data-preset="word" style="min-height:32px;padding:0 9px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">WORD FOCUS</button>
+          <button data-act="preset" data-preset="reader" style="min-height:32px;padding:0 9px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">WIDE READER</button>
+          <button data-act="preset" data-preset="mine" style="min-height:32px;padding:0 9px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">{{ mineLabel }}</button>
+        </div>
+        <button data-act="saveLayout" style="min-height:32px;padding:0 10px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">SAVE THIS ARRANGEMENT</button>
+        <span style="font:600 9px/1.3 var(--fm);color:var(--muted,#6b6152)">{{ layoutNote }}</span>
+        <span style="flex:1"></span>
+        <sc-for list="{{ paneChips }}" as="p" hint-placeholder-count="5">
+          <span style="display:flex;align-items:stretch;border:2px solid var(--ink,#16130f)">
+            <span style="padding:0 7px;font:700 9px/32px var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">{{ p.label }}</span>
+            <button data-act="up" data-pane="{{ p.key }}" aria-label="Move up" style="min-width:30px;min-height:32px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10px/1 var(--fm);cursor:pointer">▲</button>
+            <button data-act="down" data-pane="{{ p.key }}" aria-label="Move down" style="min-width:30px;min-height:32px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10px/1 var(--fm);cursor:pointer">▼</button>
+            <button data-act="side" data-pane="{{ p.key }}" aria-label="Move to other side" style="min-width:30px;min-height:32px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10px/1 var(--fm);cursor:pointer">⇄</button>
+          </span>
+        </sc-for>
+      </div>
+
+      <div style="{{ deskGridStyle }}">
+
+        <div style="display:flex;flex-direction:column;gap:12px;min-height:0">
+          <section data-pane-shell="xref" aria-label="Cross references" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Cross Refs</span>
+              <span style="flex:1"></span>
+              <div role="group" aria-label="Cross references sync" style="display:flex;border:2px solid var(--headInk,#fff);border-radius:3px;overflow:hidden">
+                <button data-act="follow" data-pane="xref" style="min-height:30px;padding:0 8px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+                <button data-act="pin" data-pane="xref" style="min-height:30px;padding:0 8px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+              </div>
+            </div>
+            <div data-pinbadge="xref" style="display:none;align-items:center;gap:7px;padding:6px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ xrefRef }}</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:9px">
+              <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">Showing for {{ xrefRef }}</p>
+              <sc-for list="{{ xrefs }}" as="x" hint-placeholder-count="4">
+                <div style="display:flex;gap:9px;padding:7px 0;border-top:1px solid var(--rule,rgba(0,0,0,.18))">
+                  <span style="font:700 11px/1.5 var(--fm);color:var(--accent2,#1b5e9c);white-space:nowrap">{{ x.ref }}</span>
+                  <span style="font:400 13px/1.45 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ x.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+
+          <section data-pane-shell="people" aria-label="People and topics" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">People · Topics</span>
+              <span style="flex:1"></span>
+              <div role="group" aria-label="People pane sync" style="display:flex;border:2px solid var(--headInk,#fff);border-radius:3px;overflow:hidden">
+                <button data-act="follow" data-pane="people" style="min-height:30px;padding:0 8px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+                <button data-act="pin" data-pane="people" style="min-height:30px;padding:0 8px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+              </div>
+            </div>
+            <div data-pinbadge="people" style="display:none;align-items:center;gap:7px;padding:6px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ peopleRef }}</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:9px">
+              <p style="margin:0 0 7px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">In {{ peopleRef }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px">
+                <sc-for list="{{ people }}" as="p" hint-placeholder-count="3">
+                  <span style="font:600 11px/1 var(--fu);padding:7px 8px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8);color:var(--ink,#16130f)">{{ p }}</span>
+                </sc-for>
+              </div>
+              <p style="margin:0 0 7px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">Topics</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ topics }}" as="t" hint-placeholder-count="3">
+                  <span style="font:600 11px/1 var(--fu);padding:7px 8px;border:2px dashed var(--ink,#16130f);color:var(--ink,#16130f)">{{ t }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section aria-label="Bible reader" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+          <div style="display:flex;align-items:center;gap:9px;padding:7px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+            <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Bible · KJV</span>
+            <div style="display:flex;align-items:center;gap:5px">
+              <label for="mbook" style="font:700 8.5px/1 var(--fm);letter-spacing:.1em;color:var(--headInk,#fff)">BOOK</label>
+              <input id="mbook" data-pick="book" list="mannaBooks" autocomplete="off" spellcheck="false" onChange="{{ onPick }}" onKeyDown="{{ onPickKey }}" style="width:132px;min-height:34px;padding:0 7px;border:2px solid var(--headInk,#fff);border-radius:0;background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:600 11px/1 var(--fm)">
+              <datalist id="mannaBooks"><sc-for list="{{ books }}" as="b" hint-placeholder-count="3"><option value="{{ b }}"></option></sc-for></datalist>
+              <label for="mchap" style="font:700 8.5px/1 var(--fm);letter-spacing:.1em;color:var(--headInk,#fff)">CH</label>
+              <input id="mchap" data-pick="chapter" type="number" min="1" inputmode="numeric" onChange="{{ onPick }}" onKeyDown="{{ onPickKey }}" style="width:56px;min-height:34px;padding:0 6px;border:2px solid var(--headInk,#fff);border-radius:0;background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:600 11px/1 var(--fm)">
+              <label for="mvers" style="font:700 8.5px/1 var(--fm);letter-spacing:.1em;color:var(--headInk,#fff)">V</label>
+              <input id="mvers" data-pick="verse" type="number" min="1" inputmode="numeric" onChange="{{ onPick }}" onKeyDown="{{ onPickKey }}" style="width:56px;min-height:34px;padding:0 6px;border:2px solid var(--headInk,#fff);border-radius:0;background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:600 11px/1 var(--fm)">
+              <span data-pickerr style="display:none;font:700 9px/1.3 var(--fm);letter-spacing:.04em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f">{{ pickError }}</span>
+            </div>
+            <span style="flex:1"></span>
+            <span style="font:700 9px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--headInk,#fff);color:var(--head,#16130f)">CONTROLLER</span>
+          </div>
+          <sc-if value="{{ outOfFixture }}">
+            <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--warn,#f2b705);color:#16130f">
+              <span style="font:700 10px/1.4 var(--fm);letter-spacing:.04em">{{ fixtureNote }}</span>
+            </div>
+          </sc-if>
+
+          <div style="flex:1;min-height:0;overflow:auto;background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:5px 5px">
+            <div style="padding:0 0 28px">
+              <div style="position:relative;margin:0 0 6px;padding:22px 26px 20px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8);border-bottom:var(--bw,3px) solid var(--ink,#16130f)">
+                <p style="margin:0;font:600 10px/1 var(--fm);letter-spacing:.22em;text-transform:uppercase;opacity:.75">Chapter {{ chapterLabel }}</p>
+                <p style="margin:4px 0 0;font:400 52px/.92 var(--fd);letter-spacing:.01em;text-transform:uppercase">{{ bookLabel }}</p>
+                <p style="margin:8px 0 0;font:400 14px/1.4 var(--fs);max-width:52ch;opacity:.85">{{ chapterBlurb }}</p>
+              </div>
+
+              <div data-reader style="padding:8px 26px 0;max-width:62ch">
+                <p data-verse="12" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">12</span>
+                  Now when Jesus had heard that John was cast into prison, he departed into <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;margin:0;cursor:pointer">◆&nbsp;Galilee</button>;
+                </p>
+                <p data-verse="13" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">13</span>
+                  And leaving <button data-act="place" data-place="nazareth" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;margin:0;cursor:pointer">◆&nbsp;Nazareth</button>, he came and dwelt in <button data-act="place" data-place="capernaum" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;margin:0;cursor:pointer">◆&nbsp;Capernaum</button>, which is upon the sea coast, in the borders of Zabulon and Nephthalim:
+                </p>
+                <p data-verse="14" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">14</span>
+                  That it might be fulfilled which was spoken by Esaias the prophet, saying,
+                </p>
+                <p data-verse="15" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">15</span>
+                  The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;margin:0;cursor:pointer">◆&nbsp;Galilee</button> of the Gentiles;
+                </p>
+                <p data-verse="16" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">16</span>
+                  The people which sat in darkness saw great <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;margin:0;cursor:pointer">light</button>; and to them which sat in the region and shadow of death <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;margin:0;cursor:pointer">light</button> is sprung up.
+                </p>
+                <p data-verse="17" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:9px 12px 9px 46px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">
+                  <span style="position:absolute;left:12px;top:13px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">17</span>
+                  From that time Jesus began to preach, and to say, <span data-woc style="display:inline;border-left:4px double currentColor;padding-left:7px;margin-left:2px"><span data-wocmark style="font:700 9px/1 var(--fm);letter-spacing:.08em;vertical-align:.35em;margin-right:4px">✝WoC</span>Repent: for the <button data-act="word" data-strongs="G932" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;margin:0;cursor:pointer">kingdom</button> of heaven is at hand.</span>
+                </p>
+
+                <div style="margin:20px 0 0;padding:11px 13px;border:2px dashed var(--rule,rgba(0,0,0,.35));background:var(--paper,#f6ecd8)">
+                  <p style="margin:0;font:600 9.5px/1.5 var(--fm);letter-spacing:.09em;text-transform:uppercase;color:var(--muted,#6b6152)">Legend — <span style="border-bottom:3px double currentColor">double rule</span> = original-language word · ◆ dotted = place · ✝ + rule = words of Christ. Tap any verse number or line to make it the desk selection.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+            <button data-act="prev" style="min-height:38px;padding:0 13px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:600 11px/1 var(--fm);cursor:pointer">◀ PREV VERSE</button>
+            <button data-act="next" style="min-height:38px;padding:0 13px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:600 11px/1 var(--fm);cursor:pointer">NEXT CHAPTER ▶</button>
+            <span style="flex:1"></span>
+            <span style="font:600 10px/1.4 var(--fm);letter-spacing:.06em;color:var(--muted,#6b6152)">{{ followSummary }}</span>
+          </div>
+        </section>
+
+        <div style="display:flex;flex-direction:column;gap:12px;min-height:0">
+
+          <section data-pane-shell="commentary" aria-label="Commentary" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Commentary</span>
+              <span style="flex:1"></span>
+              <div role="group" aria-label="Commentary sync" style="display:flex;border:2px solid var(--headInk,#fff);border-radius:3px;overflow:hidden">
+                <button data-act="follow" data-pane="commentary" style="min-height:30px;padding:0 9px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+                <button data-act="pin" data-pane="commentary" style="min-height:30px;padding:0 9px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+              </div>
+            </div>
+            <div data-pinbadge="commentary" style="display:none;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · HELD AT {{ comRef }}</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:11px 12px">
+              <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">Editorial note — not Scripture</p>
+              <p style="margin:0 0 8px;font:400 20px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">{{ comRef }}</p>
+              <p style="margin:0;font:400 15px/1.6 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ comBody }}</p>
+            </div>
+            <div data-stalebar="commentary" style="display:none;align-items:center;gap:8px;padding:8px 9px;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--warn,#f2b705)">
+              <span style="flex:1;font:700 10.5px/1.35 var(--fm);letter-spacing:.03em;color:#16130f">NOT FOLLOWING. Bible has moved to {{ selLabel }}.</span>
+              <button data-act="follow" data-pane="commentary" style="min-height:36px;padding:0 11px;border:2px solid #16130f;background:#16130f;color:#fff;font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">RESUME FOLLOW</button>
+            </div>
+          </section>
+
+          <section data-pane-shell="word" aria-label="Word study" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Word Study</span>
+              <span style="flex:1"></span>
+              <div role="group" aria-label="Word study sync" style="display:flex;border:2px solid var(--headInk,#fff);border-radius:3px;overflow:hidden">
+                <button data-act="follow" data-pane="word" style="min-height:30px;padding:0 9px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+                <button data-act="pin" data-pane="word" style="min-height:30px;padding:0 9px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+              </div>
+            </div>
+            <div data-pinbadge="word" style="display:none;align-items:center;gap:7px;padding:6px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ wStrongs }}</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:11px 12px">
+              <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
+                <span style="font:700 12px/1 var(--fm);letter-spacing:.06em;padding:6px 8px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">{{ wStrongs }}</span>
+                <span style="font:400 30px/1.1 var(--fs);color:var(--ink,#16130f)">{{ wGreek }}</span>
+                <span style="font:400 15px/1.2 var(--fs);font-style:italic;color:var(--muted,#6b6152)">{{ wTranslit }}</span>
+              </div>
+              <p style="margin:9px 0 0;font:600 10px/1.4 var(--fm);letter-spacing:.09em;text-transform:uppercase;color:var(--muted,#6b6152)">{{ wMorph }} · {{ wOcc }} occurrences</p>
+              <p style="margin:8px 0 0;font:400 15px/1.55 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ wGloss }}</p>
+              <p style="margin:11px 0 5px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">From {{ wFrom }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ wRelated }}" as="r" hint-placeholder-count="3">
+                  <span style="font:600 11px/1 var(--fm);padding:7px 8px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8);color:var(--ink,#16130f)">{{ r }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </section>
+
+          <section data-pane-shell="atlas" aria-label="Atlas" style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Atlas</span>
+              <span style="flex:1"></span>
+              <div role="group" aria-label="Atlas sync" style="display:flex;border:2px solid var(--headInk,#fff);border-radius:3px;overflow:hidden">
+                <button data-act="follow" data-pane="atlas" style="min-height:30px;padding:0 9px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+                <button data-act="pin" data-pane="atlas" style="min-height:30px;padding:0 9px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+              </div>
+            </div>
+            <div data-pinbadge="atlas" style="display:none;align-items:center;gap:7px;padding:6px 9px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ placeName }}</span>
+            </div>
+            <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 164px">
+              <div data-map style="position:relative;border-right:2px solid var(--ink,#16130f);background:var(--mapbg,#e6dcc2);background-image:repeating-linear-gradient(45deg,var(--rule,rgba(0,0,0,.14)) 0 1px,transparent 1px 7px)">
+                <div style="position:absolute;left:42%;top:47%;width:24%;height:26%;transform:translate(-50%,-50%);border:2px solid var(--ink,#16130f);border-radius:50%;background:var(--water,#9db7c4)"></div>
+                <span style="position:absolute;left:42%;top:47%;transform:translate(-50%,-50%);font:600 8px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f);text-align:center;width:70px">SEA OF<br>GALILEE</span>
+                <div data-dot="galilee" style="position:absolute;left:26%;top:24%;width:11px;height:11px;margin:-5px 0 0 -5px;border:2px solid var(--ink,#16130f);border-radius:50%;background:var(--paper,#f6ecd8)"></div>
+                <span style="position:absolute;left:26%;top:24%;margin:8px 0 0 -22px;font:700 9px/1 var(--fm);color:var(--ink,#16130f)">GALILEE</span>
+                <div data-dot="nazareth" style="position:absolute;left:20%;top:66%;width:11px;height:11px;margin:-5px 0 0 -5px;border:2px solid var(--ink,#16130f);border-radius:50%;background:var(--paper,#f6ecd8)"></div>
+                <span style="position:absolute;left:20%;top:66%;margin:8px 0 0 -24px;font:700 9px/1 var(--fm);color:var(--ink,#16130f)">NAZARETH</span>
+                <div data-dot="capernaum" style="position:absolute;left:56%;top:33%;width:11px;height:11px;margin:-5px 0 0 -5px;border:2px solid var(--ink,#16130f);border-radius:50%;background:var(--paper,#f6ecd8)"></div>
+                <span style="position:absolute;left:56%;top:33%;margin:8px 0 0 -26px;font:700 9px/1 var(--fm);color:var(--ink,#16130f)">CAPERNAUM</span>
+                <div data-cross style="position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border:3px solid var(--accent,#c8341f);border-radius:50%;pointer-events:none"></div>
+                <span style="position:absolute;left:6px;bottom:5px;font:600 11px/1.3 var(--fm);letter-spacing:.04em;color:var(--ink,#16130f)">schematic — bundled vector atlas goes here</span>
+              </div>
+              <div style="overflow:auto;padding:9px">
+                <p style="margin:0 0 5px;font:400 18px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">{{ placeName }}</p>
+                <p style="margin:0 0 7px;font:400 12.5px/1.45 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ placeDesc }}</p>
+                <sc-for list="{{ placeFacts }}" as="f" hint-placeholder-count="2">
+                  <p style="margin:0 0 4px;font:600 9.5px/1.4 var(--fm);letter-spacing:.04em;color:var(--muted,#6b6152)">{{ f }}</p>
+                </sc-for>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div data-pane-shell="notes" style="display:flex;align-items:center;gap:11px;padding:8px 14px;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--ink,#16130f)">Notes</span>
+        <span data-pinbadge="notes" style="display:none;font:700 9px/1 var(--fm);letter-spacing:.1em;padding:6px 7px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ noteRef }}</span>
+        <span style="font:600 9.5px/1 var(--fm);letter-spacing:.08em;color:var(--muted,#6b6152)">{{ noteRef }}</span>
+        <span style="flex:1;font:400 14px/1.45 var(--fs);color:var(--ink,#16130f)">{{ noteBody }}</span>
+        <div role="group" aria-label="Notes sync" style="display:flex;border:2px solid var(--ink,#16130f);border-radius:3px;overflow:hidden">
+          <button data-act="follow" data-pane="notes" style="min-height:34px;padding:0 10px;border:0;background:transparent;color:var(--ink,#16130f);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+          <button data-act="pin" data-pane="notes" style="min-height:34px;padding:0 10px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isTablet }}">
+    <div style="width:1024px;height:790px;padding:18px;background:#101010;border-radius:26px;box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55))">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border-radius:8px;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--head,#16130f);border-bottom:var(--bw,3px) solid var(--ink,#16130f)">
+          <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--headInk,#fff)">Matthew 4</span>
+          <span style="font:700 9px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">{{ selLabel }}</span>
+          <span style="flex:1"></span>
+          <button data-act="tabletToggle" style="min-height:38px;padding:0 12px;border:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">{{ tabletToggleLabel }}</button>
+        </div>
+        <div style="flex:1;min-height:0;display:grid;grid-template-columns:{{ tabletCols }};gap:0">
+          <div style="min-height:0;overflow:auto;padding:0 0 20px;background:var(--panel,#fffaf0);background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:5px 5px">
+            <div style="padding:18px 22px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">
+              <p style="margin:0;font:600 9px/1 var(--fm);letter-spacing:.22em;text-transform:uppercase;opacity:.75">Chapter Four</p>
+              <p style="margin:4px 0 0;font:400 40px/.95 var(--fd);text-transform:uppercase">Matthew</p>
+            </div>
+            <div data-reader style="padding:12px 22px;max-width:58ch">
+              <p data-verse="12" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">12</span>Now when Jesus had heard that John was cast into prison, he departed into <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;cursor:pointer">◆&nbsp;Galilee</button>;</p>
+              <p data-verse="13" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">13</span>And leaving <button data-act="place" data-place="nazareth" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;cursor:pointer">◆&nbsp;Nazareth</button>, he came and dwelt in <button data-act="place" data-place="capernaum" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;cursor:pointer">◆&nbsp;Capernaum</button>, which is upon the sea coast, in the borders of Zabulon and Nephthalim:</p>
+              <p data-verse="14" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">14</span>That it might be fulfilled which was spoken by Esaias the prophet, saying,</p>
+              <p data-verse="15" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">15</span>The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:0 2px;cursor:pointer">◆&nbsp;Galilee</button> of the Gentiles;</p>
+              <p data-verse="16" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">16</span>The people which sat in darkness saw great <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;cursor:pointer">light</button>; and to them which sat in the region and shadow of death <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;cursor:pointer">light</button> is sprung up.</p>
+              <p data-verse="17" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:10px 12px 10px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 19px/1.65 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:12px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">17</span>From that time Jesus began to preach, and to say, <span data-woc style="display:inline;border-left:4px double currentColor;padding-left:7px"><span data-wocmark style="font:700 9px/1 var(--fm);vertical-align:.35em;margin-right:4px">✝WoC</span>Repent: for the <button data-act="word" data-strongs="G932" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:0 1px;cursor:pointer">kingdom</button> of heaven is at hand.</span></p>
+            </div>
+          </div>
+
+          <div style="{{ tabletPaneStyle }}">
+            <div style="display:flex;gap:0;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+              <button data-act="mpane" data-mpane="commentary" style="flex:1;min-height:44px;border:0;border-right:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">COMM</button>
+              <button data-act="mpane" data-mpane="word" style="flex:1;min-height:44px;border:0;border-right:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">WORD</button>
+              <button data-act="mpane" data-mpane="atlas" style="flex:1;min-height:44px;border:0;border-right:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">ATLAS</button>
+              <button data-act="mpane" data-mpane="xref" style="flex:1;min-height:44px;border:0;background:transparent;color:var(--headInk,#fff);font:700 9.5px/1 var(--fm);letter-spacing:.06em;cursor:pointer">XREF</button>
+            </div>
+            <div data-pinbadge="mobile" style="display:none;align-items:center;gap:8px;padding:8px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ mPinRef }}</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:12px;background:var(--panel,#fffaf0)">
+              <p style="margin:0 0 6px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">{{ mPaneKicker }}</p>
+              <p style="margin:0 0 8px;font:400 22px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">{{ mPaneTitle }}</p>
+              <p style="margin:0;font:400 15px/1.6 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ mPaneBody }}</p>
+              <sc-for list="{{ mPaneList }}" as="m" hint-placeholder-count="3">
+                <div style="display:flex;gap:9px;padding:8px 0;border-top:1px solid var(--rule,rgba(0,0,0,.18))">
+                  <span style="font:700 11px/1.5 var(--fm);color:var(--accent2,#1b5e9c);white-space:nowrap">{{ m.ref }}</span>
+                  <span style="font:400 14px/1.45 var(--fs);color:var(--ink,#16130f)">{{ m.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px;padding:9px;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+              <button data-act="follow" data-pane="mobile" style="flex:1;min-height:46px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+              <button data-act="pin" data-pane="mobile" style="flex:1;min-height:46px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isPhone }}">
+    <div style="width:414px;height:872px;padding:12px;background:#101010;border-radius:46px;box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55))">
+      <div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border-radius:34px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px 2px;font:600 11px/1 var(--fm);color:var(--ink,#16130f)"><span>9:41</span><span>▮▮▮ ◗</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--head,#16130f);border-bottom:var(--bw,3px) solid var(--ink,#16130f)">
+          <span style="font:400 16px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--headInk,#fff)">Matthew 4</span>
+          <span style="flex:1"></span>
+          <span style="font:700 9px/1 var(--fm);letter-spacing:.09em;padding:6px 7px;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">{{ selLabel }}</span>
+        </div>
+
+        <div style="flex:1;min-height:0;overflow:auto;background:var(--panel,#fffaf0);background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:5px 5px">
+          <div style="padding:16px 18px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">
+            <p style="margin:0;font:600 9px/1 var(--fm);letter-spacing:.2em;text-transform:uppercase;opacity:.75">Chapter Four</p>
+            <p style="margin:4px 0 0;font:400 34px/.95 var(--fd);text-transform:uppercase">Matthew</p>
+          </div>
+          <div data-reader style="padding:10px 16px 200px">
+            <p data-verse="12" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">12</span>Now when Jesus had heard that John was cast into prison, he departed into <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:2px;cursor:pointer">◆&nbsp;Galilee</button>;</p>
+            <p data-verse="13" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">13</span>And leaving <button data-act="place" data-place="nazareth" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:2px;cursor:pointer">◆&nbsp;Nazareth</button>, he came and dwelt in <button data-act="place" data-place="capernaum" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:2px;cursor:pointer">◆&nbsp;Capernaum</button>, which is upon the sea coast, in the borders of Zabulon and Nephthalim:</p>
+            <p data-verse="14" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">14</span>That it might be fulfilled which was spoken by Esaias the prophet, saying,</p>
+            <p data-verse="15" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">15</span>The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, <button data-act="place" data-place="galilee" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:2px dotted currentColor;padding:2px;cursor:pointer">◆&nbsp;Galilee</button> of the Gentiles;</p>
+            <p data-verse="16" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">16</span>The people which sat in darkness saw great <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:2px;cursor:pointer">light</button>; and to them which sat in the region and shadow of death <button data-act="word" data-strongs="G5457" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:2px;cursor:pointer">light</button> is sprung up.</p>
+            <p data-verse="17" data-act="verse" role="button" tabindex="0" style="margin:0 0 2px;padding:11px 10px 11px 40px;position:relative;border-radius:3px;cursor:pointer;font:400 18px/1.7 var(--fs);color:var(--ink,#16130f)"><span style="position:absolute;left:10px;top:15px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">17</span>From that time Jesus began to preach, and to say, <span data-woc style="display:inline;border-left:4px double currentColor;padding-left:7px"><span data-wocmark style="font:700 9px/1 var(--fm);vertical-align:.35em;margin-right:4px">✝WoC</span>Repent: for the <button data-act="word" data-strongs="G932" style="font:inherit;color:inherit;background:transparent;border:0;border-bottom:3px double currentColor;padding:2px;cursor:pointer">kingdom</button> of heaven is at hand.</span></p>
+          </div>
+        </div>
+
+        <div style="{{ drawerStyle }}">
+          <button data-act="drawer" style="display:flex;align-items:center;gap:9px;width:100%;min-height:48px;padding:0 14px;border:0;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f);color:var(--headInk,#fff);cursor:pointer;text-align:left">
+            <span style="width:38px;height:5px;background:currentColor;border-radius:3px"></span>
+            <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Study · {{ mPaneTitle }}</span>
+            <span style="flex:1"></span>
+            <span style="font:700 10px/1 var(--fm)">{{ drawerCaret }}</span>
+          </button>
+          <div style="display:flex;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+            <button data-act="mpane" data-mpane="commentary" style="flex:1;min-height:46px;border:0;border-right:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);cursor:pointer">COMM</button>
+            <button data-act="mpane" data-mpane="word" style="flex:1;min-height:46px;border:0;border-right:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);cursor:pointer">WORD</button>
+            <button data-act="mpane" data-mpane="atlas" style="flex:1;min-height:46px;border:0;border-right:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);cursor:pointer">ATLAS</button>
+            <button data-act="mpane" data-mpane="xref" style="flex:1;min-height:46px;border:0;background:transparent;color:var(--ink,#16130f);font:700 9.5px/1 var(--fm);cursor:pointer">XREF</button>
+          </div>
+          <div data-pinbadge="mobile" style="display:none;align-items:center;gap:8px;padding:8px 12px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:repeating-linear-gradient(135deg,var(--warn,#f2b705) 0 10px,var(--ink,#16130f) 10px 20px)">
+            <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--warn,#f2b705);color:#16130f;border:2px solid #16130f">PINNED · {{ mPinRef }}</span>
+          </div>
+          <div style="flex:1;min-height:0;overflow:auto;padding:12px 14px;background:var(--panel,#fffaf0)">
+            <p style="margin:0 0 5px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152)">{{ mPaneKicker }}</p>
+            <p style="margin:0 0 7px;font:400 22px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">{{ mPaneTitle }}</p>
+            <p style="margin:0;font:400 15px/1.6 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">{{ mPaneBody }}</p>
+            <sc-for list="{{ mPaneList }}" as="m" hint-placeholder-count="3">
+              <div style="display:flex;gap:9px;padding:8px 0;border-top:1px solid var(--rule,rgba(0,0,0,.18))">
+                <span style="font:700 11px/1.5 var(--fm);color:var(--accent2,#1b5e9c);white-space:nowrap">{{ m.ref }}</span>
+                <span style="font:400 14px/1.45 var(--fs);color:var(--ink,#16130f)">{{ m.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:9px;padding:10px 12px;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+            <button data-act="follow" data-pane="mobile" style="flex:1;min-height:50px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 12px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+            <button data-act="pin" data-pane="mobile" style="flex:1;min-height:50px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 12px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+          </div>
+        </div>
+
+        <nav aria-label="Primary" style="position:relative;z-index:3;display:flex;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+          <button style="flex:1;min-height:62px;border:0;background:var(--accent,#c8341f);color:var(--onAccent,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">READ</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">SEARCH</button>
+          <button data-act="drawer" style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">STUDY</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">NOTES</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">MORE</button>
+        </nav>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isHome }}">
+    <div style="width:414px;height:872px;padding:12px;background:#101010;border-radius:46px;box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55))">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border-radius:34px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px 4px;font:600 11px/1 var(--fm);color:var(--ink,#16130f)"><span>9:41</span><span>▮▮▮ ◗</span></div>
+        <div style="flex:1;min-height:0;overflow:auto;background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:5px 5px">
+
+          <div style="margin:8px 12px 0;border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="display:flex;align-items:flex-end;gap:8px;padding:10px 12px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">
+              <span style="font:400 34px/.85 var(--fd);letter-spacing:.02em;text-transform:uppercase">Manna</span>
+              <span style="flex:1"></span>
+              <span style="font:600 9px/1.4 var(--fm);letter-spacing:.1em;text-align:right;opacity:.8">NO. 04<br>MATTHEW<br>OFFLINE</span>
+            </div>
+            <div style="position:relative;height:186px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--mapbg,#e6dcc2);background-image:repeating-linear-gradient(45deg,var(--rule,rgba(0,0,0,.14)) 0 2px,transparent 2px 9px)">
+              <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:600 10px/1.5 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6152);text-align:center">cover art<br>1024 × 640</span>
+              <div style="position:absolute;left:10px;bottom:10px;right:10px;padding:8px 10px;border:2px solid var(--ink,#16130f);background:var(--warn,#f2b705);color:#16130f">
+                <p style="margin:0;font:700 10px/1.3 var(--fm);letter-spacing:.08em;text-transform:uppercase">"The people which sat in darkness saw great light."</p>
+              </div>
+            </div>
+            <button data-act="screen" data-screen="desk" style="display:block;width:100%;min-height:74px;padding:11px 13px;border:0;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff);text-align:left;cursor:pointer">
+              <span style="display:block;font:700 9.5px/1 var(--fm);letter-spacing:.14em;text-transform:uppercase;opacity:.9">Continue reading</span>
+              <span style="display:block;margin-top:6px;font:400 27px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase">Matthew 4:16</span>
+            </button>
+            <div style="padding:12px 13px;border-bottom:var(--bw,3px) solid var(--ink,#16130f)">
+              <label for="cbnl" style="display:block;margin:0 0 6px;font:600 9.5px/1 var(--fm);letter-spacing:.11em;text-transform:uppercase;color:var(--muted,#6b6152)">Find the verse</label>
+              <input id="cbnl" type="text" value="who saw the great light?" style="width:100%;box-sizing:border-box;min-height:50px;padding:0 12px;border:2px solid var(--ink,#16130f);border-radius:0;background:var(--paper,#f6ecd8);color:var(--ink,#16130f);font:400 16px/1.4 var(--fs)">
+              <p style="margin:7px 0 0;font:600 9.5px/1.4 var(--fm);letter-spacing:.05em;color:var(--muted,#6b6152)">Answers from bundled text only. Nothing leaves the device.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+              <button data-act="screen" data-screen="desk" style="min-height:64px;border:0;border-right:2px solid var(--ink,#16130f);border-bottom:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">STRONG'S</button>
+              <button data-act="screen" data-screen="desk" style="min-height:64px;border:0;border-bottom:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">ATLAS</button>
+              <button data-act="screen" data-screen="desk" style="min-height:64px;border:0;border-right:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">TOPICS</button>
+              <button data-act="screen" data-screen="desk" style="min-height:64px;border:0;background:transparent;color:var(--ink,#16130f);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">NOTES</button>
+            </div>
+          </div>
+
+          <div style="margin:12px;padding:12px;border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <p style="margin:0 0 9px;font:400 19px/1 var(--fd);letter-spacing:.04em;text-transform:uppercase;color:var(--ink,#16130f)">Study progress</p>
+            <p style="margin:0 0 4px;font:600 10px/1 var(--fm);letter-spacing:.06em;color:var(--muted,#6b6152)">MATTHEW · 62%</p>
+            <div style="height:16px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8)"><div style="width:62%;height:100%;background:var(--accent,#c8341f)"></div></div>
+            <p style="margin:10px 0 4px;font:600 10px/1 var(--fm);letter-spacing:.06em;color:var(--muted,#6b6152)">WORD STUDIES THIS WEEK · 9 OF 15</p>
+            <div style="height:16px;border:2px solid var(--ink,#16130f);background:var(--paper,#f6ecd8)"><div style="width:60%;height:100%;background:var(--accent2,#1b5e9c)"></div></div>
+            <div style="display:flex;gap:8px;margin-top:11px">
+              <span style="flex:1;padding:9px;border:2px dashed var(--ink,#16130f);font:700 10px/1.4 var(--fm);text-align:center;color:var(--ink,#16130f)">12-DAY<br>STREAK</span>
+              <span style="flex:1;padding:9px;border:2px dashed var(--ink,#16130f);font:700 10px/1.4 var(--fm);text-align:center;color:var(--ink,#16130f)">48<br>NOTES</span>
+              <span style="flex:1;padding:9px;border:2px dashed var(--ink,#16130f);font:700 10px/1.4 var(--fm);text-align:center;color:var(--ink,#16130f)">6<br>MODULES</span>
+            </div>
+          </div>
+        </div>
+        <nav aria-label="Primary" style="display:flex;border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)">
+          <button data-act="screen" data-screen="phone" style="flex:1;min-height:62px;border:0;background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">READ</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">SEARCH</button>
+          <button data-act="screen" data-screen="phone" style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">STUDY</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">NOTES</button>
+          <button style="flex:1;min-height:62px;border:0;border-left:2px solid var(--headInk,#fff);background:transparent;color:var(--headInk,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">MORE</button>
+        </nav>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isReading }}">
+    <div style="width:1240px;height:860px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--rule,rgba(0,0,0,.18))">
+        <span style="font:600 9.5px/1 var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6152)">Full-screen reading · interface recedes</span>
+        <span style="flex:1"></span>
+        <div role="group" aria-label="Reader mode" style="display:flex;border:2px solid var(--ink,#16130f);border-radius:3px;overflow:hidden">
+          <button data-act="mode" data-mode="scroll" style="min-height:34px;padding:0 12px;border:0;background:transparent;color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">SCROLL</button>
+          <button data-act="mode" data-mode="page" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PAGE</button>
+        </div>
+        <button data-act="screen" data-screen="desk" style="min-height:34px;padding:0 12px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:600 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">EXIT ✕</button>
+      </div>
+      <div style="flex:1;min-height:0;overflow:auto;display:flex;justify-content:center;padding:34px 20px">
+        <div style="{{ readPageStyle }}">
+          <p style="margin:0 0 26px;font:400 12px/1 var(--fm);letter-spacing:.28em;text-transform:uppercase;color:var(--muted,#6b6152);text-align:center">Matthew 4 · {{ modeLabel }}</p>
+          <div data-reader style="max-width:60ch;margin:0 auto">
+            <p data-verse="12" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">12</span>Now when Jesus had heard that John was cast into prison, he departed into Galilee;</p>
+            <p data-verse="13" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">13</span>And leaving Nazareth, he came and dwelt in Capernaum, which is upon the sea coast, in the borders of Zabulon and Nephthalim:</p>
+            <p data-verse="14" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">14</span>That it might be fulfilled which was spoken by Esaias the prophet, saying,</p>
+            <p data-verse="15" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">15</span>The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles;</p>
+            <p data-verse="16" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">16</span>The people which sat in darkness saw great light; and to them which sat in the region and shadow of death light is sprung up.</p>
+            <p data-verse="17" data-act="verse" role="button" tabindex="0" style="margin:0 0 4px;padding:8px 10px 8px 44px;position:relative;border-radius:3px;cursor:pointer;font:400 22px/1.75 var(--fs);color:var(--ink,#16130f);text-wrap:pretty"><span style="position:absolute;left:8px;top:14px;font:700 11px/1 var(--fm);color:var(--muted,#6b6152)">17</span>From that time Jesus began to preach, and to say, <span data-woc style="display:inline;border-left:4px double currentColor;padding-left:7px"><span data-wocmark style="font:700 10px/1 var(--fm);vertical-align:.35em;margin-right:4px">✝WoC</span>Repent: for the kingdom of heaven is at hand.</span></p>
+          </div>
+          <p style="margin:30px 0 0;font:600 11px/1 var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--muted,#6b6152);text-align:center">{{ pageFoot }}</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--rule,rgba(0,0,0,.18))">
+        <button data-act="prev" style="min-height:44px;padding:0 16px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:600 11px/1 var(--fm);cursor:pointer">◀ {{ prevLabel }}</button>
+        <span style="flex:1"></span>
+        <span style="font:600 10px/1 var(--fm);letter-spacing:.1em;color:var(--muted,#6b6152)">TAP ANY VERSE TO SET THE DESK SELECTION · {{ selLabel }}</span>
+        <span style="flex:1"></span>
+        <button data-act="next" style="min-height:44px;padding:0 16px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:600 11px/1 var(--fm);cursor:pointer">{{ nextLabel }} ▶</button>
+      </div>
+    </div>
+    </sc-if>
+
+   </div>
+   </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:940}}">
+class Component extends DCLogic {
+  state = { screen:'desk', theme:'classic', book:'Matthew', chapter:4, verse:16, strongs:'G5457', place:'capernaum',
+            pins:{}, woc:'red', mode:'scroll', mpane:'commentary', drawer:true, tabletOpen:true, scale:1 };
+
+  rootRef = React.createRef();
+  hostRef = React.createRef();
+
+  THEMES = {
+    classic:{'--paper':'#f6ecd8','--panel':'#fffaf0','--ink':'#16130f','--headInk':'#fff8ea','--head':'#16130f','--accent':'#b3271a','--onAccent':'#fff8ea','--accent2':'#17558c','--muted':'#6b6152','--rule':'rgba(22,19,15,.22)','--dot':'rgba(22,19,15,.13)','--warn':'#f2b705','--mapbg':'#e6dcc2','--water':'#9db7c4','--desk':'#c9bda5','--bw':'3px','--sh':'12px 12px 0 rgba(22,19,15,.55)','--sh2':'5px 5px 0 rgba(22,19,15,.5)','--woc':'#a8231a','--sel':'rgba(179,39,26,.13)'},
+    golden:{'--paper':'#ecdfb8','--panel':'#f6ebc8','--ink':'#241d12','--headInk':'#f6ebc8','--head':'#241d12','--accent':'#a8451a','--onAccent':'#f6ebc8','--accent2':'#1d5049','--muted':'#6e5f42','--rule':'rgba(36,29,18,.26)','--dot':'rgba(36,29,18,.2)','--warn':'#e0a92b','--mapbg':'#ddcda0','--water':'#8fa9a4','--desk':'#bfae82','--bw':'3px','--sh':'12px 12px 0 rgba(36,29,18,.5)','--sh2':'5px 5px 0 rgba(36,29,18,.45)','--woc':'#8f2f14','--sel':'rgba(168,69,26,.16)'},
+    graphic:{'--paper':'#1a1d22','--panel':'#20242b','--ink':'#eef1f5','--headInk':'#eef1f5','--head':'#2b313a','--accent':'#d94b3a','--onAccent':'#12151a','--accent2':'#6fb3e0','--muted':'#a2acb9','--rule':'rgba(238,241,245,.22)','--dot':'rgba(238,241,245,.07)','--warn':'#e7b53c','--mapbg':'#2a2f38','--water':'#3d5566','--desk':'#0d0f13','--bw':'3px','--sh':'12px 12px 0 rgba(0,0,0,.7)','--sh2':'5px 5px 0 rgba(0,0,0,.6)','--woc':'#ff9a86','--sel':'rgba(217,75,58,.22)'},
+    parchment:{'--paper':'#efe6d2','--panel':'#f7f0e0','--ink':'#2b2419','--headInk':'#f7f0e0','--head':'#4a3d28','--accent':'#7a4a1e','--onAccent':'#f7f0e0','--accent2':'#3d5a4a','--muted':'#6d6250','--rule':'rgba(43,36,25,.2)','--dot':'rgba(43,36,25,.05)','--warn':'#c9962f','--mapbg':'#e3d8bf','--water':'#a5b4ac','--desk':'#cdc0a4','--bw':'1px','--sh':'0 6px 22px rgba(43,36,25,.28)','--sh2':'0 2px 8px rgba(43,36,25,.16)','--woc':'#8a3216','--sel':'rgba(122,74,30,.14)'},
+    study:{'--paper':'#ffffff','--panel':'#ffffff','--ink':'#1a1a1a','--headInk':'#ffffff','--head':'#2c2c2c','--accent':'#1f4fa3','--onAccent':'#ffffff','--accent2':'#1f4fa3','--muted':'#5c5c5c','--rule':'rgba(0,0,0,.16)','--dot':'rgba(0,0,0,0)','--warn':'#e8b81c','--mapbg':'#f2f2f2','--water':'#c9d8e2','--desk':'#e8e8e8','--bw':'1px','--sh':'0 2px 10px rgba(0,0,0,.14)','--sh2':'0 1px 4px rgba(0,0,0,.12)','--woc':'#a11f11','--sel':'rgba(31,79,163,.11)'},
+    night:{'--paper':'#101216','--panel':'#171a1f','--ink':'#e7e4dd','--headInk':'#e7e4dd','--head':'#22262c','--accent':'#e0a33c','--onAccent':'#101216','--accent2':'#8fc0e8','--muted':'#9a968c','--rule':'rgba(231,228,221,.2)','--dot':'rgba(231,228,221,.05)','--warn':'#e0a33c','--mapbg':'#1e232a','--water':'#2f4653','--desk':'#08090b','--bw':'2px','--sh':'10px 10px 0 rgba(0,0,0,.8)','--sh2':'4px 4px 0 rgba(0,0,0,.7)','--woc':'#ff9d8c','--sel':'rgba(224,163,60,.2)'}
+  };
+
+  COM = {
+    12:"When Jesus hears that John is imprisoned he withdraws north. Matthew marks a handover: the forerunner's voice falls silent and the ministry it announced begins.",
+    13:"Leaving Nazareth for Capernaum moves Jesus from an inland hill village to a lakeside customs and fishing town on the trade road — a place where news travelled.",
+    14:"A formula quotation. Matthew reads the move north as deliberate fulfilment of Isaiah rather than as a retreat from danger.",
+    15:"Zebulun and Naphtali were the first territories carried off by Assyria. The region longest under foreign shadow is the one named first for light.",
+    16:"The light does not arrive somewhere else and summon the people to it; it rises where they already sit. Isaiah's image of dawn over occupied territory is applied to Galilee.",
+    17:"The first recorded word of the ministry is 'Repent'. The reason given is not judgement but proximity: the kingdom has come near."
+  };
+  XREF = {
+    12:[{ref:'Mark 1:14',text:'Now after that John was put in prison, Jesus came into Galilee.'},{ref:'Luke 3:19–20',text:'Herod shut up John in prison.'},{ref:'John 4:1–3',text:'He left Judaea, and departed again into Galilee.'}],
+    13:[{ref:'Matt 9:1',text:'He came into his own city.'},{ref:'Luke 4:31',text:'And came down to Capernaum, a city of Galilee.'},{ref:'Josh 19:10–16',text:'The inheritance of the children of Zebulun.'}],
+    14:[{ref:'Isa 9:1',text:'Afterward did more grievously afflict her by the way of the sea.'},{ref:'Matt 1:22',text:'That it might be fulfilled which was spoken of the Lord.'}],
+    15:[{ref:'Isa 9:1',text:'The land of Zebulun and the land of Naphtali.'},{ref:'1 Kings 9:11',text:'Twenty cities in the land of Galilee.'}],
+    16:[{ref:'Isa 9:2',text:'The people that walked in darkness have seen a great light.'},{ref:'Luke 1:79',text:'To give light to them that sit in darkness.'},{ref:'John 8:12',text:'I am the light of the world.'},{ref:'Eph 5:14',text:'Christ shall give thee light.'}],
+    17:[{ref:'Mark 1:15',text:'The time is fulfilled, and the kingdom of God is at hand.'},{ref:'Matt 3:2',text:'Repent ye: for the kingdom of heaven is at hand.'},{ref:'Matt 10:7',text:'Preach, saying, The kingdom of heaven is at hand.'},{ref:'Acts 2:38',text:'Repent, and be baptized every one of you.'}]
+  };
+  PEOPLE = { 12:['Jesus','John the Baptist'],13:['Jesus','Zabulon','Nephthalim'],14:['Esaias'],15:['Zabulon','Nephthalim'],16:['—'],17:['Jesus'] };
+  TOPICS = { 12:['Withdrawal','Galilee ministry'],13:['Capernaum','Fulfilment'],14:['Prophecy'],15:['Isaiah 9','Gentiles'],16:['Light & darkness','Isaiah 9'],17:['Repentance','Kingdom of heaven'] };
+  NOTES = { 16:'Compare with Isaiah 9:2 — the tense shift from "walked" to "sat" is worth a sermon note.', 17:'Check whether Mark 1:15 adds "believe the gospel" — different emphasis.' };
+  WORDS = {
+    G5457:{greek:'φῶς',tr:'phōs',morph:'Noun · neuter',occ:73,gloss:'Light: the medium by which things are made visible, and by extension revelation, moral clarity, and the presence of God.',from:'Matthew 4:16',rel:['G5458 φωστήρ','G5461 φωτίζω','G5462 φωτισμός']},
+    G932:{greek:'βασιλεία',tr:'basileia',morph:'Noun · feminine',occ:162,gloss:'Kingdom, reign, royal rule. In Matthew it is the active rule of God breaking into the present rather than a territory on a map.',from:'Matthew 4:17',rel:['G935 βασιλεύς','G936 βασιλεύω','G933 βασίλειον']}
+  };
+  PLACES = {
+    galilee:{name:'Galilee',desc:'Northern region of Roman Palestine, densely populated and mixed in language and trade.',facts:['REGION · NORTH','ROADS TO DAMASCUS & THE COAST','ISA 9:1 — "GALILEE OF THE NATIONS"']},
+    nazareth:{name:'Nazareth',desc:'Small hill town in lower Galilee, roughly 25 km south-west of Capernaum.',facts:['VILLAGE · EST. POP. 400','NO OT MENTION','LEFT IN MATT 4:13']},
+    capernaum:{name:'Capernaum',desc:'Fishing and customs town on the north shore of the Sea of Galilee; base of the Galilean ministry.',facts:['TOWN · LAKESIDE','CUSTOMS POST ON THE VIA MARIS','CALLED "HIS OWN CITY" — MATT 9:1']}
+  };
+  DOTS = { galilee:[26,24], nazareth:[20,66], capernaum:[56,33] };
+  BOOKS = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+  COUNTS = [50,40,27,36,34,24,21,4,31,24,22,25,29,36,10,13,10,42,150,31,12,8,66,52,5,48,12,14,3,9,1,4,7,3,3,3,2,14,4,28,16,24,21,28,16,16,13,6,6,4,4,5,3,6,4,3,1,13,5,5,3,5,1,1,1,22];
+  SIZES = { desk:[1440,900], pinned:[1440,900], tablet:[1024,790], phone:[414,872], home:[414,872], reading:[1240,860] };
+
+  PRESETS = {
+    default:{ leftW:300, rightW:372, left:['xref','people'], right:['commentary','word','atlas'], name:'DEFAULT' },
+    word:{ leftW:252, rightW:452, left:['people','xref'], right:['word','commentary','atlas'], name:'WORD FOCUS' },
+    reader:{ leftW:236, rightW:288, left:['xref','people'], right:['commentary','atlas','word'], name:'WIDE READER' }
+  };
+  LABELS = { xref:'XREF', people:'PEOPLE', commentary:'COMM', word:'WORD', atlas:'ATLAS' };
+
+  componentDidMount(){
+    this.ro = () => this.fit(); window.addEventListener('resize', this.ro);
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem('manna.layout') || 'null'); } catch(e){}
+    this.setState({ layout: { ...this.PRESETS.default }, saved });
+    this.down = (e) => {
+      const h = e.target.closest && e.target.closest('[data-h]'); if(!h) return;
+      e.preventDefault();
+      const kind = h.dataset.h, sc = this.state.scale || 1, L = this.state.layout || this.PRESETS.default;
+      const x0 = e.clientX, y0 = e.clientY;
+      let move;
+      if (kind === 'col'){
+        const side = h.dataset.side, w0 = side === 'left' ? L.leftW : L.rightW;
+        move = (ev) => {
+          const d = (ev.clientX - x0) / sc;
+          const w = Math.max(180, Math.min(600, side === 'left' ? w0 + d : w0 - d));
+          this.setLayout({ [side === 'left' ? 'leftW' : 'rightW']: Math.round(w), name:'CUSTOM' });
+        };
+      } else {
+        const zone = h.dataset.zone, i = +h.dataset.i, col = this.col(zone);
+        if (!col) return;
+        const grow = { ...(L.grow || {}) };
+        L[zone].forEach((k, n) => { const el = col.children[n]; if (el) grow[k] = el.offsetHeight; });
+        const a = L[zone][i], b = L[zone][i+1], hA = grow[a], hB = grow[b];
+        move = (ev) => {
+          const d = (ev.clientY - y0) / sc;
+          const na = Math.max(96, hA + d), nb = Math.max(96, hB - d);
+          if (na + nb !== hA + hB) return;
+          this.setLayout({ grow:{ ...grow, [a]:na, [b]:nb }, name:'CUSTOM' });
+        };
+      }
+      const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+      window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+    };
+    this.keys = () => {};
+    window.addEventListener('pointerdown', this.down);
+    window.addEventListener('keydown', this.keys);
+    this.fit(); this.paint();
+  }
+
+  grid(){ const r = this.rootRef.current; const b = r && r.querySelector('[aria-label="Bible reader"]'); return b ? b.parentNode : null; }
+  col(zone){ const g = this.grid(); return g ? g.children[zone === 'left' ? 0 : 2] : null; }
+
+  sidePane(key){
+    const L = { ...(this.state.layout || this.PRESETS.default) };
+    const from = L.left.indexOf(key) > -1 ? 'left' : 'right', to = from === 'left' ? 'right' : 'left';
+    if (L[from].length < 2) return;
+    L[from] = L[from].filter(k => k !== key); L[to] = [...L[to], key]; L.name = 'CUSTOM';
+    L.grow = {};
+    this.setState({ layout:L });
+  }
+
+  handles(){
+    const g = this.grid(), L = this.state.layout || this.PRESETS.default; if(!g) return;
+    g.style.position = 'relative';
+    const H = (id, css, data) => {
+      let el = g.querySelector('[data-hid="'+id+'"]');
+      if (!el){ el = document.createElement('div'); el.dataset.hid = id; el.setAttribute('aria-hidden','true'); g.appendChild(el); }
+      Object.assign(el.dataset, data);
+      el.style.cssText = 'position:absolute;z-index:6;background:transparent;touch-action:none;' + css;
+      return el;
+    };
+    const cols = { left:g.children[0], right:g.children[2] };
+    const gh = g.clientHeight - 24;
+    ['left','right'].forEach(z => {
+      const c = cols[z]; if(!c) return;
+      const x = z === 'left' ? (c.offsetLeft + c.offsetWidth - 5) : (c.offsetLeft - 6);
+      H('col-'+z, 'left:'+x+'px;top:12px;width:11px;height:'+gh+'px;cursor:col-resize', { h:'col', side:z });
+      L[z].forEach((k,i) => {
+        if (i === L[z].length - 1) return;
+        const ch = c.children[i]; if(!ch) return;
+        H('row-'+z+'-'+i, 'left:'+c.offsetLeft+'px;top:'+(c.offsetTop + ch.offsetTop + ch.offsetHeight)+'px;width:'+c.offsetWidth+'px;height:12px;cursor:row-resize', { h:'row', zone:z, i:i });
+      });
+      for (let i = L[z].length - 1; i < 4; i++){ const dead = g.querySelector('[data-hid="row-'+z+'-'+i+'"]'); if (dead) dead.remove(); }
+    });
+  }
+
+  setLayout(patch){ this.setState(s => ({ layout: { ...(s.layout || this.PRESETS.default), ...patch } })); }
+
+  moveePane(key, dir){
+    const L = { ...(this.state.layout || this.PRESETS.default) };
+    ['left','right'].forEach(z => {
+      const arr = [...L[z]], i = arr.indexOf(key);
+      if (i < 0) return;
+      const j = i + dir; if (j < 0 || j >= arr.length) return;
+      arr.splice(j, 0, arr.splice(i, 1)[0]); L[z] = arr; L.name = 'CUSTOM';
+    });
+    this.setState({ layout:L });
+  }
+  componentDidUpdate(){ this.fit(); this.paint(); }
+  componentWillUnmount(){ window.removeEventListener('resize', this.ro); window.removeEventListener('pointerdown', this.down); window.removeEventListener('keydown', this.keys); }
+
+  fit(){
+    const h = this.hostRef.current; if(!h) return;
+    const [w,ht] = this.SIZES[this.state.screen] || [1440,900];
+    const s = Math.min(1, (h.clientWidth-40)/w, (h.clientHeight-40)/ht);
+    if (Math.abs(s - this.state.scale) > 0.004) this.setState({ scale:s });
+  }
+
+  ref(v){ return this.state.book + ' ' + this.state.chapter + ':' + v; }
+  paneRef(pane){ const p = this.state.pins[pane]; return p ? p.verse : this.state.verse; }
+  isPinned(pane){ return !!this.state.pins[pane]; }
+
+  onPickKey(e){ if (e.key === 'Enter'){ e.preventDefault(); this.onPick(e); e.target.blur(); } }
+
+  onPick(e){
+    const el = e.target, k = el.dataset.pick, raw = el.value.trim();
+    if (k === 'book'){
+      const hit = this.BOOKS.find(b => b.toLowerCase() === raw.toLowerCase())
+               || this.BOOKS.find(b => b.toLowerCase().startsWith(raw.toLowerCase()));
+      if (!hit) return this.setState({ pickError:'NO BOOK MATCHES "' + raw.toUpperCase() + '"' });
+      return this.setState({ book:hit, chapter:1, pickError:'' });
+    }
+    const n = parseInt(raw, 10);
+    if (k === 'chapter'){
+      const max = this.COUNTS[this.BOOKS.indexOf(this.state.book)] || 1;
+      if (!n || n < 1 || n > max) return this.setState({ pickError: this.state.book.toUpperCase() + ' HAS ' + max + ' CHAPTERS' });
+      return this.setState({ chapter:n, pickError:'' });
+    }
+    if (!n || n < 12 || n > 17) return this.setState({ pickError:'MOCK VERSES 12–17 ONLY' });
+    return this.setState({ verse:n, pickError:'' });
+  }
+
+  onAct = (e) => {
+    const el = e.target.closest('[data-act]'); if(!el) return;
+    const a = el.dataset.act; const s = this.state;
+    if (a==='screen'){ const sc = el.dataset.screen;
+      if (sc==='pinned') this.setState({ screen:'pinned', verse:17, pins:{ ...s.pins, commentary:{verse:16} } });
+      else this.setState({ screen:sc });
+      return; }
+    if (a==='theme') return this.setState({ theme: el.dataset.theme });
+    if (a==='woc') return this.setState({ woc: el.dataset.woc });
+    if (a==='mode') return this.setState({ mode: el.dataset.mode });
+    if (a==='mpane') return this.setState({ mpane: el.dataset.mpane, drawer:true, tabletOpen:true });
+    if (a==='drawer') return this.setState({ drawer: !s.drawer });
+    if (a==='tabletToggle') return this.setState({ tabletOpen: !s.tabletOpen });
+    if (a==='verse') return this.setState({ verse: +el.dataset.verse });
+    if (a==='word') return this.setState({ strongs: el.dataset.strongs, mpane:'word', drawer:true });
+    if (a==='place') return this.setState({ place: el.dataset.place, mpane:'atlas', drawer:true });
+    if (a==='next') return this.setState({ verse: Math.min(17, s.verse+1) });
+    if (a==='prev') return this.setState({ verse: Math.max(12, s.verse-1) });
+    if (a==='side') return this.sidePane(el.dataset.pane);
+    if (a==='up') return this.moveePane(el.dataset.pane, -1);
+    if (a==='down') return this.moveePane(el.dataset.pane, 1);
+    if (a==='preset'){ const p = el.dataset.preset;
+      if (p === 'mine'){ if (s.saved) this.setState({ layout:{ ...s.saved, name:'MY LAYOUT' } }); return; }
+      return this.setState({ layout:{ ...this.PRESETS[p] } }); }
+    if (a==='saveLayout'){ const L = { ...(s.layout || this.PRESETS.default), name:'MY LAYOUT' };
+      try { localStorage.setItem('manna.layout', JSON.stringify(L)); } catch(err){}
+      return this.setState({ saved:L, layout:L }); }
+    if (a==='pin'){ const p = el.dataset.pane; const key = p==='mobile' ? s.mpane : p;
+      return this.setState({ pins:{ ...s.pins, [key]:{ verse:s.verse, strongs:s.strongs, place:s.place } } }); }
+    if (a==='follow'){ const p = el.dataset.pane; const key = p==='mobile' ? s.mpane : p;
+      const pins = { ...s.pins }; delete pins[key]; return this.setState({ pins }); }
+  };
+
+  paint(){
+    const r = this.rootRef.current; if(!r) return;
+    const s = this.state, T = this.THEMES[s.theme];
+    const base = (el) => { if(!el.dataset.c0){ const m = (el.getAttribute('style')||'').match(/(?:^|;)\s*color:([^;]+)/); el.dataset.c0 = m ? m[1].trim() : 'inherit'; } return el.dataset.c0; };
+    const on = (el, act) => { el.style.background = act ? 'var(--accent)' : 'transparent'; el.style.color = act ? 'var(--onAccent)' : base(el); };
+    r.querySelectorAll('[data-act="screen"][data-screen]').forEach(b => { const a = b.dataset.screen === s.screen; b.style.background = a ? 'var(--warn)' : 'transparent'; b.style.color = a ? '#16130f' : ''; b.setAttribute('aria-selected', a); });
+    r.querySelectorAll('[data-act="theme"]').forEach(b => { const a = b.dataset.theme === s.theme; b.style.background = a ? 'var(--warn)' : 'transparent'; b.style.color = a ? '#16130f' : ''; b.style.borderColor = a ? 'var(--warn)' : 'currentColor'; b.setAttribute('aria-pressed', a); });
+    r.querySelectorAll('[data-act="woc"]').forEach(b => { const a = b.dataset.woc === s.woc; b.style.background = a ? '#fff' : 'transparent'; b.style.color = a ? '#16130f' : ''; b.setAttribute('aria-pressed', a); });
+    r.querySelectorAll('[data-act="mode"]').forEach(b => { const a = b.dataset.mode === s.mode; b.style.background = a ? 'var(--ink)' : 'transparent'; b.style.color = a ? 'var(--paper)' : ''; b.setAttribute('aria-pressed', a); });
+    r.querySelectorAll('[data-act="mpane"]').forEach(b => { const a = b.dataset.mpane === s.mpane; b.style.background = a ? 'var(--accent)' : 'transparent'; b.style.color = a ? 'var(--onAccent)' : base(b); b.setAttribute('aria-pressed', a); });
+
+    const pv = { book:s.book, chapter:String(s.chapter), verse:String(s.verse) };
+    r.querySelectorAll('[data-pick]').forEach(el => { const v = pv[el.dataset.pick]; if (el !== document.activeElement && el.value !== v) el.value = v; });
+    r.querySelectorAll('[data-pickerr]').forEach(el => { el.style.display = s.pickError ? 'inline-block' : 'none'; });
+    r.querySelectorAll('[data-verse]').forEach(p => {
+      const a = +p.dataset.verse === s.verse;
+      p.style.background = a ? T['--sel'] : 'transparent';
+      p.style.boxShadow = a ? 'inset 5px 0 0 var(--accent)' : 'none';
+      p.style.outline = a ? '2px solid var(--accent)' : '2px solid transparent';
+      p.setAttribute('aria-current', a ? 'true' : 'false');
+    });
+    r.querySelectorAll('[data-strongs]').forEach(b => {
+      const a = b.dataset.strongs === s.strongs;
+      b.style.background = a ? T['--sel'] : 'transparent';
+      b.style.color = a ? T['--accent'] : '';
+      b.style.fontWeight = a ? '600' : '';
+    });
+    r.querySelectorAll('[data-place]').forEach(b => {
+      const a = b.dataset.place === s.place;
+      b.style.background = a ? T['--sel'] : 'transparent';
+      b.style.color = a ? T['--accent'] : '';
+      b.style.fontWeight = a ? '600' : '';
+    });
+    r.querySelectorAll('[data-dot]').forEach(d => { const a = d.dataset.dot === s.place; d.style.background = a ? T['--accent'] : T['--paper']; d.style.transform = a ? 'scale(1.5)' : 'none'; });
+    const cross = r.querySelector('[data-cross]');
+    if (cross){ const c = this.DOTS[s.place] || [50,50]; cross.style.left = c[0] + '%'; cross.style.top = c[1] + '%'; }
+
+    r.querySelectorAll('[data-woc]').forEach(w => {
+      if (s.woc === 'red'){ w.style.color = T['--woc']; w.style.borderLeftStyle = 'double'; }
+      else if (s.woc === 'mark'){ w.style.color = ''; w.style.borderLeftStyle = 'double'; }
+      else { w.style.color = ''; w.style.borderLeftStyle = 'none'; w.style.paddingLeft = '0'; }
+    });
+    r.querySelectorAll('[data-wocmark]').forEach(m => { m.style.display = s.woc === 'off' ? 'none' : 'inline'; });
+
+    const L = s.layout || this.PRESETS.default;
+    ['left','right'].forEach(z => {
+      const col = this.col(z);
+      L[z].forEach((k,i) => {
+        const el = r.querySelector('[data-pane-shell="'+k+'"]');
+        if (!el) return;
+        el.style.flexBasis = '0'; el.style.flexShrink = '1';
+        el.style.flexGrow = (L.grow && L.grow[k]) || 1;
+        if (col && col.children[i] !== el) col.appendChild(el);
+      });
+    });
+    if (s.screen === 'desk' || s.screen === 'pinned') this.handles();
+    r.querySelectorAll('[data-act="preset"]').forEach(b => {
+      const map = { default:'DEFAULT', word:'WORD FOCUS', reader:'WIDE READER', mine:'MY LAYOUT' };
+      const a = map[b.dataset.preset] === L.name;
+      b.style.background = a ? 'var(--accent)' : 'transparent'; b.style.color = a ? 'var(--onAccent)' : 'var(--ink)';
+      b.setAttribute('aria-pressed', a);
+      if (b.dataset.preset === 'mine' && !s.saved){ b.style.opacity = '.45'; b.disabled = true; } else { b.style.opacity = '1'; b.disabled = false; }
+    });
+    ['commentary','xref','word','atlas','people','notes'].forEach(pane => {
+      const pinned = this.isPinned(pane);
+      r.querySelectorAll('[data-pinbadge="'+pane+'"]').forEach(b => { b.style.display = pinned ? 'flex' : 'none'; });
+      r.querySelectorAll('[data-stalebar="'+pane+'"]').forEach(b => { b.style.display = pinned && this.paneRef(pane) !== s.verse ? 'flex' : 'none'; });
+      const shell = r.querySelector('[data-pane-shell="'+pane+'"]');
+      if (shell){ shell.style.borderColor = pinned ? T['--warn'] : 'var(--ink)'; shell.style.borderStyle = pinned ? 'dashed' : 'solid'; shell.style.filter = pinned ? 'saturate(.55)' : 'none'; }
+      r.querySelectorAll('[data-act="follow"][data-pane="'+pane+'"]').forEach(b => on(b, !pinned));
+      r.querySelectorAll('[data-act="pin"][data-pane="'+pane+'"]').forEach(b => on(b, pinned));
+    });
+    const mPinned = this.isPinned(s.mpane);
+    r.querySelectorAll('[data-pinbadge="mobile"]').forEach(b => { b.style.display = mPinned ? 'flex' : 'none'; });
+    r.querySelectorAll('[data-act="follow"][data-pane="mobile"]').forEach(b => on(b, !mPinned));
+    r.querySelectorAll('[data-act="pin"][data-pane="mobile"]').forEach(b => on(b, mPinned));
+  }
+
+  mobilePane(){
+    const s = this.state, pinned = this.isPinned(s.mpane);
+    const v = pinned ? this.state.pins[s.mpane].verse : s.verse;
+    if (s.mpane === 'commentary') return { kicker:'Editorial note — not Scripture', title:this.ref(v), body:this.COM[v], list:[] };
+    if (s.mpane === 'xref') return { kicker:'Cross references for ' + this.ref(v), title:this.ref(v), body:'', list:this.XREF[v] };
+    if (s.mpane === 'word'){ const w = this.WORDS[s.strongs]; return { kicker:'Strong\u2019s ' + s.strongs + ' · ' + w.morph + ' · ' + w.occ + ' occurrences', title:w.greek + '  ' + w.tr, body:w.gloss, list:[] }; }
+    const p = this.PLACES[s.place];
+    return { kicker:'Atlas centred on', title:p.name, body:p.desc, list:p.facts.map(f => ({ ref:'·', text:f })) };
+  }
+
+  renderVals(){
+    const s = this.state, T = this.THEMES[s.theme];
+    const comV = this.paneRef('commentary'), xrefV = this.paneRef('xref'), peopleV = this.paneRef('people'), noteV = this.paneRef('notes');
+    const w = this.WORDS[s.strongs], pl = this.PLACES[s.place], mp = this.mobilePane();
+    const pinnedNames = Object.keys(s.pins);
+    const scale = s.scale, size = this.SIZES[s.screen] || [1440,900];
+    const page = s.mode === 'page';
+    return {
+      rootRef:this.rootRef, hostRef:this.hostRef, onAct:(e) => this.onAct(e), onPick:(e) => this.onPick(e), onPickKey:(e) => this.onPickKey(e),
+      deskGridStyle:{ flex:1, minHeight:0, display:'grid', gap:'12px', padding:'12px',
+        gridTemplateColumns:(s.layout ? s.layout.leftW : 300) + 'px 1fr ' + (s.layout ? s.layout.rightW : 372) + 'px' },
+      paneChips: ['xref','people','commentary','word','atlas'].map(k => ({ key:k, label:this.LABELS[k] })),
+      mineLabel: s.saved ? 'MY LAYOUT' : 'NO SAVED LAYOUT',
+      pickError: s.pickError || '',
+      bookLabel: s.book, chapterLabel: s.chapter,
+      chapterBlurb: (s.book === 'Matthew' && s.chapter === 4)
+        ? 'Jesus leaves Nazareth for Capernaum and begins to preach.'
+        : 'No chapter summary in the mock data set for this reference.',
+      layoutNote: (s.layout && s.layout.name === 'CUSTOM') ? 'UNSAVED ARRANGEMENT · DRAG ANY PANE EDGE, OR ▲▼ ⇄' : 'DRAG ANY PANE EDGE TO RESIZE · ▲▼ REORDER · ⇄ SWAP SIDE',
+      books:this.BOOKS,
+      chapters:Array.from({length:this.COUNTS[this.BOOKS.indexOf(s.book)] || 1}, (_,i) => i+1),
+      verses:[12,13,14,15,16,17],
+      outOfFixture: !(s.book === 'Matthew' && s.chapter === 4),
+      fixtureNote: 'MOCK DATA COVERS MATTHEW 4:12–17 ONLY. ' + s.book.toUpperCase() + ' ' + s.chapter + ' WOULD LOAD FROM THE INSTALLED TEXT MODULE.',
+      shellStyle:{ ...T, display:'flex', flexDirection:'column', height:'100vh', overflow:'hidden',
+        background:'var(--desk)', color:'var(--ink)', fontFamily:'var(--fu)',
+        '--fd':'"Haettenschweiler","Arial Narrow Bold","Franklin Gothic Condensed Medium",Impact,system-ui,sans-serif',
+        '--fu':'system-ui,-apple-system,"Segoe UI",Roboto,sans-serif',
+        '--fs':'"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif',
+        '--fm':'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace' },
+      sizerStyle:{ width:(size[0]*scale)+'px', height:(size[1]*scale)+'px', flex:'none' },
+      stageStyle:{ width:size[0]+'px', height:size[1]+'px', transform:'scale('+scale+')', transformOrigin:'top left', flex:'none' },
+      isDesk: s.screen==='desk'||s.screen==='pinned', isTablet:s.screen==='tablet', isPhone:s.screen==='phone',
+      isHome: s.screen==='home', isReading: s.screen==='reading',
+      selLabel: this.ref(s.verse).toUpperCase(),
+      followSummary: pinnedNames.length ? (pinnedNames.length + ' PANE(S) PINNED · ' + pinnedNames.join(', ').toUpperCase()) : 'ALL PANES FOLLOWING SCRIPTURE',
+      comRef:this.ref(comV), comBody:this.COM[comV],
+      xrefRef:this.ref(xrefV), xrefs:this.XREF[xrefV],
+      peopleRef:this.ref(peopleV), people:this.PEOPLE[peopleV], topics:this.TOPICS[peopleV],
+      noteRef:this.ref(noteV), noteBody:this.NOTES[noteV] || 'No note on this verse yet — tap to write one.',
+      wStrongs:s.strongs, wGreek:w.greek, wTranslit:w.tr, wMorph:w.morph, wOcc:w.occ, wGloss:w.gloss, wFrom:w.from, wRelated:w.rel,
+      placeName:pl.name, placeDesc:pl.desc, placeFacts:pl.facts,
+      mPaneKicker:mp.kicker, mPaneTitle:mp.title, mPaneBody:mp.body, mPaneList:mp.list,
+      mPinRef: this.isPinned(s.mpane) ? this.ref(this.state.pins[s.mpane].verse) : '',
+      tabletCols: s.tabletOpen ? '1fr 372px' : '1fr 0px',
+      tabletToggleLabel: s.tabletOpen ? 'HIDE STUDY PANE ▶' : '◀ SHOW STUDY PANE',
+      tabletPaneStyle:{ display:s.tabletOpen?'flex':'none', flexDirection:'column', minHeight:0, borderLeft:'var(--bw) solid var(--ink)' },
+      drawerStyle:{ position:'absolute', left:0, right:0, bottom:'62px', zIndex:2, height:'54%',
+        display:'flex', flexDirection:'column', background:'var(--panel)',
+        borderTop:'var(--bw) solid var(--ink)', boxShadow:'0 -8px 0 rgba(0,0,0,.18)',
+        transform: s.drawer ? 'translateY(0)' : 'translateY(calc(100% - 48px))',
+        transition:'transform .22s ease' },
+      drawerCaret: s.drawer ? '▼ CLOSE' : '▲ OPEN',
+      modeLabel: page ? 'Page mode' : 'Scroll mode',
+      pageFoot: page ? 'PAGE 2 OF 9 · SWIPE OR TAP TO TURN' : 'CONTINUOUS SCROLL',
+      prevLabel: page ? 'PAGE' : 'VERSE', nextLabel: page ? 'PAGE' : 'VERSE',
+      readPageStyle: page
+        ? { width:'760px', padding:'40px 56px', background:'var(--panel)', border:'var(--bw) solid var(--ink)', boxShadow:'var(--sh)' }
+        : { width:'760px', padding:'10px 0 60px', background:'transparent' }
+    };
+  }
+}
+</script>
+</body>
+</html>

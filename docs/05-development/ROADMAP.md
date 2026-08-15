@@ -54,8 +54,14 @@ no external runtime files.
 
 **Deps:** none — first implementation packet.
 
-**Blocked by:** UI mock approval. The accepted Study Desk visual direction must
-exist before implementation begins.
+**Design direction:** ACCEPTED 2026-08-15 —
+[../01-spec/study-desk-design.md](../01-spec/study-desk-design.md).
+
+**Still blocked by:** the prototype file `Study Desk.dc.html` was not included in
+the received bundle. Its logic objects are named as the fixture contract for the
+Commentary, Cross Refs, People, Topics and Notes strings. Those strings are
+undefined until it arrives. The KJV verses, Strong's entries and place records
+are fully specified in the design doc and are not blocked.
 
 **Deliverables:**
 - Deterministic build script producing `dist/manna.html`
@@ -87,6 +93,13 @@ exist before implementation begins.
 production backup, notes, real Strong's datasets, Bible search, Verse Finder,
 morphology, real atlas data, sermon builder, reading plans, complete page-turn
 animation.
+
+**Also out of scope, though fully designed** — building any of these in P0.1 is a
+YAGNI finding, not a bonus: the layout model (pane resize, reorder, column swap,
+presets, `SAVE THIS ARRANGEMENT`), any persistence of layout or preferences, the
+full 66-book reference picker with per-book chapter validation, all six themes,
+full-screen reading mode, and Page vs Scroll mode. P0.1 needs enough theming to
+prove the token architecture, not the full set.
 
 **Explicit non-claims:** passing P0.1 does not prove persistent browser storage,
 backup safety, iOS library viability, import compatibility, search scalability,

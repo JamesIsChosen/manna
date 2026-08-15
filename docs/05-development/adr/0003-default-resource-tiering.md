@@ -24,8 +24,8 @@ Nave's) ship as **separate module files the user imports once**, distributed
 alongside the HTML. Keeps the app fast and R1 intact for the application, but the
 full experience is no longer literally one file.
 
-**C. Two editions.** Publish `codex-bible.html` (core) and
-`codex-bible-full.html` (everything). The user picks. Preserves the one-file
+**C. Two editions.** Publish `manna.html` (core) and
+`manna-full.html` (everything). The user picks. Preserves the one-file
 promise for both, at the cost of two build targets.
 
 ## Interaction with ADR-0002

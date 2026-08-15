@@ -1,4 +1,4 @@
-# Codex Bible — Roadmap
+# Manna — Roadmap
 
 Working roadmap. The full narrative source, including phases P1–P14, is
 [ROADMAP-source.md](ROADMAP-source.md); items are promoted here as they are
@@ -48,7 +48,7 @@ functionality is built. No major Bible-study feature begins before P0 passes.
 
 ### [ ] P0.1 — Single-HTML Mobile Feasibility Harness
 
-**Goal:** Prove one self-contained Codex Bible HTML artifact executes reliably
+**Goal:** Prove one self-contained Manna HTML artifact executes reliably
 as an offline application shell on target desktop and mobile environments with
 no external runtime files.
 
@@ -58,7 +58,7 @@ no external runtime files.
 exist before implementation begins.
 
 **Deliverables:**
-- Deterministic build script producing `dist/codex-bible.html`
+- Deterministic build script producing `dist/manna.html`
 - Embedded CSS, JavaScript, and SVG assets
 - Matthew 4:12–17 Scripture fixture with one Strong's-linked word and place entities
 - Central `SelectionService` with verse, word, and place events
@@ -69,7 +69,7 @@ exist before implementation begins.
 
 **Acceptance criteria:**
 1. The application runs from a single HTML file with no sibling runtime assets.
-2. Copying only `codex-bible.html` into an empty directory and opening it yields the full harness.
+2. Copying only `manna.html` into an empty directory and opening it yields the full harness.
 3. The harness functions with the network disconnected.
 4. Verse selection updates Commentary and Cross-Reference panes, each visibly naming the selected verse.
 5. Word selection on a tagged fixture word updates the Word Study pane with its Strong's entry.

@@ -5,7 +5,7 @@
 
 ## Context
 
-Codex Bible bundles public-domain Scripture and study resources and is designed
+Manna bundles public-domain Scripture and study resources and is designed
 to be freely copied — it is one HTML file, so redistribution is trivial by
 construction. The project needed a license before its first public commit;
 absent one, the work is "all rights reserved" and nobody may legally
@@ -20,12 +20,12 @@ GNU Affero General Public License v3.0 only.
 | Option | Why not |
 |---|---|
 | MIT / Apache-2.0 | Permits a closed, paid fork of a tool built on public-domain Scripture. The freedom to redistribute is the product. |
-| GPL-3.0-only | Nearly equivalent here, since Codex Bible never runs as a network service. AGPL chosen for the stronger guarantee if a hosted variant ever appears. |
+| GPL-3.0-only | Nearly equivalent here, since Manna never runs as a network service. AGPL chosen for the stronger guarantee if a hosted variant ever appears. |
 | Proprietary | Contradicts R6 (user ownership) and the offline, no-account model. |
 
 ## Consequences
 
-- Anyone distributing a modified Codex Bible must offer source.
+- Anyone distributing a modified Manna must offer source.
 - Contributors keep copyright; there is no CLA. Relicensing later would need
   every contributor's agreement. This is deliberate.
 - Bundled resources must each carry a redistribution right compatible with

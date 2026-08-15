@@ -13,7 +13,7 @@ Press, Oxford University Press and Collins.
 Verified wording: the restriction covers **printing the translation in the UK or
 importing printed copies into the UK**. The patent has no effect outside the UK.
 
-Codex Bible is distributed globally under AGPL as an electronic artifact and
+Manna is distributed globally under AGPL as an electronic artifact and
 prints nothing. Whether the patent reaches electronic distribution is not settled
 by its own wording, but "probably fine" is not a basis for a release decision.
 
@@ -25,7 +25,7 @@ question entirely. Cost: time.
 
 **B. Ship KJV as a library-pack module rather than bundling it.** Under ADR-0002
 option E, the core artifact bundles a worldwide-public-domain translation and the
-user loads KJV PCE themselves. Codex Bible then never distributes the KJV.
+user loads KJV PCE themselves. Manna then never distributes the KJV.
 
 **C. Bundle a worldwide-PD translation as the default.** ~~World English Bible~~
 — **rejected by James, 2026-08-15.** WEB is a user-imported module if wanted, not

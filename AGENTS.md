@@ -1,4 +1,4 @@
-# Codex Bible — agent contract
+# Manna — agent contract
 
 Read this first. It is the contract for any agent working in this repository.
 
@@ -17,7 +17,7 @@ Non-negotiable. A PR violating any of these cannot merge regardless of quality.
 
 | Constraint | Why |
 |---|---|
-| **Single release file** | `dist/codex-bible.html` requires no sibling `.js`, `.css`, `.svg`, `.woff`, `.wasm`, or `.json` |
+| **Single release file** | `dist/manna.html` requires no sibling `.js`, `.css`, `.svg`, `.woff`, `.wasm`, or `.json` |
 | **No network at runtime** | No CDN, remote font, remote script, telemetry, or map tile |
 | **No server required** | Must work opened directly from the filesystem |
 | **Scripture is never fabricated** | Displayed verse text comes verbatim from an installed module. No inference, no reconstruction, no generated quotations |

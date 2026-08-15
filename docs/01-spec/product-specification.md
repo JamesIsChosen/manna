@@ -1,4 +1,4 @@
-# Codex Bible — Product Specification
+# Manna — Product Specification
 
 **Version 0.2**
 
@@ -6,7 +6,7 @@ Converted from the original .docx on 2026-08-15. Content preserved; structure no
 
 ## 1. Product Vision
 
-Codex Bible is a powerful, visually distinctive, offline-first Bible study workstation delivered as a **single self-contained** **.html** **application**.
+Manna is a powerful, visually distinctive, offline-first Bible study workstation delivered as a **single self-contained** **.html** **application**.
 
 The same HTML file shall operate on:
 
@@ -28,7 +28,7 @@ modern desktop and mobile browsers
 
 No server, account, subscription, cloud service, installation package, or Internet connection shall be required for core Bible-study functionality.
 
-Codex Bible combines the depth of traditional desktop Bible software with the accessibility of a modern mobile application and the visual energy of a premium graphic novel.
+Manna combines the depth of traditional desktop Bible software with the accessibility of a modern mobile application and the visual energy of a premium graphic novel.
 
 The long-term goal is not merely to create another Bible reader.
 
@@ -39,7 +39,7 @@ The goal is to create a:
 
 ## 2. Core Product Philosophy
 
-Codex Bible shall be governed by the following principles.
+Manna shall be governed by the following principles.
 
 
 ### 2.1 Scripture First
@@ -115,7 +115,7 @@ Internet-hosted databases
 
 Personal Bible-study information belongs to the user.
 
-Codex Bible shall require:
+Manna shall require:
 
 no account
 
@@ -136,7 +136,7 @@ Users shall be able to export their information at any time.
 
 The primary application shall be distributed as one file:
 
-codex-bible.html
+manna.html
 
 The HTML may internally contain:
 
@@ -176,7 +176,7 @@ The application shall distinguish between three categories of data.
 
 ### 4.1 Built-In Resources
 
-Legally redistributable material may be embedded directly into Codex Bible.
+Legally redistributable material may be embedded directly into Manna.
 
 Potential resources include:
 
@@ -273,7 +273,7 @@ application settings
 
 Mobile support is a primary architectural requirement.
 
-Codex Bible shall not have a separate mobile edition.
+Manna shall not have a separate mobile edition.
 
 The **same HTML file and same application codebase** must adapt to desktop, tablet, and phone form factors.
 
@@ -346,7 +346,7 @@ Frequently used reader actions shall be reachable without requiring the user to 
 
 ## 9. Main Bible Reader
 
-The Bible reader is the heart of Codex Bible.
+The Bible reader is the heart of Manna.
 
 The visual style should resemble a premium comic book or graphic novel while preserving exceptional Scripture readability.
 
@@ -442,7 +442,7 @@ This shall be particularly important on mobile devices.
 
 ## 13. Words of Christ in Red
 
-Codex Bible shall support an optional traditional **red-letter Bible mode**.
+Manna shall support an optional traditional **red-letter Bible mode**.
 
 Setting:
 
@@ -1417,7 +1417,7 @@ Selecting a person opens their profile.
 
 ## 52. Bible Timeline
 
-Codex Bible should include an interactive biblical chronology.
+Manna should include an interactive biblical chronology.
 
 Major eras may include:
 
@@ -1535,7 +1535,7 @@ These markings shall be a separate annotation layer.
 
 ## 56. Connecting-Word Study
 
-Codex Bible should facilitate study of logical connectors such as:
+Manna should facilitate study of logical connectors such as:
 
 therefore
 
@@ -1854,7 +1854,7 @@ Users may later select:
 
 ## 68. Study Trail
 
-Codex Bible should retain an optional navigational history that reflects study exploration rather than merely previous pages.
+Manna should retain an optional navigational history that reflects study exploration rather than merely previous pages.
 
 Example:
 
@@ -1870,7 +1870,7 @@ Users may jump to any step.
 
 ## 69. Sermon Builder
 
-Codex Bible shall contain a dedicated:
+Manna shall contain a dedicated:
 
 **SERMON WORKSHOP**
 
@@ -2083,7 +2083,7 @@ Print layouts shall use restrained styling.
 
 ## 78. “Ask the Text”
 
-Instead of relying on an AI chatbot, Codex Bible should provide an evidence-oriented query system.
+Instead of relying on an AI chatbot, Manna should provide an evidence-oriented query system.
 
 Examples:
 
@@ -2235,7 +2235,7 @@ reading plan
 
 ## 84. Resource Licensing
 
-Codex Bible shall distinguish:
+Manna shall distinguish:
 
 **Public Domain**
 
@@ -2357,7 +2357,7 @@ A backup exported from one device should be importable on another compatible dev
 
 Workflow:
 
-copy codex-bible.html;
+copy manna.html;
 
 open it;
 
@@ -2565,7 +2565,7 @@ Optional pinch-to-resize may be provided where practical.
 
 ## 102. Read Aloud
 
-Where device/browser speech functionality exists, Codex Bible may provide:
+Where device/browser speech functionality exists, Manna may provide:
 
 **READ ALOUD**
 
@@ -2759,7 +2759,7 @@ modified
 
 ## 110. Versification
 
-Codex Bible must eventually support multiple versification systems.
+Manna must eventually support multiple versification systems.
 
 The data model shall not assume every translation has identical verse boundaries.
 
@@ -2816,7 +2816,7 @@ The initial home screen may resemble a premium comic-book issue cover.
 Example:
 
 
-## CODEX BIBLE
+## MANNA
 
 
 ### THE WORD
@@ -2850,14 +2850,14 @@ Sermons in Progress: 2
 
 ## 113. Signature Features
 
-The primary features that distinguish Codex Bible should be:
+The primary features that distinguish Manna should be:
 
 
 ### 1. FIND THE VERSE
 
 Describe the meaning or remembered idea.
 
-Codex Bible finds likely real passages with confidence scores.
+Manna finds likely real passages with confidence scores.
 
 
 ### 2. EXPLORE EVERY WORD
@@ -3117,9 +3117,9 @@ Investigate additional legally and technically supportable module ecosystems.
 
 ## 115. Core Acceptance Workflow
 
-A mature Codex Bible release must allow a user to perform the following completely offline:
+A mature Manna release must allow a user to perform the following completely offline:
 
-Open codex-bible.html on a computer or phone.
+Open manna.html on a computer or phone.
 
 Navigate to a Bible passage.
 
@@ -3277,7 +3277,7 @@ accessibility mode can provide a non-red visual distinction.
 
 For Bible modules without red-letter metadata:
 
-Codex Bible must not guess;
+Manna must not guess;
 
 the setting must clearly report that red-letter data is unavailable.
 
@@ -3337,7 +3337,7 @@ reduced-motion mode
 
 ## 119. Product Positioning
 
-Codex Bible should occupy the space between:
+Manna should occupy the space between:
 
 conventional desktop Bible study software,
 
@@ -3356,11 +3356,11 @@ Its central proposition is:
 
 ## 120. Long-Term Vision
 
-A mature Codex Bible user should be able to begin with:
+A mature Manna user should be able to begin with:
 
 “Where is that verse about God choosing weak things?”
 
-Codex Bible identifies:
+Manna identifies:
 
 **1 Corinthians 1:27**
 
@@ -3418,4 +3418,4 @@ and continue reading—
 
 all from one offline HTML application running locally on a phone, tablet, or computer.
 
-Codex Bible should feel like carrying an entire Bible research desk in one’s pocket while retaining the beauty, movement, and visual identity of a graphic novel.
+Manna should feel like carrying an entire Bible research desk in one’s pocket while retaining the beauty, movement, and visual identity of a graphic novel.

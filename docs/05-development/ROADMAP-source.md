@@ -1,4 +1,4 @@
-# Codex Bible — Development Roadmap (source)
+# Manna — Development Roadmap (source)
 
 **Version 0.1**
 
@@ -6,9 +6,9 @@ Converted from the original .docx on 2026-08-15. Content preserved; structure no
 
 ## 1. Purpose
 
-This roadmap converts the Codex Bible Engineering Specification v0.3 into a sequence of independently testable implementation packets.
+This roadmap converts the Manna Engineering Specification v0.3 into a sequence of independently testable implementation packets.
 
-Codex Bible is intended to become:
+Manna is intended to become:
 
 **a mobile-first, desktop-capable, fully offline Bible research workstation distributed as one self-contained HTML file.**
 
@@ -186,7 +186,7 @@ minimal source project
 
 deterministic build script
 
-dist/codex-bible.html
+dist/manna.html
 
 embedded JavaScript
 
@@ -220,7 +220,7 @@ function with network disconnected.
 
 Place only:
 
-codex-bible.html
+manna.html
 
 into a clean directory.
 
@@ -228,7 +228,7 @@ Open it.
 
 Expected:
 
-**CODEX BIBLE PLATFORM HARNESS**
+**MANNA PLATFORM HARNESS**
 
 and one test passage.
 
@@ -242,7 +242,7 @@ No runtime network dependency.
 
 ### Goal
 
-Prove Codex Bible performs no unexpected runtime network activity.
+Prove Manna performs no unexpected runtime network activity.
 
 
 ### Implement
@@ -2009,7 +2009,7 @@ Clean source checkout shall create the final artifact deterministically.
 
 Directory contains only:
 
-codex-bible.html
+manna.html
 
 Core application must work.
 
@@ -2172,7 +2172,7 @@ Any release-blocking issue returns the project to the appropriate packet.
 
 Only after all mandatory acceptance gates pass may the artifact be designated:
 
-**Codex Bible 1.0**
+**Manna 1.0**
 
 
 ## 6. Optional Post-1.0 Roadmap
@@ -2329,7 +2329,7 @@ Backup must work early.
 
 ### Risk 4 — Single-File Size
 
-Bundled assets may eventually make codex-bible.html large.
+Bundled assets may eventually make manna.html large.
 
 Phase P0 must determine practical thresholds.
 
@@ -2513,12 +2513,12 @@ generated content cannot masquerade as Scripture.
 The final build process should eventually produce something resembling:
 
 dist/
-├─ codex-bible.html
-├─ codex-bible.html.sha256
+├─ manna.html
+├─ manna.html.sha256
 ├─ BUILD-MANIFEST.json
 └─ LICENSE-MANIFEST.json
 
-Only codex-bible.html is necessary for application execution.
+Only manna.html is necessary for application execution.
 
 The additional files exist for release verification and distribution provenance.
 
@@ -2681,7 +2681,7 @@ screen-reader semantics.
 
 ## 22. Final Product Goal
 
-The roadmap is complete when Codex Bible can truthfully be described as:
+The roadmap is complete when Manna can truthfully be described as:
 
 **A single offline HTML file that gives a phone, tablet, or computer a serious Bible research environment—including Scripture reading, comic-book page navigation, Words of Christ in Red, Strong’s, original-language study, exhaustive concordance search, natural-language verse discovery, dictionaries, commentaries, cross-references, maps, timelines, notes, reading plans, prayer journal, Scripture memory, sermon preparation, presentation tools, and portable user-owned study data.**
 
@@ -2711,7 +2711,7 @@ The first implementation packet shall be:
 
 Its sole objective is to answer:
 
-**Can Codex Bible’s fundamental deployment model actually work as intended before we build anything expensive on top of it?**
+**Can Manna’s fundamental deployment model actually work as intended before we build anything expensive on top of it?**
 
 P0.1 should not attempt to build the real Bible reader.
 

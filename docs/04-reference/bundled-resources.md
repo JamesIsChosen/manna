@@ -1,6 +1,6 @@
 # Bundled resources
 
-The default resources Codex Bible ships with, their provenance, and their
+The default resources Manna ships with, their provenance, and their
 licensing status.
 
 **Every bundled resource must have a verified redistribution right** (product
@@ -21,7 +21,7 @@ pinned, checksum recorded), `NEEDS-VERIFICATION`, `BLOCKED`.
 
 The KJV is public domain in the United States and most of the world, but **in the
 United Kingdom it is under perpetual Crown copyright**, exercised through Letters
-Patent and administered by Cambridge University Press. Codex Bible is distributed
+Patent and administered by Cambridge University Press. Manna is distributed
 globally under AGPL, so this must be checked rather than assumed.
 
 Separately, the *Pure Cambridge Edition* as published by BibleProtector is an
@@ -52,7 +52,7 @@ Two things follow that matter here:
 - **Ship KJV as a library-pack module, not bundled.** Under the two-file
   architecture (ADR-0002 option E), the core artifact can bundle a
   worldwide-public-domain translation and let the user load KJV PCE from the
-  library pack. Codex Bible then never distributes the KJV at all — the user
+  library pack. Manna then never distributes the KJV at all — the user
   brings it. This is an architectural answer to a legal question, and it fits the
   design already chosen.
 - ~~Bundle a worldwide-PD translation as the fallback default.~~ **Rejected by

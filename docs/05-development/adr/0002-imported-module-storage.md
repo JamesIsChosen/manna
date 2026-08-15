@@ -5,7 +5,7 @@
 
 ## Context
 
-Codex Bible ships as one self-contained HTML file (R1) and absorbs Bible
+Manna ships as one self-contained HTML file (R1) and absorbs Bible
 modules, commentaries, dictionaries, and maps from other free software (R7).
 
 These two facts create a question the specification does not currently answer
@@ -42,11 +42,11 @@ library to a real folder the user picks. Desktop Chromium only; absent on
 Firefox and Safari, which are exactly the environments where `file://` storage is
 most doubtful.
 
-**D. Library pack file.** Modules export to a single `.codexlibrary` container
+**D. Library pack file.** Modules export to a single `.mannalibrary` container
 the user re-imports. Portable and browser-independent, but reload is manual.
 
-**E. Two files: HTML + auto-loading library pack.** `codex-bible.html` plus
-`codex-library.js` beside it. The app is two files; the library pack grows as the
+**E. Two files: HTML + auto-loading library pack.** `manna.html` plus
+`manna-library.js` beside it. The app is two files; the library pack grows as the
 user imports modules. Proposed by James, 2026-08-15.
 
 ## Probe results — 2026-08-15, headless Chromium, real `file://` origin
@@ -63,8 +63,8 @@ without the user selecting it every session. Measured rather than assumed:
 Two consequences:
 
 1. **A library pack must be a classic JavaScript file, not a data file.**
-   `codex-library.js` assigning `window.__CODEX_LIBRARY__ = {...}` auto-loads.
-   The same content as `.json`, `.codexlibrary`, or any opaque extension read via
+   `manna-library.js` assigning `window.__MANNA_LIBRARY__ = {...}` auto-loads.
+   The same content as `.json`, `.mannalibrary`, or any opaque extension read via
    `fetch` does not — `file://` is an opaque origin and CORS blocks it. This is
    the single design constraint that makes or breaks option E.
 2. **IndexedDB worked on `file://` here**, which is better than feared and makes
@@ -79,7 +79,7 @@ Treat this as one data point that narrows the design space, not as the answer.
 
 R7 states imported modules must never gain executable capability. A library pack
 that is a `.js` file **is executable by definition** — the browser runs it before
-any application code inspects it. A hostile `codex-library.js` placed beside the
+any application code inspects it. A hostile `manna-library.js` placed beside the
 HTML executes as application code.
 
 This is survivable but must be designed for, not waved through:

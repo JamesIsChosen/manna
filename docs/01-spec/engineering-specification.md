@@ -1,4 +1,4 @@
-# Codex Bible — Engineering Specification
+# Manna — Engineering Specification
 
 **Version 0.3**
 
@@ -6,15 +6,15 @@ Converted from the original .docx on 2026-08-15. Content preserved; structure no
 
 ## 1. Purpose
 
-This specification converts the Codex Bible product vision into an implementation-governing engineering plan.
+This specification converts the Manna product vision into an implementation-governing engineering plan.
 
-Codex Bible shall be a:
+Manna shall be a:
 
 **mobile-first, desktop-capable, offline Bible research workstation distributed as one self-contained HTML file.**
 
 The final distributable artifact shall be:
 
-codex-bible.html
+manna.html
 
 The source repository may contain any number of development files, tests, fixtures, schemas, scripts, and modules.
 
@@ -30,7 +30,7 @@ The following requirements override convenience, framework preference, and imple
 
 Normal application distribution shall consist of one file:
 
-codex-bible.html
+manna.html
 
 No sibling JavaScript, CSS, image, font, WASM, or configuration file may be required for core startup.
 
@@ -59,7 +59,7 @@ No separate mobile application shall be required.
 
 ### R4 — No Server Required
 
-Codex Bible must not require:
+Manna must not require:
 
 Node.js
 
@@ -78,7 +78,7 @@ during normal use.
 
 ### R5 — Scripture Integrity
 
-Codex Bible shall never manufacture, silently alter, or reconstruct displayed Scripture.
+Manna shall never manufacture, silently alter, or reconstruct displayed Scripture.
 
 Displayed verse text shall come from an installed or bundled Bible module.
 
@@ -118,7 +118,7 @@ The project shall maintain a conventional source tree even though it produces on
 
 Suggested structure:
 
-codex-bible/
+manna/
 │
 ├─ src/
 │  ├─ app/
@@ -149,7 +149,7 @@ codex-bible/
 ├─ scripts/
 ├─ docs/
 └─ dist/
-   └─ codex-bible.html
+   └─ manna.html
 
 Development readability shall not be sacrificed merely because the release is one file.
 
@@ -158,7 +158,7 @@ A deterministic build process shall assemble the release artifact.
 
 ## 4. Release Packaging
 
-The production build shall inline all core runtime dependencies into codex-bible.html.
+The production build shall inline all core runtime dependencies into manna.html.
 
 Potential embedded resources include:
 
@@ -211,7 +211,7 @@ should produce byte-identical release artifacts where technically practical.
 
 Build output shall produce:
 
-codex-bible.html
+manna.html
 
 SHA-256 digest
 
@@ -251,7 +251,7 @@ Network access shall not be necessary to render the application.
 
 ## 7. Application Architecture
 
-Codex Bible should use a layered architecture.
+Manna should use a layered architecture.
 
 ┌────────────────────────────────────────┐
 │               UI LAYER                 │
@@ -292,7 +292,7 @@ SWORD
 SWORD Adapter
     │
     ▼
-Codex BibleModule
+MannaModule
 
 and:
 
@@ -302,7 +302,7 @@ OSIS
 OSIS Adapter
     │
     ▼
-Codex BibleModule
+MannaModule
 
 The reader consumes BibleModule, not SWORD or OSIS directly.
 
@@ -419,7 +419,7 @@ Segment {
     text: "I am the resurrection..."
 }
 
-Codex Bible shall not infer Christ’s speech from punctuation.
+Manna shall not infer Christ’s speech from punctuation.
 
 If the module lacks reliable speaker metadata:
 
@@ -529,7 +529,7 @@ MorphologyRecord {
     case
 }
 
-Codex Bible shall preserve the originating morphology scheme rather than pretending all datasets use identical encoding.
+Manna shall preserve the originating morphology scheme rather than pretending all datasets use identical encoding.
 
 
 ## 18. Personal Annotation Model
@@ -703,7 +703,7 @@ Approximate dates and disputed chronology must be explicitly representable.
 
 ## 27. Storage Architecture
 
-Codex Bible shall use a storage abstraction rather than calling browser storage APIs throughout application code.
+Manna shall use a storage abstraction rather than calling browser storage APIs throughout application code.
 
 Example:
 
@@ -754,7 +754,7 @@ This enables selective export and migration.
 
 ## 29. Storage Health Check
 
-At startup Codex Bible shall perform a storage capability test.
+At startup Manna shall perform a storage capability test.
 
 Possible status:
 
@@ -773,16 +773,16 @@ The application shall never silently rely on uncertain local persistence for irr
 
 ## 30. Backup Architecture
 
-Codex Bible backup format shall have a stable extension such as:
+Manna backup format shall have a stable extension such as:
 
-my-library.codexbackup
+my-library.mannabackup
 
 The file contents should be a versioned container.
 
 Conceptual manifest:
 
 {
-  "format": "codex-backup",
+  "format": "manna-backup",
   "version": 1,
   "created": "...",
   "appVersion": "...",
@@ -1139,7 +1139,7 @@ backup compression
 
 graph layout calculations
 
-If a worker capability is unavailable, Codex Bible shall provide a safe degraded implementation.
+If a worker capability is unavailable, Manna shall provide a safe degraded implementation.
 
 
 ## 51. Verse Finder Architecture
@@ -1263,7 +1263,7 @@ Quality regression shall be testable across versions.
 
 ## 57. Bible Knowledge Graph
 
-Codex Bible shall treat interconnected study information as a graph.
+Manna shall treat interconnected study information as a graph.
 
 Node types may include:
 
@@ -1429,7 +1429,7 @@ occurrence lists
 
 concordance lists
 
-Codex Bible shall render only the visible region plus a reasonable buffer.
+Manna shall render only the visible region plus a reasonable buffer.
 
 This is critical for mobile memory use.
 
@@ -1572,7 +1572,7 @@ Pane state should be preserved as a preference.
 
 ## 74. Mobile Memory Constraints
 
-Codex Bible shall assume phones have substantially tighter usable memory than desktop systems.
+Manna shall assume phones have substantially tighter usable memory than desktop systems.
 
 Therefore:
 
@@ -1727,7 +1727,7 @@ reference visibility
 
 ## 83. Security Boundary
 
-The browser runtime containing Codex Bible code is trusted.
+The browser runtime containing Manna code is trusted.
 
 Imported data is not.
 
@@ -1817,7 +1817,7 @@ Unexpected runtime network requests constitute a defect.
 
 ## 89. Privacy
 
-Codex Bible shall include no hidden:
+Manna shall include no hidden:
 
 telemetry
 
@@ -1986,7 +1986,7 @@ Only automatic screen-awake behavior disappears.
 
 ## 98. Mobile Browser Compatibility Gate
 
-Before implementation expands deeply, Codex Bible shall perform an explicit compatibility investigation on actual or representative:
+Before implementation expands deeply, Manna shall perform an explicit compatibility investigation on actual or representative:
 
 Android Chrome
 
@@ -2027,7 +2027,7 @@ whether orientation changes work;
 
 whether large resource usage is viable.
 
-If any browser imposes limitations, Codex Bible shall document and safely accommodate them while preserving the one-file release goal.
+If any browser imposes limitations, Manna shall document and safely accommodate them while preserving the one-file release goal.
 
 
 ## 100. Testing Layers
@@ -2280,7 +2280,7 @@ Commentary import stopped because 17 entries contain an unsupported compressed f
 
 ## 109. Diagnostic Export
 
-Codex Bible may provide:
+Manna may provide:
 
 **EXPORT DIAGNOSTICS**
 
@@ -2712,7 +2712,7 @@ backup/export
 
 The release shall be tested from a clean directory containing only:
 
-codex-bible.html
+manna.html
 
 The application must not depend on leftover build files.
 
@@ -2750,7 +2750,7 @@ Any altered Scripture text is a release-blocking defect.
 
 ## 130. User Data Integrity Gate
 
-Tests must prove that upgrading Codex Bible does not silently destroy:
+Tests must prove that upgrading Manna does not silently destroy:
 
 notes
 
@@ -2769,7 +2769,7 @@ memory progress
 
 ## 131. Product Safety Rule for Study Assistance
 
-Codex Bible may organize and expose study evidence.
+Manna may organize and expose study evidence.
 
 It must visibly distinguish:
 
@@ -2825,7 +2825,7 @@ The framework is subordinate to the product constraints.
 
 ## 133. Recommended Application Philosophy
 
-Codex Bible should behave less like a website and more like a **portable document-based application**.
+Manna should behave less like a website and more like a **portable document-based application**.
 
 The HTML file is the executable shell.
 
@@ -2835,7 +2835,7 @@ Backups are the user’s portable data.
 
 This conceptual model keeps the product understandable:
 
-CODEX BIBLE
+MANNA
     │
     ├── Scripture Library
     ├── Study Library
@@ -2846,12 +2846,12 @@ CODEX BIBLE
 
 The user should be able to place:
 
-codex-bible.html
+manna.html
 
 on a phone or computer, open it, and immediately see:
 
 
-## CODEX BIBLE
+## MANNA
 
 **Continue Reading**
 
@@ -2916,7 +2916,7 @@ to:
 
 **sermon**
 
-without leaving Codex Bible.
+without leaving Manna.
 
 
 ## 135. Engineering North Star
@@ -2932,7 +2932,7 @@ If the answer is no, the design should be reconsidered.
 
 The next implementation document should be:
 
-**CODEX BIBLE DEVELOPMENT ROADMAP v0.1**
+**MANNA DEVELOPMENT ROADMAP v0.1**
 
 It should convert this engineering specification into independently testable development packets beginning with:
 

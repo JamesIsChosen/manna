@@ -9,13 +9,13 @@ Sources: product spec §9–12, §103–105, §111–113; P0.1 packet PART I and
 
 ## Brief as issued
 
-Design the **Study Desk** for Codex Bible: an offline-first Bible study
+Design the **Study Desk** for Manna: an offline-first Bible study
 workstation that ships as one self-contained HTML file and runs identically on
 phone, tablet, and desktop.
 
 ### The core idea
 
-Codex Bible is not a collection of separate Bible-study screens. It is a
+Manna is not a collection of separate Bible-study screens. It is a
 **synchronized workspace where Scripture controls everything around it.** The
 Bible stays visible; selecting something in it updates every compatible study
 pane at once. That single behaviour is the product.

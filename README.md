@@ -1,4 +1,4 @@
-# Codex Bible
+# Manna
 
 A comic-book-themed, offline-first Bible study workstation delivered as **one
 self-contained HTML file** that runs on desktop, tablet, and phone with no
@@ -13,7 +13,7 @@ See [docs/05-development/ROADMAP.md](docs/05-development/ROADMAP.md).
 
 | # | Requirement |
 |---|---|
-| R1 | Single release file -- `codex-bible.html`, no sibling assets required |
+| R1 | Single release file -- `manna.html`, no sibling assets required |
 | R2 | Offline core -- all core functions work with no network |
 | R3 | Mobile first -- the same file serves phone, tablet, and desktop |
 | R4 | No server required -- no Node, Python, HTTP server, or backend at runtime |

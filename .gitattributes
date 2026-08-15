@@ -1,0 +1,17 @@
+# Normalize line endings. Byte-identical builds depend on this being right.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.wasm binary
+*.pdf binary
+*.zip binary
+*.docx binary
+
+# Keep generated artifacts out of diffs but still reviewable on request
+dist/** -diff

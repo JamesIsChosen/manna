@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  determinism:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      # Two builds in the same shell prove little. Vary path, timezone, locale.
+      - name: Build A
+        run: npm run build && find dist -type f -exec sha256sum {} + | sort > /tmp/a.txt
+      - name: Build B under a different environment
+        env:
+          TZ: Asia/Tokyo
+          LC_ALL: C
+        run: |
+          rm -rf dist
+          npm run build
+          find dist -type f -exec sha256sum {} + | sort > /tmp/b.txt
+      - name: Compare
+        run: diff /tmp/a.txt /tmp/b.txt

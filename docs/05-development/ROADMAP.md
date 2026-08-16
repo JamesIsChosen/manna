@@ -48,6 +48,12 @@ functionality is built. No major Bible-study feature begins before P0 passes.
 
 ### [~] P0.1 — Single-HTML Mobile Feasibility Harness
 
+**P0.1 governance exceptions:** ADR-0009 accepts the recorded Android
+`adb reverse`/localhost execution as criterion-13 evidence for P0.1 only, without
+waiving the general no-server/direct-filesystem requirement. ADR-0010 records James's
+one-time waiver of reviewer/author session independence for the final P0.1 closeout.
+Neither exception changes the global rules for later roadmap items.
+
 **Goal:** Prove one self-contained Manna HTML artifact executes reliably
 as an offline application shell on target desktop and mobile environments with
 no external runtime files.
@@ -89,7 +95,7 @@ and is an R5 matter — see
 10. The artifact contains no absolute developer filesystem path, verified by an automated check.
 11. Deliberate failure fixtures — external JS, external CSS, fetched fixture, missing artifact, broken propagation, pinned pane that follows — each fail verification with a non-zero exit code.
 12. Build metadata (app version, build ID, and blanked-field artifact digest) is visible in Diagnostics without exposing local paths; the true final-byte artifact SHA-256 is recorded in `BUILD-MANIFEST.json` and `manna.html.sha256` (see ADR-0007).
-13. Validation covers desktop Chromium, desktop Firefox, and an Android Chromium-class browser. iOS is recorded as a status row, not a Safari pass/fail: supported via a named third-party viewer hosting Apple WebKit at a `file://` origin; `[~]` device/build evidence deferred (see ADR-0008); storage quota explicitly outstanding (see ADR-0005).
+13. Validation covers desktop Chromium, desktop Firefox, and an Android Chromium-class browser. For P0.1 only, the recorded Android 11 emulator + Chrome run delivered through `adb reverse` to localhost is accepted as sufficient Android evidence even though direct Android `file://` launch was denied; this does not waive the general no-server/direct-filesystem requirement (see ADR-0009). iOS is recorded as a status row, not a Safari pass/fail: supported via a named third-party viewer hosting Apple WebKit at a `file://` origin; `[~]` device/build evidence deferred (see ADR-0008); storage quota explicitly outstanding (see ADR-0005).
 14. A reproducibility probe from two source directories records whether output is byte-identical, and documents any nondeterministic fields.
 15. Verse 15 renders the translator-supplied word `by` as visually distinct from translated text, and the distinction survives in the data model rather than being stripped at load. Scripture text matches the source module byte-for-byte once the supplied-word representation is accounted for.
 
@@ -107,7 +113,8 @@ prove the token architecture, not the full set.
 
 **Explicit non-claims:** passing P0.1 does not prove persistent browser storage,
 backup safety, iOS library viability, import compatibility, search scalability,
-or security hardening.
+or security hardening. It also does not establish direct Android `file://` launch:
+ADR-0009 is a P0.1-only evidence exception, not a general server/runtime waiver.
 
 ---
 

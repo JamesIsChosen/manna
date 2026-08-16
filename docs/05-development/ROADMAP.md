@@ -79,7 +79,7 @@ and is an R5 matter — see
 **Acceptance criteria:**
 1. The application runs from a single HTML file with no sibling runtime assets.
 2. Copying only `manna.html` into an empty directory and opening it yields the full harness.
-3. The harness functions with the network disconnected.
+3. The harness functions with the network disconnected. `[~]` deferred at P0.1 — actual disconnected-execution not yet demonstrated (non-blocking; CSP `connect-src 'none'` + fail-closed no-network lint already pass — see ADR-0008).
 4. Verse selection updates Commentary and Cross-Reference panes, each visibly naming the selected verse.
 5. Word selection on a tagged fixture word updates the Word Study pane with its Strong's entry.
 6. Place selection updates the Atlas pane.
@@ -89,7 +89,7 @@ and is an R5 matter — see
 10. The artifact contains no absolute developer filesystem path, verified by an automated check.
 11. Deliberate failure fixtures — external JS, external CSS, fetched fixture, missing artifact, broken propagation, pinned pane that follows — each fail verification with a non-zero exit code.
 12. Build metadata (app version, build ID, and blanked-field artifact digest) is visible in Diagnostics without exposing local paths; the true final-byte artifact SHA-256 is recorded in `BUILD-MANIFEST.json` and `manna.html.sha256` (see ADR-0007).
-13. Validation covers desktop Chromium, desktop Firefox, and an Android Chromium-class browser. iOS is recorded as a status row, not a Safari pass/fail: supported via a named third-party viewer hosting Apple WebKit at a `file://` origin, with device and build recorded, storage quota explicitly outstanding (see ADR-0005).
+13. Validation covers desktop Chromium, desktop Firefox, and an Android Chromium-class browser. iOS is recorded as a status row, not a Safari pass/fail: supported via a named third-party viewer hosting Apple WebKit at a `file://` origin; `[~]` device/build evidence deferred (see ADR-0008); storage quota explicitly outstanding (see ADR-0005).
 14. A reproducibility probe from two source directories records whether output is byte-identical, and documents any nondeterministic fields.
 15. Verse 15 renders the translator-supplied word `by` as visually distinct from translated text, and the distinction survives in the data model rather than being stripped at load. Scripture text matches the source module byte-for-byte once the supplied-word representation is accounted for.
 

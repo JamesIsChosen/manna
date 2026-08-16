@@ -46,7 +46,7 @@ a planning pass rather than being guessed at.
 The purpose of P0 is to prove the product concept works before substantial
 functionality is built. No major Bible-study feature begins before P0 passes.
 
-### [~] P0.1 — Single-HTML Mobile Feasibility Harness
+### [x] P0.1 — Single-HTML Mobile Feasibility Harness
 
 **P0.1 governance exceptions:** ADR-0009 accepts the recorded Android
 `adb reverse`/localhost execution as criterion-13 evidence for P0.1 only, without

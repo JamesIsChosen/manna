@@ -593,11 +593,14 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex="0"]:focus-visibl
   .bottomnav { display: flex; }
   .desk-body { padding-bottom: 62px; }
   /* The fixed bottom nav (62px + 3px border = 65px) overlays the bottom of the
-   * viewport. Reserve that space on the reader so the footer PREV/NEXT buttons
-   * clear it when scrolled to the bottom. env(safe-area-inset-bottom) adds the
-   * iOS home-indicator inset so those devices clear it too. The reader inside
-   * the desk keeps its larger 200px drawer clearance via .phone-body .reader. */
-  .reader { padding: 8px 10px calc(65px + env(safe-area-inset-bottom)); }
+   * viewport. Reserve that space on the reader plus a real margin so the footer
+   * PREV/NEXT buttons clear it with headroom when scrolled to the bottom.
+   * Reserving exactly the nav height is not enough: a 0px clearance flips to an
+   * overlap on any engine metric difference (subpixel rounding, font metrics).
+   * env(safe-area-inset-bottom) adds the iOS home-indicator inset so those
+   * devices clear it too. The reader inside the desk keeps its larger 200px
+   * drawer clearance via .phone-body .reader. */
+  .reader { padding: 8px 10px calc(65px + 16px + env(safe-area-inset-bottom)); }
   .verse { font-size: 18px; line-height: 1.7; }
 }
 @media (max-width: 1149px) and (min-width: 640px) {

@@ -147,9 +147,18 @@ async function poll(cdp, expression, predicate, timeoutMs, what) {
 
 const browserPath = findBrowser();
 
-test('browser: artifact boots and renders #app with the fixture verses', {
-  skip: browserPath ? false : 'no Chromium-family browser found (set MANNA_BROWSER to the binary)'
-}, async () => {
+/* A real browser is a hard prerequisite for this file: its entire purpose is to
+ * exercise the artifact in an actual engine, so silently skipping when no binary
+ * is present would turn a green run into "checked nothing". Fail instead — a
+ * skipped test is not a passed test. */
+function requireBrowser() {
+  if (!browserPath) {
+    throw new Error('no Chromium-family browser found (set MANNA_BROWSER to the binary, or install Chrome/Chromium/Edge)');
+  }
+}
+
+test('browser: artifact boots and renders #app with the fixture verses', async () => {
+  requireBrowser();
   const { proc, profile } = launch(browserPath);
   try {
     const port = await waitForPort(proc, profile, 15000);
@@ -261,9 +270,8 @@ async function runNavReachabilityCheck(viewport, mobile, label) {
   }
 }
 
-test('browser: no button is clipped by the viewport or overlapped by the fixed nav', {
-  skip: browserPath ? false : 'no Chromium-family browser found (set MANNA_BROWSER to the binary)'
-}, async () => {
+test('browser: no button is clipped by the viewport or overlapped by the fixed nav', async () => {
+  requireBrowser();
   await runNavReachabilityCheck([1280, 1032], false, 'desktop');
   await runNavReachabilityCheck([360, 800], true, 'phone');
 });

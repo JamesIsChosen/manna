@@ -15,7 +15,7 @@
  * MANNA_BROWSER env var). */
 const { test } = require('node:test');
 const assert = require('node:assert');
-const { spawn } = require('node:child_process');
+const { spawn, spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -72,25 +72,128 @@ function launch(browserPath) {
   return { proc, profile };
 }
 
+const CDP_COMMAND_TIMEOUT_MS = 10000;
+const BROWSER_EXIT_TIMEOUT_MS = 15000;
+
+function waitForExit(proc, timeoutMs) {
+  if (proc.exitCode !== null) return Promise.resolve(true);
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = (value) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      proc.removeListener('exit', onExit);
+      resolve(value);
+    };
+    const onExit = () => finish(true);
+    const timer = setTimeout(() => finish(proc.exitCode !== null), timeoutMs);
+    proc.once('exit', onExit);
+    if (proc.exitCode !== null) finish(true);
+  });
+}
+
+function windowsProfileProcesses(profile) {
+  if (process.platform !== 'win32') return [];
+  const escaped = profile.replace(/'/g, "''");
+  const script = "$needle='" + escaped + "'; " +
+    "@(Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne $PID -and $_.CommandLine -and $_.CommandLine -like ('*'+$needle+'*') } | ForEach-Object { [pscustomobject]@{ pid=[int]$_.ProcessId; ppid=[int]$_.ParentProcessId; name=$_.Name; commandLine=$_.CommandLine } }) | ConvertTo-Json -Compress";
+  const r = spawnSync('powershell.exe', ['-NoProfile', '-Command', script], {
+    encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], windowsHide: true,
+    timeout: 10000
+  });
+  if (r.error || r.status !== 0) return [];
+  const raw = String(r.stdout || '').trim();
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    const list = Array.isArray(parsed) ? parsed : [parsed];
+    return list.filter((p) => p && Number.isFinite(Number(p.pid))).map((p) => ({
+      pid: Number(p.pid), ppid: Number(p.ppid), name: String(p.name || ''),
+      commandLine: String(p.commandLine || '')
+    }));
+  } catch (_) {
+    return [];
+  }
+}
+
+function windowsProfilePids(profile) {
+  return [...new Set(windowsProfileProcesses(profile).map((p) => p.pid))];
+}
+
+async function stopBrowser(proc, profile) {
+  if (process.platform === 'win32') {
+    const deadline = Date.now() + BROWSER_EXIT_TIMEOUT_MS;
+    let emptyScans = 0;
+    while (Date.now() < deadline) {
+      const pids = windowsProfilePids(profile);
+      if (pids.length === 0) {
+        emptyScans += 1;
+        if (emptyScans >= 5) break;
+        await sleep(200);
+        continue;
+      }
+
+      emptyScans = 0;
+      for (const pid of pids) {
+        spawnSync('taskkill.exe', ['/PID', String(pid), '/T', '/F'], {
+          stdio: 'ignore', windowsHide: true, timeout: 10000
+        });
+      }
+      await sleep(200);
+    }
+
+    const remaining = windowsProfileProcesses(profile);
+    if (remaining.length) {
+      const summary = remaining.map((p) => ({
+        pid: p.pid, ppid: p.ppid, name: p.name,
+        commandLine: p.commandLine.slice(0, 240)
+      }));
+      throw new Error('browser profile process(es) survived iterative teardown: ' + JSON.stringify(summary));
+    }
+  } else if (proc && proc.exitCode === null) {
+    try { proc.kill(); } catch (_) {}
+    const exited = await waitForExit(proc, BROWSER_EXIT_TIMEOUT_MS);
+    if (!exited && proc.exitCode === null) {
+      try { proc.kill('SIGKILL'); } catch (_) {}
+      await waitForExit(proc, BROWSER_EXIT_TIMEOUT_MS);
+    }
+    if (proc.exitCode === null) throw new Error('browser process did not exit within the bounded teardown window');
+  }
+
+  await sleep(200);
+  try {
+    fs.rmSync(profile, { recursive: true, force: true, maxRetries: 8, retryDelay: 150 });
+  } catch (_) { /* best-effort profile cleanup after verified process exit */ }
+}
+
 async function waitForPort(proc, profile, timeoutMs) {
   const file = path.join(profile, 'DevToolsActivePort');
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
-    if (proc.exitCode !== null) throw new Error('browser exited early (code ' + proc.exitCode + ')');
     if (fs.existsSync(file)) {
       const text = fs.readFileSync(file, 'utf8').trim().split('\n');
       return parseInt(text[0], 10);
     }
+    // On Windows msedge.exe may act as a launcher and exit 0 while the real
+    // profile-scoped browser processes continue. The profile/port is the
+    // authoritative lifecycle, not the launcher PID.
+    if (process.platform !== 'win32' && proc.exitCode !== null) {
+      throw new Error('browser exited early (code ' + proc.exitCode + ')');
+    }
     await sleep(100);
   }
-  throw new Error('browser did not expose DevToolsActivePort within ' + timeoutMs + 'ms');
+  const extra = process.platform === 'win32'
+    ? '; launcherExit=' + proc.exitCode + '; profilePids=' + JSON.stringify(windowsProfilePids(profile))
+    : '; exit=' + proc.exitCode;
+  throw new Error('browser did not expose DevToolsActivePort within ' + timeoutMs + 'ms' + extra);
 }
 
 async function getPageWsUrl(port) {
   const start = Date.now();
   while (Date.now() - start < 10000) {
     try {
-      const res = await fetch('http://127.0.0.1:' + port + '/json/list');
+      const res = await fetch('http://127.0.0.1:' + port + '/json/list', { signal: AbortSignal.timeout(2000) });
       const targets = await res.json();
       const page = targets.find((t) => t.type === 'page');
       if (page) return page.webSocketDebuggerUrl;
@@ -104,27 +207,68 @@ function connect(wsUrl) {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(wsUrl);
     let nextId = 0;
+    let opened = false;
     const pending = new Map();
+
+    const rejectPending = (error) => {
+      for (const { rej, timer } of pending.values()) {
+        clearTimeout(timer);
+        rej(error);
+      }
+      pending.clear();
+    };
+
+    const connectTimer = setTimeout(() => {
+      if (opened) return;
+      try { ws.close(); } catch (_) {}
+      reject(new Error('CDP WebSocket open timed out after ' + CDP_COMMAND_TIMEOUT_MS + 'ms'));
+    }, CDP_COMMAND_TIMEOUT_MS);
+
     ws.addEventListener('message', (ev) => {
       const msg = JSON.parse(ev.data);
       if (msg.id && pending.has(msg.id)) {
-        const { res, rej } = pending.get(msg.id);
+        const item = pending.get(msg.id);
         pending.delete(msg.id);
-        if (msg.error) rej(new Error(msg.error.message));
-        else res(msg.result);
+        clearTimeout(item.timer);
+        if (msg.error) item.rej(new Error(msg.error.message));
+        else item.res(msg.result);
       }
     });
-    ws.addEventListener('open', () => resolve({
-      send(method, params) {
-        const id = ++nextId;
-        return new Promise((res, rej) => {
-          pending.set(id, { res, rej });
-          ws.send(JSON.stringify({ id, method, params: params || {} }));
-        });
-      },
-      close() { ws.close(); }
-    }));
-    ws.addEventListener('error', () => reject(new Error('CDP WebSocket error')));
+
+    ws.addEventListener('open', () => {
+      opened = true;
+      clearTimeout(connectTimer);
+      resolve({
+        send(method, params) {
+          const id = ++nextId;
+          return new Promise((res, rej) => {
+            const timer = setTimeout(() => {
+              pending.delete(id);
+              rej(new Error('CDP ' + method + ' timed out after ' + CDP_COMMAND_TIMEOUT_MS + 'ms'));
+            }, CDP_COMMAND_TIMEOUT_MS);
+            pending.set(id, { res, rej, timer, method });
+            try {
+              ws.send(JSON.stringify({ id, method, params: params || {} }));
+            } catch (error) {
+              clearTimeout(timer);
+              pending.delete(id);
+              rej(error);
+            }
+          });
+        },
+        close() { ws.close(); }
+      });
+    });
+
+    ws.addEventListener('error', () => {
+      clearTimeout(connectTimer);
+      if (!opened) reject(new Error('CDP WebSocket error'));
+      else rejectPending(new Error('CDP WebSocket error'));
+    });
+    ws.addEventListener('close', () => {
+      clearTimeout(connectTimer);
+      rejectPending(new Error('CDP WebSocket closed'));
+    });
   });
 }
 
@@ -157,7 +301,7 @@ function requireBrowser() {
   }
 }
 
-test('browser: artifact boots and renders #app with the fixture verses', async () => {
+test('browser: artifact boots and renders #app with the fixture verses', { timeout: 120000 }, async () => {
   requireBrowser();
   const { proc, profile } = launch(browserPath);
   try {
@@ -189,13 +333,7 @@ test('browser: artifact boots and renders #app with the fixture verses', async (
 
     cdp.close();
   } finally {
-    proc.kill();
-    // Wait for the browser to release its profile lock, then clean up. The
-    // temp dir is inside os.tmpdir() and is removed by the OS on reboot if
-    // this ever fails, so the delete is best-effort.
-    await new Promise((r) => proc.once('exit', r)).catch(() => {});
-    await sleep(200);
-    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+    await stopBrowser(proc, profile);
   }
 });
 
@@ -263,14 +401,11 @@ async function runNavReachabilityCheck(viewport, mobile, label) {
     assert.deepStrictEqual(violations, [], label + ' has unreachable/overlapped buttons: ' + JSON.stringify(violations));
     cdp.close();
   } finally {
-    proc.kill();
-    await new Promise((r) => proc.once('exit', r)).catch(() => {});
-    await sleep(200);
-    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+    await stopBrowser(proc, profile);
   }
 }
 
-test('browser: no button is clipped by the viewport or overlapped by the fixed nav', async () => {
+test('browser: no button is clipped by the viewport or overlapped by the fixed nav', { timeout: 120000 }, async () => {
   requireBrowser();
   await runNavReachabilityCheck([1280, 1032], false, 'desktop');
   await runNavReachabilityCheck([360, 800], true, 'phone');
@@ -397,14 +532,11 @@ async function runPhoneTapWorkflow() {
 
     cdp.close();
   } finally {
-    proc.kill();
-    await new Promise((r) => proc.once('exit', r)).catch(() => {});
-    await sleep(200);
-    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+    await stopBrowser(proc, profile);
   }
 }
 
-test('browser: phone tap workflow drives every required interaction by touch', async () => {
+test('browser: phone tap workflow drives every required interaction by touch', { timeout: 120000 }, async () => {
   requireBrowser();
   await runPhoneTapWorkflow();
 });
@@ -414,7 +546,7 @@ test('browser: phone tap workflow drives every required interaction by touch', a
  * build, copy the single artifact into a fresh empty dir, assert the dir holds
  * nothing else, boot from that copy via file://, and confirm a core selection
  * interaction works. */
-test('browser: clean-directory — manna.html alone in an empty dir boots the harness', async () => {
+test('browser: clean-directory — manna.html alone in an empty dir boots the harness', { timeout: 120000 }, async () => {
   requireBrowser();
   const cleanDir = path.join(ROOT, '.tmp', 'clean-dir-test');
   fs.rmSync(cleanDir, { recursive: true, force: true });
@@ -443,10 +575,7 @@ test('browser: clean-directory — manna.html alone in an empty dir boots the ha
 
     cdp.close();
   } finally {
-    proc.kill();
-    await new Promise((r) => proc.once('exit', r)).catch(() => {});
-    await sleep(200);
-    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+    await stopBrowser(proc, profile);
     try { fs.rmSync(cleanDir, { recursive: true, force: true }); } catch (e) { /* ignore */ }
   }
 });

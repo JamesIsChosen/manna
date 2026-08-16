@@ -61,6 +61,40 @@ Then, beyond re-running what the author ran:
   in the packet.
 - **Read the diff.** All of it.
 
+### When the reviewer cannot execute locally
+
+A reviewer whose environment cannot check out or run the project may satisfy
+the command-execution requirement with a CI run, if and only if **all** of the
+following hold. Record each one in the report; a missing item is a finding.
+
+1. **Exact commit.** The CI run's `head_sha` equals the reviewed commit, in
+   full. Not the branch tip, not "latest on the branch" — the same forty
+   characters. Record the run ID.
+2. **Audit the workflow.** Read `.github/workflows/*.yml` **at the reviewed
+   commit** and confirm it actually runs the canonical commands. The workflow
+   is author-controlled, so an unaudited CI pass proves only that the author's
+   chosen commands succeeded. State in the report which commands you confirmed.
+3. **No silent skips.** Confirm no required test was skipped. **A skipped test
+   is not a passed test.** Tests that self-skip on a missing dependency —
+   a browser, a device, an optional binary — report success while checking
+   nothing. Verify the skip count is zero for every required suite, or name
+   each skip and treat it as unverified.
+4. **Environment variation.** The protocol's vary-path/timezone/locale
+   requirement must be met by a CI job that demonstrably does so, or recorded
+   as not performed.
+5. **Adversarial checks stand.** Deliberately breaking things and confirming
+   non-zero exits cannot be delegated to a green CI run. Where the reviewer
+   cannot run them, it inspects the failure fixtures' assertions and states
+   plainly that it could not execute them. That gap is a finding unless CI
+   itself executes those fixtures.
+6. **CI never covers manual criteria.** Clean-directory execution, offline
+   operation, real browsers, real devices, and any human-observed behaviour
+   remain outside CI's reach and must be recorded separately.
+
+CI corroboration is a substitute for the reviewer's *hands*, never for the
+reviewer's *judgement*. A reviewer that only reads a green checkmark has not
+reviewed anything.
+
 ## The report
 
 Write `docs/05-development/packets/<item-id>-<slug>.review.md`, **committed to

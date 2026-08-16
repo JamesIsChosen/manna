@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "node scripts/lint.js",
-    "test": "node --test test/",
+    "test": "node --test",
     "verify": "npm run lint && npm test && npm run build",
     "verify-vendor": "node scripts/verify-vendor.js"
   },

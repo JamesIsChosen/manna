@@ -275,3 +275,178 @@ test('browser: no button is clipped by the viewport or overlapped by the fixed n
   await runNavReachabilityCheck([1280, 1032], false, 'desktop');
   await runNavReachabilityCheck([360, 800], true, 'phone');
 });
+
+/* Regression for criterion 9 (R2-F3): the phone workflow must be driven by
+ * real touch input, not direct .click(). This walks the full P0.1 phone path —
+ * navigation, verse selection, commentary/xref, word study, atlas, and
+ * pin/follow — sending genuine touchStart/touchEnd through the CDP input
+ * protocol and asserting the visible result at each step, with a
+ * horizontal-overflow guard throughout. */
+async function hasSel(cdp, selector) {
+  return evaluate(cdp, '!!document.querySelector(' + JSON.stringify(selector) + ')');
+}
+
+async function textOf(cdp, selector) {
+  return evaluate(cdp, '(function(){ var el = document.querySelector(' + JSON.stringify(selector) + '); return el ? el.textContent.trim() : ""; })()');
+}
+
+async function waitFor(cdp, fn, timeout, what) {
+  const start = Date.now();
+  let last;
+  while (Date.now() - start < timeout) {
+    last = await fn(cdp);
+    if (last) return last;
+    await sleep(100);
+  }
+  throw new Error('timed out waiting for ' + what + '; last=' + JSON.stringify(last));
+}
+
+async function dispatchTap(cdp, x, y) {
+  await cdp.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [{ x: x, y: y, id: 0, radiusX: 1, radiusY: 1, force: 1 }]
+  });
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+}
+
+async function tapEl(cdp, selector, index) {
+  index = index || 0;
+  await evaluate(cdp, '(function(){ var el = document.querySelectorAll(' + JSON.stringify(selector) + ')[' + index + ']; if (el) el.scrollIntoView({ block: "center", inline: "nearest" }); })()');
+  await sleep(150);
+  const pt = await evaluate(cdp, '(function(){ var el = document.querySelectorAll(' + JSON.stringify(selector) + ')[' + index + ']; if (!el) return null; var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()');
+  if (!pt) throw new Error('tap target not found: ' + selector + ' [' + index + ']');
+  await dispatchTap(cdp, pt.x, pt.y);
+  await sleep(180);
+}
+
+async function noHOverflow(cdp, label) {
+  const gap = await evaluate(cdp, 'document.documentElement.scrollWidth - window.innerWidth');
+  assert.ok(gap <= 0.5, label + ': horizontal overflow by ' + gap + 'px');
+}
+
+async function runPhoneTapWorkflow() {
+  const { proc, profile } = launch(browserPath);
+  try {
+    const port = await waitForPort(proc, profile, 15000);
+    const cdp = await connect(await getPageWsUrl(port));
+    await cdp.send('Page.enable');
+    await cdp.send('Emulation.setDeviceMetricsOverride', { width: 360, height: 800, deviceScaleFactor: 1, mobile: true });
+    await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+    await cdp.send('Emulation.setUserAgentOverride', { userAgent: 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36' });
+    await cdp.send('Page.navigate', { url: pathToFileURL(ARTIFACT).href });
+    await poll(cdp, 'document.getElementById("app") && document.getElementById("app").children.length > 0', (v) => v === true, 10000, 'phone boot');
+
+    // 1. Primary navigation: READER.
+    await tapEl(cdp, '.bottomnav [data-nav="reader"]');
+    await waitFor(cdp, (c) => hasSel(c, '.reader-screen'), 5000, 'reader screen');
+    await noHOverflow(cdp, 'after reader nav');
+
+    // 2. Reader navigation: NEXT then PREV.
+    await tapEl(cdp, '.reader-footer .nav-btn', 1);
+    await waitFor(cdp, (c) => hasSel(c, '.verse.selected[data-verse="17"]'), 5000, 'next verse selected');
+    await tapEl(cdp, '.reader-footer .nav-btn', 0);
+    await waitFor(cdp, (c) => hasSel(c, '.verse.selected[data-verse="16"]'), 5000, 'prev verse selected');
+
+    // 3. Primary navigation: STUDY DESK (phone tier renders the drawer).
+    await tapEl(cdp, '.bottomnav [data-nav="desk"]');
+    await waitFor(cdp, (c) => hasSel(c, '#drawer'), 5000, 'desk phone drawer');
+    await noHOverflow(cdp, 'after desk nav');
+
+    // 4. Select verse 16, then open the drawer and confirm Commentary.
+    await tapEl(cdp, '.verse[data-verse="16"]');
+    await tapEl(cdp, '.drawer .grab');
+    await waitFor(cdp, async (c) => (await evaluate(c, 'document.getElementById("drawer").classList.contains("open")')) === true, 5000, 'drawer open');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .pane-ref')) === 'MATTHEW 4:16', 5000, 'commentary shows 4:16');
+
+    // 5. Cross References update.
+    await tapEl(cdp, '.drawer .tab[data-mpane="xref"]');
+    await waitFor(cdp, (c) => hasSel(c, '.mpanel-body .xrow'), 5000, 'xref rows');
+
+    // 6. Word study: tap "light" (G5457) in v16; drawer auto-opens to WORD.
+    await tapEl(cdp, '.drawer .grab');
+    await tapEl(cdp, '.tok.word[data-strongs="G5457"]', 0);
+    await waitFor(cdp, (c) => hasSel(c, '.mpanel-body .word-body'), 5000, 'word study pane');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .chip')) === 'G5457', 5000, "Strong's G5457");
+
+    // 7. Atlas: tap "Capernaum" in v13; drawer auto-opens to ATLAS.
+    await tapEl(cdp, '.drawer .grab');
+    await tapEl(cdp, '.tok.place[data-place="capernaum"]');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .place-name')) === 'CAPERNAUM', 5000, 'atlas Capernaum');
+
+    // 8. Pin Commentary (switch to COMM, then PIN).
+    await tapEl(cdp, '.drawer .tab[data-mpane="commentary"]');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .pane-ref')) === 'MATTHEW 4:16', 5000, 'commentary 4:16 pre-pin');
+    await tapEl(cdp, '.drawer .fprow [data-fp="pin"]');
+    await waitFor(cdp, async (c) => !(await evaluate(c, 'document.querySelector(".drawer .pinbar").hidden')), 5000, 'pinbar visible');
+    const pinbar = await textOf(cdp, '.drawer .pinbar');
+    assert.ok(/PINNED/.test(pinbar), 'pinbar does not say PINNED: ' + pinbar);
+
+    // 9. Select verse 17 while pinned — commentary must stay held at 4:16.
+    await tapEl(cdp, '.drawer .grab');
+    await tapEl(cdp, '.verse[data-verse="17"]');
+    await tapEl(cdp, '.drawer .grab');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .pane-ref')) === 'MATTHEW 4:16', 5000, 'commentary held at 4:16');
+    await waitFor(cdp, async (c) => !(await evaluate(c, 'document.querySelector(".drawer .pinbar").hidden')), 5000, 'pinbar still visible');
+
+    // 10. Unpin — commentary resumes following.
+    await tapEl(cdp, '.drawer .fprow [data-fp="follow"]');
+    await waitFor(cdp, async (c) => (await evaluate(c, 'document.querySelector(".drawer .pinbar").hidden')) === true, 5000, 'pinbar hidden');
+    await waitFor(cdp, async (c) => (await textOf(c, '.mpanel-body .pane-ref')) === 'MATTHEW 4:17', 5000, 'commentary resumed 4:17');
+
+    await noHOverflow(cdp, 'after full workflow');
+
+    cdp.close();
+  } finally {
+    proc.kill();
+    await new Promise((r) => proc.once('exit', r)).catch(() => {});
+    await sleep(200);
+    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+  }
+}
+
+test('browser: phone tap workflow drives every required interaction by touch', async () => {
+  requireBrowser();
+  await runPhoneTapWorkflow();
+});
+
+/* Criterion 2 (R2-F2): copying ONLY manna.html into an empty directory and
+ * opening it must yield the full harness. This performs the verbatim action —
+ * build, copy the single artifact into a fresh empty dir, assert the dir holds
+ * nothing else, boot from that copy via file://, and confirm a core selection
+ * interaction works. */
+test('browser: clean-directory — manna.html alone in an empty dir boots the harness', async () => {
+  requireBrowser();
+  const cleanDir = path.join(ROOT, '.tmp', 'clean-dir-test');
+  fs.rmSync(cleanDir, { recursive: true, force: true });
+  fs.mkdirSync(cleanDir, { recursive: true });
+  fs.copyFileSync(ARTIFACT, path.join(cleanDir, 'manna.html'));
+
+  const listing = fs.readdirSync(cleanDir).sort();
+  assert.deepStrictEqual(listing, ['manna.html'], 'clean dir must contain only manna.html, got: ' + JSON.stringify(listing));
+
+  const { proc, profile } = launch(browserPath);
+  try {
+    const port = await waitForPort(proc, profile, 15000);
+    const cdp = await connect(await getPageWsUrl(port));
+    await cdp.send('Page.enable');
+    await cdp.send('Page.navigate', { url: pathToFileURL(path.join(cleanDir, 'manna.html')).href });
+
+    const childCount = await poll(cdp, 'document.getElementById("app") ? document.getElementById("app").children.length : -1', (n) => n > 0, 10000, '#app to render from clean dir');
+    assert.ok(childCount > 0, '#app has no rendered children from the clean-dir copy');
+
+    await evaluate(cdp, 'document.querySelector(\'[data-nav="reader"]\').click()');
+    await poll(cdp, 'document.body.textContent.includes("The people which sat in darkness saw great light")', (v) => v === true, 10000, 'verse 16 text in clean-dir reader');
+
+    // Core interaction: select verse 17 and confirm the active selection moved.
+    await evaluate(cdp, 'document.querySelector(\'.verse[data-verse="17"]\').click()');
+    await poll(cdp, '(document.querySelector(".badge-active") || {}).textContent.includes("MATTHEW 4:17")', (v) => v === true, 10000, 'verse 17 selection from clean-dir copy');
+
+    cdp.close();
+  } finally {
+    proc.kill();
+    await new Promise((r) => proc.once('exit', r)).catch(() => {});
+    await sleep(200);
+    try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch (e) { /* ignore */ }
+    try { fs.rmSync(cleanDir, { recursive: true, force: true }); } catch (e) { /* ignore */ }
+  }
+});

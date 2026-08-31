@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "LOCAL_DESIGN_CHECKPOINT_REMOTE_READBACK_PENDING"
+  "status": "DESIGN_CHECKPOINT_SYNCED_FINAL_STATE_RECORD_PENDING"
 }
 ---
 
@@ -33,4 +33,4 @@ The cold-start simulation resolved the required runtime, state, handoff, authori
 
 ## Repository closeout
 
-The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-v1-ui-ux-design-verification`, with non-force push and no merge. The design checkpoint is committed locally; publication and exact remote-head readback are the remaining closeout steps. No Product Freeze, application implementation, deployment, release, or history rewrite is part of this task.
+The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-v1-ui-ux-design-verification`, with non-force push and no merge. The design checkpoint `7d16298cfd98b771808c0efcd4dc9fff27f970bb` was published without force and read back from the exact governed ref with SHA equality. The final state-record commit is the subsequent bounded publication/readback step. No Product Freeze, application implementation, deployment, release, or history rewrite is part of this task.

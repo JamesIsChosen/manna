@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "handoff_status": "STOPPED_LOCAL_AHEAD_UI_UX_BASELINE_RECORDED",
+  "handoff_status": "STOPPED_SYNCED_UI_UX_BASELINE_RECORDED",
   "next_route": "a new design agent must create and obtain approval for complete flows, then appearance and an interactive mock; do not implement before explicit Product Freeze"
 }
 ---
@@ -30,6 +30,8 @@ The active capability is Software/Product only. The runtime is compact and proje
 
 ## Sync status
 
-The design-baseline checkpoint is committed locally but remote publication and
-exact-head readback are still required. Inspect `REPOSITORY-SYNC.md`; never
-infer currentness from local Git state alone.
+The design-reconciliation checkpoint `7d16298cfd98b771808c0efcd4dc9fff27f970bb`
+was published to the governed branch and read back with exact SHA equality.
+Inspect `REPOSITORY-SYNC.md`; never infer currentness from local Git state alone.
+This synchronization closes the bounded documentation task; it does not grant
+flow approval, Product Freeze, implementation authority, or merge authority.

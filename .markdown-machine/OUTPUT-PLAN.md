@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "MATERIALIZED_PENDING_REPOSITORY_CLOSEOUT",
+  "status": "CLOSED_OUT_WITH_REMOTE_CHECKPOINT",
   "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7"
 }
 ---

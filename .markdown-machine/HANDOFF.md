@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "handoff_status": "RECONCILIATION_IN_PROGRESS",
+  "handoff_status": "STOPPED_SYNCED",
   "next_route": "validate exact remote parity, then continue Manna at P0.2 under existing project authority"
 }
 ---
@@ -27,4 +27,4 @@ The active capability is Software/Product only. The runtime is compact and proje
 
 ## Sync status
 
-This handoff is updated after bounded closeout. If its status is not `STOPPED_SYNCED` or `REPOSITORY_SYNCED`, inspect the exact blocker rather than assuming the remote is current.
+Bounded closeout read back the governed ref at exact checkpoint `19c13f9584fc6e622c7e8638f15d1a8ee17f371e`; the final state-record checkpoint is then published and read back before this handoff is considered current. If its status is not `STOPPED_SYNCED` or `REPOSITORY_SYNCED`, inspect the exact blocker rather than assuming the remote is current.

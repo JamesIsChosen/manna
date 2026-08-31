@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "LOCAL_VALIDATION_COMPLETE_REMOTE_CLOSEOUT_PENDING"
+  "status": "REMOTE_CHECKPOINT_SYNCED_FINAL_STATE_READBACK_PENDING"
 }
 ---
 
@@ -33,4 +33,4 @@ The cold-start simulation resolved the required runtime, state, handoff, authori
 
 ## Repository closeout
 
-The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-governance-reconciliation`, with non-force push and no merge. The final classification, exact remote ref readback, and local/remote SHA equality are appended after the bounded checkpoint/push/readback sequence. No merge, force-push, deployment, release, publication, external message, or destructive integration is part of this closeout.
+The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-governance-reconciliation`, with non-force push and no merge. The first durable reconciliation checkpoint `19c13f9584fc6e622c7e8638f15d1a8ee17f371e` was read back from the exact remote ref with equality; the final state-record checkpoint is the last bounded push/readback step. No merge, force-push, deployment, release, publication, external message, or destructive integration is part of this closeout.

@@ -9,8 +9,8 @@
   "lifecycle_revision": "manna-v0.3-reconciliation",
   "run_horizon": "reconcile the existing Manna repository to Markdown Machine v0.3.0 and leave a cold-resume handoff",
   "active_capabilities": ["software-product"],
-  "repository_sync": "REMOTE_SYNC_UNKNOWN",
-  "work_status": "RECONCILIATION_IN_PROGRESS"
+  "repository_sync": "REPOSITORY_SYNCED",
+  "work_status": "RECONCILIATION_CLOSED"
 }
 ---
 
@@ -28,4 +28,4 @@ Manna is an offline-first Bible study workstation whose release target is one se
 
 Only `software-product` is active. Repository persistence is universal continuity, not a second capability. The earlier generic SMPM-1 active materialization is classified as invalid for the current v0.3.0 runtime shape and removed from active paths; its historical event remains in `history/SMPM-1-BOOTSTRAP.md` and Git history.
 
-The final repository synchronization classification and exact SHA are updated here after closeout readback. Until then this record explicitly remains recoverable partial state, not an acceptance or completion claim.
+The reconciliation checkpoint `19c13f9584fc6e622c7e8638f15d1a8ee17f371e` was read back from the canonical GitHub governed ref with exact equality. The state-record closeout commit is published and read back separately; it changes governance projections only and does not claim product acceptance.

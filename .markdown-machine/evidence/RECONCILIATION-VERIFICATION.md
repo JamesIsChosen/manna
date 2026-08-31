@@ -6,7 +6,7 @@
   "machine_version": "0.3.0",
   "project_id": "manna",
   "scope": "v0.3.0 reconciliation",
-  "status": "VERIFIED_WITH_NATIVE_BROWSER_GAP"
+  "status": "VERIFIED_WITH_NATIVE_BROWSER_GAP_AND_REMOTE_PARITY"
 }
 ---
 
@@ -24,5 +24,6 @@ Required gates: distribution pin, exact selected runtime digests, no recursive d
 - `npm test`: 46 pass; 4 browser tests blocked before execution because no Chromium-family executable is installed for the native runner.
 - In-app browser against `http://127.0.0.1:4173/manna.html`: pass for boot, navigation, verse selection, word selection, place selection, pin/follow behavior, and zero console errors.
 - `npm run build`: pass; deterministic self-contained artifact produced and final lint pass.
+- Canonical GitHub readback: pass; governed ref exactly resolved to `19c13f9584fc6e622c7e8638f15d1a8ee17f371e`.
 
 The native browser gap is environmental evidence, not an application failure; it remains explicit so a future cold resume can rerun those four tests when a Chromium-family executable is available.

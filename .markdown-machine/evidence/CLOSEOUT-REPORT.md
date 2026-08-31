@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "REMOTE_CHECKPOINT_SYNCED_FINAL_STATE_READBACK_PENDING"
+  "status": "LOCAL_DESIGN_CHECKPOINT_REMOTE_READBACK_PENDING"
 }
 ---
 
@@ -23,9 +23,9 @@ The active baseline contains only `software-product`. Repository persistence is 
 
 The distribution was pinned by exact digest in `ORIGIN.md`. No recursive distribution roots (`bootstrap/`, `machine-source/`, `project-compiler/`, `project-runtime/`, `verification/`) are present. No generic `*.template.md` files or generic record factory are active. No unused capability runtime is present. Universal semantics required for authority, SMF/schema, intent, lifecycle/horizon, Inbox, tasks/attempts, convergence, context/skills, independent review, enforcement/resources, effects, STOP/recovery, currentness, handoff, migration, and repository closeout are carried by the compact runtime export.
 
-## Preservation and application validation
+## Preservation and design validation
 
-Existing Manna product source, specifications, tests, CI, security material, and prior review/history documents remain present. `npm run lint` and `npm run build` pass. `npm test` has 46 passing assertions; four native browser tests are environment-blocked because the host has no Chromium-family executable. The in-app browser independently verified boot, navigation, verse/word/place synchronization, pin/follow behavior, and zero console errors against the built artifact.
+Existing Manna product source, specifications, tests, CI, security material, and prior review/history documents remain present. The exact supplied Study Desk and IA artifacts are materialized under `docs/01-spec/design-reference/`; the requirements, design-reference README, study-desk design record, and packet trace them without claiming Product Freeze. `npm run lint`, the non-browser test subset, and `npm run build` pass. Full `npm test` remains blocked by the host's missing Chromium-family executable and has six inherited failure-diagnostic assertion mismatches; no application source or test runner was changed for this design reconciliation.
 
 ## Cold start and new capability route
 
@@ -33,4 +33,4 @@ The cold-start simulation resolved the required runtime, state, handoff, authori
 
 ## Repository closeout
 
-The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-governance-reconciliation`, with non-force push and no merge. The first durable reconciliation checkpoint `19c13f9584fc6e622c7e8638f15d1a8ee17f371e` was read back from the exact remote ref with equality; the final state-record checkpoint is the last bounded push/readback step. No merge, force-push, deployment, release, publication, external message, or destructive integration is part of this closeout.
+The canonical binding is GitHub `JamesIsChosen/manna`, remote `origin`, governed ref `codex/manna-v1-ui-ux-design-verification`, with non-force push and no merge. The design checkpoint is committed locally; publication and exact remote-head readback are the remaining closeout steps. No Product Freeze, application implementation, deployment, release, or history rewrite is part of this task.

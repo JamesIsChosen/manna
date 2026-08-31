@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "handoff_status": "STOPPED_SYNCED_UI_UX_DESIGN_READY",
+  "handoff_status": "STOPPED_LOCAL_AHEAD_UI_UX_BASELINE_RECORDED",
   "next_route": "a new design agent must create and obtain approval for complete flows, then appearance and an interactive mock; do not implement before explicit Product Freeze"
 }
 ---
@@ -30,4 +30,6 @@ The active capability is Software/Product only. The runtime is compact and proje
 
 ## Sync status
 
-The accepted interview checkpoint `5bea95bea140b96a1961dfb93bb441d2547c45d0` was read back from the exact governed discovery ref with equality. The subsequent state-record closeout commit is also published and authoritatively read back before this handoff is reported as stopped and synchronized. Inspect `REPOSITORY-SYNC.md`; never infer currentness from local Git state alone.
+The design-baseline checkpoint is committed locally but remote publication and
+exact-head readback are still required. Inspect `REPOSITORY-SYNC.md`; never
+infer currentness from local Git state alone.

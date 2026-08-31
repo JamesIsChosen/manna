@@ -4,17 +4,23 @@
   "schema_version": 1,
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
-  "classification": "REPOSITORY_SYNCED",
+  "classification": "LOCAL_AHEAD_REMOTE",
   "remote_name": "origin",
-  "governed_ref": "refs/heads/codex/manna-v1-product-discovery",
-  "checkpoint_commit": "5bea95bea140b96a1961dfb93bb441d2547c45d0",
-  "remote_head_readback": "5bea95bea140b96a1961dfb93bb441d2547c45d0",
-  "exact_parity": true
+  "governed_ref": "refs/heads/codex/manna-v1-ui-ux-design-verification",
+  "checkpoint_commit": "65bc8e0a2e17f311df8d47741c7d09b39d48bdb8",
+  "remote_head_readback": null,
+  "exact_parity": false
 }
 ---
 
 # Repository sync observation
 
-The Version 1 product-discovery checkpoint containing the accepted product and UI/UX interview records was safely published without force or merge. Authoritative GitHub readback of `refs/heads/codex/manna-v1-product-discovery` returned exactly `5bea95bea140b96a1961dfb93bb441d2547c45d0`, equal to the intended local checkpoint.
+The Version 1 visual/layout baseline checkpoint is committed locally at
+`65bc8e0a2e17f311df8d47741c7d09b39d48bdb8`. It has not yet been published to
+the governed ref; remote-head readback is therefore pending.
 
-The closeout sequence was: commit the intended durable project state, confirm the governed discovery ref was absent, publish it without force or merge, read the exact remote ref back, and record SHA equality here and in `STATE.md`/`HANDOFF.md`. The subsequent state-record checkpoint is also published and read back before final stopped synchronization is reported.
+The required closeout sequence is: commit the intended durable project state,
+read the canonical remote ref, publish the governed ref without force or merge,
+read the exact remote ref back, and record SHA equality here and in `STATE.md`/
+`HANDOFF.md`. Do not claim `REPOSITORY_SYNCED` or `STOPPED_SYNCED` until that
+readback succeeds.

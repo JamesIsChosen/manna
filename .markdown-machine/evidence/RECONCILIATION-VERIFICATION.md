@@ -5,25 +5,26 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "scope": "v0.3.0 reconciliation",
-  "status": "VERIFIED_WITH_NATIVE_BROWSER_GAP_AND_REMOTE_PARITY"
+  "scope": "Manna V1 UI/UX design reconciliation",
+  "status": "VERIFIED_WITH_VALIDATION_GAPS_REMOTE_PENDING"
 }
 ---
 
 # Reconciliation verification ledger
 
-Required gates: distribution pin, exact selected runtime digests, no recursive distribution copy, no unused capability runtime, no generic record factory, compact runtime, preserved existing project files/history, semantic closure, cold resume without ZIP, repository binding, and exact remote readback.
+Required gates: distribution pin, exact selected runtime digests, no recursive distribution copy, no unused capability runtime, no generic record factory, compact runtime, preserved existing project files/history, semantic closure, cold resume without ZIP, design-reference traceability, repository binding, and exact remote readback.
 
 ## Local results
 
 - Exact runtime export comparisons: pass.
-- JSON front matter and manifest coverage: 21/21 machine records pass.
+- JSON front matter and manifest coverage: 25/25 machine records pass.
 - Forbidden distribution roots and generic `*.template.md` factory: absent.
 - Preservation anchors (`README.md`, `AGENTS.md`, `SECURITY.md`, `src/`, `docs/`, `test/`, `.github/`): present.
 - `npm run lint`: pass.
-- `npm test`: 46 pass; 4 browser tests blocked before execution because no Chromium-family executable is installed for the native runner.
-- In-app browser against `http://127.0.0.1:4173/manna.html`: pass for boot, navigation, verse selection, word selection, place selection, pin/follow behavior, and zero console errors.
+- `node --test test/build.test.js test/render.test.js test/selection.test.js`: 3 pass.
+- `npm test`: blocked by the host's missing Chromium-family executable for four browser tests; six failure-diagnostic assertions also fail because the existing lint runner writes diagnostics to stdout while those assertions read stderr. No application source or test runner was changed for this design reconciliation.
+- Study Desk design markers: pass; the seven added static layouts are present alongside the original six screens.
 - `npm run build`: pass; deterministic self-contained artifact produced and final lint pass.
-- Canonical GitHub readback: pass; governed ref exactly resolved to `19c13f9584fc6e622c7e8638f15d1a8ee17f371e`.
+- Canonical GitHub readback: pending publication of the design-verification branch.
 
-The native browser gap is environmental evidence, not an application failure; it remains explicit so a future cold resume can rerun those four tests when a Chromium-family executable is available.
+The native browser gap and inherited diagnostics-test mismatch remain explicit so a future implementation task can address or rerun them independently. They are outside this documentation/design-baseline scope.

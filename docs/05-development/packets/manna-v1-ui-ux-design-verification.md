@@ -27,7 +27,9 @@ Out of scope:
 - Product Freeze, roadmap recompilation, or implementation authorization;
 - new mobile/tablet flows for the seven added static layouts;
 - deciding the four unresolved IA proposals;
-- pushing, merging, releasing, or deploying this branch before review.
+- merging, releasing, or deploying this branch before review; branch
+  publication is performed only because the explicit task requires GitHub
+  Markdown Machine closeout, and does not imply review, merge, or acceptance.
 
 ## 3. How to verify
 

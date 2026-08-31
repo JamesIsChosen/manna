@@ -4,17 +4,17 @@
   "schema_version": 1,
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
-  "classification": "LOCAL_AHEAD_REMOTE",
+  "classification": "REPOSITORY_SYNCED",
   "remote_name": "origin",
   "governed_ref": "refs/heads/codex/manna-v1-product-discovery",
-  "checkpoint_commit": "96c4d8e917b78ab4d740cf381c4a53eb25f73044",
-  "remote_head_readback": null,
-  "exact_parity": false
+  "checkpoint_commit": "5bea95bea140b96a1961dfb93bb441d2547c45d0",
+  "remote_head_readback": "5bea95bea140b96a1961dfb93bb441d2547c45d0",
+  "exact_parity": true
 }
 ---
 
-# Repository sync observation before interview closeout
+# Repository sync observation
 
-The prior governance reconciliation is synchronized on its historical governed ref. The current Version 1 product-discovery branch contains the accepted product and UI/UX interview records but has not yet been published and read back. It is therefore classified `LOCAL_AHEAD_REMOTE` until bounded closeout proves exact parity.
+The Version 1 product-discovery checkpoint containing the accepted product and UI/UX interview records was safely published without force or merge. Authoritative GitHub readback of `refs/heads/codex/manna-v1-product-discovery` returned exactly `5bea95bea140b96a1961dfb93bb441d2547c45d0`, equal to the intended local checkpoint.
 
-The required sequence is: commit the intended durable project state, read remote currentness, publish the governed ref without force or merge, read the exact remote ref back, and record the SHA equality in this file and in `STATE.md`/`HANDOFF.md`. The subsequent state-record checkpoint must also be published and read back before claiming stopped synchronization.
+The closeout sequence was: commit the intended durable project state, confirm the governed discovery ref was absent, publish it without force or merge, read the exact remote ref back, and record SHA equality here and in `STATE.md`/`HANDOFF.md`. The subsequent state-record checkpoint is also published and read back before final stopped synchronization is reported.

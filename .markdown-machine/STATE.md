@@ -9,7 +9,7 @@
   "lifecycle_revision": "manna-v1-ui-ux-design-pending",
   "run_horizon": "verify Version 1 flows and visual design, then obtain explicit Product Freeze before implementation",
   "active_capabilities": ["software-product"],
-  "repository_sync": "LOCAL_AHEAD_REMOTE",
+  "repository_sync": "REPOSITORY_SYNCED",
   "work_status": "UI_UX_INTERVIEW_COMPLETE_DESIGN_PENDING"
 }
 ---
@@ -30,4 +30,4 @@ The accepted Version 1 product interview is canonical in `docs/01-spec/manna-v1-
 
 Only `software-product` is active. Repository persistence is universal continuity, not a second capability. The earlier generic SMPM-1 active materialization is classified as invalid for the current v0.3.0 runtime shape and removed from active paths; its historical event remains in `history/SMPM-1-BOOTSTRAP.md` and Git history.
 
-The prior reconciliation checkpoint remains historical evidence. This UI/UX interview closeout is intentionally local-ahead until its documentation checkpoint is safely published to `codex/manna-v1-product-discovery` and authoritatively read back. No application source changed and no Product Freeze is claimed.
+The UI/UX interview checkpoint `5bea95bea140b96a1961dfb93bb441d2547c45d0` was safely published to `codex/manna-v1-product-discovery` and authoritatively read back with exact equality. The subsequent state-record closeout commit is published and read back separately. No application source changed and no Product Freeze is claimed.

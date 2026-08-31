@@ -2,7 +2,8 @@
 
 **Status:** ACCEPTED as the visual and behavioural direction for P0.1.
 **Received:** 2026-08-15, from Claude Design.
-**Source bundle:** `design_handoff_study_desk` (README + prototype runtime).
+**Updated:** 2026-08-30, visual/layout baseline extended for Version 1.
+**Source bundle:** `Study Desk V1 Deliverables.zip` (prototype, IA model, and runtime).
 
 ## Scope warning — read before implementing
 
@@ -34,13 +35,18 @@ relevant packet rather than during it:
    explicitly not part of the product — R1 and R4 forbid a runtime that fetches
    anything. Do not carry it into `src/`.
 
-## Missing from the received bundle
+## Received design bundle update
 
-`Study Desk.dc.html` — the interactive prototype — was **not included**. The
-README below names its logic objects (`COM`, `XREF`, `PEOPLE`, `TOPICS`, `NOTES`,
-`WORDS`, `PLACES`) as *"the fixture contract for P0.1"*. Until that file arrives,
-that contract does not exist and P0.1's fixture strings are undefined beyond the
-KJV verses and Strong's entries quoted below.
+The extended `Study Desk.dc.html` and `support.js` are now present in this
+folder. The prototype preserves the original six screens and adds seven static
+layouts: Search, Notes, Library, Settings, First run, Backup & Restore, and
+Comparison. The added layouts are aesthetic/layout evidence only; they do not
+add new flow logic, mobile variants, or new selection/pin behavior.
+
+`Manna V1 IA and Interaction Model.dc.html` is also present beside the
+prototype. It records the reviewed information architecture, seven interaction
+patterns, platform/state rules, supplied-word proposal, and coverage matrix.
+Its unresolved proposals and gaps remain design work, not product authority.
 
 ---
 
@@ -53,6 +59,9 @@ This bundle documents the accepted visual and behavioural direction that P0.1 bu
 ## About the design files
 
 `Study Desk.dc.html` in this folder is a **design reference created in HTML** — a working prototype of look and behaviour, not production code to lift. `support.js` is only the runtime that lets the prototype render; it is not part of the product.
+
+`Manna V1 IA and Interaction Model.dc.html` is a companion design-reference
+artifact, not an implementation contract.
 
 The task is to **recreate these designs in the target codebase's own environment and patterns**. The repository (`manna`) is at pre-implementation stage with an empty `src/`, so the implementer chooses the approach — but the product constraints below are non-negotiable and heavily shape that choice:
 
@@ -128,6 +137,13 @@ Design sizes as authored (the prototype scales them to fit; the product is fluid
 | Phone portrait | 414 × 872 (in bezel) | Single pane, bottom nav, study drawer |
 | Home / issue cover | 414 × 872 (in bezel) | Continue reading, find-the-verse, shortcuts, progress |
 | Full-screen reading | 1240 × 860 | Interface recedes; Page vs Scroll mode |
+| Search | 1440 × 900 | Search field, methods, sectioned results, recent/saved searches |
+| Notes | 1440 × 900 | Personal-study list and linked-verse detail |
+| Library | 1440 × 900 | Resource browsing and import-summary presentation |
+| Settings | 1440 × 900 | Appearance and Scripture reading controls |
+| First run | 1440 × 900 | Trust statement and onboarding card presentation |
+| Backup & Restore | 1440 × 900 | Backup list and restore-conflict presentation |
+| Comparison | 1440 × 900 | Multi-source comparison layout and focused-source state |
 
 ### 1. Desktop Study Desk
 
@@ -310,11 +326,16 @@ Persist across launches: `prefs`, `layout` (`manna.layout`), last reference, and
 
 ## Not built, deliberately
 
-Search results, Notes editor, People Explorer detail, Topic Explorer, module import/install, and settings. Cross-column moves append rather than insert at a chosen index. Person and topic selection types are in the contract but only surfaced as chips.
+Interactive Search, Notes editing, People Explorer detail, Topic Explorer,
+module import/install, and Settings flows are not built in the prototype. The
+new seven layouts show presentation only. Cross-column moves append rather than
+insert at a chosen index. Person and topic selection types are in the contract
+but only surfaced as chips.
 
 ## Files in this bundle
 
-- `Study Desk.dc.html` — the interactive prototype: all six screens (switcher across the top), all six themes, live selection sync, pin/follow, layout model, reference picker. Open it directly in a browser.
+- `Study Desk.dc.html` — the interactive prototype: the original six screens plus seven static Version 1 layouts (switcher across the top), all six themes, live selection sync, pin/follow, layout model, and reference picker. Open it directly in a browser.
+- `Manna V1 IA and Interaction Model.dc.html` — Version 1 IA, interaction patterns, platform/state rules, supplied-word proposal, and coverage matrix.
 - `support.js` — prototype runtime only. Not part of the product.
 
 Everything is inline: no external fonts, no CDN, no image files, no icon fonts. Icons are text glyphs (`◆ ✝ ▲ ▼ ⇄ ◀ ▶ ✕`) — replace with inline SVG in the product if glyph rendering varies across platforms, but keep them non-colour-dependent.

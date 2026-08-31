@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><style>
+html,body{margin:0;padding:0;height:100%}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+a{color:#b3271a}a:hover{color:#7d1a11}
+button{font-family:inherit}
+::selection{background:rgba(179,39,26,.22)}
+</style></helmet>
+
+<div ref="{{ rootRef }}" onClick="{{ onAct }}" style="--paper:#f6ecd8;--panel:#fffaf0;--ink:#16130f;--head:#16130f;--headInk:#fff8ea;--accent:#b3271a;--onAccent:#fff8ea;--accent2:#17558c;--muted:#5a5144;--rule:rgba(22,19,15,.22);--dot:rgba(22,19,15,.13);--warn:#f2b705;--good:#1d5049;--sel:rgba(179,39,26,.13);--bw:3px;--sh2:5px 5px 0 rgba(22,19,15,.5);--desk:#c9bda5;--fd:'Haettenschweiler','Arial Narrow Bold','Franklin Gothic Condensed Medium',Impact,system-ui,sans-serif;--fu:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--fm:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--fs:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;min-height:100%;background:var(--desk);font-family:var(--fu);color:var(--ink)">
+
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:10px 16px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid #000">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:400 22px/1 var(--fd);letter-spacing:.04em;text-transform:uppercase">Manna</span>
+      <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;opacity:.75;text-transform:uppercase">V1 design document · deliverable 5</span>
+    </div>
+    <div style="flex:1"></div>
+    <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:6px 8px;background:var(--warn);color:#16130f;border:2px solid #16130f">FOR REVIEW · NOT PRODUCT FREEZE</span>
+    <div role="group" aria-label="Theme" style="display:flex;gap:6px">
+      <button data-act="theme" data-theme="classic" style="min-height:32px;padding:0 9px;border:2px solid currentColor;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">CLASSIC</button>
+      <button data-act="theme" data-theme="night" style="min-height:32px;padding:0 9px;border:2px solid currentColor;background:transparent;color:inherit;font:600 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">NIGHT</button>
+    </div>
+  </div>
+
+  <div style="padding:14px 16px 6px;background:var(--paper);border-bottom:var(--bw) solid var(--ink)">
+    <h1 style="margin:0 0 6px;font:400 46px/.94 var(--fd);letter-spacing:.02em;text-transform:uppercase;max-width:22ch">Information architecture &amp; interaction model</h1>
+    <p style="margin:0 0 12px;font:400 15px/1.55 var(--fs);max-width:78ch;color:var(--muted);text-wrap:pretty">Deliverable 5 of the eight required by <span style="font-family:var(--fm);font-size:12px">manna-v1-ui-ux-requirements.md §19</span>: a reviewed information architecture and reusable interaction model, plus the coverage matrix mapping every product-contract capability to a designed flow and state. Visual system as accepted in <span style="font-family:var(--fm);font-size:12px">study-desk-design.md</span>. Fixture content is Matthew 4:12–17.</p>
+    <div role="tablist" aria-label="Document section" style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:12px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
+        <button data-act="section" data-section="{{ n.id }}" aria-selected="{{ n.sel }}" style="min-height:34px;padding:0 11px;border:2px solid var(--ink);border-radius:2px;background:{{ n.bg }};color:{{ n.fg }};font:700 10px/1 var(--fm);letter-spacing:.1em;cursor:pointer">{{ n.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:16px;display:flex;flex-direction:column;gap:16px">
+
+  <sc-if value="{{ isIa }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;gap:14px">
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;align-items:center;gap:10px">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Entry rule</span>
+      </div>
+      <div style="padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+        <div>
+          <p style="margin:0 0 8px;font:400 15px/1.6 var(--fs)">Manna opens directly to the <strong>Reader</strong>, at the user's last Scripture location. There is no dashboard, launcher, or issue-cover Home screen on the launch path.</p>
+          <p style="margin:0;font:400 13px/1.6 var(--fs);color:var(--muted)">The prototype's Home / issue-cover screen survives as an optional destination reached from <span style="font-family:var(--fm);font-size:11.5px">MORE</span>, never as the surface Manna starts on. Conflict 1 below.</p>
+        </div>
+        <div style="border:2px dashed var(--ink);padding:11px;display:flex;flex-direction:column;gap:7px">
+          <span style="font:600 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">LAUNCH SEQUENCE</span>
+          <span style="font:700 11px/1.5 var(--fm)">CAPABILITY CHECK (quiet) → RESTORE LAST REFERENCE → READER</span>
+          <span style="font:400 13px/1.55 var(--fs);color:var(--muted)">First run only: trust statement, three-card introduction, then Reader. Indexing continues behind the Reader; it never gates it.</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:flex;align-items:baseline;gap:10px;padding:0 0 8px">
+        <h2 style="margin:0;font:400 24px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">Five primary destinations</h2>
+        <span style="font:600 9.5px/1 var(--fm);letter-spacing:.12em;color:var(--muted)">TAP A DESTINATION FOR WHAT IT OWNS</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <sc-for list="{{ dests }}" as="d" hint-placeholder-count="5">
+          <div style="background:var(--panel);border:var(--bw) {{ d.border }} var(--ink);box-shadow:var(--sh2);border-radius:2px;display:flex;flex-direction:column">
+            <button data-act="dest" data-dest="{{ d.id }}" aria-expanded="{{ d.open }}" style="text-align:left;padding:10px;background:{{ d.bg }};color:{{ d.fg }};border:0;border-bottom:var(--bw) solid var(--ink);cursor:pointer;min-height:44px">
+              <div style="font:400 20px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">{{ d.name }}</div>
+              <div style="font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;padding-top:5px;opacity:.85">{{ d.tag }}</div>
+            </button>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:8px">
+              <p style="margin:0;font:400 13.5px/1.55 var(--fs);color:var(--muted)">{{ d.opens }}</p>
+              <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--rule);padding-top:8px">
+                  <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">OWNS</span>
+                  <sc-for list="{{ d.owns }}" as="o" hint-placeholder-count="4">
+                    <span style="font:400 13px/1.45 var(--fs)">· {{ o }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Secondary menu · one level down, never in the primary bar</span>
+      </div>
+      <div style="padding:12px;display:flex;flex-wrap:wrap;gap:7px">
+        <sc-for list="{{ secondary }}" as="s" hint-placeholder-count="9">
+          <span style="font:600 11px/1 var(--fm);letter-spacing:.04em;padding:8px;border:2px solid var(--ink);background:var(--paper)">{{ s }}</span>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--warn);color:#16130f;border-bottom:var(--bw) solid var(--ink)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Conflicts this document resolves — decisions needed before Product Freeze</span>
+      </div>
+      <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:38px 1fr;gap:11px;border-bottom:1px solid var(--rule);padding-bottom:10px">
+            <span style="font:400 26px/1 var(--fd);color:var(--accent)">{{ c.n }}</span>
+            <div>
+              <div style="font:700 12px/1.4 var(--fm);letter-spacing:.04em;text-transform:uppercase;padding-bottom:5px">{{ c.title }}</div>
+              <p style="margin:0 0 6px;font:400 14px/1.6 var(--fs);max-width:86ch">{{ c.body }}</p>
+              <div style="font:400 13.5px/1.55 var(--fs);border-left:4px solid var(--accent);padding-left:9px"><span style="font:700 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--accent)">PROPOSED</span><br>{{ c.proposal }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isModel }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:14px">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+      <sc-for list="{{ patterns }}" as="p" hint-placeholder-count="7">
+        <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px;display:flex;flex-direction:column">
+          <div style="padding:8px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="font:700 10px/1 var(--fm);letter-spacing:.1em;padding:4px 6px;background:var(--headInk);color:var(--head)">{{ p.id }}</span>
+            <span style="font:400 16px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">{{ p.name }}</span>
+          </div>
+          <div style="padding:11px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <p style="margin:0;font:400 14px/1.6 var(--fs)">{{ p.rule }}</p>
+            <div style="margin-top:auto;padding-top:8px;border-top:1px solid var(--rule)">
+              <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">APPLIES TO</span>
+              <div style="font:600 11px/1.5 var(--fm);padding-top:4px">{{ p.where }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Live model — selection sync, follow and pin</span>
+        <span style="font:600 9px/1 var(--fm);letter-spacing:.12em;opacity:.8">TAP A VERSE · THEN PIN THE COMMENTARY</span>
+      </div>
+      <div style="padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:12px;background:var(--paper)">
+
+        <div style="background:var(--panel);border:var(--bw) solid var(--ink);border-radius:2px;display:flex;flex-direction:column">
+          <div style="padding:7px 9px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Bible</span>
+            <div style="flex:1"></div>
+            <span style="font:700 9px/1 var(--fm);letter-spacing:.08em;padding:4px 6px;background:var(--headInk);color:var(--head)">CONTROLLER</span>
+          </div>
+          <div style="padding:10px 12px;background-image:radial-gradient(var(--dot) 1px, transparent 1.3px);background-size:5px 5px">
+            <sc-for list="{{ demoVerses }}" as="v" hint-placeholder-count="3">
+              <div data-act="verse" data-verse="{{ v.n }}" role="button" tabindex="0" aria-current="{{ v.cur }}" style="position:relative;font:400 16px/1.6 var(--fs);padding:8px 10px 8px 40px;border-radius:3px;cursor:pointer;background:{{ v.bg }};box-shadow:{{ v.shadow }}">
+                <span style="position:absolute;left:12px;top:10px;font:700 11px/1 var(--fm);color:var(--muted)">{{ v.n }}</span>{{ v.text }}
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;padding:8px 10px;border-top:1px solid var(--rule);font:600 10px/1.4 var(--fm);letter-spacing:.06em;color:var(--muted)">{{ syncSummary }}</div>
+        </div>
+
+        <div style="border:var(--bw) {{ comBorderStyle }} {{ comBorderColor }};background:var(--panel);border-radius:2px;display:flex;flex-direction:column">
+          <div style="padding:7px 9px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Commentary</span>
+            <div style="flex:1"></div>
+            <div role="group" aria-label="Follow or pin" style="display:flex;border:2px solid var(--headInk);border-radius:2px;overflow:hidden">
+              <button data-act="pin" data-pin="0" aria-pressed="{{ followPressed }}" style="min-height:30px;padding:0 8px;border:0;background:{{ followBg }};color:{{ followFg }};font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">FOLLOW</button>
+              <button data-act="pin" data-pin="1" aria-pressed="{{ pinPressed }}" style="min-height:30px;padding:0 8px;border:0;border-left:2px solid var(--headInk);background:{{ pinBg }};color:{{ pinFg }};font:700 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">PIN</button>
+            </div>
+          </div>
+          <sc-if value="{{ pinned }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:6px 9px;background:repeating-linear-gradient(135deg,var(--warn) 0 10px,var(--ink) 10px 20px);border-bottom:var(--bw) solid var(--ink)">
+              <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:4px 6px;background:var(--warn);color:#16130f;border:2px solid #16130f">{{ pinnedBadge }}</span>
+            </div>
+          </sc-if>
+          <div style="padding:11px;filter:{{ comFilter }}">
+            <div style="font:600 9.5px/1 var(--fm);letter-spacing:.1em;color:var(--muted);padding-bottom:6px">EDITORIAL NOTE — NOT SCRIPTURE</div>
+            <div style="font:400 18px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;padding-bottom:7px">{{ comRef }}</div>
+            <p style="margin:0;font:400 14px/1.6 var(--fs)">{{ comText }}</p>
+          </div>
+          <sc-if value="{{ stale }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:auto;padding:8px 9px;background:var(--warn);border-top:var(--bw) solid var(--ink);display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+              <span style="font:700 10.5px/1.4 var(--fm);color:#16130f">{{ staleText }}</span>
+              <button data-act="pin" data-pin="0" style="min-height:36px;padding:0 10px;border:2px solid #16130f;background:#16130f;color:var(--paper);font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">RESUME FOLLOW</button>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="background:var(--panel);border:var(--bw) solid var(--ink);border-radius:2px;display:flex;flex-direction:column">
+          <div style="padding:7px 9px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink)">
+            <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Cross references</span>
+          </div>
+          <div style="padding:11px">
+            <div style="font:600 9.5px/1 var(--fm);letter-spacing:.1em;color:var(--muted);padding-bottom:8px">{{ xrefKicker }}</div>
+            <sc-for list="{{ xrefRows }}" as="x" hint-placeholder-count="3">
+              <div style="border-top:1px solid var(--rule);padding:7px 0">
+                <div style="font:700 11px/1 var(--fm);color:var(--accent2);padding-bottom:3px">{{ x.ref }}</div>
+                <div style="font:400 13px/1.5 var(--fs)">{{ x.text }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isFlows }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <sc-for list="{{ areaTabs }}" as="a" hint-placeholder-count="9">
+        <button data-act="area" data-area="{{ a.id }}" aria-pressed="{{ a.sel }}" style="min-height:38px;padding:0 11px;border:2px solid var(--ink);border-radius:2px;background:{{ a.bg }};color:{{ a.fg }};font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">{{ a.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:9px 12px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <span style="font:400 20px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">{{ flow.name }}</span>
+        <span style="font:700 9.5px/1 var(--fm);letter-spacing:.1em;padding:4px 6px;background:var(--headInk);color:var(--head)">{{ flow.home }}</span>
+        <div style="flex:1"></div>
+        <span style="font:600 9.5px/1 var(--fm);letter-spacing:.1em;opacity:.85">{{ flow.status }}</span>
+      </div>
+      <div style="padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+        <div>
+          <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">FLOW</span>
+          <div style="display:flex;flex-direction:column;gap:9px;padding-top:9px">
+            <sc-for list="{{ flow.steps }}" as="s" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start">
+                <span style="font:700 10px/1;font-family:var(--fm);padding:5px 0;text-align:center;border:2px solid var(--ink);background:var(--paper)">{{ s.n }}</span>
+                <p style="margin:0;font:400 14.5px/1.55 var(--fs);max-width:60ch">{{ s.text }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div>
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">STATES THIS FLOW MUST DESIGN</span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:9px">
+              <sc-for list="{{ flow.states }}" as="st" hint-placeholder-count="5">
+                <span style="font:600 10.5px/1 var(--fm);padding:7px 8px;border:2px dashed var(--ink);background:var(--paper)">{{ st }}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">RESPONSIVE SHAPE</span>
+            <div style="display:flex;flex-direction:column;gap:7px;padding-top:9px">
+              <sc-for list="{{ flow.plat }}" as="pl" hint-placeholder-count="3">
+                <div style="border:2px solid var(--ink);background:var(--paper);padding:8px 9px">
+                  <div style="font:700 9.5px/1 var(--fm);letter-spacing:.12em;color:var(--accent);padding-bottom:4px">{{ pl.k }}</div>
+                  <div style="font:400 13.5px/1.5 var(--fs)">{{ pl.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="border-left:4px solid var(--accent);padding-left:10px">
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--accent)">CONTRACT ANCHOR</span>
+            <p style="margin:5px 0 0;font:400 13.5px/1.55 var(--fs);color:var(--muted)">{{ flow.anchor }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isResp }}" hint-placeholder-val="{{ false }}">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+    <sc-for list="{{ platforms }}" as="p" hint-placeholder-count="3">
+      <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px;display:flex;flex-direction:column">
+        <div style="padding:9px 11px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;align-items:baseline;gap:9px">
+          <span style="font:400 22px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">{{ p.name }}</span>
+          <span style="font:600 9.5px/1 var(--fm);letter-spacing:.1em;opacity:.8">{{ p.size }}</span>
+        </div>
+        <div style="padding:12px;display:flex;flex-direction:column;gap:11px">
+          <div>
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">NAVIGATION MODEL</span>
+            <div style="font:700 11px/1.5 var(--fm);padding-top:5px">{{ p.nav }}</div>
+          </div>
+          <div>
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">STUDY SHAPE</span>
+            <p style="margin:5px 0 0;font:400 14px/1.6 var(--fs)">{{ p.study }}</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--rule);padding-top:10px">
+            <sc-for list="{{ p.rules }}" as="r" hint-placeholder-count="4">
+              <span style="font:400 13.5px/1.5 var(--fs)">· {{ r }}</span>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;border:2px dashed var(--ink);padding:9px">
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">TOUCH TARGETS</span>
+            <div style="font:700 11px/1.5 var(--fm);padding-top:4px">{{ p.targets }}</div>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isStates }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <p style="margin:0;font:400 15px/1.6 var(--fs);max-width:80ch;color:var(--muted)">Nine state classes, each with one rule and the copy pattern every destination reuses. Deliverable 2 designs these per flow; this is the model they conform to.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ stateClasses }}" as="s" hint-placeholder-count="9">
+        <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px;display:flex;flex-direction:column">
+          <div style="padding:8px 10px;background:{{ s.bg }};color:{{ s.fg }};border-bottom:var(--bw) solid var(--ink);font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">{{ s.name }}</div>
+          <div style="padding:11px;display:flex;flex-direction:column;gap:9px;flex:1">
+            <p style="margin:0;font:400 14px/1.55 var(--fs)">{{ s.rule }}</p>
+            <div style="margin-top:auto;background:var(--paper);border:2px solid var(--ink);padding:9px">
+              <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">SPECIMEN COPY</span>
+              <div style="font:400 13.5px/1.5 var(--fs);padding-top:5px">{{ s.copy }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isMatrix }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);padding:11px;border-radius:2px">
+      <div>
+        <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">DESTINATION</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:7px">
+          <sc-for list="{{ destFilters }}" as="f" hint-placeholder-count="7">
+            <button data-act="fdest" data-val="{{ f.id }}" aria-pressed="{{ f.sel }}" style="min-height:34px;padding:0 9px;border:2px solid var(--ink);border-radius:2px;background:{{ f.bg }};color:{{ f.fg }};font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">DESIGN STATUS</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:7px">
+          <sc-for list="{{ statusFilters }}" as="f" hint-placeholder-count="4">
+            <button data-act="fstat" data-val="{{ f.id }}" aria-pressed="{{ f.sel }}" style="min-height:34px;padding:0 9px;border:2px solid var(--ink);border-radius:2px;background:{{ f.bg }};color:{{ f.fg }};font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="flex:1"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ counts }}" as="c" hint-placeholder-count="4">
+          <div style="border:2px solid var(--ink);background:{{ c.bg }};color:{{ c.fg }};padding:7px 9px;min-width:74px">
+            <div style="font:400 22px/1 var(--fd)">{{ c.n }}</div>
+            <div style="font:600 8.5px/1.3 var(--fm);letter-spacing:.1em;padding-top:3px">{{ c.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:2.1fr 1fr 1.7fr .8fr .8fr;gap:0;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);font:700 9px/1.3 var(--fm);letter-spacing:.12em">
+        <div style="padding:9px">CONTRACT CAPABILITY</div>
+        <div style="padding:9px">DESTINATION</div>
+        <div style="padding:9px">FLOW · PATTERN</div>
+        <div style="padding:9px">D T P</div>
+        <div style="padding:9px">STATUS</div>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+        <div style="border-bottom:1px solid var(--rule)">
+          <button data-act="row" data-row="{{ r.id }}" aria-expanded="{{ r.open }}" style="width:100%;text-align:left;display:grid;grid-template-columns:2.1fr 1fr 1.7fr .8fr .8fr;gap:0;background:{{ r.rowBg }};border:0;cursor:pointer;color:inherit;min-height:44px;align-items:center">
+            <div style="padding:9px;font:400 14px/1.45 var(--fs)">{{ r.cap }}</div>
+            <div style="padding:9px;font:700 10px/1.3 var(--fm);letter-spacing:.06em;color:var(--accent2)">{{ r.dest }}</div>
+            <div style="padding:9px;font:600 11px/1.4 var(--fm)">{{ r.flow }}</div>
+            <div style="padding:9px;font:700 10px/1.3 var(--fm);letter-spacing:.1em">{{ r.plat }}</div>
+            <div style="padding:9px"><span style="font:700 9px/1 var(--fm);letter-spacing:.06em;padding:5px 6px;border:2px solid var(--ink);background:{{ r.bg }};color:{{ r.fg }};display:inline-block">{{ r.status }}</span></div>
+          </button>
+          <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 9px 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;background:var(--paper);border-top:1px solid var(--rule)">
+              <div style="padding-top:10px">
+                <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">STATES REQUIRED</span>
+                <div style="font:400 13.5px/1.55 var(--fs);padding-top:5px">{{ r.states }}</div>
+              </div>
+              <div style="padding-top:10px">
+                <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">EVIDENCE · WHERE DESIGNED</span>
+                <div style="font:400 13.5px/1.55 var(--fs);padding-top:5px">{{ r.evidence }}</div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isScripture }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:9px 12px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink);display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <span style="font:400 20px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase">Supplied words — proposed resolution</span>
+        <span style="font:700 9.5px/1 var(--fm);letter-spacing:.1em;padding:4px 6px;background:var(--warn);color:#16130f">R5 · OPEN IN THE FIXTURE RECORD</span>
+      </div>
+      <div style="padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+        <div>
+          <p style="margin:0 0 10px;font:400 15px/1.6 var(--fs);max-width:64ch">Matthew 4:15 in the Pure Cambridge Edition marks <span style="font-family:var(--fm);font-size:13px">[by]</span> as supplied by the translators. The accepted prototype drops the marking, which silently promotes a translator's word to translated text. The proposal: carry the distinction in the data model, render it as italic — the KJV's own print convention — and state the convention once in the reader legend rather than per verse.</p>
+          <div role="group" aria-label="Supplied word rendering" style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ supModes }}" as="m" hint-placeholder-count="3">
+              <button data-act="sup" data-val="{{ m.id }}" aria-pressed="{{ m.sel }}" style="min-height:38px;padding:0 10px;border:2px solid var(--ink);border-radius:2px;background:{{ m.bg }};color:{{ m.fg }};font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer">{{ m.label }}</button>
+            </sc-for>
+          </div>
+          <div style="padding-top:12px;font:600 11px/1.5 var(--fm);color:var(--muted)">{{ supVerdict }}</div>
+        </div>
+        <div style="background:var(--paper);border:var(--bw) solid var(--ink);padding:14px;background-image:radial-gradient(var(--dot) 1px, transparent 1.3px);background-size:5px 5px">
+          <div style="font:600 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--muted);padding-bottom:9px">KJV PURE CAMBRIDGE · MATTHEW 4:15</div>
+          <div style="position:relative;font:400 19px/1.62 var(--fs);padding:9px 12px 9px 46px;max-width:62ch">
+            <span style="position:absolute;left:12px;top:12px;font:700 11px/1 var(--fm);color:var(--muted)">15</span>
+            <sc-if value="{{ supItalic }}" hint-placeholder-val="{{ true }}">
+              <span>The land of Zabulon, and the land of Nephthalim, <em style="font-style:italic">by</em> the way of the sea, beyond Jordan, Galilee of the Gentiles;</span>
+            </sc-if>
+            <sc-if value="{{ supBrackets }}" hint-placeholder-val="{{ false }}">
+              <span>The land of Zabulon, and the land of Nephthalim, [by] the way of the sea, beyond Jordan, Galilee of the Gentiles;</span>
+            </sc-if>
+            <sc-if value="{{ supPlain }}" hint-placeholder-val="{{ false }}">
+              <span>The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles;</span>
+            </sc-if>
+          </div>
+          <div style="margin-top:12px;border:2px dashed var(--ink);padding:10px">
+            <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;color:var(--muted)">READER LEGEND</span>
+            <div style="font:400 13.5px/1.55 var(--fs);padding-top:5px">{{ supLegend }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Scripture-integrity rules the whole interface inherits</span>
+      </div>
+      <div style="padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+        <sc-for list="{{ integrity }}" as="i" hint-placeholder-count="5">
+          <div style="border-left:4px solid var(--accent);padding-left:10px">
+            <div style="font:700 10px/1.3 var(--fm);letter-spacing:.1em;color:var(--accent);padding-bottom:5px">{{ i.k }}</div>
+            <p style="margin:0;font:400 14px/1.55 var(--fs)">{{ i.v }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isGates }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Approval sequence — where this document sits</span>
+      </div>
+      <div style="padding:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:stretch">
+        <sc-for list="{{ gates }}" as="g" hint-placeholder-count="7">
+          <div style="flex:1 1 170px;border:2px solid var(--ink);background:{{ g.bg }};color:{{ g.fg }};padding:10px;min-height:78px;display:flex;flex-direction:column;gap:6px">
+            <span style="font:700 8.5px/1 var(--fm);letter-spacing:.14em;opacity:.85">{{ g.tag }}</span>
+            <span style="font:400 17px/1.05 var(--fd);letter-spacing:.04em;text-transform:uppercase">{{ g.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:0 14px 14px;font:600 11px/1.5 var(--fm);color:var(--muted);max-width:80ch">Product Freeze is not implied by approval of this document. Implementation authorization remains behind flows, appearance, the interactive mock, and an explicit human freeze.</div>
+    </div>
+
+    <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
+      <div style="padding:7px 10px;background:var(--head);color:var(--headInk);border-bottom:var(--bw) solid var(--ink)">
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">§19 deliverables · status</span>
+      </div>
+      <div style="padding:12px;display:flex;flex-direction:column;gap:0">
+        <sc-for list="{{ deliverables }}" as="d" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:30px 1fr auto;gap:11px;align-items:center;border-bottom:1px solid var(--rule);padding:9px 0">
+            <span style="font:400 22px/1 var(--fd);color:var(--muted)">{{ d.n }}</span>
+            <span style="font:400 14.5px/1.5 var(--fs)">{{ d.text }}</span>
+            <span style="font:700 9px/1 var(--fm);letter-spacing:.06em;padding:5px 7px;border:2px solid var(--ink);background:{{ d.bg }};color:{{ d.fg }}">{{ d.status }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  </div>
+
+  <div style="padding:14px 16px 26px;font:600 10px/1.6 var(--fm);letter-spacing:.06em;color:#5a5144">MANNA · V1 IA &amp; INTERACTION MODEL · FIXTURE: MATTHEW 4:12–17, KJV PURE CAMBRIDGE · EDITORIAL FIXTURES FROM STUDY DESK.DC.HTML · NOT PRODUCT CODE</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:980}}">
+class Component extends DCLogic {
+  state = { section:'ia', openDest:'read', verse:16, pinned:false, pinAt:16, area:'search', stat:'ALL', fdest:'ALL', openRow:'', sup:'italic' };
+  rootRef = React.createRef();
+
+  NIGHT = {'--paper':'#101216','--panel':'#171a1f','--ink':'#e7e4dd','--head':'#22262c','--headInk':'#e7e4dd','--accent':'#e0a33c','--onAccent':'#101216','--accent2':'#8fc0e8','--muted':'#9a968c','--rule':'rgba(231,228,221,.2)','--dot':'rgba(231,228,221,.05)','--warn':'#e0a33c','--good':'#8fc0e8','--sel':'rgba(224,163,60,.2)','--bw':'2px','--sh2':'4px 4px 0 rgba(0,0,0,.7)','--desk':'#08090b'};
+  CLASSIC = {'--paper':'#f6ecd8','--panel':'#fffaf0','--ink':'#16130f','--head':'#16130f','--headInk':'#fff8ea','--accent':'#b3271a','--onAccent':'#fff8ea','--accent2':'#17558c','--muted':'#5a5144','--rule':'rgba(22,19,15,.22)','--dot':'rgba(22,19,15,.13)','--warn':'#f2b705','--good':'#1d5049','--sel':'rgba(179,39,26,.13)','--bw':'3px','--sh2':'5px 5px 0 rgba(22,19,15,.5)','--desk':'#c9bda5'};
+
+  VERSES = {
+    16:'The people which sat in darkness saw great light; and to them which sat in the region and shadow of death light is sprung up.',
+    17:'From that time Jesus began to preach, and to say, Repent: for the kingdom of heaven is at hand.'
+  };
+  COM = {
+    16:'The light does not arrive somewhere else and summon the people to it; it rises where they already sit. Isaiah\u2019s image of dawn over occupied territory is applied to Galilee.',
+    17:'The first recorded word of the ministry is \u2018Repent\u2019. The reason given is not judgement but proximity: the kingdom has come near.'
+  };
+  XREF = {
+    16:[{ref:'Isa 9:2',text:'The people that walked in darkness have seen a great light.'},{ref:'Luke 1:79',text:'To give light to them that sit in darkness.'},{ref:'John 8:12',text:'I am the light of the world.'}],
+    17:[{ref:'Mark 1:15',text:'The time is fulfilled, and the kingdom of God is at hand.'},{ref:'Matt 3:2',text:'Repent ye: for the kingdom of heaven is at hand.'},{ref:'Acts 2:38',text:'Repent, and be baptized every one of you.'}]
+  };
+
+  NAV = [['ia','ARCHITECTURE'],['model','INTERACTION MODEL'],['flows','FLOWS'],['responsive','RESPONSIVE'],['states','STATES'],['matrix','COVERAGE MATRIX'],['scripture','SCRIPTURE INTEGRITY'],['gates','GATES']];
+
+  DESTS = [
+    {id:'read',name:'Read',tag:'LAUNCH SURFACE',opens:'Opens at the last reference. One chapter, one column, controls that recede.',owns:['Reference picker, prev/next chapter, keyboard and gesture navigation','Verse selection tray: note, highlight, bookmark, cross-refs, compare, send to Study','Strong\u2019s quick preview on tap, hover and keyboard','Full-screen reading, Page vs Scroll mode','Read-aloud, when a device voice exists']},
+    {id:'search',name:'Search',tag:'ONE FIELD',opens:'One field for references, phrases, words, topics and remembered ideas. Method is inferred and labelled.',owns:['Reference, exact-phrase, word and topic search','Verse Finder (remembered ideas)','Concordance occurrences','Saved and recent searches','Result sections across Scripture, Strong\u2019s, resources, notes, imported library']},
+    {id:'study',name:'Study',tag:'PASSAGE CONTEXT',opens:'Always opens in the context of the selected passage. One active resource per category by default.',owns:['Study Desk panes: commentary, dictionary, cross-refs, word study, Atlas, imported','Resource switcher — switching replaces rather than stacks','Layout model: resize, reorder, swap side, presets, save','Comparison workspace (explicit Compare)','Follow / Pin per pane']},
+    {id:'notes',name:'Notes',tag:'PERSONAL MATERIAL',opens:'One workspace for everything the user wrote or marked, and the sessions they wrote it in.',owns:['Notes linked to several verses, words, people, places and topics','Highlights and highlight collections','Bookmarks, questions, observations','Saved searches','Study Trail — quiet session history, pausable and clearable','Readable exports: PDF, DOCX, plain text']},
+    {id:'library',name:'Library',tag:'RESOURCES',opens:'The single place resources are browsed, enabled, organised, imported and inspected.',owns:['Bibles, commentaries, dictionaries, lexicons, books, Map Packs','Guided import: choose \u2192 detect \u2192 classify \u2192 preview \u2192 import \u2192 summary','Optional inferred-link review with confidence filters','Source inspection: author, title, digest, license, status','Backup & Restore (also in Settings)']}
+  ];
+
+  SECONDARY = ['SETTINGS','APPEARANCE','BACKUP & RESTORE','TRUST / ABOUT','STORAGE STATUS','DIAGNOSTICS','HELP','HOME / ISSUE COVER (optional)','EXPORT'];
+
+  CONFLICTS = [
+    {n:'1',title:'Home / issue cover vs. \u201Copens to the Reader\u201D',body:'The accepted prototype designs a comic-issue Home screen with Continue Reading, Find the Verse and progress. The requirements say Manna opens directly to the Reader and not to a dashboard.',proposal:'Keep the Home screen, demote it. It is reached from MORE (phone) or the secondary menu, never on launch. Continue Reading and Find the Verse are shortcuts into Read and Search, not a competing entry point.'},
+    {n:'2',title:'Six comic themes vs. System / Light / Sepia / Dark',body:'The prototype ships six named themes; the requirements name four V1 appearances and treat the rest as references that ship only if they meet the same contrast and readability bar.',proposal:'Ship the four named appearances, each implemented as a token set in the accepted architecture: Light = Classic Comics, Sepia = Parchment, Dark = Night Study, System follows the OS. Golden Age, Modern Graphic Novel and Study Mode stay as reference sets behind the same tokens.'},
+    {n:'3',title:'Comic loudness vs. the quiet Reader direction',body:'The visual character section asks for reverent, book-centred calm; the accepted direction is a premium graphic novel.',proposal:'Resolve by surface, not by theme. Inked panels, halftone and caption boxes frame Study, Library, Home and empty states. The Scripture column stays conventionally typeset in every appearance, and --bw / --sh / --dot are the dials that quiet the frame without a structural change.'},
+    {n:'4',title:'Supplied words dropped from the fixture',body:'The prototype renders Matthew 4:15 without the source module\u2019s supplied-word marking, which the fixture record flags as an R5 alteration rather than a typo.',proposal:'Carry supplied status in the verse model, render it as italic in the Reader, state the convention once in the reader legend, and preserve it through export and round-trip. See Scripture integrity.'}
+  ];
+
+  PATTERNS = [
+    {id:'P1',name:'Scripture is the controller',rule:'One selection service owns the active selection: { type, reference, selectedText, tokenId, strongsId, lemmaId, personId, placeId, sourceModule, timestamp }. Panes subscribe and each decides whether a selection type applies to it. Selecting in a study pane never moves the Bible.',where:'STUDY DESK · READER · ATLAS · WORD STUDY'},
+    {id:'P2',name:'Follow or pin, never silently stale',rule:'Every study surface carries a two-segment FOLLOW | PIN control. Pinning freezes content at the reference held when pinned, and announces it on five axes at once: hazard badge row, dashed warning border, desaturated content, a stale bar naming where the Bible has moved, and RESUME FOLLOW as the guaranteed escape.',where:'EVERY STUDY PANE · TABLET PANE · PHONE DRAWER'},
+    {id:'P3',name:'Expand and return exactly',rule:'Every substantive pane expands to full screen. Exiting or Back restores the exact prior layout, passage, selection, scroll positions and focus. Expansion is a view change, never a navigation.',where:'COMMENTARY · WORD STUDY · ATLAS · COMPARISON · NOTES · IMPORTED SOURCES'},
+    {id:'P4',name:'Back means prior context',rule:'Each workspace keeps its own state. Back returns to the exact prior context — chapter, scroll, selected verse, active resource, comparison set, unfinished note — not merely to the previous destination. A lightweight recent-history control exposes recent passages and study locations; Study Trail is the fuller optional record.',where:'ALL FIVE DESTINATIONS'},
+    {id:'P5',name:'Progressive disclosure by surface',rule:'Reader stays simple; depth lives in Study, advanced search, comparison and source inspection. One resource per category is visible by default and the switcher replaces rather than stacks. Showing several of one kind requires an explicit Compare.',where:'READER · SEARCH · STUDY · COMPARISON'},
+    {id:'P6',name:'Label honestly, always',rule:'Editorial content carries EDITORIAL NOTE — NOT SCRIPTURE. Every verse names its source module. Inferred relationships carry a confidence score and a short explanation; exact matches stay visually plain. Supplied, ambiguous, partially mapped and unmapped words are marked as such. Map layers keep their status: Fully Interactive, Partially Interactive, Source View Only, Needs Review.',where:'COMMENTARY · WORD STUDY · ATLAS · SEARCH · IMPORT SUMMARY'},
+    {id:'P7',name:'Long work is leaveable',rule:'Imports, indexing, backups and restores get persistent progress the user can leave and revisit, with safe cancellation. Ordinary actions get quiet, undoable feedback. Nothing claims success before verification; failure leaves the existing library untouched.',where:'LIBRARY · IMPORT · BACKUP & RESTORE · STARTUP'}
+  ];
+
+  FLOWS = {
+    search:{name:'Search + Verse Finder',home:'SEARCH',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['Search opens with the field focused; beneath it, recent searches and saved searches. No mode picker.','The user types anything: Matt 4:16, \u201Csat in darkness\u201D, light, repentance, or \u201Cwho saw the great light?\u201D','Manna infers the method and labels it on the results header: REFERENCE · EXACT PHRASE · WORD · TOPIC · VERSE FINDER. Inferred results carry a confidence chip; exact matches stay plain.','Results are sectioned, Scripture first: then Strong\u2019s entries, dictionaries, commentaries, cross references, maps, notes, imported library. Each row names its source module.','METHOD chips re-run the same query a different way without retyping. Advanced controls stay collapsed until opened.','Opening a result moves the Reader and records the jump in Study Trail. Back returns to the exact result list and scroll position.','SAVE THIS SEARCH writes a saved search into Notes.'],
+      states:['NO QUERY','TYPING / PROGRESSIVE','NO RESULTS','INFERRED (CONFIDENCE)','INDEX STILL BUILDING','IMPORTED LIBRARY EXCLUDED','REDUCED MODE'],
+      plat:[{k:'DESKTOP',v:'Results list with a preview column; keyboard moves through results, Enter opens.'},{k:'TABLET',v:'Results list full width; tapping a result opens a focused view with Back.'},{k:'PHONE',v:'Full-screen field, results as collapsible sections, method chips scroll horizontally, primary actions at the bottom edge.'}],
+      anchor:'Contract \u00a75 (exact/reference/phrase search, concordance, saved searches, transparent Verse Finder); requirements \u00a77.'},
+    library:{name:'Library + guided import',home:'LIBRARY',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['Library lists resources by kind with source identity, size, status and enable/disable. Sorting and collections are optional, never required.','IMPORT \u2192 choose a module, document or backup. Extensions are not trusted; content is inspected.','Manna detects the format and suggests a purpose (commentary, dictionary, lexicon, book, cross-reference source, Map Pack).','The user confirms or corrects classification and metadata. Unsupported formats get an exact explanation and supported-export guidance.','Preview shows what can be extracted and connected: verses, entries, references, entities, places, routes.','Import runs transactionally with visible, leaveable progress and safe cancellation; indexing continues without blocking the Reader.','A plain-language summary reports explicit, high, medium, low and unresolved link counts, searchable-only content, warnings, and anything needing attention. Review is optional and filters by confidence or source section.'],
+      states:['EMPTY LIBRARY','IMPORTING','INDEXING (BACKGROUND)','UNSUPPORTED FORMAT','FAILED CLOSED','PARTIAL SUCCESS','CAPACITY WARNING','NEEDS REVIEW'],
+      plat:[{k:'DESKTOP',v:'Two-column: resource list plus inspector. Import runs in a modal that can be dismissed while it continues.'},{k:'TABLET',v:'List, then focused inspector. Import is a full-screen sequence with a persistent progress row.'},{k:'PHONE',v:'One step per screen, progress pinned above the nav, resumable if the user leaves.'}],
+      anchor:'Contract \u00a76\u2013\u00a78; requirements \u00a78. Imported material is untrusted data and never gains executable capability (R7).'},
+    notes:{name:'Notes, highlights, Study Trail',home:'NOTES',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['A note starts from the verse tray or from a study resource, without leaving the passage.','Writing autosaves locally; there is no save button and no lost draft.','A note may link to several verses, words, people, places, topics and resources. Opening it shows those links and returns to any of them.','Highlights use collections; bookmarks, questions and observations are the same object type with different intent labels.','Tags and collections are optional organisation, never a required step in the writing flow.','Study Trail records passages and resources visited in the session. It stays hidden until opened, and can be paused or cleared.','Readable exports (PDF, DOCX, plain text) preview references and attribution before export, and respect resource permissions.'],
+      states:['NO NOTES YET','UNFINISHED DRAFT','AUTOSAVED','LINK TARGET MISSING','TRAIL PAUSED','TRAIL EMPTY','EXPORT PREVIEW'],
+      plat:[{k:'DESKTOP',v:'Notes strip under the desk for the current verse; the full workspace is a destination.'},{k:'TABLET',v:'Note editor as a focused view over the reader, returning to the exact verse.'},{k:'PHONE',v:'Note editor as a sheet from the verse tray; keyboard-aware, actions at the bottom edge.'}],
+      anchor:'Contract \u00a75, \u00a710; requirements \u00a79, \u00a717.'},
+    word:{name:'Word study (full entry)',home:'STUDY',status:'PARTLY IN PROTOTYPE · FULL ENTRY UNDESIGNED',
+      steps:['A study-enabled word in the Reader is a real button with a double-underline cue; tap, hover and keyboard all open the same quick preview.','The preview shows original form, transliteration, pronunciation, Strong\u2019s number, concise definition, grammar when available, and mapping status.','OPEN WORD STUDY expands to the full entry: occurrences, related forms, usage by passage, source details and stated limitations.','Occurrences open in the Reader without losing the word context; Back returns to the entry, scrolled where it was.','Mapping honesty: one-to-many, many-to-one, ambiguous, translator-supplied and unmapped words are labelled. Manna never presents an uncertain alignment as an exact definition.','An untagged translation may route to the KJV/Strong\u2019s verse baseline, labelled as a baseline rather than a mapping.'],
+      states:['MAPPED','AMBIGUOUS','PARTIALLY MAPPED','UNMAPPED','SUPPLIED WORD','NO STRONG\u2019S MODULE','OT (MASORETIC) VS NT (TR) TERMINOLOGY'],
+      plat:[{k:'DESKTOP',v:'Preview popover anchored to the word; Word Study pane on the right expands to full screen.'},{k:'TABLET',v:'Preview sheet; full entry replaces the study pane.'},{k:'PHONE',v:'Selecting a word switches the drawer to WORD and opens it; full entry is a full-screen view.'}],
+      anchor:'Contract \u00a73; requirements \u00a710.'},
+    atlas:{name:'Atlas + Map Packs',home:'STUDY',status:'SCHEMATIC IN PROTOTYPE · VIEWS UNDESIGNED',
+      steps:['A recognised place in the Reader carries a dotted underline and a \u25C6 prefix; selecting it presents a concise place card.','If Atlas is already in Study, selection focuses or recentres it. A redundant OPEN IN ATLAS action must not appear. If Atlas is absent, the card offers it.','Atlas preserves the current passage while switching views: Geographic, Route/Journey, Region, Timeline, Relationship, Source Map.','Imported map layers keep attribution and status: Fully Interactive, Partially Interactive, Source View Only, Needs Review.','Uncertain geography is visibly distinguishable from verified data; Manna never invents coordinates, routes or boundaries.','Where structured conversion is incomplete, the imported source stays available as a verse-linked source view.'],
+      states:['VERIFIED','UNCERTAIN','SOURCE VIEW ONLY','NEEDS REVIEW','NO MAP PACK','SCHEMATIC PLACEHOLDER (BUNDLED ASSET PENDING)'],
+      plat:[{k:'DESKTOP',v:'Map cell plus detail column inside the Atlas pane; expands full screen.'},{k:'TABLET',v:'Atlas as the single study pane, detail below the map.'},{k:'PHONE',v:'Atlas in the drawer; expanding gives a full-screen map with the place card as a sheet.'}],
+      anchor:'Contract \u00a79; requirements \u00a711.'},
+    settings:{name:'Settings + appearance',home:'SECONDARY',status:'GAP · UNDESIGNED',
+      steps:['Settings is one level below the primary destinations, never in the primary bar.','Appearance offers System, Light, Sepia and Dark, with independent Scripture typeface, size, line spacing and reading width.','Words of Christ is a three-way control: RED + MARK, MARK ONLY (high contrast), OFF. Marker and rule carry the meaning; colour is redundant by design.','Appearance changes presentation only — never study state, resource visibility, or the current selection.','Trust / About states local operation, storage use, capacity, backup status and browser limitations in plain language.','Diagnostics and storage status are reachable here and from the startup capability check when something is wrong.'],
+      states:['DEFAULTS','MODIFIED','REDUCED MODE','STORAGE NEAR CAPACITY','UNSUPPORTED BROWSER FEATURE','HIGH CONTRAST / REDUCED MOTION ACTIVE'],
+      plat:[{k:'DESKTOP',v:'Settings as a full page with a section list; live preview of Scripture type controls.'},{k:'TABLET',v:'Same, single column with a section index at the top.'},{k:'PHONE',v:'Grouped list rows into focused sub-screens; type controls preview on a real verse.'}],
+      anchor:'Requirements \u00a76, \u00a714, \u00a716; contract \u00a711.'},
+    firstrun:{name:'First run + trust',home:'SECONDARY',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['First run is brief: not a setup wizard. Three cards, then Scripture.','Card 1 — local operation: no account, no server, nothing leaves the device.','Card 2 — Reader and Study: Scripture controls the study panes around it.','Card 3 — imported material: untrusted data, source-labelled, never executable.','The trust statement is shown in full: \u201CManna is a study aid, not a substitute for your physical Bible. Always verify Scripture and study material against your physical Bible.\u201D','Manna then opens directly to Scripture. The guided tour is optional and skippable at any point; contextual help remains available later.','A compact reminder appears once per study session and on commentary, imported-source, Verse Finder and inferred-link surfaces — never on every verse action.'],
+      states:['FIRST RUN','SKIPPED TOUR','RETURNING USER','SESSION REMINDER','SURFACE REMINDER','REDUCED MODE ON FIRST RUN'],
+      plat:[{k:'DESKTOP',v:'Centred card sequence over the desk; Escape skips to Scripture.'},{k:'TABLET',v:'Same sequence, full width.'},{k:'PHONE',v:'Full-screen cards, primary action at the bottom edge, skip always visible.'}],
+      anchor:'Contract \u00a711; requirements \u00a713.'},
+    backup:{name:'Backup & Restore',home:'SECONDARY',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['Discoverable from both Library and Settings, with the same flow in each.','Backup offers a full .mannabackup (personal data, settings and imported modules) or a smaller Personal Data Only export, with optional offline password encryption and no account recovery.','Backup listings show contents, creation date and encryption state.','Restore inspects and validates before any mutation, then previews contents, conflicts, available space, and the consequences of Merge versus Replace.','Replace creates an emergency pre-restore backup first when possible.','Restore runs transactionally and verifies the result. Failure leaves the existing library untouched and says so plainly.','Progress is persistent and leaveable; success is never claimed before verification.'],
+      states:['NO BACKUPS','CREATING','ENCRYPTED','WRONG PASSWORD','VERSION MIGRATION','CONFLICTS FOUND','INSUFFICIENT SPACE','FAILED CLOSED','VERIFIED'],
+      plat:[{k:'DESKTOP',v:'Two-pane: backup list plus inspector; restore preview as a blocking review step.'},{k:'TABLET',v:'List then focused inspector; progress row persists across views.'},{k:'PHONE',v:'One decision per screen; Merge vs Replace stated in plain consequences before confirming.'}],
+      anchor:'Contract \u00a710; requirements \u00a715.'},
+    compare:{name:'Comparison workspace',home:'STUDY',status:'SPECIFIED HERE · NEEDS LOW-FI FLOWS',
+      steps:['Comparison is a deliberate workspace entered by an explicit COMPARE action, never the default Reader layout.','The user adds as many compatible Bibles or study sources as wanted; Manna imposes no arbitrary limit.','Each column names its source module. Manna never merges translations or reconstructs one from another.','Large sets use grouping, collapsing, progressive rendering and a focused-source mode; resources are never silently removed.','Ordinary commentary use keeps one active commentary pane — showing several requires the same explicit Compare.','Exiting comparison restores the prior Study layout, passage and selection exactly.'],
+      states:['TWO SOURCES','MANY SOURCES','FOCUSED SOURCE','INCOMPATIBLE SOURCE','LOADING PROGRESSIVELY','SOURCE MISSING'],
+      plat:[{k:'DESKTOP',v:'Side-by-side columns with a focused-source toggle and per-source collapse.'},{k:'TABLET',v:'Two columns maximum, others collapsed into a source strip.'},{k:'PHONE',v:'One source at a time with a horizontal source strip; verse-locked scrolling, not compressed columns.'}],
+      anchor:'Contract \u00a74; requirements \u00a75.'}
+  };
+
+  PLATFORMS = [
+    {name:'Desktop',size:'1440 × 900 AUTHORED · FLUID IN PRODUCT',nav:'RESTRAINED APPLICATION NAV · READ SEARCH STUDY NOTES LIBRARY',
+      study:'Study sits beside Scripture or expands into its own workspace. Panes stack in two columns around the Bible; the layout model allows resize, reorder, side swap and saved presets.',
+      rules:['Bible stays visible while study panes update.','Full-screen expansion of any pane, returning exactly.','Keyboard navigation for reference, verses, results and panes.','Resize handles sit on the pane borders and consume no layout width.'],targets:'DESK CONTROLS 30–38px (POINTER + KEYBOARD SURFACES)'},
+    {name:'Tablet',size:'1024 × 790 AUTHORED',nav:'APPLICATION NAV · ONE COLLAPSIBLE STUDY PANE',
+      study:'Reader plus one study pane at a time, chosen by a four-tab strip. HIDE STUDY PANE collapses the column to zero without changing the passage.',
+      rules:['Reflow, never a shrunken desktop.','Same FOLLOW | PIN semantics, larger targets.','Comparison caps at two visible columns; the rest collapse into a source strip.','Pinned treatment identical to desktop.'],targets:'PANE TABS 44px · FOLLOW/PIN 46px'},
+    {name:'Phone',size:'414 × 872 AUTHORED · PRIMARY TARGET',nav:'BOTTOM NAV · READ SEARCH STUDY NOTES MORE',
+      study:'Study is a swipe-up drawer above the nav: grab bar, pane tabs, pane body, FOLLOW | PIN at the bottom edge. Selecting a word or place switches the drawer to that pane and opens it.',
+      rules:['Sequential focused views, never compressed columns.','Primary actions near the bottom edge.','Reader padding keeps the drawer from covering the last verse.','Drawer motion is the only animation, disabled under reduced motion.'],targets:'BOTTOM NAV 62px · DRAWER TABS 46px · FOLLOW/PIN 50px'}
+  ];
+
+  STATE_CLASSES = [
+    {name:'Empty',rule:'Say what would be here and give the one action that fills it. Never a decorative void.',copy:'No note on this verse yet — tap to write one.'},
+    {name:'First run',rule:'Three cards and the trust statement, then Scripture. Skippable at every point.',copy:'Manna is a study aid, not a substitute for your physical Bible.'},
+    {name:'Loading',rule:'Progressive rendering, stable scroll position, no layout jump when content lands.',copy:'Showing the first 50 of 412 matches · loading more as you scroll'},
+    {name:'Long-running',rule:'Persistent progress the user can leave and revisit, with safe cancellation. Reader stays usable.',copy:'Indexing Matthew Henry — 62% · you can keep reading'},
+    {name:'Success',rule:'Quiet and undoable. Never claimed before verification completes.',copy:'Import verified · 1,189 entries linked · 34 need review'},
+    {name:'Warning',rule:'What happened, what is still safe, and the next safe action. Technical detail expandable.',copy:'MOCK DATA COVERS MATTHEW 4:12–17 ONLY. ROMANS 1 WOULD LOAD FROM THE INSTALLED TEXT MODULE.'},
+    {name:'Error',rule:'Fail closed and say so. The existing library is untouched, and the message says that first.',copy:'Restore stopped before any change. Your library is unchanged.'},
+    {name:'Reduced mode',rule:'Name the affected features, keep everything else working, offer guidance rather than a technical gate.',copy:'Storage is unavailable in this browser. Reading works; notes cannot be saved.'},
+    {name:'Recovery',rule:'Preview consequences before mutation; create an emergency backup first when possible.',copy:'Replace will remove 6 modules and 48 notes. An emergency backup will be created first.'}
+  ];
+
+  ROWS = [
+    ['Reader with book/chapter/verse navigation','READ','Reader + reference picker','D T P','P','Off-fixture reference · invalid book · invalid chapter · module missing','Prototype: desk, tablet, phone reader; reference picker with datalist and per-book chapter validation.'],
+    ['Verse selection updates every compatible pane','STUDY','P1 selection controller','D T P','P','Verse selected · pane naming the verse · no note on verse','Prototype: Commentary, Cross Refs, People·Topics, Notes all name the selected verse.'],
+    ['Follow / Pin per study surface','STUDY','P2 follow or pin','D T P','P','Following · pinned · pinned and stale · resumed','Prototype: five-axis pinned treatment, PINNED screen preset, stale bar with RESUME FOLLOW.'],
+    ['Layout model: resize, reorder, swap, presets, save','STUDY','LAYOUT bar','D','P','Default · custom · unsaved · saved as MY LAYOUT','Prototype: presets DEFAULT / WORD FOCUS / WIDE READER / MY LAYOUT, border-mounted handles.'],
+    ['Commentary integration, one active by default','STUDY','Resource switcher','D T P','P','Active · switched · pinned · editorial kicker present','Prototype: Commentary pane with EDITORIAL NOTE — NOT SCRIPTURE kicker.'],
+    ['Cross-reference integration','STUDY','Cross Refs pane','D T P','P','Rows for verse · none for verse','Prototype: per-verse cross-reference rows with source-styled references.'],
+    ['Strong\u2019s quick preview (tap, hover, keyboard)','READ','Token \u2192 preview','D T P','S','Mapped · ambiguous · partially mapped · unmapped · supplied','This document, Word study flow. The popover itself is undesigned.'],
+    ['Full word study: occurrences, forms, usage, limits','STUDY','Word Study \u2192 full screen','D T P','S','Mapped · no module · OT vs NT terminology','This document, Word study flow. Prototype shows the entry summary only.'],
+    ['Dictionary and lexicon integration','STUDY','Resource switcher','D T P','G','Active · none installed · imported source','Not designed. Needs a pane specification and a switcher entry.'],
+    ['Atlas integration; place selection centres the map','STUDY','Place \u2192 Atlas focus','D T P','P','Verified · uncertain · schematic placeholder','Prototype: schematic Atlas, crosshair move, place card, no redundant OPEN IN ATLAS.'],
+    ['Map Packs, layers, six map views, statuses','STUDY','Atlas view switcher','D T P','G','Fully / partially interactive · source view only · needs review','Not designed. Contract \u00a79 view set has no flow yet.'],
+    ['Exact, reference and phrase search','SEARCH','One field, labelled inference','D T P','S','No query · progressive · no results · index building','This document, Search flow.'],
+    ['Verse Finder for remembered ideas','SEARCH','Same field, inferred method','D T P','S','Inferred with confidence · reminder surface','This document, Search flow. Confidence chip pattern from P6.'],
+    ['Concordance occurrences','SEARCH','Word \u2192 occurrences','D T P','G','Many occurrences · paged · none','Not designed. Overlaps the word-study occurrence list; decide one surface.'],
+    ['Saved and recent searches','NOTES','Save from results','D T P','S','None saved · saved · renamed','This document, Search and Notes flows.'],
+    ['Notes linked to verses, words, people, places, topics','NOTES','Verse tray \u2192 note','D T P','S','Empty · draft · autosaved · link target missing','This document, Notes flow. Prototype has the read-only Notes strip.'],
+    ['Highlights and highlight collections','NOTES','Verse tray \u2192 highlight','D T P','G','No highlights · collection · colourless alternative','Not designed. Needs a non-colour-dependent highlight treatment.'],
+    ['Bookmarks, questions, observations','NOTES','Verse tray \u2192 mark','D T P','G','None · listed · filtered by intent','Not designed. Proposed as one object type with intent labels.'],
+    ['Study sessions and Study Trail','NOTES','Trail drawer','D T P','S','Hidden · open · paused · cleared','This document, Notes flow.'],
+    ['Comparison workspace, no arbitrary source limit','STUDY','Explicit COMPARE','D T P','S','Two · many · focused · incompatible · progressive','This document, Comparison flow.'],
+    ['Library browse, enable, disable, organise, inspect','LIBRARY','Library list + inspector','D T P','S','Empty · populated · disabled resource · inspecting','This document, Library flow.'],
+    ['Module import (SWORD, OSIS, VPL, JSON, IMP)','LIBRARY','Guided import','D T P','S','Detecting · unsupported · preview · importing · summary','This document, Library flow. Fail-closed rules from contract \u00a76.'],
+    ['Document ingestion (PDF, DOCX, TXT, Markdown)','LIBRARY','Guided import + classification','D T P','S','Suggested class · corrected · text-only PDF rejected','This document, Library flow. OCR is out of V1.'],
+    ['Inferred-link review with confidence filters','LIBRARY','Optional review','D T P','S','Explicit · high · medium · low · unresolved','This document, Library flow. Review is optional by contract \u00a78.'],
+    ['Source identity on every verse and resource','ALL','P6 honest labelling','D T P','P','Bundled · imported · editorial · inferred','Prototype: editorial kicker, source-labelled panes.'],
+    ['Full backup and personal-data-only export','SECONDARY','Backup & Restore','D T P','S','No backups · creating · encrypted · verified','This document, Backup flow.'],
+    ['Safe restore with merge or replace','SECONDARY','Restore preview','D T P','S','Conflicts · insufficient space · migration · failed closed','This document, Backup flow.'],
+    ['Optional offline password encryption','SECONDARY','Backup options','D T P','S','Encrypted · wrong password · no recovery path','This document, Backup flow. No account-based recovery by contract \u00a710.'],
+    ['Appearance: System, Light, Sepia, Dark + type controls','SECONDARY','Settings \u2192 Appearance','D T P','G','Defaults · modified · high contrast · reduced motion','Not designed. Conflict 2 maps the four appearances onto the accepted token sets.'],
+    ['Words of Christ without colour dependence','READ','Three-way WoC control','D T P','P','RED + MARK · MARK ONLY · OFF','Prototype: double rule plus \u2720WoC marker, colour redundant.'],
+    ['First run and the trust statement','SECONDARY','First run cards','D T P','S','First run · skipped · returning · session reminder','This document, First run flow.'],
+    ['Trust / About, storage status, diagnostics','SECONDARY','Settings sections','D T P','G','Normal · near capacity · unsupported feature','Not designed.'],
+    ['Startup capability check and reduced mode','SECONDARY','Quiet check \u2192 Reader','D T P','S','Supported (silent) · degraded · read-only','This document, entry rule and Settings flow.'],
+    ['Readable exports: PDF, DOCX, plain text','NOTES','Export preview','D T P','G','Preview · permissions restricted · attribution required','Not designed. Backups stay separate from readable exports.'],
+    ['Device read-aloud, identified as the device voice','READ','Reader menu','D T P','G','Available · no voice installed · playing','Not designed. Bundled narration is out of V1.'],
+    ['Navigation memory: Back means prior context','ALL','P4 workspace memory','D T P','S','Returned exactly · history control · trail','This document, Interaction model.'],
+    ['Supplied-word rendering (R5)','READ','Italic + reader legend','D T P','S','Supplied present · legend shown · export preserved','This document, Scripture integrity. Open decision.'],
+    ['Full-screen expansion with exact return','STUDY','P3 expand and return','D T P','P','Expanded · exited to exact prior layout','Prototype: full-screen reading; pane expansion specified, partly built.']
+  ];
+
+  INTEGRITY = [
+    {k:'VERBATIM',v:'Scripture is reproduced exactly as the installed module carries it, including markings the module preserves. The fixture record, not the design document, is the source of truth for verse text.'},
+    {k:'VISUALLY DISTINCT',v:'Scripture uses the Scripture serif, conventionally typeset — no condensing, no letter-spacing, no comic styling. Editorial and personal material never share that treatment.'},
+    {k:'NEVER RECONSTRUCTED',v:'Translations are never merged, and one translation is never rebuilt from another. Every displayed verse names its source module.'},
+    {k:'UNCERTAINTY IS LABELLED',v:'Supplied, ambiguous, partially mapped and unmapped words are marked. Inferred links carry a confidence score and a short explanation.'},
+    {k:'DECORATION NEVER INTERFERES',v:'Nothing sits over the verse text. Scripture stays selectable and copyable, and right-to-left content renders, selects and copies correctly.'}
+  ];
+
+  GATES = [
+    {tag:'DONE',name:'Product contract',s:1},{tag:'DONE',name:'UI/UX interview',s:1},{tag:'THIS DOCUMENT',name:'IA + interaction model',s:2},{tag:'NEXT',name:'Approved flows',s:0},{tag:'THEN',name:'Appearance + interactive mock',s:0},{tag:'HUMAN',name:'Product Freeze',s:0},{tag:'AFTER',name:'Roadmap + implementation',s:0}
+  ];
+
+  DELIVERABLES = [
+    ['1','Complete low-fidelity flows for every Version 1 function','FLOWS SPECIFIED',0],
+    ['2','Empty, first-run, loading, long-running, success, warning, error, reduced-mode and recovery states','MODEL DEFINED',0],
+    ['3','Desktop and phone flows, tablet derived and demonstrated','RULES DEFINED',0],
+    ['4','Keyboard, touch, screen-reader, reduced-motion and text-scaling behaviour','PARTLY — PROTOTYPE',0],
+    ['5','A reviewed information architecture and reusable interaction model','THIS DOCUMENT',1],
+    ['6','A visual system honouring the approved quiet Reader direction','ACCEPTED · CONFLICT 3',0],
+    ['7','A high-fidelity interactive mock for desktop and phone','STUDY DESK PROTOTYPE',0],
+    ['8','A coverage matrix mapping every capability to a designed flow and state','THIS DOCUMENT',1]
+  ];
+
+  onAct = (e) => {
+    const t = e.target.closest('[data-act]'); if (!t) return;
+    const a = t.dataset.act;
+    if (a === 'section') this.setState({ section:t.dataset.section });
+    else if (a === 'dest') this.setState(s => ({ openDest: s.openDest === t.dataset.dest ? '' : t.dataset.dest }));
+    else if (a === 'verse') this.setState({ verse:+t.dataset.verse });
+    else if (a === 'pin') this.setState(s => t.dataset.pin === '1' ? ({ pinned:true, pinAt:s.verse }) : ({ pinned:false }));
+    else if (a === 'area') this.setState({ area:t.dataset.area });
+    else if (a === 'fdest') this.setState({ fdest:t.dataset.val });
+    else if (a === 'fstat') this.setState({ stat:t.dataset.val });
+    else if (a === 'row') this.setState(s => ({ openRow: s.openRow === t.dataset.row ? '' : t.dataset.row }));
+    else if (a === 'sup') this.setState({ sup:t.dataset.val });
+    else if (a === 'theme') this.applyTheme(t.dataset.theme);
+  };
+
+  applyTheme(name){
+    const el = this.rootRef.current; if (!el) return;
+    const set = name === 'night' ? this.NIGHT : this.CLASSIC;
+    Object.keys(set).forEach(k => el.style.setProperty(k, set[k]));
+  }
+
+  ref(v){ return 'MATTHEW 4:' + v; }
+
+  renderVals(){
+    const s = this.state;
+    const pill = (sel) => ({ bg: sel ? 'var(--accent)' : 'var(--paper)', fg: sel ? 'var(--onAccent)' : 'var(--ink)' });
+    const comV = s.pinned ? s.pinAt : s.verse;
+    const stale = s.pinned && s.pinAt !== s.verse;
+
+    const STAT = { P:{label:'IN PROTOTYPE',bg:'var(--accent2)',fg:'#fff8ea'}, S:{label:'SPECIFIED HERE',bg:'var(--accent)',fg:'var(--onAccent)'}, G:{label:'GAP',bg:'var(--warn)',fg:'#16130f'} };
+    const all = this.ROWS.map((r,i) => ({ id:'r'+i, cap:r[0], dest:r[1], flow:r[2], plat:r[3], code:r[4], states:r[5], evidence:r[6],
+      status:STAT[r[4]].label, bg:STAT[r[4]].bg, fg:STAT[r[4]].fg, open:s.openRow === 'r'+i, rowBg: s.openRow === 'r'+i ? 'var(--sel)' : 'transparent' }));
+    const rows = all.filter(r => (s.fdest === 'ALL' || r.dest === s.fdest) && (s.stat === 'ALL' || r.code === s.stat));
+
+    const dfl = ['ALL','READ','SEARCH','STUDY','NOTES','LIBRARY','SECONDARY','ALL ROWS'];
+    const destFilters = ['ALL','READ','SEARCH','STUDY','NOTES','LIBRARY','SECONDARY'].map(id => ({ id, label:id, sel:s.fdest === id, ...pill(s.fdest === id) }));
+    const statusFilters = [['ALL','ALL'],['P','IN PROTOTYPE'],['S','SPECIFIED HERE'],['G','GAP']].map(([id,label]) => ({ id, label, sel:s.stat === id, ...pill(s.stat === id) }));
+
+    const c = k => all.filter(r => r.code === k).length;
+    const counts = [
+      { n:all.length, label:'CAPABILITIES', bg:'var(--paper)', fg:'var(--ink)' },
+      { n:c('P'), label:'IN PROTOTYPE', bg:'var(--accent2)', fg:'#fff8ea' },
+      { n:c('S'), label:'SPECIFIED HERE', bg:'var(--accent)', fg:'var(--onAccent)' },
+      { n:c('G'), label:'GAPS', bg:'var(--warn)', fg:'#16130f' }
+    ];
+
+    const areaLabels = { search:'SEARCH', library:'LIBRARY + IMPORT', notes:'NOTES + TRAIL', word:'WORD STUDY', atlas:'ATLAS', settings:'SETTINGS', firstrun:'FIRST RUN', backup:'BACKUP', compare:'COMPARISON' };
+    const flow = this.FLOWS[s.area];
+
+    return {
+      rootRef:this.rootRef, onAct:this.onAct,
+      nav:this.NAV.map(([id,label]) => ({ id, label, sel:s.section === id, ...pill(s.section === id) })),
+      isIa:s.section === 'ia', isModel:s.section === 'model', isFlows:s.section === 'flows', isResp:s.section === 'responsive',
+      isStates:s.section === 'states', isMatrix:s.section === 'matrix', isScripture:s.section === 'scripture', isGates:s.section === 'gates',
+
+      dests:this.DESTS.map(d => ({ ...d, open:s.openDest === d.id, border:s.openDest === d.id ? 'solid' : 'solid',
+        bg:s.openDest === d.id ? 'var(--accent)' : 'var(--head)', fg:s.openDest === d.id ? 'var(--onAccent)' : 'var(--headInk)' })),
+      secondary:this.SECONDARY, conflicts:this.CONFLICTS, patterns:this.PATTERNS,
+
+      demoVerses:[16,17].map(n => ({ n, text:this.VERSES[n], cur:s.verse === n ? 'true' : 'false',
+        bg:s.verse === n ? 'var(--sel)' : 'transparent', shadow:s.verse === n ? 'inset 5px 0 0 var(--accent)' : 'none' })),
+      syncSummary: s.pinned ? '1 PANE(S) PINNED · COMMENTARY' : 'ALL PANES FOLLOWING SCRIPTURE',
+      pinned:s.pinned, stale,
+      pinnedBadge:'PINNED · HELD AT ' + this.ref(s.pinAt),
+      staleText:'NOT FOLLOWING. Bible has moved to ' + this.ref(s.verse) + '.',
+      comRef:this.ref(comV), comText:this.COM[comV],
+      comBorderStyle:s.pinned ? 'dashed' : 'solid', comBorderColor:s.pinned ? 'var(--warn)' : 'var(--ink)',
+      comFilter:s.pinned ? 'saturate(.55)' : 'none',
+      followPressed:s.pinned ? 'false' : 'true', pinPressed:s.pinned ? 'true' : 'false',
+      followBg:s.pinned ? 'transparent' : 'var(--accent)', followFg:s.pinned ? 'var(--headInk)' : 'var(--onAccent)',
+      pinBg:s.pinned ? 'var(--accent)' : 'transparent', pinFg:s.pinned ? 'var(--onAccent)' : 'var(--headInk)',
+      xrefKicker:'SHOWING FOR ' + this.ref(s.verse), xrefRows:this.XREF[s.verse],
+
+      areaTabs:Object.keys(this.FLOWS).map(id => ({ id, label:areaLabels[id], sel:s.area === id, ...pill(s.area === id) })),
+      flow:{ ...flow, steps:flow.steps.map((text,i) => ({ n:i+1, text })) },
+
+      platforms:this.PLATFORMS,
+      stateClasses:this.STATE_CLASSES.map((x,i) => ({ ...x, bg:i % 3 === 1 ? 'var(--accent)' : 'var(--head)', fg:i % 3 === 1 ? 'var(--onAccent)' : 'var(--headInk)' })),
+
+      rows, destFilters, statusFilters, counts,
+
+      supModes:[['italic','ITALIC + LEGEND'],['brackets','SOURCE BRACKETS'],['plain','UNMARKED']].map(([id,label]) => ({ id, label, sel:s.sup === id, ...pill(s.sup === id) })),
+      supItalic:s.sup === 'italic', supBrackets:s.sup === 'brackets', supPlain:s.sup === 'plain',
+      supVerdict: s.sup === 'italic' ? 'PROPOSED. The KJV\u2019s own print convention, carries meaning without colour, and survives export as real emphasis markup.'
+        : s.sup === 'brackets' ? 'ACCEPTABLE FALLBACK. Unambiguous and plain-text safe, but reads as editorial punctuation and clutters the verse.'
+        : 'REJECTED. This is what the prototype does today. It promotes a translator\u2019s word to translated text and fails R5.',
+      supLegend: s.sup === 'italic' ? 'Italic words were supplied by the translators and have no counterpart in the Greek or Hebrew.'
+        : s.sup === 'brackets' ? 'Words in [brackets] were supplied by the translators and have no counterpart in the Greek or Hebrew.'
+        : 'No legend possible — the distinction is not rendered.',
+      integrity:this.INTEGRITY,
+
+      gates:this.GATES.map(g => ({ ...g, bg:g.s === 2 ? 'var(--accent)' : g.s === 1 ? 'var(--head)' : 'var(--paper)', fg:g.s === 2 ? 'var(--onAccent)' : g.s === 1 ? 'var(--headInk)' : 'var(--ink)' })),
+      deliverables:this.DELIVERABLES.map(([n,text,status,done]) => ({ n, text, status,
+        bg:done ? 'var(--accent)' : 'var(--paper)', fg:done ? 'var(--onAccent)' : 'var(--ink)' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

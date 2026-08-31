@@ -1,59 +1,79 @@
-# Study Desk baseline mock handoff
+# Baseline UI/UX mock — handoff
 
-**Status:** received as a design handoff; repository reconciliation in progress
+**Status:** aesthetics and layout baselined for every V1 surface; flows not yet designed
 **Review date:** 2026-08-30
-**Role:** design evidence only — not Product Freeze or application-code authorization
+**Produced by:** Claude Design, this session
+**Repository state:** materialized on the local UI/UX design branch; not Product Freeze
 
-## Canonical location
+## What this covers
 
-This record belongs beside the prototype assets under
-`docs/01-spec/design-reference/`. The folder is intentionally separate from
-`src/`: its HTML and JavaScript are visual/interaction reference material, not
-the Manna runtime.
+Per `manna-v1-ui-ux-requirements.md` §19, deliverable 6 (visual system) and the
+layout/presentation half of deliverable 7 (interactive mock). It does **not**
+cover deliverable 1 (low-fi flows), deliverable 2 (state coverage beyond what
+is visually shown), or deliverable 4 (keyboard/screen-reader/reduced-motion
+behavior beyond what the accepted prototype already had).
 
-## Handoff inventory
+## Canonical artifacts
 
-The design handoff describes:
+Both design artifacts are stored in this folder and remain reference material,
+not product code:
 
-- `Study Desk.dc.html` — the accepted Study Desk prototype, expanded from the
-  original six screens to seven additional static layouts: Search, Notes,
-  Library, Settings, First run, Backup & Restore, and Comparison;
-- `support.js` — the sibling Design Component preview runtime;
-- `Manna V1 IA and Interaction Model.dc.html` — information architecture,
-  seven interaction patterns, platform/state rules, a coverage matrix, and the
-  supplied-word representation proposal.
+1. [`Study Desk.dc.html`](Study%20Desk.dc.html) — the accepted prototype,
+   unchanged in its original six screens (Desk, Pinned, Tablet, Phone, Home,
+   Reading), now with seven additional static layouts at the same visual
+   baseline:
 
-The first two assets are present in this repository. The extended 13-screen
-HTML, IA/interaction-model HTML, and the two draft patch files named by the
-external handoff are not present in this checkout. The tracked prototype is
-therefore preserved unchanged and must not be described as the 13-screen
-version until those source files are transferred and reviewed.
+   - **Search** — one field, method chips, sectioned results, recent/saved
+     searches;
+   - **Notes** — note/highlight/bookmark list, linked-verse detail, tags, and a
+     collapsed Study Trail strip;
+   - **Library** — kind filter, resource grid, status chips, inspector, and
+     import-summary presentation;
+   - **Settings** — section list and Appearance controls for system/light/
+     sepia/dark presentation, Scripture type controls, and Words of Christ;
+   - **First run** — centred card sequence, progress dots, trust statement, and
+     skip-to-Scripture action;
+   - **Backup & Restore** — backup list and restore preview with conflicts and
+     Merge/Replace consequences;
+   - **Comparison** — side-by-side source columns, focused-source state, and a
+     collapsed overflow strip.
 
-## What is preserved
+   These seven layouts are static only. They add no new interactive state,
+   pin/follow behavior, or selection wiring. Existing screens and their
+   behavior are preserved.
 
-The existing prototype remains the source of visual direction and the P0.1
-fixture contract. Its existing six-screen behavior is preserved, including the
-Reader, Study Desk, pinned-pane, responsive, theme, selection, and reading-mode
-examples. Its Scripture text remains non-authoritative; use the fixture record
-at [../../../fixtures/matthew-4-12-17.md](../../../fixtures/matthew-4-12-17.md).
+2. [`Manna V1 IA and Interaction Model.dc.html`](Manna%20V1%20IA%20and%20Interaction%20Model.dc.html)
+   — the reviewed information architecture, seven reusable interaction
+   patterns, platform/state rules, supplied-word proposal, and 38-row coverage
+   matrix.
+
+3. [`support.js`](support.js) — the sibling Design Component preview runtime.
+   It is required only to open the prototype and is not part of the Manna
+   runtime.
+
+## Open design work
+
+- Complete low-fidelity flows are still required for every Version 1 function.
+- Empty, loading, long-running, success, warning, error, reduced-mode, and
+  recovery states remain to be designed systematically.
+- The seven added layouts have no tablet or phone treatment yet; only Reader
+  and Home have those device views in the prototype.
+- The IA document records four unresolved proposals: Home versus launch to
+  Reader, six prototype themes versus four Version 1 appearances, comic
+  loudness versus the quiet Reader direction, and supplied-word treatment.
+- Ten coverage-matrix rows remain gaps: dictionary/lexicon, Map Pack views,
+  concordance occurrences, highlights, bookmarks/questions/observations,
+  Appearance detail, Trust/About, startup capability checks, readable exports,
+  and read-aloud.
+
+The supplied-word italic rendering is a proposal only. It has not been applied
+to the authoritative fixture record or used to alter Scripture text.
 
 ## Protocol boundary
 
-This Markdown record is the repository-facing handoff. It does not duplicate
-the full Version 1 requirements or claim a roadmap item is complete. The
-requirements remain canonical at
-`docs/01-spec/manna-v1-ui-ux-requirements.md`; the Markdown Machine state and
-next legal task remain under `.markdown-machine/`.
-
-No root-level `github.md`, free-form patch bundle, or untracked design notes are
-created as part of this reconciliation. Repository association and state belong
-to the project-local Markdown Machine records and Git metadata.
-
-## Required follow-up before design closeout
-
-1. Transfer the externally produced 13-screen prototype, IA/interaction model,
-   and exact requirements patch into this canonical tree.
-2. Validate that the prototype remains reference-only and that supplied words
-   are represented without altering authoritative Scripture data.
-3. Update the requirements and machine task records only after the transferred
-   design evidence is actually present and independently checked.
+The canonical requirements are
+[`manna-v1-ui-ux-requirements.md`](../manna-v1-ui-ux-requirements.md). The
+machine-owned state and next legal task remain under
+[`../../../.markdown-machine/`](../../../.markdown-machine/). This handoff
+does not declare Product Freeze, authorize implementation, or recompile the
+roadmap.

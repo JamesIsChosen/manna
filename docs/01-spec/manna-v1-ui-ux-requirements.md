@@ -1,6 +1,7 @@
 # Manna Version 1 UI/UX Requirements
 
-**Status:** INTERVIEW COMPLETE — design and Product Freeze pending
+**Status:** INTERVIEW COMPLETE — visual/layout baseline recorded; flows and Product Freeze pending
+**Review date:** 2026-08-30
 **Authority:** Human-approved UI/UX interview
 **Implementation state:** FROZEN; this is a design handoff, not application-code authorization
 
@@ -156,6 +157,15 @@ The next design effort must produce:
 6. a visual system honoring the approved quiet Reader direction;
 7. a high-fidelity interactive mock for desktop and phone;
 8. a coverage matrix mapping every product-contract capability to a designed flow and state.
+
+**Design progress, 2026-08-30:** deliverable 6 (visual system) and the
+layout half of deliverable 7 (interactive mock) are baselined for every V1
+surface — Read, Search, Study, Notes, Library, plus Settings, First run, and
+Backup & Restore. See
+[design-reference/baseline-mock-handoff.md](design-reference/baseline-mock-handoff.md)
+for what exists, what is excluded, and the open conflicts it does not resolve.
+Deliverables 1, 2, and 4 (flows, full state coverage, and non-pointer
+interaction beyond the original prototype) remain undesigned.
 
 Approval gates are sequential:
 

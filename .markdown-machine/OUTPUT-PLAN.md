@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "V1_PRODUCT_DISCOVERY_PLANNED",
+  "status": "V1_UI_UX_INTERVIEW_MATERIALIZED",
   "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7"
 }
 ---
@@ -43,9 +43,9 @@ Preserve the existing Manna application, product specifications, tests, CI, secu
 
 Do not copy `bootstrap/`, `machine-source/`, `project-compiler/`, `project-runtime/`, or `verification/` into the project. Do not activate unused capability runtimes, a generic record factory, or generic kernel source decomposition. Do not create a generic `*.template.md` record factory. Do not change the existing application implementation in this governance reconciliation.
 
-## Closeout
+## Initial reconciliation closeout (historical)
 
-The governed ref is the new non-default branch `codex/manna-governance-reconciliation`. No merge, force-push, deployment, release, or publication is authorized. Final closeout requires an authoritative remote readback proving exact local/remote SHA equality, followed by a cold-resume handoff.
+The initial v0.3.0 reconciliation used the non-default branch `codex/manna-governance-reconciliation`. That bounded transaction prohibited merge, force-push, deployment, release, or publication and required authoritative remote readback. The later Version 1 discovery transaction rebinds current closeout to `codex/manna-v1-product-discovery` in `REPOSITORY.md`.
 
 ## Version 1 product-discovery transaction
 
@@ -59,5 +59,22 @@ The human has reopened Manna as a new-product discovery effort while preserving 
 | `.markdown-machine/HANDOFF.md` | universal runtime + accepted interview | Resume at UI/UX interview without prior chat | specialized | current |
 | `.markdown-machine/lifecycle/HORIZON.md` | software/product runtime + accepted interview | Stop implementation until UI/UX approval and Product Freeze | specialized | current |
 | `.markdown-machine/COMPILED-MANIFEST.md` | manifest specification | Add traceability for the new machine-owned intent record | specialized | current |
+
+No application source, build script, test, dependency, or release artifact is modified by this transaction.
+
+## Version 1 UI/UX interview transaction
+
+The human completed and approved the UI/UX requirements interview, then directed clean closeout so a new agent can perform design. This transaction adds or specializes:
+
+| target_path | semantic_source | inclusion_reason | transform | role |
+| --- | --- | --- | --- | --- |
+| `docs/01-spec/manna-v1-ui-ux-requirements.md` | accepted human UI/UX interview | Canonical design requirements and approval gates | generated | current |
+| `.markdown-machine/intent/UI-UX-INTERVIEW-V1.md` | accepted human UI/UX interview | Bind current intent to the canonical design requirements | generated | current |
+| `.markdown-machine/tasks/V1-UI-UX-DESIGN.md` | accepted interview and human handoff direction | Exact next-agent design objective | generated | current |
+| `.markdown-machine/STATE.md` | universal runtime + accepted interview | Expose design-pending frontier | specialized | current |
+| `.markdown-machine/HANDOFF.md` | universal runtime + accepted interview | Cold-resume the new design agent without prior chat | specialized | current |
+| `.markdown-machine/lifecycle/*` | software/product runtime + accepted interview | Advance lifecycle to Flows/UX while preserving Product Freeze | specialized | current |
+| `.markdown-machine/REPOSITORY*.md` | repository closeout contract | Bind and verify the discovery branch | specialized | current |
+| `.markdown-machine/COMPILED-MANIFEST.md` | manifest specification | Trace the new intent and task records | specialized | current |
 
 No application source, build script, test, dependency, or release artifact is modified by this transaction.

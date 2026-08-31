@@ -1,6 +1,6 @@
 # Manna Version 1 Product Contract
 
-**Status:** SEMANTICALLY CLOSED — UI/UX interview pending  
+**Status:** SEMANTICALLY CLOSED — UI/UX interview complete; design pending
 **Authority:** Accepted human product interview  
 **Implementation state:** FROZEN until UI/UX approval and Product Freeze
 
@@ -142,4 +142,4 @@ The following remain in the future roadmap rather than Version 1:
 
 ## 14. Current product frontier
 
-This contract supersedes assumptions that the P0.1 prototype is final UI approval. P0.1 remains implementation and feasibility evidence. The next legal product step is a UI/UX interview, followed by design verification and explicit Product Freeze. No additional production implementation begins before that freeze.
+This contract supersedes assumptions that the P0.1 prototype is final UI approval. P0.1 remains implementation and feasibility evidence. The UI/UX interview is complete and canonical in `docs/01-spec/manna-v1-ui-ux-requirements.md`. The next legal product step is flow and visual design verification, followed by explicit human Product Freeze. No additional production implementation begins before that freeze.

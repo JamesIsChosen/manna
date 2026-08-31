@@ -1,8 +1,10 @@
-# SMPM Bootstrap — Repository Conformance Packet
+# Historical / Superseded: SMPM Bootstrap — Repository Conformance Packet
 
 ## Status
 
-Materialized locally; independent review not requested for this governance-only packet.
+Historical prior attempt; superseded by the Markdown Machine v0.3.0 reconciliation. Independent review was not requested for that governance-only packet.
+
+This document is preserved as project history. It is not the current active machine contract and does not govern new work.
 
 ## Goal
 

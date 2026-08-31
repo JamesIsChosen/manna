@@ -5,8 +5,8 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "handoff_status": "STOPPED_SYNCED",
-  "next_route": "validate exact remote parity, then continue Manna at P0.2 under existing project authority"
+  "handoff_status": "PRODUCT_DISCOVERY_ACTIVE",
+  "next_route": "conduct the UI/UX interview from the accepted Version 1 contract; do not implement before explicit Product Freeze"
 }
 ---
 
@@ -17,13 +17,15 @@ Read this file together with `ORIGIN.md`, `RUNTIME.md`, `STATE.md`, `REPOSITORY.
 ## Current route
 
 1. Confirm the active identity is Markdown Machine v0.3.0 and the project is Manna.
-2. Revalidate the authority/currentness and exact governed Git ref in `REPOSITORY-SYNC.md`.
-3. Treat this reconciliation as durable partial governance work; it is not a product acceptance claim.
-4. Resume the existing Manna roadmap at P0.2, the Offline Security & Network Guard, after satisfying its own review and evidence gates.
+2. Read `docs/01-spec/manna-v1-product-contract.md` and `intent/PRODUCT-CONTRACT-V1.md`.
+3. Treat P0.1 and the existing UI prototype as evidence/reference, not final product approval.
+4. Conduct the UI/UX interview beginning with information architecture and the clean-Reader-first flow.
+5. Verify the resulting design and obtain explicit Product Freeze before changing application behavior.
+6. Recompile the roadmap after Product Freeze; do not assume the old P0.2 → P6/P7 sequence still expresses Version 1 priorities.
 
 ## Boundaries
 
-The active capability is Software/Product only. The runtime is compact and project-local. Do not add generic source trees, generic templates, unused capabilities, or a factory. Preserve existing application files and historical reviews. Do not merge, force-push, deploy, publish, or rewrite history.
+The active capability is Software/Product only. The runtime is compact and project-local. Do not add generic source trees, generic templates, unused capabilities, or a factory. Preserve existing application files and historical reviews. Do not merge, force-push, deploy, publish, rewrite history, or resume implementation before Product Freeze.
 
 ## Sync status
 

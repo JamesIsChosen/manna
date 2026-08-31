@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "CLOSED_OUT_WITH_REMOTE_CHECKPOINT",
+  "status": "V1_PRODUCT_DISCOVERY_PLANNED",
   "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7"
 }
 ---
@@ -46,3 +46,18 @@ Do not copy `bootstrap/`, `machine-source/`, `project-compiler/`, `project-runti
 ## Closeout
 
 The governed ref is the new non-default branch `codex/manna-governance-reconciliation`. No merge, force-push, deployment, release, or publication is authorized. Final closeout requires an authoritative remote readback proving exact local/remote SHA equality, followed by a cold-resume handoff.
+
+## Version 1 product-discovery transaction
+
+The human has reopened Manna as a new-product discovery effort while preserving repository answers as evidence. Before any further application implementation, this transaction will:
+
+| target_path | semantic_source | inclusion_reason | transform | role |
+| --- | --- | --- | --- | --- |
+| `docs/01-spec/manna-v1-product-contract.md` | accepted human product interview | Canonical Version 1 product intent and semantic closure | generated | current |
+| `.markdown-machine/intent/PRODUCT-CONTRACT-V1.md` | accepted human product interview | Bind current project intent to the canonical product contract | generated | current |
+| `.markdown-machine/STATE.md` | universal runtime + accepted interview | Expose the new discovery frontier | specialized | current |
+| `.markdown-machine/HANDOFF.md` | universal runtime + accepted interview | Resume at UI/UX interview without prior chat | specialized | current |
+| `.markdown-machine/lifecycle/HORIZON.md` | software/product runtime + accepted interview | Stop implementation until UI/UX approval and Product Freeze | specialized | current |
+| `.markdown-machine/COMPILED-MANIFEST.md` | manifest specification | Add traceability for the new machine-owned intent record | specialized | current |
+
+No application source, build script, test, dependency, or release artifact is modified by this transaction.

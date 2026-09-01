@@ -2,11 +2,14 @@
 {
   "record_type": "LIFECYCLE_GRAPH",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "capability": "software-product",
-  "revision": "manna-v1-ui-ux-high-fidelity-verified-appearance-approval-pending"
+  "compiled_under_authority_ref": "sha256:a458796ed04021248db17179275c826fa1b9bf053150476ccb6ac45d3063c2af",
+  "graph_id": "manna-software-product-lifecycle",
+  "node_ids": ["INTENT", "PRODUCT_DISCOVERY", "FLOWS_UX", "DESIGN_VERIFICATION", "PRODUCT_FREEZE", "ARCHITECTURE", "IMPLEMENTATION", "RELEASE_READINESS"],
+  "edge_ids": ["intent-to-discovery", "discovery-to-flows", "flows-to-design", "design-to-freeze", "freeze-to-architecture", "architecture-to-implementation", "implementation-to-release"],
+  "terminal_node_ids": ["RELEASE_READINESS"],
+  "capability_binding_refs": ["sha256:3baeb6f51b9ad59278f87514500ce2dcab3a583eb7b2ea7871fd60e0e9c4cf93"],
+  "run_horizon_ref": "sha256:170b17ec7ac01a8e52ef8613dd7ce87bf06cf722c3f5162e903a4142203677ce"
 }
 ---
 

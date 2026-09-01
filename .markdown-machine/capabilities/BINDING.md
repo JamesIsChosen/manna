@@ -2,12 +2,13 @@
 {
   "record_type": "CAPABILITY_BINDING",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "active_capability": "software-product",
-  "selection_state": "ACTIVE",
-  "selection_reason": "Existing Manna is a software product with an explicit product and implementation lifecycle"
+  "compiled_under_authority_ref": "sha256:e1cf81d9694a9ef2eed6f553b8888c862fd932f63f78832800b325ec2abecf04",
+  "intent_baseline_ref": "sha256:b275d476d59aabc8784feaba8cbfec6b751002c439070d4bf2e3e9726ddf1d93",
+  "capability_id": "software-product",
+  "capability_source_ref": "sha256:057731549337dc15474c9eb84df71c1e8bf3274aa2aade1e6bd4d3948c37748f",
+  "capability_state": "ACTIVE",
+  "operation_floor_profile_id": "OPERATION-FLOORS/v2"
 }
 ---
 

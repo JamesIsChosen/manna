@@ -3,7 +3,7 @@
   "record_type": "PROJECT_HANDOFF",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
+  "machine_version": "0.4.0",
   "project_id": "manna",
   "handoff_status": "STOPPED_HIGH_FIDELITY_VERIFIED_APPEARANCE_APPROVAL_PENDING",
   "next_route": "obtain human appearance approval for the verified desktop/phone reference, then request explicit Product Freeze; do not implement before Product Freeze"
@@ -16,7 +16,7 @@ Read this file together with `ORIGIN.md`, `RUNTIME.md`, `STATE.md`, `REPOSITORY.
 
 ## Current route
 
-1. Confirm the active identity is Markdown Machine v0.3.0 and the project is Manna.
+1. Confirm the active identity is Markdown Machine v0.4.0 and the project is Manna.
 2. Read `docs/01-spec/manna-v1-product-contract.md`, `docs/01-spec/manna-v1-ui-ux-requirements.md`, and their records under `intent/`.
 3. Treat P0.1 and the existing UI prototype as evidence/reference, not final product approval.
 4. The human-approved flow baseline is
@@ -31,9 +31,10 @@ The active capability is Software/Product only. The runtime is compact and proje
 
 ## Sync status
 
-The design-reconciliation checkpoint `7d16298cfd98b771808c0efcd4dc9fff27f970bb`
-was published to the governed branch and read back with exact SHA equality.
-Inspect `REPOSITORY-SYNC.md`; never infer currentness from local Git state alone.
-The flow draft and the human's approval are now recorded on the current design
-branch; this does not grant appearance approval, Product Freeze, implementation
-authority, or merge authority.
+This migration is committed on the dedicated local branch
+`codex/markdown-machine-v0.4.0-migration`. The current remote-tracking
+observation is the prior branch head `8d17a63`; this migration has not been
+pushed. Inspect `REPOSITORY-SYNC.md`; never infer currentness from local Git
+state alone. The flow draft and the human's approval are recorded on the
+design branch; this does not grant appearance approval, Product Freeze,
+implementation authority, or merge authority.

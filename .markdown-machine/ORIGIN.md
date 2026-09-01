@@ -1,33 +1,57 @@
 ---
 {
-  "record_type": "PROJECT_ORIGIN",
+  "record_type": "DISTRIBUTION_ORIGIN",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7",
-  "source_attachment": "/home/james/Downloads/Markdown-Machine-v0.3.0.zip",
-  "source_status": "PINNED_FOR_REACQUISITION"
+  "machine_name": "Markdown Machine",
+  "machine_version": "0.4.0",
+  "source_transport": "GIT_REPOSITORY",
+  "source_identity": "https://github.com/JamesIsChosen/markdown-machine",
+  "compatibility_family": "MARKDOWN-MACHINE-V0-4",
+  "content_set_digest": "c3a0cd8bc889c75a7d5d9cd131c14fb84c9b3ebe87b9f0476f9e69d41636d65b",
+  "governing_source_paths": [
+    "bootstrap/02-GENESIS-ADMISSION-PROFILE.md",
+    "project-runtime/SMF1-PROFILE.md",
+    "project-runtime/SCHEMA-EVALUATION-PROFILE.md",
+    "project-runtime/AUTHORITY-CURRENTNESS-EVALUATION-PROFILE.md",
+    "project-runtime/CONTRACT-EVALUATION-PROFILE.md",
+    "project-runtime/TRANSITION-EVALUATION-PROFILE.md",
+    "project-runtime/GOVERNING-RECORD-CONTRACTS.md",
+    "project-runtime/RECOVERY-CRITICAL-RECORD-CONTRACTS.md",
+    "project-runtime/RECOVERY-STATE-EVALUATION-PROFILE.md",
+    "project-runtime/TRANSITION-ADMISSION-CONTRACT.md",
+    "project-runtime/OPERATION-FLOOR-VOCABULARY.md",
+    "project-runtime/HUMAN-CONTROL-PROFILE.md",
+    "project-runtime/UNIVERSAL-RUNTIME.md"
+  ],
+  "governing_source_digests": [
+    "2eb22d1c58b582133228dd994d2b3f7ee301806f9d1e984beab368001428c5f0",
+    "e3bfce8930a819758c298f9fc21ec6008a1030ddbab3a23cf3390fa26ca38802",
+    "a8fb4c042dbd4f06b517d1b3d09267fd35024b5b51505a74355e05df2dd423fd",
+    "f3e25a494306ed84d9f3775eeca59bc64ff00777dfb7585d59f5375ee5fa3311",
+    "364afc0734ee27055b55bc2830ddc2b81fb871c1b078af99ac6465692421fb5f",
+    "25b133746a8321f01646d0659fc4681715d4006a2b79d05bc5fd98bf0117f4c8",
+    "c5ef15ea26ad226ecfcf1a3cb76fa15519f7627d6923ca7848b6895b2ecfa7db",
+    "a1d9f0ce676e844c9552b0b68485e5346252739c0251ba617ea280bf47ef3156",
+    "d22093d6ee87f4837fd48c7c065f96afdb331c8d4af866b85243608b59f16144",
+    "eea1a685af2f34f204be30afe91e886c32603c244f8a0dcb08235ea7fdbda218",
+    "e6e3dbad0070df5487d326d5877cb27cce0c2ed5818ce72cc1b1e0b4d05164bc",
+    "d0eb812f4194f1f497feb769c91f78b8dffe127248f3f629b008a6b23094e9dd",
+    "a0b807cff0a2dd6db7b239e294fe5cc9be31e487f02bf03735c990882210b770"
+  ],
+  "selected_capability_source_paths": ["project-runtime/capabilities/software-product.md"],
+  "selected_capability_source_digests": ["057731549337dc15474c9eb84df71c1e8bf3274aa2aade1e6bd4d3948c37748f"],
+  "git_commit": "48a1ec344851238366c708d75eb82fb9554cf125",
+  "git_tree": "9d92212201333c47598282e4f3865f04e050f07b"
 }
 ---
 
-# Manna origin and reacquisition
+# Manna distribution origin
 
-Manna is compiled from Markdown Machine v0.3.0. The exact distribution digest is:
+This project-local origin record pins Markdown Machine v0.4.0 to the verified
+remote repository, tag commit, tree, content-set digest, exact governing
+exports, and the one selected Software/Product capability export. It does not
+copy the Markdown Machine distribution or authorize automatic future upgrades.
 
-`b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7`
-
-The active project runtime is pinned to the universal runtime digest `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f`. The selected Software / Product Development runtime is pinned to `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e`.
-
-The project is self-contained after materialization. The ZIP is origin evidence and reacquisition input only; runtime operation and cold resume do not depend on it. No automatic synchronization with a later Markdown Machine release is implied. A future capability or semantic expansion requires fresh trusted source reacquisition and a new governed compilation.
-
-## Compiler pins
-
-| compiler semantic source | digest |
-| --- | --- |
-| `project-compiler/COMPILED-PROJECT-MANIFEST-SPEC.md` | `edc78f73334f4ccb7096df865b9f1fe642b9aa86fd9eb03aae51cdf4f8a6fcad` |
-| `project-compiler/05-OUTPUT-PLAN-AND-PUBLICATION.md` | `57146175e1c3ac4b1e7ec62c7acc04c11bc923aed169d800511f912ca42f4eed` |
-| `project-compiler/06-ORIGIN-AND-REACQUISITION.md` | `02b4fa611361a44996128b3af5e626967f39b37804341c43070d1fddad2ab3e9` |
-| `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` |
-
-`machine-source/`, `project-compiler/`, `project-runtime/`, `bootstrap/`, and `verification/` remain distribution-only and are not project runtime roots.
+The prior v0.3.0 origin, human statement, genesis, evidence, and history remain
+in Git history and are not rewritten by this migration.

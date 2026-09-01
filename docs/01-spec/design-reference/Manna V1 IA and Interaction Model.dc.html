@@ -103,7 +103,7 @@ button{font-family:inherit}
 
     <div style="background:var(--panel);border:var(--bw) solid var(--ink);box-shadow:var(--sh2);border-radius:2px">
       <div style="padding:7px 10px;background:var(--warn);color:#16130f;border-bottom:var(--bw) solid var(--ink)">
-        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Conflicts this document resolves — decisions needed before Product Freeze</span>
+        <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Resolved design recommendations — human approved 2026-08-31</span>
       </div>
       <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
         <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="4">
@@ -112,7 +112,7 @@ button{font-family:inherit}
             <div>
               <div style="font:700 12px/1.4 var(--fm);letter-spacing:.04em;text-transform:uppercase;padding-bottom:5px">{{ c.title }}</div>
               <p style="margin:0 0 6px;font:400 14px/1.6 var(--fs);max-width:86ch">{{ c.body }}</p>
-              <div style="font:400 13.5px/1.55 var(--fs);border-left:4px solid var(--accent);padding-left:9px"><span style="font:700 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--accent)">PROPOSED</span><br>{{ c.proposal }}</div>
+              <div style="font:400 13.5px/1.55 var(--fs);border-left:4px solid var(--accent);padding-left:9px"><span style="font:700 9.5px/1 var(--fm);letter-spacing:.14em;color:var(--accent)">APPROVED DIRECTION</span><br>{{ c.proposal }}</div>
             </div>
           </div>
         </sc-for>

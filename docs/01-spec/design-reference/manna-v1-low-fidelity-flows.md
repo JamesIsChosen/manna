@@ -1,6 +1,6 @@
 # Manna Version 1 low-fidelity flows
 
-**Status:** DRAFT — awaiting human flow approval  
+**Status:** HUMAN-APPROVED FLOW BASELINE — high-fidelity verification pending
 **Review date:** 2026-08-31  
 **Authority:** derived from the human-approved Version 1 product contract and UI/UX requirements  
 **Implementation state:** design evidence only; no Product Freeze or application-code authorization
@@ -530,17 +530,18 @@ route. `A`–`J` refer to the flows above; `X` is the cross-flow behavior in §1
 
 ## 14. Approval boundary
 
-This draft is ready for human review of the flow sequence, states, platform
-reflow, and accessibility rules. Approval should specifically confirm:
+The human approved this flow baseline and its recommendations on 2026-08-31.
+The high-fidelity reference must now be reviewed against the flow sequence,
+states, platform reflow, and accessibility rules. Review should specifically
+confirm:
 
 - the five-destination IA and direct-to-Reader launch;
-- the four open IA proposals recorded in the companion artifact, especially
-  supplied-word rendering;
+- the four approved IA recommendations recorded in the companion artifact,
+  especially supplied-word rendering;
 - the action vocabulary and consequences for Merge/Replace, import, and
   inferred-link review;
 - the required exact-return behavior and the mobile drawer/sheet model.
 
-Human approval of this document is approval of the flows only. It does not
-approve Product Freeze. The next design stage is appearance and high-fidelity
-interactive mock verification, followed by a separate explicit Product Freeze
-decision.
+This approval covers the flows only. It does not approve Product Freeze. The
+next design stage is appearance and high-fidelity interactive mock verification,
+followed by a separate explicit Product Freeze decision.

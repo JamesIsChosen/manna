@@ -16,7 +16,9 @@ The interactive prototype behind
   implementation contract.
 - `manna-v1-low-fidelity-flows.md` — the draft end-to-end flows, edge states,
   responsive routes, accessibility behavior, recovery rules, and capability
-  coverage matrix for human flow approval.
+  coverage matrix, approved by the human on 2026-08-31.
+- `manna-v1-phone-interactive-mock.html` — a self-contained tappable phone
+  reference for the remaining V1 surfaces and mobile interaction patterns.
 - `support.js` — prototype runtime (`dc-runtime`). Requires `window.React`.
   Explicitly not part of the product; R1 and R4 forbid it.
 

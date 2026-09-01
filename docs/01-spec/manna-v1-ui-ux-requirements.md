@@ -1,7 +1,7 @@
 # Manna Version 1 UI/UX Requirements
 
-**Status:** INTERVIEW COMPLETE — visual/layout baseline recorded; flow draft awaiting human approval; Product Freeze pending
-**Review date:** 2026-08-30
+**Status:** FLOW APPROVED — visual/layout baseline and high-fidelity reference verification recorded; appearance approval and Product Freeze pending
+**Review date:** 2026-08-31
 **Authority:** Human-approved UI/UX interview
 **Implementation state:** FROZEN; this is a design handoff, not application-code authorization
 
@@ -9,7 +9,10 @@
 
 Manna should feel like opening a Bible first and a complete study workstation second. Scripture is visually primary. Complexity appears progressively and only when requested. The existing P0.1 mock and comic-book treatment are reference evidence, not an approved final interface.
 
-The next design agent must first demonstrate the complete flow, then the appearance, across desktop and phone. Production implementation, roadmap recompilation, and Product Freeze remain prohibited until the human explicitly approves both.
+The complete flow is human-approved. The next design gate is appearance approval
+for the desktop and phone references. Production implementation, roadmap
+recompilation, and Product Freeze remain prohibited until the human explicitly
+approves the appearance and then grants Product Freeze.
 
 ## 2. Information architecture
 
@@ -158,16 +161,21 @@ The next design effort must produce:
 7. a high-fidelity interactive mock for desktop and phone;
 8. a coverage matrix mapping every product-contract capability to a designed flow and state.
 
-**Design progress, 2026-08-30:** deliverable 6 (visual system) and the
+**Design progress, 2026-08-31:** deliverable 6 (visual system) and the
 layout half of deliverable 7 (interactive mock) are baselined for every V1
 surface — Read, Search, Study, Notes, Library, plus Settings, First run, and
 Backup & Restore. See
 [design-reference/baseline-mock-handoff.md](design-reference/baseline-mock-handoff.md)
 for what exists, what is excluded, and the open conflicts it does not resolve.
 Deliverables 1, 2, and 4 (flows, full state coverage, and non-pointer
-interaction beyond the original prototype) are drafted for human review in
+interaction beyond the original prototype) were approved by the human on
+2026-08-31 in
 [design-reference/manna-v1-low-fidelity-flows.md](design-reference/manna-v1-low-fidelity-flows.md).
-They remain unapproved and unverified in the high-fidelity mock.
+The companion
+[design-reference/manna-v1-phone-interactive-mock.html](design-reference/manna-v1-phone-interactive-mock.html)
+now provides the phone reference for the remaining V1 surfaces. Desktop and
+phone reference interactions were exercised in the local browser; independent
+human appearance approval remains the next gate.
 
 Approval gates are sequential:
 

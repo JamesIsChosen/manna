@@ -3,29 +3,24 @@
   "record_type": "PROJECT_OUTPUT_PLAN",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "project_id": "manna",
-  "status": "V0_5_GOVERNANCE_MIGRATION_MATERIALIZED",
+  "status": "V0_5_1_GOVERNANCE_MIGRATION_MATERIALIZED",
   "source_identity": "https://github.com/JamesIsChosen/markdown-machine",
-  "source_tag": "v0.5.0",
-  "source_commit": "9de2b2db3fa91ccddebec8543e27001393f2f6ed",
-  "source_tree": "30e694996a76e31bccf0576effe8a8182e7b45e8",
-  "content_set_digest": "d8945b78f65bdd2f32cfe52f9841536f1bca57aad2b8f0da1c9366124500a718"
+  "source_tag": "v0.5.1",
+  "source_commit": "914687c5dccd334e208781fbcae53ea23f4e4f41",
+  "source_tree": "71f7f41af51f36a8613041f019c1077095215cdb",
+  "content_set_digest": "fea489c7701910c0d9cfe3f86b2651e5a67f233c3ec0ecfc798b9cba2d97c5f4"
 }
 ---
-# Manna v0.5.0 governed migration output plan
+# Manna v0.5.1 governed migration output plan
 
-This bounded plan materializes the exact v0.5.0 project-local runtime and contracts, preserves project-owned product content and historical governance, enters the old-contract manifest-only bridge, finalizes one coherent candidate binding set, regenerates derived projections, and leaves the repository local-only. It does not copy generic source roots or activate unused capabilities.
-
-## Exact source exports
-
-`RUNTIME.md`, `contracts/`, and `capabilities/software-product.md` are verbatim exact exports from the selected v0.5.0 Git tree. Their source paths and digests are recorded in `ORIGIN.md`.
+This bounded plan materializes the exact v0.5.1 project-local runtime and contracts through the normal direct migration capability. It preserves the v0.5.0 current state under bounded history, does not copy generic source roots, and activates no new capability.
 
 ## Migration disposition
 
-- old v0.3.0 origin/runtime/manifest and exact migration closure: preserve under `history/v0.3.0/`
-- old Genesis and accepted project intent: preserve; no second Genesis
-- candidate v0.5.0 kernel/contracts/capability: replace current mechanics
-- existing Tasks/lifecycle/horizon/convergence/repository identity: mechanically rebind to v0.5 typed records
-- failed v0.4 attempt: historical Git evidence only; never current authority
-- application source, product docs, tests, CI, assets, security material: preserve unchanged
+- coherent v0.5.0 origin/runtime/contracts: retained under history/v0.5.0/
+- old v0.3.0 bridge/finalizer: preserved under bounded historical closure
+- candidate v0.5.1 kernel/contracts/capability: installed as the sole current mechanics
+- existing Tasks, lifecycle, horizon, convergence, repository identity, and product state: mechanically preserved/rebound only where required
+- failed v0.4 attempt: historical Git evidence only

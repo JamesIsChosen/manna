@@ -3,10 +3,10 @@
   "record_type": "CAPABILITY_BINDING",
   "schema_version": 1,
   "project_id": "manna",
-  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
-  "intent_baseline_ref": "sha256:a1a5b93ad5d297ff5c243f023f8b504c6cb6fafc3db64c3ead112e4c220f345a",
+  "compiled_under_authority_ref": "sha256:b1e4808cf8aa4d0063ec50610f34dbe98aa2e733c96bb31e3ed32a9ff4d0ef01",
+  "intent_baseline_ref": "sha256:62568fc918b59c7ac67cc8837e6696ca843c5805bc5507e3b6798dd46e040e70",
   "capability_id": "software-product",
-  "capability_source_ref": "sha256:a328b4a8c38e338bb586e04958a00ae450da02902dde90137ff21ee2f477316c",
+  "capability_source_ref": "sha256:798b87457933b61485ba80cd1c16239af797ad1d12fde3f49a792d120c8ce8ec",
   "capability_state": "ACTIVE",
   "operation_floor_profile_id": "OPERATION-FLOORS/v2"
 }

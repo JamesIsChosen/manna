@@ -3,7 +3,7 @@
   "record_type": "OPERATION_FLOOR_VOCABULARY",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "contract_id": "OPERATION-FLOORS/v2",
   "authoritative_contract": true,
   "project_output_eligible": true,

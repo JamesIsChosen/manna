@@ -3,7 +3,7 @@
   "record_type": "INTENT_BASELINE",
   "schema_version": 1,
   "project_id": "manna",
-  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "compiled_under_authority_ref": "sha256:b1e4808cf8aa4d0063ec50610f34dbe98aa2e733c96bb31e3ed32a9ff4d0ef01",
   "human_statement_refs": [
     "sha256:26377103c638dd7f7fb344e0fba2ad1d1b1d76f1f7c0544505d9b6fe856d2cb8"
   ],
@@ -33,7 +33,7 @@
     "history rewrite",
     "merge or release"
   ],
-  "run_horizon_ref": "sha256:e7a2e346d74fdc88ed7d33d5890b65be3b0b3a0df9ce824f4af9cf378ae353b1"
+  "run_horizon_ref": "sha256:18a53b295d950f05f564cad883e0257288446ee50cc947c7b2d8577ba6843914"
 }
 ---
 # Manna accepted intent baseline

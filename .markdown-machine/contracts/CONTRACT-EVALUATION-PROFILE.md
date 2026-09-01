@@ -3,7 +3,7 @@
   "record_type": "CONTRACT_EVALUATION_PROFILE",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "profile_id": "MM-CONTRACT-EVAL/1",
   "authoritative_contract": true,
   "project_output_eligible": true,

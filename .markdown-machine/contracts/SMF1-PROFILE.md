@@ -3,7 +3,7 @@
   "record_type": "SMF_PROFILE",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "profile_id": "SMF/1",
   "authoritative_contract": true,
   "project_output_eligible": true,

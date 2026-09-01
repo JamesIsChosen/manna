@@ -3,7 +3,7 @@
   "record_type": "RUN_HORIZON",
   "schema_version": 1,
   "project_id": "manna",
-  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "compiled_under_authority_ref": "sha256:b1e4808cf8aa4d0063ec50610f34dbe98aa2e733c96bb31e3ed32a9ff4d0ef01",
   "horizon_id": "manna-v1-ui-ux-design-verification",
   "reachable_terminal_nodes": [
     "HUMAN_APPEARANCE_APPROVAL",

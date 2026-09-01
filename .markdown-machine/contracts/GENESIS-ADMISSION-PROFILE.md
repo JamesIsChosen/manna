@@ -3,7 +3,7 @@
   "record_type": "GENESIS_ADMISSION_PROFILE",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "profile_id": "DIRECT_HUMAN_GENESIS_ADMISSION/v2",
   "bootstrap_profile_ids": [
     "DIRECT_HUMAN_ARTIFACT_SELECTION/v1",

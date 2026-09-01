@@ -3,7 +3,7 @@
   "record_type": "RECOVERY_CRITICAL_RECORD_CONTRACT_REGISTRY",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "registry_id": "RECOVERY-CRITICAL-CONTRACTS/v1",
   "schema_profile": "SMF-SCHEMA/1",
   "contract_evaluation_profile": "MM-CONTRACT-EVAL/1",

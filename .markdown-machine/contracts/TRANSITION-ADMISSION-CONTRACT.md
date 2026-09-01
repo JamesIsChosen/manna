@@ -3,7 +3,7 @@
   "record_type": "TRANSITION_ADMISSION_CONTRACT",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "contract_id": "TRANSITION-ADMISSION/v2",
   "schema_profile": "SMF-SCHEMA/1",
   "contract_evaluation_profile": "MM-CONTRACT-EVAL/1",

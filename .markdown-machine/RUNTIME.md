@@ -3,7 +3,7 @@
   "record_type": "PROJECT_RUNTIME_EXPORT",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "title": "Universal Project Runtime Export",
   "project_output_eligible": true,
   "output_role": "UNIVERSAL_RUNTIME_SOURCE"

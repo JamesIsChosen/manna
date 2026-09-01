@@ -4,13 +4,15 @@
   "schema_version": 1,
   "project_id": "manna",
   "machine_name": "Markdown Machine",
-  "machine_version": "0.5.0",
+  "machine_version": "0.5.1",
   "source_transport": "GIT_REPOSITORY",
   "source_identity": "https://github.com/JamesIsChosen/markdown-machine",
-  "content_set_digest": "d8945b78f65bdd2f32cfe52f9841536f1bca57aad2b8f0da1c9366124500a718",
+  "content_set_digest": "fea489c7701910c0d9cfe3f86b2651e5a67f233c3ec0ecfc798b9cba2d97c5f4",
   "compatibility_family": "MARKDOWN-MACHINE-V0-5",
   "governing_source_paths": [
     "bootstrap/02-GENESIS-ADMISSION-PROFILE.md",
+    "machine-source/kernel/00-CONSTITUTION.md",
+    "machine-source/kernel/13-MIGRATION.md",
     "project-runtime/SMF1-PROFILE.md",
     "project-runtime/SCHEMA-EVALUATION-PROFILE.md",
     "project-runtime/AUTHORITY-CURRENTNESS-EVALUATION-PROFILE.md",
@@ -26,31 +28,33 @@
     "project-runtime/capabilities/software-product.md"
   ],
   "governing_source_digests": [
-    "125ceb225febd7de772ab7768fc606ec7e88b58269409344a5c1ed241d05cbb9",
-    "9da796c7c9d8fa86acef6fd9578bb88d3939fb2fdeb5fcc0e0f133df827200e1",
-    "9890782ec564d59971447eb1ef03bcfb3940debe27277d8c0f22c0ce804add3c",
-    "a484caf9f96437eeb147b83466da90f4840c843e786f142910527b36a94cea11",
-    "5cb238ac53de291838e0fabbebba7020c700d6a4497136bbf29b20e205f2b4a1",
-    "8c4132a6115437784c62ee88b18f167ca75f9e1ef61aec9c744f39fe4cf5ead7",
-    "faec0b31ee8cd42b10d27ab6130f80418ecdd741330b34bc8e897613a33eb68f",
-    "56329ff86c64d6d70f0310e3ba252e403977e16ee53983039f3c1f6dbf1da56b",
-    "333007c42a40c533416eed13936245708655b6e1d5d5c2bdb2d5c97018cc1d03",
-    "778a10183cfb1baf096db0a322b118fad107813188a0e3995394fc0e614d1228",
-    "6193292720960fef886a12188da0f50d338c5caefb6c53634f655dc8e568361d",
-    "6335df381b52b28ff28f073c698aa45b9446b1a50e7c732ee16358f1952db70d",
-    "6c2e9db0d8b11cdbd40eb33b048ab95aa55e35702b365d839227b65ecfc06181",
-    "a328b4a8c38e338bb586e04958a00ae450da02902dde90137ff21ee2f477316c"
+    "ed44a50247bfad0758aefc2100ebe99a3d887d102c7cd5160c2200fb239af415",
+    "490f8f9e22bf82c664b5b65ed6003d91dd6624bfb520ac9e922a114657c7aebf",
+    "869930be85194670ee30cc61556f86d974a46f817f501faa1098f5e6977ac5b5",
+    "bc65e62277e679fd3541c164be264c1be387b55eb669c39e1f18314934fa7e09",
+    "83f75026cf1579a075c457f3ee7e40427b7ba467977852fe90cce9f442efb8f2",
+    "c94d2d4f4d62187f18131302515121e9d0c37796443019440aea1b40febf89c6",
+    "5da97738533b82f95b36dca6050b52b19ab22d8e23ccdcfe9bc11cf832748c28",
+    "e3ab1e49c5a4a5c4bee9c7351b33bfe1c805678c79657e26f6e3d4642e460f46",
+    "d123c293d8f5672560e477fdebc9c4edf33a085c8173f2f809a2c1e840406d8c",
+    "71e7e552517ddb900b72751081b60ba52262f66f08ce949f276e80eed115f19d",
+    "9b8a6dbb97d272946405b6b508b85bb50153af53ecc44550a3e1d7e4d53c8fcd",
+    "b46041b3172e7d72b30b8ca7ad0d6a424207b1383809c7e2e96ea95297733b28",
+    "c0707ab4fa0fa0b3349af80c639db7fb279435965a3ab6103af328e4033ad305",
+    "6b3d1c176735280fc5badfc413b1afa13ceb07b9190da11dcf0040d6f8e782e2",
+    "97c47a27d01ceeca18f79101154f36da896211be869fde7440c0f5ea7c4bdb57",
+    "798b87457933b61485ba80cd1c16239af797ad1d12fde3f49a792d120c8ce8ec"
   ],
   "selected_capability_source_paths": [
     "project-runtime/capabilities/software-product.md"
   ],
   "selected_capability_source_digests": [
-    "a328b4a8c38e338bb586e04958a00ae450da02902dde90137ff21ee2f477316c"
+    "798b87457933b61485ba80cd1c16239af797ad1d12fde3f49a792d120c8ce8ec"
   ],
-  "git_commit": "9de2b2db3fa91ccddebec8543e27001393f2f6ed",
-  "git_tree": "30e694996a76e31bccf0576effe8a8182e7b45e8e"
+  "git_commit": "914687c5dccd334e208781fbcae53ea23f4e4f41",
+  "git_tree": "71f7f41af51f36a8613041f019c1077095215cdb"
 }
 ---
 # Manna distribution origin
 
-This record binds Manna to the exact Markdown Machine v0.5.0 Git release selected for this migration. The tag, commit, tree, content-set digest, governing source bytes, and selected Software/Product capability are all pinned. Future releases remain inert until separately admitted through the migration contract.
+This record binds Manna to the exact Markdown Machine v0.5.1 Git release selected for the direct successor migration. The tag, commit, tree, content-set digest, governing source bytes, selected Software/Product capability, and v0.5.1 migration-continuity floor are pinned. Future releases remain inert until separately admitted through the current migration contract.

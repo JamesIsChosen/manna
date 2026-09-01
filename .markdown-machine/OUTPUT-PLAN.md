@@ -3,54 +3,78 @@
   "record_type": "PROJECT_OUTPUT_PLAN",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.4.0",
+  "machine_version": "0.3.0",
   "project_id": "manna",
-  "status": "V0_4_GOVERNANCE_MIGRATION_MATERIALIZED",
-  "source_identity": "https://github.com/JamesIsChosen/markdown-machine",
-  "source_tag": "v0.4.0",
-  "source_commit": "48a1ec344851238366c708d75eb82fb9554cf125",
-  "source_tree": "9d92212201333c47598282e4f3865f04e050f07b",
-  "content_set_digest": "c3a0cd8bc889c75a7d5d9cd131c14fb84c9b3ebe87b9f0476f9e69d41636d65b"
+  "status": "V1_UI_UX_INTERVIEW_MATERIALIZED",
+  "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7"
 }
 ---
 
-# Manna v0.4.0 governance migration output plan
+# Manna v0.3.0 output plan
 
-This is the bounded project-local materialization plan for upgrading Manna’s
-Markdown Machine mechanics. Existing application source, product docs, assets,
-configuration, accepted requirements, architecture, tests, identity, and Git
-history are preserved. The prior v0.3.0 plan is retained in
-`history/OUTPUT-PLAN-V0.3.md`.
+This plan is the inert pre-materialization boundary. It records the small project-owned output selected from the Markdown Machine v0.3.0 distribution; the distribution itself is not copied into this repository.
 
-## Exact universal and contract exports
+## Existing-project decision
 
-| project path | exact Markdown Machine source | source digest |
-| --- | --- | --- |
-| `.markdown-machine/RUNTIME.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `a0b807cff0a2dd6db7b239e294fe5cc9be31e487f02bf03735c990882210b770` |
-| `.markdown-machine/contracts/GENESIS-ADMISSION-PROFILE.md` | `bootstrap/02-GENESIS-ADMISSION-PROFILE.md` | `2eb22d1c58b582133228dd994d2b3f7ee301806f9d1e984beab368001428c5f0` |
-| `.markdown-machine/contracts/SMF1-PROFILE.md` | `project-runtime/SMF1-PROFILE.md` | `e3bfce8930a819758c298f9fc21ec6008a1030ddbab3a23cf3390fa26ca38802` |
-| `.markdown-machine/contracts/SCHEMA-EVALUATION-PROFILE.md` | `project-runtime/SCHEMA-EVALUATION-PROFILE.md` | `a8fb4c042dbd4f06b517d1b3d09267fd35024b5b51505a74355e05df2dd423fd` |
-| `.markdown-machine/contracts/AUTHORITY-CURRENTNESS-EVALUATION-PROFILE.md` | `project-runtime/AUTHORITY-CURRENTNESS-EVALUATION-PROFILE.md` | `f3e25a494306ed84d9f3775eeca59bc64ff00777dfb7585d59f5375ee5fa3311` |
-| `.markdown-machine/contracts/CONTRACT-EVALUATION-PROFILE.md` | `project-runtime/CONTRACT-EVALUATION-PROFILE.md` | `364afc0734ee27055b55bc2830ddc2b81fb871c1b078af99ac6465692421fb5f` |
-| `.markdown-machine/contracts/TRANSITION-EVALUATION-PROFILE.md` | `project-runtime/TRANSITION-EVALUATION-PROFILE.md` | `25b133746a8321f01646d0659fc4681715d4006a2b79d05bc5fd98bf0117f4c8` |
-| `.markdown-machine/contracts/GOVERNING-RECORD-CONTRACTS.md` | `project-runtime/GOVERNING-RECORD-CONTRACTS.md` | `c5ef15ea26ad226ecfcf1a3cb76fa15519f7627d6923ca7848b6895b2ecfa7db` |
-| `.markdown-machine/contracts/RECOVERY-CRITICAL-RECORD-CONTRACTS.md` | `project-runtime/RECOVERY-CRITICAL-RECORD-CONTRACTS.md` | `a1d9f0ce676e844c9552b0b68485e5346252739c0251ba617ea280bf47ef3156` |
-| `.markdown-machine/contracts/RECOVERY-STATE-EVALUATION-PROFILE.md` | `project-runtime/RECOVERY-STATE-EVALUATION-PROFILE.md` | `d22093d6ee87f4837fd48c7c065f96afdb331c8d4af866b85243608b59f16144` |
-| `.markdown-machine/contracts/TRANSITION-ADMISSION-CONTRACT.md` | `project-runtime/TRANSITION-ADMISSION-CONTRACT.md` | `eea1a685af2f34f204be30afe91e886c32603c244f8a0dcb08235ea7fdbda218` |
-| `.markdown-machine/contracts/OPERATION-FLOOR-VOCABULARY.md` | `project-runtime/OPERATION-FLOOR-VOCABULARY.md` | `e6e3dbad0070df5487d326d5877cb27cce0c2ed5818ce72cc1b1e0b4d05164bc` |
-| `.markdown-machine/contracts/HUMAN-CONTROL-PROFILE.md` | `project-runtime/HUMAN-CONTROL-PROFILE.md` | `d0eb812f4194f1f497feb769c91f78b8dffe127248f3f629b008a6b23094e9dd` |
+Preserve the existing Manna application, product specifications, tests, CI, security material, documentation, and Git history. Reconcile the earlier SMPM-1 bootstrap by removing its generic active machine directories and retaining only the project history that explains that prior attempt. The active project capability baseline is Software / Product Development because Manna is an offline-first single-HTML Bible study application. Repository persistence is universal continuity, not an additional capability.
 
-## Selected capability
+## Planned machine-owned output
 
-Only `software-product` is compiled. Its exact source is
-`project-runtime/capabilities/software-product.md` with digest
-`057731549337dc15474c9eb84df71c1e8bf3274aa2aade1e6bd4d3948c37748f`.
+| target_path | semantic_source | source_digest | inclusion_reason | capability_or_universal_role | transform | role |
+| --- | --- | --- | --- | --- | --- | --- |
+| `.markdown-machine/RUNTIME.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Compact lossless universal project governance runtime | universal runtime | verbatim-runtime-export | current |
+| `.markdown-machine/capabilities/software-product.md` | `project-runtime/capabilities/software-product.md` | `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e` | Runtime semantics for the active project capability | software-product | verbatim-runtime-export | current |
+| `.markdown-machine/ORIGIN.md` | `project-compiler/06-ORIGIN-AND-REACQUISITION.md` | `02b4fa611361a44996128b3af5e626967f39b37804341c43070d1fddad2ab3e9` | Exact distribution/runtime pin and future reacquisition route | universal continuity | generated | current |
+| `.markdown-machine/COMPILED-MANIFEST.md` | `project-compiler/COMPILED-PROJECT-MANIFEST-SPEC.md` | `edc78f73334f4ccb7096df865b9f1fe642b9aa86fd9eb03aae51cdf4f8a6fcad` | Trace every machine-owned output | universal continuity | generated | current |
+| `.markdown-machine/REPOSITORY.md` | `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` | Bind canonical GitHub persistence and closeout policy | repository continuity | generated | current |
+| `.markdown-machine/STATE.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Current recoverable project projection | universal continuity | generated | current |
+| `.markdown-machine/HANDOFF.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Cold-resume navigation and next legal route | universal continuity | generated | current |
+| `.markdown-machine/REPOSITORY-SYNC.md` | `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` | Exact remote currentness evidence | repository continuity | generated | current |
+| `.markdown-machine/authority/*` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Genesis, authority, and convergence semantics | universal continuity | generated | current |
+| `.markdown-machine/intent/*` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Immutable human intent and baseline | universal continuity | generated | current |
+| `.markdown-machine/capabilities/BINDING.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Explicit selected capability binding | universal capability selection | generated | current |
+| `.markdown-machine/lifecycle/*` | `project-runtime/capabilities/software-product.md` | `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e` | Product lifecycle and bounded horizon | software-product | generated | current |
+| `.markdown-machine/tasks/*` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Stable next objective and finite attempt boundary | universal continuity | generated | current |
+| `.markdown-machine/inbox/*` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Candidate requests remain separated from authority | universal continuity | generated | current |
+| `.markdown-machine/evidence/*` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Verification and provenance projections | universal continuity | generated | current |
+| `.markdown-machine/history/*` | prior project history | repository history | Preserve prior bootstrap chronology and failure classification | historical interpretation | generated | historical |
 
-## Project-local generated mechanics
+## Explicit exclusions
 
-The migration adds the v0.4.0 origin and kernel manifest, explicit kernel and
-capability migration transitions, migration approvals, publication plans,
-convergence policy, repository sync intent, and current v0.4.0 projections.
-Only the selected capability binding and one discovery operation contract are
-active. No generic distribution roots, templates, source tree, unused
-capability, factory, application source, or release artifact is included.
+Do not copy `bootstrap/`, `machine-source/`, `project-compiler/`, `project-runtime/`, or `verification/` into the project. Do not activate unused capability runtimes, a generic record factory, or generic kernel source decomposition. Do not create a generic `*.template.md` record factory. Do not change the existing application implementation in this governance reconciliation.
+
+## Initial reconciliation closeout (historical)
+
+The initial v0.3.0 reconciliation used the non-default branch `codex/manna-governance-reconciliation`. That bounded transaction prohibited merge, force-push, deployment, release, or publication and required authoritative remote readback. The later Version 1 discovery transaction rebinds current closeout to `codex/manna-v1-product-discovery` in `REPOSITORY.md`.
+
+## Version 1 product-discovery transaction
+
+The human has reopened Manna as a new-product discovery effort while preserving repository answers as evidence. Before any further application implementation, this transaction will:
+
+| target_path | semantic_source | inclusion_reason | transform | role |
+| --- | --- | --- | --- | --- |
+| `docs/01-spec/manna-v1-product-contract.md` | accepted human product interview | Canonical Version 1 product intent and semantic closure | generated | current |
+| `.markdown-machine/intent/PRODUCT-CONTRACT-V1.md` | accepted human product interview | Bind current project intent to the canonical product contract | generated | current |
+| `.markdown-machine/STATE.md` | universal runtime + accepted interview | Expose the new discovery frontier | specialized | current |
+| `.markdown-machine/HANDOFF.md` | universal runtime + accepted interview | Resume at UI/UX interview without prior chat | specialized | current |
+| `.markdown-machine/lifecycle/HORIZON.md` | software/product runtime + accepted interview | Stop implementation until UI/UX approval and Product Freeze | specialized | current |
+| `.markdown-machine/COMPILED-MANIFEST.md` | manifest specification | Add traceability for the new machine-owned intent record | specialized | current |
+
+No application source, build script, test, dependency, or release artifact is modified by this transaction.
+
+## Version 1 UI/UX interview transaction
+
+The human completed and approved the UI/UX requirements interview, then directed clean closeout so a new agent can perform design. This transaction adds or specializes:
+
+| target_path | semantic_source | inclusion_reason | transform | role |
+| --- | --- | --- | --- | --- |
+| `docs/01-spec/manna-v1-ui-ux-requirements.md` | accepted human UI/UX interview | Canonical design requirements and approval gates | generated | current |
+| `.markdown-machine/intent/UI-UX-INTERVIEW-V1.md` | accepted human UI/UX interview | Bind current intent to the canonical design requirements | generated | current |
+| `.markdown-machine/tasks/V1-UI-UX-DESIGN.md` | accepted interview and human handoff direction | Exact next-agent design objective | generated | current |
+| `.markdown-machine/STATE.md` | universal runtime + accepted interview | Expose design-pending frontier | specialized | current |
+| `.markdown-machine/HANDOFF.md` | universal runtime + accepted interview | Cold-resume the new design agent without prior chat | specialized | current |
+| `.markdown-machine/lifecycle/*` | software/product runtime + accepted interview | Advance lifecycle to Flows/UX while preserving Product Freeze | specialized | current |
+| `.markdown-machine/REPOSITORY*.md` | repository closeout contract | Bind and verify the discovery branch | specialized | current |
+| `.markdown-machine/COMPILED-MANIFEST.md` | manifest specification | Trace the new intent and task records | specialized | current |
+
+No application source, build script, test, dependency, or release artifact is modified by this transaction.

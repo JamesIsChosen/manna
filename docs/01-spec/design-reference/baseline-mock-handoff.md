@@ -1,17 +1,18 @@
 # Baseline UI/UX mock — handoff
 
-**Status:** aesthetics and layout baselined for every V1 surface; flows not yet designed
+**Status:** aesthetics/layout baselined and low-fidelity flows drafted; human flow approval pending
 **Review date:** 2026-08-30
 **Produced by:** Claude Design, this session
 **Repository state:** materialized on the local UI/UX design branch; not Product Freeze
 
 ## What this covers
 
-Per `manna-v1-ui-ux-requirements.md` §19, deliverable 6 (visual system) and the
-layout/presentation half of deliverable 7 (interactive mock). It does **not**
-cover deliverable 1 (low-fi flows), deliverable 2 (state coverage beyond what
-is visually shown), or deliverable 4 (keyboard/screen-reader/reduced-motion
-behavior beyond what the accepted prototype already had).
+Per `manna-v1-ui-ux-requirements.md` §19, this handoff records deliverable 6
+(visual system) and the layout/presentation half of deliverable 7 (interactive
+mock). The companion
+[manna-v1-low-fidelity-flows.md](manna-v1-low-fidelity-flows.md) now drafts
+deliverables 1–4 at the flow/design-rule level. It is awaiting human approval
+and high-fidelity verification; it does not authorize production behavior.
 
 ## Canonical artifacts
 
@@ -53,21 +54,23 @@ not product code:
 
 ## Open design work
 
-- Complete low-fidelity flows are still required for every Version 1 function.
-- Empty, loading, long-running, success, warning, error, reduced-mode, and
-  recovery states remain to be designed systematically.
-- The seven added layouts have no tablet or phone treatment yet; only Reader
-  and Home have those device views in the prototype.
+- Human review and approval of the low-fidelity flows and edge-state coverage
+  is pending. The draft covers every Version 1 capability in its matrix.
+- The seven added high-fidelity layouts still need tablet and phone treatments
+  in the interactive mock; the flow draft defines their required reflow.
+- Keyboard, touch, screen-reader, reduced-motion, and text-scaling behavior is
+  specified as design rules but remains unverified in a rendered mock.
 - The IA document records four unresolved proposals: Home versus launch to
   Reader, six prototype themes versus four Version 1 appearances, comic
   loudness versus the quiet Reader direction, and supplied-word treatment.
-- Ten coverage-matrix rows remain gaps: dictionary/lexicon, Map Pack views,
-  concordance occurrences, highlights, bookmarks/questions/observations,
+- The former ten coverage-matrix gaps are now covered by the low-fidelity draft;
+  they remain unverified in the high-fidelity mock: dictionary/lexicon, Map Pack
+  views, concordance occurrences, highlights, bookmarks/questions/observations,
   Appearance detail, Trust/About, startup capability checks, readable exports,
   and read-aloud.
 
-The supplied-word italic rendering is a proposal only. It has not been applied
-to the authoritative fixture record or used to alter Scripture text.
+The supplied-word italic rendering remains a proposal only. It has not been
+applied to the authoritative fixture record or used to alter Scripture text.
 
 ## Protocol boundary
 
@@ -76,4 +79,5 @@ The canonical requirements are
 machine-owned state and next legal task remain under
 [`../../../.markdown-machine/`](../../../.markdown-machine/). This handoff
 does not declare Product Freeze, authorize implementation, or recompile the
-roadmap.
+roadmap. The next gate is human approval of the low-fidelity flows; after that,
+the design agent must verify the appearance and high-fidelity interactive mock.

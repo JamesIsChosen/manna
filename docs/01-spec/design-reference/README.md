@@ -14,6 +14,9 @@ The interactive prototype behind
   information architecture, interaction patterns, platform/state rules,
   supplied-word proposal, and coverage matrix. It is design evidence, not an
   implementation contract.
+- `manna-v1-low-fidelity-flows.md` — the draft end-to-end flows, edge states,
+  responsive routes, accessibility behavior, recovery rules, and capability
+  coverage matrix for human flow approval.
 - `support.js` — prototype runtime (`dc-runtime`). Requires `window.React`.
   Explicitly not part of the product; R1 and R4 forbid it.
 
@@ -25,7 +28,9 @@ and Comparison. Those added layouts do not add new flow logic, mobile variants,
 or new selection/pin behavior.
 
 The repository-facing baseline and remaining design gaps are recorded in
-[baseline-mock-handoff.md](baseline-mock-handoff.md).
+[baseline-mock-handoff.md](baseline-mock-handoff.md). The low-fidelity flow
+draft is a separate approval-stage artifact; neither document declares Product
+Freeze.
 
 **Its Scripture text is not authoritative.** Verse 15 drops the KJV's
 supplied-word brackets present in the source module — see

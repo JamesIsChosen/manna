@@ -6,7 +6,7 @@
   "machine_version": "0.3.0",
   "project_id": "manna",
   "capability": "software-product",
-  "revision": "manna-v1-ui-ux-design-pending"
+  "revision": "manna-v1-ui-ux-flow-draft-awaiting-human-approval"
 }
 ---
 

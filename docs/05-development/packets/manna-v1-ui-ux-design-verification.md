@@ -2,10 +2,12 @@
 
 ## 1. Summary
 
-This packet records the supplied Version 1 visual/layout baseline for the
-`manna-v1-ui-ux-design-verification` task. It installs the extended Study Desk
-prototype and the companion IA/interaction model as design-reference evidence;
-it does not modify application code or claim Product Freeze.
+This packet records the supplied Version 1 visual/layout baseline and the new
+low-fidelity flow draft for the `manna-v1-ui-ux-design-verification` task. The
+flow draft covers end-to-end behavior, edge states, platform reflow,
+accessibility rules, recovery, and all Version 1 capabilities; it remains
+awaiting human approval and does not modify application code or claim Product
+Freeze.
 
 ## 2. Scope
 
@@ -16,17 +18,21 @@ In scope:
 - preserve the supplied `support.js` runtime unchanged;
 - add the IA, interaction-pattern, platform/state, supplied-word, and coverage
   matrix artifact;
+- add `docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md` as the
+  flow and state approval artifact;
 - apply the design-progress note to §19 of the Version 1 UI/UX requirements;
 - retain all design material under `docs/01-spec/` and all machine state under
   `.markdown-machine/`;
-- record remaining flow-design and approval gaps.
+- advance the cold-resume records to the human flow-approval gate;
+- record remaining approval and high-fidelity verification gaps.
 
 Out of scope:
 
 - production application behavior, `src/`, fixtures, or tests;
 - Product Freeze, roadmap recompilation, or implementation authorization;
-- new mobile/tablet flows for the seven added static layouts;
 - deciding the four unresolved IA proposals;
+- human approval of the low-fidelity flows;
+- high-fidelity mobile/tablet mock implementation or verification;
 - merging, releasing, or deploying this branch before review; branch
   publication is performed only because the explicit task requires GitHub
   Markdown Machine closeout, and does not imply review, merge, or acceptance.
@@ -38,8 +44,10 @@ Run from the repository root:
 ```bash
 test -f "docs/01-spec/design-reference/Study Desk.dc.html"
 test -f "docs/01-spec/design-reference/Manna V1 IA and Interaction Model.dc.html"
+test -f "docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md"
 rg -q 'data-screen="search"' "docs/01-spec/design-reference/Study Desk.dc.html"
 rg -q 'data-screen="compare"' "docs/01-spec/design-reference/Study Desk.dc.html"
+rg -q '^## 13\. Capability coverage matrix$' "docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md"
 git diff --check
 npm run lint
 npm test
@@ -49,6 +57,7 @@ npm run build
 Recorded results:
 
 - design-reference file/marker checks: pass;
+- low-fidelity flow artifact and coverage-matrix marker checks: pass;
 - `npm run lint`: pass;
 - non-browser tests: 3 pass;
 - `npm test`: blocked by unavailable Chromium-family executable in
@@ -64,17 +73,18 @@ Copied from `docs/01-spec/manna-v1-ui-ux-requirements.md` §19:
 
 | Criterion | How satisfied | Test |
 |---|---|---|
-| complete low-fidelity flows for every Version 1 function | Not satisfied; the supplied artifacts are visual/layout baseline work only. | IA coverage review; flow pass remains next. |
-| empty, first-run, loading, long-running, success, warning, error, reduced-mode, and recovery states | Partially represented visually; systematic state coverage remains open. | Coverage-matrix review. |
-| desktop and phone flows, with tablet behavior derived and demonstrated where layout changes materially | Partially satisfied for the original Reader/Home surfaces; the seven added layouts are desktop-only static layouts. | Design artifact inspection. |
-| keyboard, touch, screen-reader, reduced-motion, and text-scaling behavior | Existing prototype behavior is preserved; new surfaces are not fully specified for these modes. | Accessibility review remains open. |
+| complete low-fidelity flows for every Version 1 function | Drafted in the new flow artifact, including Reader, Search, Study, Notes, Library, secondary surfaces, and cross-flow behavior. | Flow artifact inspection; human approval pending. |
+| empty, first-run, loading, long-running, success, warning, error, reduced-mode, and recovery states | Defined globally and mapped to each capability's flow. | Flow artifact §§1.1 and 13; high-fidelity verification pending. |
+| desktop and phone flows, with tablet behavior derived and demonstrated where layout changes materially | Defined for every flow in the platform-reflow table and each long-running/list/detail flow. | Flow artifact §§1.2 and 2–11; rendered mock verification pending. |
+| keyboard, touch, screen-reader, reduced-motion, and text-scaling behavior | Defined as cross-flow interaction rules, including focus return, non-hover equivalents, and non-colour cues. | Flow artifact §12; accessibility verification pending. |
 | a reviewed information architecture and reusable interaction model | Satisfied by the supplied IA/interaction-model artifact, subject to the four unresolved proposals noted there. | Artifact inspection and human decision. |
 | a visual system honoring the approved quiet Reader direction | Satisfied at aesthetics/layout level across the 13-screen prototype. | Prototype artifact inspection. |
 | a high-fidelity interactive mock for desktop and phone | Partially satisfied: desktop mock is extended; phone treatment exists only for original surfaces. | Prototype artifact inspection. |
-| a coverage matrix mapping every product-contract capability to a designed flow and state | Partially satisfied by the supplied 38-row matrix; ten rows remain gaps and the matrix is not a flow implementation. | IA artifact inspection. |
+| a coverage matrix mapping every product-contract capability to a designed flow and state | Drafted as a 38-row capability matrix covering all Version 1 capabilities and their states. | Flow artifact §13; human approval and high-fidelity verification pending. |
 
-This packet intentionally does not mark the design task complete because the
-unmet criteria are a documented design boundary, not evidence to reinterpret.
+This packet intentionally does not mark the design task complete: the flow
+draft requires human approval, the high-fidelity desktop/phone mock still needs
+verification, and Product Freeze remains a separate human decision.
 
 ## 5. Test evidence
 
@@ -85,11 +95,14 @@ unmet criteria are a documented design boundary, not evidence to reinterpret.
   Restore, and Comparison.
 - The prototype remains in `docs/01-spec/design-reference/`; no design runtime
   file was copied into `src/` or `dist/`.
+- The low-fidelity flow artifact maps every Version 1 capability to a flow and
+  state, including the ten rows previously marked as design gaps.
 - Negative design checks: the handoff is not treated as Product Freeze,
   supplied-word treatment is not applied to the fixture, and the seven added
   layouts are not represented as completed flows.
 - Browser rendering remains unverified on this host because no Chromium-family
-  executable is installed.
+  executable is installed; the flow artifact is documentation evidence, not a
+  substitute for interactive browser verification.
 
 ## 6. Assumptions made
 
@@ -102,22 +115,24 @@ unmet criteria are a documented design boundary, not evidence to reinterpret.
 
 ## 7. What to scrutinise
 
+- The low-fidelity draft is comprehensive but has not received human approval
+  or been exercised in the high-fidelity mock.
 - The extended prototype has static presentation for seven new surfaces but no
-  corresponding flow or mobile-state coverage.
+  corresponding rendered mobile/tablet behavior.
 - `support.js` remains a prototype-only dependency and contains network-capable
   preview logic; it must not enter the product build.
-- The coverage matrix contains ten explicit gaps and should drive the next
-  flow-design pass.
+- The ten former coverage gaps now have proposed flow/state treatment; their
+  visual treatment and interaction behavior remain to be verified.
 
 ## 8. Self-assessment
 
-- This packet does not close the full Version 1 design task; it closes only the
-  bounded artifact-reconciliation session.
+- This packet does not close the full Version 1 design task; it records the
+  bounded baseline plus flow-draft continuation.
 - No production behavior, Scripture fixture, roadmap marker, or Product Freeze
   state was changed.
-- The next design session must complete flows and edge states, obtain human
-  flow approval, then verify the appearance and interactive mock before Product
-  Freeze can be considered.
+- The next action is human review/approval of the low-fidelity flow artifact.
+  After approval, verify the appearance and interactive desktop/phone mock
+  before Product Freeze can be considered.
 
 ## 9. Docs updated
 
@@ -128,6 +143,11 @@ unmet criteria are a documented design boundary, not evidence to reinterpret.
   reference-only boundary;
 - `docs/01-spec/design-reference/baseline-mock-handoff.md` — repository-state
   handoff and remaining gaps;
+- `docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md` — draft
+  end-to-end flows, edge states, platform rules, and coverage matrix;
+- `.markdown-machine/HANDOFF.md`, `.markdown-machine/STATE.md`,
+  `.markdown-machine/tasks/V1-UI-UX-DESIGN.md`, and lifecycle records — current
+  cold-resume route and approval boundary;
 - `docs/01-spec/design-reference/Study Desk.dc.html` — supplied extended mock;
 - `docs/01-spec/design-reference/Manna V1 IA and Interaction Model.dc.html` —
   supplied IA/interaction model;
@@ -143,10 +163,10 @@ the product because it uses external preview dependencies.
 
 | Platform | Result | Notes |
 |---|---|---|
-| Desktop browser | Unverified | No Chromium-family executable is installed on this host. |
-| Phone | Unverified | New layouts have no phone treatment; original prototype views remain reference material. |
-| Tablet | Unverified | New layouts have no tablet treatment; original prototype view remains reference material. |
-| Keyboard/screen reader/reduced motion/text scaling | Partially specified | Existing prototype behavior is preserved; new surfaces need dedicated flow design. |
+| Desktop browser | Unverified | No Chromium-family executable is installed on this host; flow routes are documented. |
+| Phone | Unverified | Flow reflow is documented; new layouts still need interactive phone mock treatment. |
+| Tablet | Unverified | Flow reflow is documented; new layouts still need interactive tablet mock treatment. |
+| Keyboard/screen reader/reduced motion/text scaling | Specified, unverified | Cross-flow behavior is documented; rendered interaction review remains. |
 
 ## 12. Bundle / size impact
 

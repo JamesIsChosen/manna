@@ -5,8 +5,8 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "project_id": "manna",
-  "handoff_status": "STOPPED_SYNCED_UI_UX_BASELINE_RECORDED",
-  "next_route": "a new design agent must create and obtain approval for complete flows, then appearance and an interactive mock; do not implement before explicit Product Freeze"
+  "handoff_status": "STOPPED_FLOW_DRAFT_AWAITING_HUMAN_APPROVAL",
+  "next_route": "human must review and approve the low-fidelity flow draft; then verify appearance and the desktop/phone interactive mock; do not implement before explicit Product Freeze"
 }
 ---
 
@@ -19,8 +19,10 @@ Read this file together with `ORIGIN.md`, `RUNTIME.md`, `STATE.md`, `REPOSITORY.
 1. Confirm the active identity is Markdown Machine v0.3.0 and the project is Manna.
 2. Read `docs/01-spec/manna-v1-product-contract.md`, `docs/01-spec/manna-v1-ui-ux-requirements.md`, and their records under `intent/`.
 3. Treat P0.1 and the existing UI prototype as evidence/reference, not final product approval.
-4. Begin the new-agent design task in `tasks/V1-UI-UX-DESIGN.md`: complete low-fidelity flows and edge states first, then stop for human flow approval.
-5. After flow approval, produce the visual system and a high-fidelity interactive desktop/phone mock, then stop for human appearance approval.
+4. Review `docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md` and
+   obtain human approval of its complete flows and edge states.
+5. After flow approval, verify the visual system and high-fidelity interactive
+   desktop/phone mock, then stop for human appearance approval.
 6. Obtain explicit human Product Freeze before changing application behavior.
 7. Recompile the roadmap after Product Freeze; do not assume the old P0.2 → P6/P7 sequence still expresses Version 1 priorities.
 
@@ -33,5 +35,6 @@ The active capability is Software/Product only. The runtime is compact and proje
 The design-reconciliation checkpoint `7d16298cfd98b771808c0efcd4dc9fff27f970bb`
 was published to the governed branch and read back with exact SHA equality.
 Inspect `REPOSITORY-SYNC.md`; never infer currentness from local Git state alone.
-This synchronization closes the bounded documentation task; it does not grant
-flow approval, Product Freeze, implementation authority, or merge authority.
+The flow draft is now recorded on the current design branch; this does not
+grant flow approval, Product Freeze, implementation authority, or merge
+authority.

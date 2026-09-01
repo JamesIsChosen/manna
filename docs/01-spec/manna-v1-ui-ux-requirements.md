@@ -1,6 +1,6 @@
 # Manna Version 1 UI/UX Requirements
 
-**Status:** INTERVIEW COMPLETE — visual/layout baseline recorded; flows and Product Freeze pending
+**Status:** INTERVIEW COMPLETE — visual/layout baseline recorded; flow draft awaiting human approval; Product Freeze pending
 **Review date:** 2026-08-30
 **Authority:** Human-approved UI/UX interview
 **Implementation state:** FROZEN; this is a design handoff, not application-code authorization
@@ -165,7 +165,9 @@ Backup & Restore. See
 [design-reference/baseline-mock-handoff.md](design-reference/baseline-mock-handoff.md)
 for what exists, what is excluded, and the open conflicts it does not resolve.
 Deliverables 1, 2, and 4 (flows, full state coverage, and non-pointer
-interaction beyond the original prototype) remain undesigned.
+interaction beyond the original prototype) are drafted for human review in
+[design-reference/manna-v1-low-fidelity-flows.md](design-reference/manna-v1-low-fidelity-flows.md).
+They remain unapproved and unverified in the high-fidelity mock.
 
 Approval gates are sequential:
 

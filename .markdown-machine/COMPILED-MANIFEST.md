@@ -3,41 +3,38 @@
   "record_type": "COMPILED_PROJECT_MANIFEST",
   "schema_version": 1,
   "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
+  "machine_version": "0.5.0",
   "project_id": "manna",
-  "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7",
-  "manifest_status": "MATERIALIZED"
+  "manifest_status": "MATERIALIZED",
+  "source_tag": "v0.5.0",
+  "source_commit": "9de2b2db3fa91ccddebec8543e27001393f2f6ed",
+  "source_tree": "30e694996a76e31bccf0576effe8a8182e7b45e8",
+  "content_set_digest": "d8945b78f65bdd2f32cfe52f9841536f1bca57aad2b8f0da1c9366124500a718"
 }
 ---
-
 # Manna compiled project manifest
 
-Every machine-owned artifact in `.markdown-machine/` is listed below. The manifest is project-local and does not recursively include the Markdown Machine distribution. Its own inclusion basis is the v0.3.0 manifest specification and the pre-materialization output plan.
+This manifest records the v0.5.0 project-local governance surface. Exact candidate exports are listed in `OUTPUT-PLAN.md`; the Markdown Machine distribution is not copied into the project. The old v0.3.0 runtime/source closure is bounded under `history/v0.3.0/`, and the legacy bridge is bounded under `history/v0.5.0-migration/`.
 
-| project_artifact | semantic_source | source_digest | inclusion_reason | capability_or_universal_role | transform | governance_role |
-| --- | --- | --- | --- | --- | --- | --- |
-| `.markdown-machine/OUTPUT-PLAN.md` | `project-compiler/05-OUTPUT-PLAN-AND-PUBLICATION.md` | `57146175e1c3ac4b1e7ec62c7acc04c11bc923aed169d800511f912ca42f4eed` | Inert plan before machine-owned writes | universal compilation | generated | current |
-| `.markdown-machine/RUNTIME.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Compact lossless universal semantics | universal runtime | verbatim-runtime-export | current |
-| `.markdown-machine/capabilities/software-product.md` | `project-runtime/capabilities/software-product.md` | `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e` | Active product capability semantics | software-product | verbatim-runtime-export | current |
-| `.markdown-machine/ORIGIN.md` | `project-compiler/06-ORIGIN-AND-REACQUISITION.md` | `02b4fa611361a44996128b3af5e626967f39b37804341c43070d1fddad2ab3e9` | Pin origin and future reacquisition | universal continuity | generated | current |
-| `.markdown-machine/COMPILED-MANIFEST.md` | `project-compiler/COMPILED-PROJECT-MANIFEST-SPEC.md` | `edc78f73334f4ccb7096df865b9f1fe642b9aa86fd9eb03aae51cdf4f8a6fcad` | Trace every project artifact | universal compilation | generated | current |
-| `.markdown-machine/REPOSITORY.md` | `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` | Canonical repository continuity binding | universal continuity | generated | current |
-| `.markdown-machine/REPOSITORY-SYNC.md` | `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` | Remote currentness projection | universal continuity | generated | current |
-| `.markdown-machine/STATE.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Current project projection | universal continuity | generated | current |
-| `.markdown-machine/HANDOFF.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Cold-resume route | universal continuity | generated | current |
-| `.markdown-machine/authority/PROJECT-GENESIS.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Genesis admission | universal authority | generated | current |
-| `.markdown-machine/authority/AUTHORITY.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Current authority projection | universal authority | generated | current |
-| `.markdown-machine/authority/CONVERGENCE.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Bounded reconciliation capacity | universal convergence | generated | current |
-| `.markdown-machine/intent/HUMAN-STATEMENT.md` | supplied human reconciliation request | `43b81579e2d621ebc7e0908108d7bcdc0743939a3c323be045110cda18729182` | Immutable intent provenance | universal intent | generated | current |
-| `.markdown-machine/intent/BASELINE.md` | existing `README.md` and product specification | existing project baseline | Preserve current product intent | software-product | generated | current |
-| `.markdown-machine/intent/PRODUCT-CONTRACT-V1.md` | accepted human Version 1 product interview | current-thread human authority | Bind the semantically closed Version 1 contract and UI/UX frontier | software-product | generated | current |
-| `.markdown-machine/intent/UI-UX-INTERVIEW-V1.md` | accepted human Version 1 UI/UX interview | current-thread human authority | Bind the semantically closed design requirements and next approval gates | software-product | generated | current |
-| `.markdown-machine/capabilities/BINDING.md` | `project-compiler/02-CAPABILITY-SELECTION.md` | `0b7d63803e7fcc44029f84a725f7a00c229aac8a5f3eff15d63b5c5909965045` | Record explicit active capability selection | universal capability selection | generated | current |
-| `.markdown-machine/lifecycle/GRAPH.md` | `project-runtime/capabilities/software-product.md` | `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e` | Product lifecycle frontier | software-product | generated | current |
-| `.markdown-machine/lifecycle/HORIZON.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Bounded run horizon | universal lifecycle | generated | current |
-| `.markdown-machine/tasks/P0.2-OFFLINE-SECURITY.md` | existing Manna roadmap and P0.1 packet | existing project baseline | Preserve next objective | software-product | generated | current |
-| `.markdown-machine/tasks/V1-UI-UX-DESIGN.md` | accepted Version 1 contract and UI/UX interview | current-thread human authority | Exact next-agent design and verification objective | software-product | generated | current |
-| `.markdown-machine/inbox/RECONCILIATION.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Route reconciliation request | universal change control | generated | current |
-| `.markdown-machine/evidence/RECONCILIATION-VERIFICATION.md` | `project-runtime/UNIVERSAL-RUNTIME.md` | `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f` | Verification ledger | universal evidence | generated | current |
-| `.markdown-machine/evidence/CLOSEOUT-REPORT.md` | `project-compiler/05-OUTPUT-PLAN-AND-PUBLICATION.md` | `57146175e1c3ac4b1e7ec62c7acc04c11bc923aed169d800511f912ca42f4eed` | Final reconciliation and closeout report | universal evidence | generated | current |
-| `.markdown-machine/history/SMPM-1-BOOTSTRAP.md` | Git commit `12a9d33c4827c82f87ab79bd1858da958a6e824d` | `12a9d33c4827c82f87ab79bd1858da958a6e824d` | Preserve superseded bootstrap chronology | historical interpretation | generated | historical |
+## Current authority
+
+- `.markdown-machine/authority/AUTHORITY.md` → `sha256:b1e4808cf8aa4d0063ec50610f34dbe98aa2e733c96bb31e3ed32a9ff4d0ef01`
+- `.markdown-machine/authority/AUTHORITY-TRANSITION-KERNEL-MIGRATE.md` → `sha256:b1e4808cf8aa4d0063ec50610f34dbe98aa2e733c96bb31e3ed32a9ff4d0ef01`
+- `.markdown-machine/authority/KERNEL-MANIFEST.md` → `sha256:b21e61ad2a4e133d7c6e1cd0b943cadb208f1950454ba80a2ae00bd95e82a0d3`
+- `.markdown-machine/ORIGIN.md` → `sha256:e81c1859d4f67fdc491c39e46eecbedd0c072bc2bfaf3bb20ba8761ec02b3323`
+
+## Current typed binding set
+
+- `.markdown-machine/intent/BASELINE.md` → `sha256:a1a5b93ad5d297ff5c243f023f8b504c6cb6fafc3db64c3ead112e4c220f345a`
+- `.markdown-machine/capabilities/BINDING.md` → `sha256:b60ad1c9dbbafc48ea449d8430a5b3adbf7d207fac6c9d3bcb5574a7475f9c6f`
+- `.markdown-machine/lifecycle/GRAPH.md` → `sha256:d91b9917afc2b463412b36fa4912f6335fb0da4590a7c73e4e41eb6d8673ee23`
+- `.markdown-machine/lifecycle/HORIZON.md` → `sha256:e7a2e346d74fdc88ed7d33d5890b65be3b0b3a0df9ce824f4af9cf378ae353b1`
+- `.markdown-machine/authority/OPERATION-CONTRACT-DISCOVERY.md` → `sha256:152658a9b5bd785c74b251c27a1f1e6b80f7802c03316c97d2d3fc93492818ed`
+- `.markdown-machine/tasks/P0.2-OFFLINE-SECURITY.md` → `sha256:9858bf044957e2719e1dc11a6a9a04f5d7edc2ebaf05c80e8522e7fab9b2d1ef`
+- `.markdown-machine/tasks/V1-UI-UX-DESIGN.md` → `sha256:52d65c89e444390c255efd5cb53011c6a716c40b53bf4dfc4c085b8011fe158b`
+- `.markdown-machine/authority/CONVERGENCE-POLICY.md` → `sha256:3f00eb397aa0508e83a376789a01afb7168806b2b0eb330831fc8ec05930fb64`
+- `.markdown-machine/REPOSITORY.md` → `sha256:d9c8128deeafff579276a3d866b7f59cab557d531159fd02b03319a664dd6a38`
+
+## Historical closure
+
+The v0.3.0 origin/runtime/manifest/output plan, Genesis projection, original human statement, and exact old authority/migration source closure remain under `history/v0.3.0/`. No second Genesis was created, and the failed v0.4 attempt remains historical Git evidence rather than current authority.

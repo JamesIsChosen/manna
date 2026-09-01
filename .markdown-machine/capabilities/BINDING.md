@@ -2,15 +2,15 @@
 {
   "record_type": "CAPABILITY_BINDING",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "active_capability": "software-product",
-  "selection_state": "ACTIVE",
-  "selection_reason": "Existing Manna is a software product with an explicit product and implementation lifecycle"
+  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "intent_baseline_ref": "sha256:a1a5b93ad5d297ff5c243f023f8b504c6cb6fafc3db64c3ead112e4c220f345a",
+  "capability_id": "software-product",
+  "capability_source_ref": "sha256:a328b4a8c38e338bb586e04958a00ae450da02902dde90137ff21ee2f477316c",
+  "capability_state": "ACTIVE",
+  "operation_floor_profile_id": "OPERATION-FLOORS/v2"
 }
 ---
-
 # Active capability binding
 
-`software-product` is the only active capability. Documentation, IT Operations, Personal Infrastructure, Research, Security/Vulnerability, and Recurring Operations are not independently activated by the existence of related files or work. Repository persistence is universal continuity and is recorded in `REPOSITORY.md`, not as an extra capability.
+`software-product` remains the only active capability. The candidate runtime export is exact v0.5.0 source; no newly available capability is activated by this migration.

@@ -2,20 +2,37 @@
 {
   "record_type": "LIFECYCLE_GRAPH",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "capability": "software-product",
-  "revision": "manna-v1-ui-ux-high-fidelity-verified-appearance-approval-pending"
+  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "graph_id": "manna-software-product-lifecycle",
+  "node_ids": [
+    "INTENT",
+    "PRODUCT_DISCOVERY",
+    "FLOWS_UX",
+    "DESIGN_VERIFICATION",
+    "PRODUCT_FREEZE",
+    "ARCHITECTURE",
+    "IMPLEMENTATION",
+    "RELEASE_READINESS"
+  ],
+  "edge_ids": [
+    "intent-to-discovery",
+    "discovery-to-flows",
+    "flows-to-design",
+    "design-to-freeze",
+    "freeze-to-architecture",
+    "architecture-to-implementation",
+    "implementation-to-release"
+  ],
+  "terminal_node_ids": [
+    "RELEASE_READINESS"
+  ],
+  "capability_binding_refs": [
+    "sha256:b60ad1c9dbbafc48ea449d8430a5b3adbf7d207fac6c9d3bcb5574a7475f9c6f"
+  ],
+  "run_horizon_ref": "sha256:e7a2e346d74fdc88ed7d33d5890b65be3b0b3a0df9ce824f4af9cf378ae353b1"
 }
 ---
-
 # Manna lifecycle graph
 
-The active capability fragment is:
-
-`Intent → Product discovery → Product challenge/council → Human product approval when required → Flows/UX → Design verification → Product Freeze → Architecture → Architecture challenge → Implementation → Implementation acceptance → Integration → Release readiness`
-
-The existing repository has completed or recorded the P0.1 single-HTML feasibility packet. New-product discovery and the UI/UX requirements interview are complete. The active frontier is Flows/UX: the complete flows are approved and the desktop/phone high-fidelity references are verified; obtain human appearance approval, then request explicit Product Freeze.
-
-P0.2 Offline Security & Network Guard remains preserved but deferred. Product Freeze must recompile the roadmap before P0.2 or any later implementation packet is authorized. Post-freeze changes route through Inbox and return to the earliest affected frontier while preserving unaffected work.
+The existing Software/Product lifecycle remains intact. The current frontier is design verification pending human appearance approval, followed by explicit Product Freeze. This migration changes governance mechanics only.

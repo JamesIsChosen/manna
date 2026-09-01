@@ -2,20 +2,18 @@
 {
   "record_type": "RUN_HORIZON",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "horizon": "Version 1 flow and visual design verification, followed by explicit Product Freeze",
-  "substantive_product_work": "requirements interview, human-approved low-fidelity flow draft, and local-browser desktop/phone high-fidelity reference verification complete; appearance approval pending; application implementation not started by this task"
+  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "horizon_id": "manna-v1-ui-ux-design-verification",
+  "reachable_terminal_nodes": [
+    "HUMAN_APPEARANCE_APPROVAL",
+    "PRODUCT_FREEZE_REQUEST"
+  ],
+  "human_basis_refs": [
+    "sha256:26377103c638dd7f7fb344e0fba2ad1d1b1d76f1f7c0544505d9b6fe856d2cb8"
+  ]
 }
 ---
-
 # Run horizon
 
-The UI/UX requirements interview, low-fidelity flow draft, and desktop/phone
-high-fidelity reference verification are complete and approved at their
-respective gates. This run now requires human appearance approval. This horizon does not authorize starting
-P0.2, changing application behavior, merging, deploying, or releasing before
-explicit Product Freeze. The governing documents are
-`docs/01-spec/manna-v1-product-contract.md` and
-`docs/01-spec/manna-v1-ui-ux-requirements.md`.
+The current product horizon is unchanged: human appearance approval and explicit Product Freeze remain required before application implementation. The v0.5 governance migration does not advance product lifecycle authority.

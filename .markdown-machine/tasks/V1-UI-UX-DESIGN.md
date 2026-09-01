@@ -2,27 +2,32 @@
 {
   "record_type": "TASK_CONTRACT",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
+  "compiled_under_authority_ref": "sha256:81dfe0c3cc29492152379ec06257f6b0d4e70b7dacabc405276e3c6337e3ebfa",
+  "intent_baseline_ref": "sha256:a1a5b93ad5d297ff5c243f023f8b504c6cb6fafc3db64c3ead112e4c220f345a",
   "task_id": "manna-v1-ui-ux-design-verification",
-  "status": "HIGH_FIDELITY_VERIFIED_APPEARANCE_APPROVAL_PENDING",
-  "capability": "software-product",
-  "source": "docs/01-spec/manna-v1-product-contract.md and docs/01-spec/manna-v1-ui-ux-requirements.md"
+  "convergence_root_ref": "sha256:e8596c0040fd4f2724a36b0160a0d2c7600c4499d89cab978d261b38e93de56f",
+  "lifecycle_node_id": "DESIGN_VERIFICATION",
+  "capability_binding_ref": "sha256:b60ad1c9dbbafc48ea449d8430a5b3adbf7d207fac6c9d3bcb5574a7475f9c6f",
+  "operation_contract_ref": "sha256:152658a9b5bd785c74b251c27a1f1e6b80f7802c03316c97d2d3fc93492818ed",
+  "purpose": "Verify the Version 1 flows and visual design before human Product Freeze.",
+  "scope": [
+    "desktop and phone design references",
+    "flow and state verification",
+    "human appearance approval route"
+  ],
+  "prohibited_scope": [
+    "application implementation",
+    "merge",
+    "deployment",
+    "release"
+  ],
+  "completion_conditions": [
+    "human appearance approval obtained",
+    "explicit Product Freeze requested"
+  ]
 }
 ---
-
 # Current product task: Version 1 UI/UX design
 
-The visual system and desktop layout baseline are now recorded in the
-design-reference artifacts. The extended mock covers the original six screens
-plus Search, Notes, Library, Settings, First run, Backup & Restore, and
-Comparison as static layouts. The companion IA document records the interaction
-model, platform/state rules, supplied-word proposal, and coverage matrix.
-
-The low-fidelity flow and edge-state draft is recorded and human-approved in
-`docs/01-spec/design-reference/manna-v1-low-fidelity-flows.md`. The visual
-system and desktop/phone high-fidelity references have been exercised in the
-local browser; the immediate next step is human appearance approval.
-
-Do not modify production application behavior. Do not declare Product Freeze on behalf of the human. The task ends with design evidence and an explicit request for human design approval; roadmap recompilation and implementation require a later, explicit Product Freeze.
+The task’s product scope and completion conditions are preserved exactly from the recovered project state. Governance migration does not complete the task or grant implementation authority.

@@ -5,7 +5,7 @@
   "machine_name": "Markdown Machine",
   "machine_version": "0.3.0",
   "statement_id": "manna-mm-v0.3-reconciliation",
-  "source_attachment": "/home/james/.codex/attachments/85111aa3-f25d-4754-bd8d-2f68db88c8d1/pasted-text.txt",
+  "source_attachment": "historical-user-attachment:pasted-text.txt",
   "source_digest": "43b81579e2d621ebc7e0908108d7bcdc0743939a3c323be045110cda18729182",
   "immutability": "PROVENANCE_ONLY"
 }

@@ -24,13 +24,20 @@ button{font-family:inherit}
       <span style="font:600 9px/1 var(--fm);letter-spacing:.14em;opacity:.75;text-transform:uppercase">Study Desk · direction v3</span>
     </div>
 
-    <div role="tablist" aria-label="Screen" style="display:flex;gap:0;border:2px solid currentColor;border-radius:3px;overflow:hidden">
+    <div role="tablist" aria-label="Screen" style="display:flex;flex-wrap:wrap;gap:0;border:2px solid currentColor;border-radius:3px;overflow:hidden">
       <button data-act="screen" data-screen="desk" style="min-height:34px;padding:0 12px;border:0;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">DESK</button>
       <button data-act="screen" data-screen="pinned" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">PINNED</button>
       <button data-act="screen" data-screen="tablet" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">TABLET</button>
       <button data-act="screen" data-screen="phone" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">PHONE</button>
       <button data-act="screen" data-screen="home" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">HOME</button>
       <button data-act="screen" data-screen="reading" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">READING</button>
+      <button data-act="screen" data-screen="search" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">SEARCH</button>
+      <button data-act="screen" data-screen="notes" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">NOTES</button>
+      <button data-act="screen" data-screen="library" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">LIBRARY</button>
+      <button data-act="screen" data-screen="settings" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">SETTINGS</button>
+      <button data-act="screen" data-screen="firstrun" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">FIRST RUN</button>
+      <button data-act="screen" data-screen="backup" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">BACKUP</button>
+      <button data-act="screen" data-screen="compare" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">COMPARE</button>
     </div>
 
     <div style="flex:1"></div>
@@ -540,6 +547,311 @@ button{font-family:inherit}
     </div>
     </sc-if>
 
+    <sc-if value="{{ isSearch }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Search</span>
+        <span style="flex:1"></span>
+        <span style="font:700 9px/1 var(--fm);letter-spacing:.1em;padding:5px 8px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff)">ONE FIELD · METHOD INFERRED</span>
+      </div>
+      <div style="padding:16px 16px 0">
+        <input value="sat in darkness" style="width:100%;box-sizing:border-box;min-height:56px;padding:0 16px;border:2px solid var(--ink,#16130f);background:var(--panel,#fffaf0);color:var(--ink,#16130f);font:400 20px/1.4 var(--fs)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 0">
+          <span style="font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">METHOD</span>
+          <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:8px 10px;border:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">REFERENCE</span>
+          <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:8px 10px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff)">EXACT PHRASE</span>
+          <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:8px 10px;border:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">WORD</span>
+          <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:8px 10px;border:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">TOPIC</span>
+          <span style="font:700 10px/1 var(--fm);letter-spacing:.06em;padding:8px 10px;border:2px dashed var(--ink,#16130f);color:var(--ink,#16130f)">VERSE FINDER</span>
+          <span style="flex:1"></span>
+          <span style="font:600 9.5px/1 var(--fm);letter-spacing:.08em;padding:6px 8px;border:2px solid var(--warn,#f2b705);color:var(--muted,#6b6152)">FOUND AS EXACT PHRASE · 3 MATCHES</span>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:236px 1fr;gap:14px;padding:0 16px 16px">
+        <div style="display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto">
+          <div>
+            <p style="margin:0 0 6px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">RECENT</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 11px/1.3 var(--fm);padding:8px 9px;border:2px dashed var(--ink,#16130f);color:var(--ink,#16130f)">kingdom of heaven</span>
+              <span style="font:600 11px/1.3 var(--fm);padding:8px 9px;border:2px dashed var(--ink,#16130f);color:var(--ink,#16130f)">Matt 4:16</span>
+            </div>
+          </div>
+          <div>
+            <p style="margin:0 0 6px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">SAVED SEARCHES</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 11px/1.3 var(--fm);padding:8px 9px;border:2px solid var(--ink,#16130f);background:var(--panel,#fffaf0);color:var(--ink,#16130f)">light + darkness, Gospels</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto">
+          <section style="background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="padding:7px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)"><span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Scripture</span></div>
+            <div style="padding:10px 12px;display:flex;flex-direction:column;gap:9px">
+              <div style="border-top:1px solid var(--rule,rgba(0,0,0,.18));padding-top:8px"><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">MATTHEW 4:16 · KJV</span><p style="margin:4px 0 0;font:400 16px/1.5 var(--fs);color:var(--ink,#16130f)">The people which <mark style="background:var(--sel,rgba(179,39,26,.13));color:inherit">sat in darkness</mark> saw great light...</p></div>
+              <div style="border-top:1px solid var(--rule,rgba(0,0,0,.18));padding-top:8px"><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">ISAIAH 9:2 · KJV</span><p style="margin:4px 0 0;font:400 16px/1.5 var(--fs);color:var(--ink,#16130f)">The people that walked in darkness have seen a great light...</p></div>
+            </div>
+          </section>
+          <section style="background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="padding:7px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)"><span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Strong's</span><span style="font:700 9px/1 var(--fm);letter-spacing:.08em;color:var(--headInk,#fff);opacity:.75;margin-left:8px">RELATED, NOT AN EXACT MATCH</span></div>
+            <div style="padding:10px 12px"><span style="font:700 11px/1 var(--fm);padding:5px 7px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">G5457</span> <span style="font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">φῶς, phōs — light</span></div>
+          </section>
+          <section style="background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+            <div style="padding:7px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)"><span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--headInk,#fff)">Commentary &amp; cross references</span></div>
+            <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+              <div><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">MATTHEW HENRY, CONCISE · 4:16</span><p style="margin:4px 0 0;font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">The light does not arrive somewhere else and summon the people to it...</p></div>
+              <div style="border-top:1px solid var(--rule,rgba(0,0,0,.18));padding-top:8px"><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">LUKE 1:79</span><p style="margin:4px 0 0;font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">To give light to them that sit in darkness.</p></div>
+            </div>
+          </section>
+          <section style="background:var(--panel,#fffaf0);border:2px dashed var(--ink,#16130f);opacity:.8">
+            <div style="padding:10px 12px"><span style="font:600 11px/1.4 var(--fm);color:var(--muted,#6b6152)">IMPORTED LIBRARY — no matches in currently enabled resources</span></div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isNotes }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Notes</span>
+        <span style="flex:1"></span>
+        <button style="min-height:34px;padding:0 13px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">+ NEW NOTE</button>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:360px 1fr;gap:0">
+        <div style="border-right:var(--bw,3px) solid var(--ink,#16130f);overflow:auto;background:var(--panel,#fffaf0)">
+          <div style="display:flex;gap:0;border-bottom:var(--bw,3px) solid var(--ink,#16130f)">
+            <span style="flex:1;text-align:center;padding:10px 0;font:700 10px/1 var(--fm);letter-spacing:.06em;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">ALL</span>
+            <span style="flex:1;text-align:center;padding:10px 0;font:700 10px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f);border-left:2px solid var(--ink,#16130f)">NOTES</span>
+            <span style="flex:1;text-align:center;padding:10px 0;font:700 10px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f);border-left:2px solid var(--ink,#16130f)">HIGHLIGHTS</span>
+            <span style="flex:1;text-align:center;padding:10px 0;font:700 10px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f);border-left:2px solid var(--ink,#16130f)">TRAIL</span>
+          </div>
+          <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
+            <div style="padding:10px;border:var(--bw,3px) solid var(--ink,#16130f);background:var(--sel,rgba(179,39,26,.13))">
+              <div style="display:flex;align-items:center;gap:7px"><span style="font:700 9px/1 var(--fm);letter-spacing:.08em;padding:4px 6px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">NOTE</span><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">MATTHEW 4:16</span></div>
+              <p style="margin:6px 0 0;font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">Compare with Isaiah 9:2 — the tense shift from "walked" to "sat" is worth a sermon note.</p>
+              <div style="display:flex;gap:5px;margin-top:7px"><span style="font:600 9.5px/1 var(--fm);padding:5px 6px;border:2px dashed var(--ink,#16130f)">sermon-prep</span></div>
+            </div>
+            <div style="padding:10px;border:2px solid var(--ink,#16130f)">
+              <div style="display:flex;align-items:center;gap:7px"><span style="font:700 9px/1 var(--fm);letter-spacing:.08em;padding:4px 6px;background:var(--ink,#16130f);color:var(--paper,#f6ecd8)">NOTE</span><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">MATTHEW 4:17</span></div>
+              <p style="margin:6px 0 0;font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">Check whether Mark 1:15 adds "believe the gospel" — different emphasis.</p>
+            </div>
+            <div style="padding:10px;border:2px solid var(--ink,#16130f)">
+              <div style="display:flex;align-items:center;gap:7px"><span style="font:700 9px/1 var(--fm);letter-spacing:.08em;padding:4px 6px;background:var(--accent2,#1b5e9c);color:#fff">HIGHLIGHT</span><span style="font:700 11px/1 var(--fm);color:var(--accent2,#1b5e9c)">MATTHEW 4:13</span></div>
+              <p style="margin:6px 0 0;font:400 14px/1.5 var(--fs);color:var(--ink,#16130f)">"Capernaum, which is upon the sea coast" — collection: Places of the ministry</p>
+            </div>
+            <div style="padding:10px;border:2px dashed var(--rule,rgba(0,0,0,.3))">
+              <span style="font:600 12px/1.4 var(--fs);color:var(--muted,#6b6152)">No note on this verse yet — tap to write one.</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;min-height:0">
+          <div style="flex:1;min-height:0;overflow:auto;padding:22px 28px">
+            <p style="margin:0 0 4px;font:600 9.5px/1.4 var(--fm);letter-spacing:.1em;color:var(--muted,#6b6152)">NOTE · LINKED TO</p>
+            <div style="display:flex;gap:7px;margin-bottom:14px">
+              <span style="font:600 11px/1 var(--fm);padding:7px 9px;border:2px solid var(--ink,#16130f);background:var(--panel,#fffaf0)">MATTHEW 4:16</span>
+              <span style="font:600 11px/1 var(--fm);padding:7px 9px;border:2px solid var(--ink,#16130f);background:var(--panel,#fffaf0)">ISAIAH 9:2</span>
+              <span style="font:600 11px/1 var(--fm);padding:7px 9px;border:2px dotted var(--ink,#16130f);background:var(--panel,#fffaf0)">◆ GALILEE</span>
+            </div>
+            <p style="margin:0 0 16px;font:400 22px/1.6 var(--fs);color:var(--ink,#16130f);max-width:62ch">Compare with Isaiah 9:2 — the tense shift from "walked" to "sat" is worth a sermon note. The people are already there when the light arrives; it is not a summons but a discovery.</p>
+            <p style="margin:0 0 8px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">TAGS</p>
+            <div style="display:flex;gap:6px"><span style="font:600 10.5px/1 var(--fm);padding:7px 8px;border:2px dashed var(--ink,#16130f)">sermon-prep</span><span style="font:600 10.5px/1 var(--fm);padding:7px 8px;border:2px dashed var(--ink,#16130f)">+ ADD TAG</span></div>
+            <p style="margin:20px 0 0;font:600 9.5px/1.4 var(--fm);letter-spacing:.05em;color:var(--muted,#6b6152)">Autosaved · edited just now</p>
+          </div>
+          <div style="border-top:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);padding:11px 16px">
+            <button style="display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;color:var(--ink,#16130f);cursor:pointer;padding:0">
+              <span style="font:400 15px/1 var(--fd);letter-spacing:.06em;text-transform:uppercase">Study Trail</span>
+              <span style="flex:1"></span>
+              <span style="font:700 9px/1 var(--fm);letter-spacing:.06em;color:var(--muted,#6b6152)">HIDDEN UNTIL OPENED · ▲ OPEN</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isLibrary }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Library</span>
+        <span style="flex:1"></span>
+        <button style="min-height:34px;padding:0 13px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">IMPORT</button>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:200px 1fr 320px;gap:0">
+        <div style="border-right:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);padding:12px;display:flex;flex-direction:column;gap:4px">
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">ALL RESOURCES</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">BIBLES</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">COMMENTARIES</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">DICTIONARIES &amp; LEXICONS</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">MAP PACKS</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">IMPORTED BOOKS</span>
+        </div>
+        <div style="overflow:auto;padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-content:start">
+          <div style="border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5));padding:12px">
+            <p style="margin:0 0 5px;font:400 17px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">KJV Pure Cambridge</p>
+            <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.04em;color:var(--muted,#6b6152)">BUNDLED · BIBLE · SOURCE VERIFIED</p>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:5px 7px;background:var(--accent2,#1b5e9c);color:#fff">ENABLED</span>
+          </div>
+          <div style="border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5));padding:12px">
+            <p style="margin:0 0 5px;font:400 17px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Matthew Henry, Concise</p>
+            <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.04em;color:var(--muted,#6b6152)">BUNDLED · COMMENTARY</p>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:5px 7px;background:var(--accent2,#1b5e9c);color:#fff">ENABLED</span>
+          </div>
+          <div style="border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5));padding:12px;opacity:.6">
+            <p style="margin:0 0 5px;font:400 17px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Webster's 1828</p>
+            <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.04em;color:var(--muted,#6b6152)">BUNDLED · DICTIONARY</p>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:5px 7px;border:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">DISABLED</span>
+          </div>
+          <div style="border:var(--bw,3px) dashed var(--warn,#f2b705);background:var(--panel,#fffaf0);padding:12px">
+            <p style="margin:0 0 5px;font:400 17px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Personal Sermon Notes.docx</p>
+            <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.04em;color:var(--muted,#6b6152)">IMPORTED · BOOK · 34 LINKS NEED REVIEW</p>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:5px 7px;background:var(--warn,#f2b705);color:#16130f">NEEDS REVIEW</span>
+          </div>
+        </div>
+        <div style="border-left:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);padding:16px;overflow:auto">
+          <p style="margin:0 0 4px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">INSPECTOR</p>
+          <p style="margin:0 0 10px;font:400 22px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Personal Sermon Notes</p>
+          <p style="margin:0 0 4px;font:600 10px/1.4 var(--fm);color:var(--muted,#6b6152)">SOURCE · DOCX, IMPORTED 2026-08-11</p>
+          <p style="margin:0 0 4px;font:600 10px/1.4 var(--fm);color:var(--muted,#6b6152)">LICENSE · PERSONAL / UNSPECIFIED</p>
+          <p style="margin:0 0 12px;font:600 10px/1.4 var(--fm);color:var(--muted,#6b6152)">DIGEST · 9f2a…c701</p>
+          <div style="border:2px solid var(--ink,#16130f);padding:10px;margin-bottom:12px">
+            <p style="margin:0 0 6px;font:700 9.5px/1.4 var(--fm);letter-spacing:.06em">IMPORT SUMMARY</p>
+            <p style="margin:0;font:400 13.5px/1.55 var(--fs);color:var(--ink,#16130f)">128 explicit references linked · 61 high-confidence · 40 medium-confidence · 34 need review</p>
+          </div>
+          <button style="width:100%;min-height:38px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer;margin-bottom:8px">REVIEW 34 LINKS</button>
+          <button style="width:100%;min-height:38px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">DISABLE RESOURCE</button>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isSettings }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Settings</span>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:220px 1fr;gap:0">
+        <div style="border-right:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);padding:12px;display:flex;flex-direction:column;gap:4px">
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">APPEARANCE</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">SCRIPTURE READING</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">BACKUP &amp; RESTORE</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">TRUST / ABOUT</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">STORAGE &amp; DIAGNOSTICS</span>
+          <span style="padding:9px 8px;font:700 10.5px/1 var(--fm);letter-spacing:.06em;color:var(--ink,#16130f)">HELP</span>
+        </div>
+        <div style="overflow:auto;padding:24px 30px;max-width:760px">
+          <p style="margin:0 0 14px;font:400 26px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Appearance</p>
+          <p style="margin:0 0 8px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">THEME</p>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+            <div style="border:var(--bw,3px) solid var(--accent,#c8341f);padding:10px;background:var(--panel,#fffaf0)"><div style="height:34px;background:#f6ecd8;border:2px solid #16130f;margin-bottom:7px"></div><span style="font:700 10px/1 var(--fm);letter-spacing:.06em">SYSTEM</span></div>
+            <div style="border:2px solid var(--ink,#16130f);padding:10px"><div style="height:34px;background:#fffaf0;border:2px solid #16130f;margin-bottom:7px"></div><span style="font:700 10px/1 var(--fm);letter-spacing:.06em">LIGHT</span></div>
+            <div style="border:2px solid var(--ink,#16130f);padding:10px"><div style="height:34px;background:#f7f0e0;border:1px solid #2b2419;margin-bottom:7px"></div><span style="font:700 10px/1 var(--fm);letter-spacing:.06em">SEPIA</span></div>
+            <div style="border:2px solid var(--ink,#16130f);padding:10px"><div style="height:34px;background:#171a1f;border:2px solid #e7e4dd;margin-bottom:7px"></div><span style="font:700 10px/1 var(--fm);letter-spacing:.06em">DARK</span></div>
+          </div>
+          <p style="margin:0 0 8px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">SCRIPTURE TYPE</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:110px;font:600 10.5px/1 var(--fm)">TYPEFACE</span><span style="flex:1;height:2px;background:var(--rule,rgba(0,0,0,.2));position:relative"><span style="position:absolute;left:0;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--accent,#c8341f);border:2px solid var(--ink,#16130f)"></span></span><span style="font:400 13px/1 var(--fs);color:var(--muted,#6b6152)">Iowan Old Style</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:110px;font:600 10.5px/1 var(--fm)">SIZE</span><span style="flex:1;height:2px;background:var(--rule,rgba(0,0,0,.2));position:relative"><span style="position:absolute;left:44%;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--accent,#c8341f);border:2px solid var(--ink,#16130f)"></span></span><span style="font:600 11px/1 var(--fm);color:var(--muted,#6b6152)">19px</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:110px;font:600 10.5px/1 var(--fm)">LINE SPACING</span><span style="flex:1;height:2px;background:var(--rule,rgba(0,0,0,.2));position:relative"><span style="position:absolute;left:60%;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--accent,#c8341f);border:2px solid var(--ink,#16130f)"></span></span><span style="font:600 11px/1 var(--fm);color:var(--muted,#6b6152)">1.62</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:110px;font:600 10.5px/1 var(--fm)">READING WIDTH</span><span style="flex:1;height:2px;background:var(--rule,rgba(0,0,0,.2));position:relative"><span style="position:absolute;left:70%;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--accent,#c8341f);border:2px solid var(--ink,#16130f)"></span></span><span style="font:600 11px/1 var(--fm);color:var(--muted,#6b6152)">62ch</span></div>
+          </div>
+          <p style="margin:0 0 8px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">WORDS OF CHRIST</p>
+          <div role="group" style="display:flex;border:2px solid var(--ink,#16130f);width:fit-content;margin-bottom:18px">
+            <span style="padding:9px 12px;font:700 10px/1 var(--fm);letter-spacing:.06em;background:var(--accent,#c8341f);color:var(--onAccent,#fff)">RED + MARK</span>
+            <span style="padding:9px 12px;font:700 10px/1 var(--fm);letter-spacing:.06em;border-left:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">MARK ONLY</span>
+            <span style="padding:9px 12px;font:700 10px/1 var(--fm);letter-spacing:.06em;border-left:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">OFF</span>
+          </div>
+          <p style="margin:0 0 8px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">LIVE PREVIEW</p>
+          <div style="border:2px solid var(--ink,#16130f);padding:14px 16px;background:var(--panel,#fffaf0)">
+            <p style="margin:0;font:400 19px/1.62 var(--fs);color:var(--ink,#16130f)">From that time Jesus began to preach, and to say, <span style="border-left:4px double var(--woc,#a8231a);padding-left:7px;color:var(--woc,#a8231a)">Repent: for the kingdom of heaven is at hand.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isFirstrun }}">
+    <div style="width:1440px;height:900px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--desk,#c9bda5);background-image:radial-gradient(var(--dot,rgba(0,0,0,.14)) 1px,transparent 1.3px);background-size:6px 6px;border:var(--bw,3px) solid var(--ink,#16130f)">
+      <div style="width:560px;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));padding:30px 34px">
+        <div style="display:flex;gap:6px;margin-bottom:18px"><span style="width:26px;height:6px;background:var(--accent,#c8341f)"></span><span style="width:26px;height:6px;background:var(--rule,rgba(0,0,0,.2))"></span><span style="width:26px;height:6px;background:var(--rule,rgba(0,0,0,.2))"></span></div>
+        <p style="margin:0 0 8px;font:600 9.5px/1.4 var(--fm);letter-spacing:.14em;color:var(--muted,#6b6152)">CARD 1 OF 3</p>
+        <p style="margin:0 0 14px;font:400 40px/1.02 var(--fd);letter-spacing:.02em;text-transform:uppercase;color:var(--ink,#16130f)">Everything stays on this device</p>
+        <p style="margin:0 0 22px;font:400 17px/1.55 var(--fs);color:var(--ink,#16130f);text-wrap:pretty">No account, no server, no internet connection required. Manna works fully offline, and your notes never leave your device unless you export them.</p>
+        <div style="border:2px dashed var(--ink,#16130f);padding:12px 14px;margin-bottom:22px">
+          <p style="margin:0;font:400 14px/1.55 var(--fs);color:var(--ink,#16130f)">Manna is a study aid, not a substitute for your physical Bible. Always verify Scripture and study material against your physical Bible.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <button style="min-height:44px;padding:0 18px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8);font:700 11px/1 var(--fm);letter-spacing:.08em;cursor:pointer">NEXT</button>
+          <span style="flex:1"></span>
+          <button data-act="screen" data-screen="desk" style="min-height:44px;padding:0 14px;border:0;background:transparent;color:var(--muted,#6b6152);font:700 10px/1 var(--fm);letter-spacing:.08em;cursor:pointer;text-decoration:underline">SKIP TO SCRIPTURE</button>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isBackup }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Backup &amp; Restore</span>
+        <span style="flex:1"></span>
+        <button style="min-height:34px;padding:0 13px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">CREATE BACKUP</button>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 480px;gap:0">
+        <div style="overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="border:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5));padding:12px 14px;display:flex;align-items:center;gap:14px">
+            <div style="flex:1"><p style="margin:0 0 3px;font:400 18px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Full backup · 2026-08-28</p><p style="margin:0;font:600 10px/1.4 var(--fm);color:var(--muted,#6b6152)">312 MB · PERSONAL DATA + SETTINGS + 6 MODULES · ENCRYPTED</p></div>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:6px 8px;background:var(--accent2,#1b5e9c);color:#fff">VERIFIED</span>
+          </div>
+          <div style="border:2px solid var(--ink,#16130f);padding:12px 14px;display:flex;align-items:center;gap:14px">
+            <div style="flex:1"><p style="margin:0 0 3px;font:400 18px/1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Personal data only · 2026-08-14</p><p style="margin:0;font:600 10px/1.4 var(--fm);color:var(--muted,#6b6152)">18 MB · NOTES, HIGHLIGHTS, BOOKMARKS · NOT ENCRYPTED</p></div>
+            <span style="font:700 9.5px/1 var(--fm);letter-spacing:.06em;padding:6px 8px;border:2px solid var(--ink,#16130f);color:var(--ink,#16130f)">VERIFIED</span>
+          </div>
+        </div>
+        <div style="border-left:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0);overflow:auto;padding:16px 18px">
+          <p style="margin:0 0 4px;font:600 9px/1 var(--fm);letter-spacing:.12em;color:var(--muted,#6b6152)">RESTORE PREVIEW</p>
+          <p style="margin:0 0 12px;font:400 22px/1.1 var(--fd);letter-spacing:.03em;text-transform:uppercase;color:var(--ink,#16130f)">Full backup · 2026-08-28</p>
+          <p style="margin:0 0 4px;font:600 10.5px/1.5 var(--fm);color:var(--ink,#16130f)">CONTENTS · 6 modules, 48 notes, 12 highlight collections, settings</p>
+          <p style="margin:0 0 12px;font:600 10.5px/1.5 var(--fm);color:var(--ink,#16130f)">SPACE REQUIRED · 312 MB of 1.8 GB available</p>
+          <div style="border:2px solid var(--warn,#f2b705);background:rgba(242,183,5,.14);padding:10px 12px;margin-bottom:14px">
+            <p style="margin:0;font:700 11px/1.5 var(--fm);color:#6b5300">3 CONFLICTS · newer local notes exist on 3 verses also present in this backup.</p>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:14px">
+            <button style="flex:1;min-height:46px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10.5px/1.3 var(--fm);letter-spacing:.04em;cursor:pointer">MERGE<br><span style="font-weight:400;font-size:9px;opacity:.8">keeps both, newer wins on conflicts</span></button>
+            <button style="flex:1;min-height:46px;border:2px solid var(--ink,#16130f);background:var(--ink,#16130f);color:var(--paper,#f6ecd8);font:700 10.5px/1.3 var(--fm);letter-spacing:.04em;cursor:pointer">REPLACE<br><span style="font-weight:400;font-size:9px;opacity:.8">removes current library first</span></button>
+          </div>
+          <p style="margin:0;font:600 10px/1.5 var(--fm);color:var(--muted,#6b6152)">Replace creates an emergency recovery backup first. Failure leaves your existing library untouched.</p>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isCompare }}">
+    <div style="width:1440px;height:900px;display:flex;flex-direction:column;background:var(--paper,#f6ecd8);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh,10px 10px 0 rgba(0,0,0,.55));overflow:hidden">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--panel,#fffaf0)">
+        <span style="font:400 17px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--ink,#16130f)">Comparison</span>
+        <span style="font:700 9px/1 var(--fm);letter-spacing:.1em;padding:5px 8px;border:2px solid var(--ink,#16130f);background:var(--accent,#c8341f);color:var(--onAccent,#fff)">MATTHEW 4:16 · 4 SOURCES</span>
+        <span style="flex:1"></span>
+        <button style="min-height:34px;padding:0 13px;border:2px solid var(--ink,#16130f);background:transparent;color:var(--ink,#16130f);font:700 10px/1 var(--fm);letter-spacing:.06em;cursor:pointer">+ ADD SOURCE</button>
+      </div>
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr 60px;gap:12px;padding:14px">
+        <section style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+          <div style="padding:8px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)"><span style="font:400 14px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--headInk,#fff)">KJV</span></div>
+          <div style="flex:1;overflow:auto;padding:12px"><p style="margin:0;font:400 17px/1.6 var(--fs);color:var(--ink,#16130f)">The people which sat in darkness saw great light; and to them which sat in the region and shadow of death light is sprung up.</p></div>
+        </section>
+        <section style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--accent,#c8341f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+          <div style="padding:8px 10px;border-bottom:var(--bw,3px) solid var(--accent,#c8341f);background:var(--accent,#c8341f);display:flex;align-items:center;gap:6px"><span style="font:400 14px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--onAccent,#fff)">Matthew Henry, Concise</span><span style="font:700 8.5px/1 var(--fm);letter-spacing:.06em;padding:3px 5px;background:var(--onAccent,#fff);color:var(--accent,#c8341f);margin-left:auto">FOCUSED</span></div>
+          <div style="flex:1;overflow:auto;padding:12px"><p style="margin:0 0 6px;font:600 9px/1.4 var(--fm);letter-spacing:.1em;color:var(--muted,#6b6152)">EDITORIAL NOTE — NOT SCRIPTURE</p><p style="margin:0;font:400 15px/1.6 var(--fs);color:var(--ink,#16130f)">The light does not arrive somewhere else and summon the people to it; it rises where they already sit.</p></div>
+        </section>
+        <section style="display:flex;flex-direction:column;min-height:0;background:var(--panel,#fffaf0);border:var(--bw,3px) solid var(--ink,#16130f);box-shadow:var(--sh2,5px 5px 0 rgba(0,0,0,.5))">
+          <div style="padding:8px 10px;border-bottom:var(--bw,3px) solid var(--ink,#16130f);background:var(--head,#16130f)"><span style="font:400 14px/1 var(--fd);letter-spacing:.05em;text-transform:uppercase;color:var(--headInk,#fff)">Matthew Henry, Complete</span></div>
+          <div style="flex:1;overflow:auto;padding:12px"><p style="margin:0 0 6px;font:600 9px/1.4 var(--fm);letter-spacing:.1em;color:var(--muted,#6b6152)">EDITORIAL NOTE — NOT SCRIPTURE</p><p style="margin:0;font:400 15px/1.6 var(--fs);color:var(--ink,#16130f)">Formerly they sat in darkness, a case of extreme misery; the gospel comes to them as a great light, without their seeking...</p></div>
+        </section>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:8px">
+          <span style="writing-mode:vertical-rl;font:700 10px/1 var(--fm);letter-spacing:.1em;color:var(--muted,#6b6152)">+1 MORE, COLLAPSED</span>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
    </div>
    </div>
   </div>
@@ -594,7 +906,8 @@ class Component extends DCLogic {
   DOTS = { galilee:[26,24], nazareth:[20,66], capernaum:[56,33] };
   BOOKS = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
   COUNTS = [50,40,27,36,34,24,21,4,31,24,22,25,29,36,10,13,10,42,150,31,12,8,66,52,5,48,12,14,3,9,1,4,7,3,3,3,2,14,4,28,16,24,21,28,16,16,13,6,6,4,4,5,3,6,4,3,1,13,5,5,3,5,1,1,1,22];
-  SIZES = { desk:[1440,900], pinned:[1440,900], tablet:[1024,790], phone:[414,872], home:[414,872], reading:[1240,860] };
+  SIZES = { desk:[1440,900], pinned:[1440,900], tablet:[1024,790], phone:[414,872], home:[414,872], reading:[1240,860],
+            search:[1440,900], notes:[1440,900], library:[1440,900], settings:[1440,900], firstrun:[1440,900], backup:[1440,900], compare:[1440,900] };
 
   PRESETS = {
     default:{ leftW:300, rightW:372, left:['xref','people'], right:['commentary','word','atlas'], name:'DEFAULT' },
@@ -881,6 +1194,8 @@ class Component extends DCLogic {
       stageStyle:{ width:size[0]+'px', height:size[1]+'px', transform:'scale('+scale+')', transformOrigin:'top left', flex:'none' },
       isDesk: s.screen==='desk'||s.screen==='pinned', isTablet:s.screen==='tablet', isPhone:s.screen==='phone',
       isHome: s.screen==='home', isReading: s.screen==='reading',
+      isSearch: s.screen==='search', isNotes: s.screen==='notes', isLibrary: s.screen==='library',
+      isSettings: s.screen==='settings', isFirstrun: s.screen==='firstrun', isBackup: s.screen==='backup', isCompare: s.screen==='compare',
       selLabel: this.ref(s.verse).toUpperCase(),
       followSummary: pinnedNames.length ? (pinnedNames.length + ' PANE(S) PINNED · ' + pinnedNames.join(', ').toUpperCase()) : 'ALL PANES FOLLOWING SCRIPTURE',
       comRef:this.ref(comV), comBody:this.COM[comV],

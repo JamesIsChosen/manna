@@ -17,8 +17,8 @@
     {"path":"docs/01-spec/product-specification.md","source_digest":"ac45071a5e6959e05df502fb2c65e36ffe907c953dc0bfe61e81d0f6335f94fa"},
     {"path":"docs/01-spec/engineering-specification.md","source_digest":"03b9db70ea3a394201b0cf56e161bca639fe1c9e7bde08353fca44d86bd5cbe4"},
     {"path":"docs/05-development/ROADMAP.md","source_digest":"360482b6ddb86e300dd29569515ecbbfbbe1e34652800f40b1cb810de714375e"},
-    {"path":"docs/05-development/packets/P0.1-offline-security.md","source_digest":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
-    {"path":".markdown-machine/history/35e1125f9d8ec953e19de5679648bfabdbcead0dbe3227cd3e01db25476086f2/tasks/P0.2-OFFLINE-SECURITY.md","source_digest":"51e861ac9f39f2de2868afe08840eb18def5818b5c5ad2657e3e88b5f3310014"}
+    {"path":"docs/01-spec/p0.1-implementation-packet.md","source_digest":"098a87e4719cc9b8b21fd484fe23f8a098bd01c0d9bdfc2b4cd9e72c642786c5"},
+    {"path":".markdown-machine/history/2162e3e9e0f4d11c80d553f6bea54207fdaa46116ceff42f9cd5a549c7608a15/tasks/P0.2-OFFLINE-SECURITY.md","source_digest":"414e96eda36c8ab102f3d01d2d1341bf760121f80dad86751a998cacbed17b5c"}
   ],
   "subtree_context": [],
   "exact_path_context": [],

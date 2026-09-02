@@ -17,7 +17,7 @@
     {"path":"docs/01-spec/product-specification.md","source_digest":"ac45071a5e6959e05df502fb2c65e36ffe907c953dc0bfe61e81d0f6335f94fa"},
     {"path":"docs/01-spec/engineering-specification.md","source_digest":"03b9db70ea3a394201b0cf56e161bca639fe1c9e7bde08353fca44d86bd5cbe4"},
     {"path":"docs/01-spec/design-reference/Study Desk.dc.html","source_digest":"2669e33b2fc6cc9775eb7ace181e683fc639c6c6febceafe5d6f55b6956b5b05"},
-    {"path":".markdown-machine/history/35e1125f9d8ec953e19de5679648bfabdbcead0dbe3227cd3e01db25476086f2/tasks/V1-UI-UX-DESIGN.md","source_digest":"b88458acc10a00af3687fecc239c630828cd01aa39b0ed35c8c9226e277e2547"}
+    {"path":".markdown-machine/history/2162e3e9e0f4d11c80d553f6bea54207fdaa46116ceff42f9cd5a549c7608a15/tasks/V1-UI-UX-DESIGN.md","source_digest":"73ec8ceb0a6ed2c0d1f5babab942a123ec7673be1302b59390d94ab24ff60e57"}
   ],
   "subtree_context": [],
   "exact_path_context": [],

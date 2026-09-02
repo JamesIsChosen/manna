@@ -83,3 +83,14 @@ rewrite is permitted.
 This is an author-created adoption packet. It does not manufacture an
 independent acceptance result. One independent final finding-closure review
 remains required; the successor must not be merged by this task.
+
+## F5 correction
+
+The current V1 UI/UX and P0.2 Task contracts bind their historical project
+context to the exact retained `2162e3e9…` namespace, using the retained Task
+digests recorded by `HISTORY-MANIFEST.md`. The P0.2 Task's pre-existing P0.1
+context was also corrected to the existing source path
+`docs/01-spec/p0.1-implementation-packet.md` and its exact digest. An explicit
+validation pass resolves every `project_context`, `subtree_context`, and
+`exact_path_context` entry for both current Tasks and compares the bytes to its
+declared `source_digest`.

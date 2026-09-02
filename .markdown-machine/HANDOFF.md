@@ -5,7 +5,7 @@
   "authoritative": false,
   "project_id": "manna",
   "basis_head_ref": {"ref":"sha256:04c44cd76887dc551d9247553056c0821338df683b5534105e3ac9ae0da02da4","path":".markdown-machine/authority/authority-transition-task-v1-ui-ux.md"},
-  "basis_repository_commit": "ac3c0c00be62a41e120c44de14b613d41fdac1e4",
+  "basis_repository_commit": "c8661bb5dfde8c3c0ea3db78c9af76ad2749dc05",
   "authority_epoch": 0,
   "sequence": 5,
   "origin_ref": {"ref":"sha256:d024da6aa0eed41153a71a190012a61139a47c62882dcc797f784e74a8dd0554","path":".markdown-machine/ORIGIN.md"},
@@ -22,7 +22,7 @@
   "convergence_remaining": {"manna-product-work":0,"historical_reusable":0},
   "repository_sync": "REPOSITORY_SYNCED",
   "next_lawful": "HUMAN_APPEARANCE_APPROVAL_PENDING",
-  "generated_at_closeout": "2026-09-02T15:42:48Z",
+  "generated_at_closeout": "2026-09-02T17:42:31Z",
   "lifecycle_node_id": "DESIGN_VERIFICATION"
 }
 ---

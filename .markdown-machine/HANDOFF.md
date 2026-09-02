@@ -5,7 +5,7 @@
   "authoritative": false,
   "project_id": "manna",
   "basis_head_ref": {"ref":"sha256:926a0ccb32d5730c06884a9bacd5af9bed3f5d5414df257434f8be3f4248a42a","path":".markdown-machine/authority/authority-transition-task-v1-ui-ux.md"},
-  "basis_repository_commit": "018284a7099bdb08943ed4d77b19376165ada62e",
+  "basis_repository_commit": "d8266d6fcf4d8e37cebd81a12c44d59e69aade0c",
   "authority_epoch": 0,
   "sequence": 5,
   "origin_ref": {"ref":"sha256:887c23761c533ba7435df823fcdd4d453385095e15a93b72ad3e5c40880315ef","path":".markdown-machine/ORIGIN.md"},
@@ -20,7 +20,7 @@
   "human_action_required": "Obtain human appearance approval, then receive an explicit Product Freeze request before implementation.",
   "review_barrier": [],
   "convergence_remaining": {"manna-product-work":0,"historical_reusable":0},
-  "repository_sync": "LOCAL_AHEAD_REMOTE",
+  "repository_sync": "REPOSITORY_SYNCED",
   "next_lawful": "Obtain human appearance approval; then request explicit Product Freeze before implementation.",
   "generated_at_closeout": "2026-09-01T00:00:00Z",
   "lifecycle_node_id": "DESIGN_VERIFICATION"

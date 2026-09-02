@@ -1,33 +1,31 @@
 ---
 {
-  "record_type": "PROJECT_ORIGIN",
+  "record_type": "DISTRIBUTION_ORIGIN",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "project_id": "manna",
-  "distribution_digest": "b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7",
-  "source_attachment": "/home/james/Downloads/Markdown-Machine-v0.3.0.zip",
-  "source_status": "PINNED_FOR_REACQUISITION"
+  "machine_name": "Markdown Machine",
+  "machine_version": "0.6.0",
+  "source_transport": "GIT_REPOSITORY",
+  "source_identity": "JamesIsChosen/markdown-machine@v0.6.0",
+  "content_set_digest": "66af7c3dd03a24dd41945e40b028c96fc925a9c610d6a1f751192d718c60eeb3",
+  "compatibility_family": "MARKDOWN-MACHINE-V0-6",
+  "enforcement_profile": "MM-ENFORCEMENT/1",
+  "governing_sources": [
+    {"path":"project-runtime/RECORD-GRAMMAR.md","sha256":"71b4666f81f973472e98ddac4e17501933eeb2db8447a3d3372fa1030f7e4040"},
+    {"path":"project-runtime/GOVERNING-RECORD-CONTRACTS.md","sha256":"cc4122c8c06157a7f2346c5166a9c3267633368ac1f5a5ce400b266841972118"},
+    {"path":"project-runtime/RECOVERY-CONTRACTS.md","sha256":"9cf67e56cdb1a7ab2a2534e802bf0a531dc0da7a6664eb86b0391806b066d2c1"},
+    {"path":"project-runtime/AUTHORITY-EVALUATOR.md","sha256":"5567d443ca71dfa2d60df941ab72a57c3273864d24a4a6917dd91b9222dd3b04"},
+    {"path":"project-runtime/HUMAN-CONTROL.md","sha256":"ad9dd45d856cbfa07442c7a32986af29332863bce975c2ad839ca6732d56cdf1"},
+    {"path":"bootstrap/GENESIS-ADMISSION.md","sha256":"1bc787fdcd524032145576621af7cb635034ccaacb1516a0d3b94538d0e83d5e"}
+  ],
+  "selected_capability_sources": [
+    {"capability_id":"software-product","path":"project-runtime/capabilities/software-product.md","sha256":"26eaf260c6a79d8067e3b9d7b1b8520fce7db48c02125114bdea5ff19e529ab6"}
+  ],
+  "git_commit": "9248215bb7be844c268403228cd5f3a231363834",
+  "git_tree": "79cf2800f17c57a5a2d419d862dd58ee329c2236"
 }
 ---
+# Markdown Machine v0.6.0 origin
 
-# Manna origin and reacquisition
-
-Manna is compiled from Markdown Machine v0.3.0. The exact distribution digest is:
-
-`b1c01eeaf4039feae1fbc135ef0fcaf481b48cb4d29a3f75b459c3dee6cba0f7`
-
-The active project runtime is pinned to the universal runtime digest `aa13cb5c05bf8a8a137ac85c602c45908c317836cb1367b8ff831d6274294a4f`. The selected Software / Product Development runtime is pinned to `9df586bcece12a000be14421579069ad9137d49385993f758f6f2b6484fec97e`.
-
-The project is self-contained after materialization. The ZIP is origin evidence and reacquisition input only; runtime operation and cold resume do not depend on it. No automatic synchronization with a later Markdown Machine release is implied. A future capability or semantic expansion requires fresh trusted source reacquisition and a new governed compilation.
-
-## Compiler pins
-
-| compiler semantic source | digest |
-| --- | --- |
-| `project-compiler/COMPILED-PROJECT-MANIFEST-SPEC.md` | `edc78f73334f4ccb7096df865b9f1fe642b9aa86fd9eb03aae51cdf4f8a6fcad` |
-| `project-compiler/05-OUTPUT-PLAN-AND-PUBLICATION.md` | `57146175e1c3ac4b1e7ec62c7acc04c11bc923aed169d800511f912ca42f4eed` |
-| `project-compiler/06-ORIGIN-AND-REACQUISITION.md` | `02b4fa611361a44996128b3af5e626967f39b37804341c43070d1fddad2ab3e9` |
-| `project-compiler/07-REPOSITORY-BINDING-AND-CLOSEOUT.md` | `4e03acde6d4f22fef950df46604278ec50630b33c66441306b929dff65e409e0` |
-
-`machine-source/`, `project-compiler/`, `project-runtime/`, `bootstrap/`, and `verification/` remain distribution-only and are not project runtime roots.
+This origin is bound to the exact released lightweight tag, not to the
+repository default branch.

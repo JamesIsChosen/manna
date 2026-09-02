@@ -2,128 +2,243 @@
 {
   "record_type": "PROJECT_RUNTIME_EXPORT",
   "schema_version": 1,
-  "machine_name": "Markdown Machine",
-  "machine_version": "0.3.0",
   "title": "Universal Project Runtime Export",
   "project_output_eligible": true,
   "output_role": "UNIVERSAL_RUNTIME_SOURCE"
 }
 ---
+# Universal Project Runtime
 
-# Universal Project Runtime Export
+This is the compact universal narrative exported into a child project's
+`.markdown-machine/RUNTIME.md`. It describes the rules whose exact structured
+definitions live in the six canonical contracts. It is not a template factory
+and cannot be used to relax a contract.
 
-This is the compact, lossless universal governance runtime intended to be compiled into a child project's `.markdown-machine/RUNTIME.md`.
+## 1. Authority and records
 
-It is **not** a generic source directory to copy. The compiler may specialize project metadata, but must preserve all applicable semantics below.
+Only an admitted current `AUTHORITY_TRANSITION` supplies positive governance.
+Genesis is admitted by the selected bootstrap profile; it cannot be created by
+project records. Ordinary authority is single-parent. A fork is unresolved
+until an explicit `AUTHORITY_FORK_RESOLVE` establishes one canonical winner and
+a new epoch. Files, timestamps, repository state, observations, evidence,
+reviews, handoffs, inbox items, or model output never manufacture authority.
 
-## 1. Authority
+Authority records are strict Markdown records with JSON front matter. UTF-8,
+LF, no BOM, one JSON object, duplicate-key rejection, canonical numbers, valid
+Unicode scalars, exact typed references, closed predicates/operators, and
+unknown-field/op rejection are mandatory. A record is an inert candidate until
+it is admitted by the current law; a candidate cannot authorize its own
+admission.
 
-Only admitted/current AuthorityTransitions supply positive project governance currentness. Handoffs, state summaries, timestamps, Inbox items, evidence, reviews, resource/effect records, and external observations cannot create positive authority.
+Human statements are captured before the transition that cites them and remain
+immutable. Their provenance is never rewritten or reclassified. Human control
+semantics are defined by `HUMAN-CONTROL.md`; unresolved human intent belongs to
+the human, while derivable mechanics belong to the agent.
 
-Governing contracts are compiled as inert candidates under current Authority A, exact-digest-bound by an admitted Authority B, and only then may govern. Post-publication receipts/currentness observations may prove B usable but are external evidence and cannot alter B's semantic authority.
+## 2. Human control
 
-Genesis is admitted from a pre-chain bootstrap trust event committed to the selected Markdown Machine artifact/profile. Project records cannot self-authorize their own genesis.
+Humans use ordinary language for project goals, stopping, continuing, and
+machine migration. No reserved command, magic phrase, version word, or token is
+required. The agent classifies language using the current conversation and
+recovered state, then records the exact statement. A request to continue
+substantive work while stopped supplies semantic RESUME intent, but the
+admitted RESUME transition must still release the barrier. Read-only status
+questions do not release STOP. A clear request to use a selected candidate
+distribution supplies migration approval only after exact candidate binding;
+comparison or conditional language does not.
 
-Ordinary authority transitions are single-parent. Fork recovery uses the narrowly defined multi-parent resolution/cutover semantics below.
+## 3. Capabilities and execution
 
-## 2. Structured records
+Capability availability is not capability activation. A capability is selected
+only for a distinct governed objective and is activated through its admitted
+binding and operation floors. Skills are bounded procedures, not authority.
 
-Machine-bearing Markdown uses strict JSON front matter (`SMF/1`): UTF-8, LF, no BOM, one JSON object, duplicate keys forbidden, no YAML aliases/tags/implicit typing. Structured strings must decode to Unicode scalar values; unpaired surrogate escapes are rejected. Machine-critical integers represented as JSON numbers must be canonical base-10 integers within ±(2^53−1); wider/exact decimal values use schema-defined canonical strings. Freeform Markdown body cannot expand or override structured machine authority.
+Markdown Machine is provider-, model-, platform-, tool-, language-,
+methodology-, and vendor-neutral. Recover accepted intent, constraints,
+existing state, risks, resources, and evidence; discover viable strategies; and
+choose the best justified project-specific strategy inside the human authority
+envelope. Do not infer a stack or provider from examples or tool availability.
+Material mechanics belong in project strategy state with their evidence and
+re-evaluation triggers.
 
-Schema evaluation uses the exact project-pinned Markdown Machine schema profile/compatibility family; unknown or incompatible schema semantics fail closed for governing use.
+## 4. Lifecycle, intent, inbox, and work
 
-## 3. Human intent and interview
-
-Human authority governs unresolved intent; agents govern mechanics. Every new project performs safe discovery, universal intent interview, capability-specific interview only for credible capabilities, and frontier-sufficient intent completeness. Do not ask for facts safely discoverable. Do not repeat already answered intent. Resume does not restart the universal interview merely because agent/session changed.
-
-Exact human statements remain immutable provenance. Agent interpretation becomes current only through admitted authority.
-
-## 4. Capabilities
-
-The universal runtime is capability-neutral. Capability availability does not imply project activation. Capability composition does not imply authority or credential composition. ACTIVE means eligible for exact Task-level OperationContracts, not blanket permission.
-
-Skills/procedures and cross-cutting concerns do not become capabilities merely because related work occurs.
-
-## 5. Lifecycle and horizon
-
-Project lifecycle is a revisioned capability-composed graph. Changed accepted intent/capability/currentness invalidates only causally affected downstream state; preserve unaffected history/work and resume from earliest still-valid node.
-
-Run Horizon is current human-authorized progress boundary. “Finish/end to end” does not automatically authorize public, destructive, payment, external-communication, credential, physical, or other consequential effects without established intent/effect authority.
-
-## 6. Inbox/change control
-
-Thought/request receipt is candidate input, not Task authority. Required route:
+Intent is accepted through an immutable `INTENT_BASELINE`. Inbox material is
+candidate input, never Task authority:
 
 ```text
-Inbox → impact → accepted intent/authority → lifecycle revision → Task authorization → execution
+Inbox → impact → accepted intent → lifecycle revision → Task authorization → execution
 ```
 
-A major change returns to the earliest affected lifecycle frontier; unaffected accepted work remains reusable.
+The lifecycle is a revisioned capability-composed graph. A changed intent,
+capability, or currentness fact invalidates only causally affected state. The
+Run Horizon is a current human-authorized boundary; “finish” never silently
+authorizes public, destructive, payment, physical, credential, or other
+consequential effects.
 
-## 7. Tasks/Attempts/Workers
+`TASK_CONTRACT` revisions are immutable and Task identity is stable. Only
+`TASK_AUTHORIZE` and `TASK_CANCEL` mutate the Task map; cancellation leaves a
+tombstone. `RESULT_ACCEPT` is linkage-only. An Attempt requires the exact
+current non-tombstoned Task plus all current preflight checks. A handoff
+verification fast path never substitutes for Attempt preflight.
 
-TaskIdentity is stable objective identity. TaskContractRevision is immutable exact Task semantics. Attempt binds an authorized Task revision to exact Worker/endpoint/environment execution. New Worker/model/provider/session/worktree/handoff does not create a new objective or convergence budget.
+## 5. Context and canonical targets
 
-Children require governed ChildTasks and inherit parent/root authority/budget floors. No free recursive spawning.
+Stored paths are canonical logical paths: project-relative components joined by
+ASCII `/`, with no empty, `.`, or `..` component, leading/trailing separator,
+normalization, or host case folding. POSIX and Windows host locators are
+adapters that first prove one relative logical locator; an absolute host path
+is never the governing identity. Ambiguous aliases or multiple plausible
+logical identities block.
 
-## 8. Convergence
+The runtime accepts exactly one caller-declared locator syntax. A
+`CANONICAL_LOGICAL` locator is validated directly; `POSIX_RELATIVE_HOST` uses
+`/` as separator and rejects leading `/`, empty components, `..`, NUL, or an
+unproved project-relative path; `WINDOWS_RELATIVE_HOST` treats `/` and `\\` as
+separators and rejects drive, UNC, device, leading-separator, empty, `..`, or
+invalid-scalar forms. Both adapters join validated components with `/` and then
+apply the canonical logical-path rule. Physical symlinks, junctions, mounts,
+hard links, and case aliases may locate bytes but cannot rewrite logical
+ancestry; ambiguity blocks.
 
-Every unresolved objective lineage has one ConvergenceRoot with finite multidimensional capacity. Reservations precede commencement. Uncertain commencement does not earn free refund. Same-objective continuation after exhaustion remains same root and requires admitted finite extension.
+Task applicability is exactly `PROJECT`, `SUBTREE`, or `EXACT_PATH`. Exact
+context is bound as `{path, source_digest}`. Transformed context is bound
+through a `CONTEXT_REPRESENTATION` carrying exact provenance. Component-prefix
+matching is deterministic and sibling/cousin context is excluded unless an
+admitted reference requires it. Explicit references are resolved in a finite
+visited-set closure; cycles stop, duplicates do not amplify authority, and
+unresolved required references fail closed. No filename, proximity, search
+ranking, glob, embedding, or host behavior creates applicability.
 
-Concurrency accounting and rollback continuity are separate. Restoring old local Markdown must never mint autonomous capacity. After crash/restart/restore/cross-copy recovery, previously authorized residual capacity is reusable only with exact/continuity-qualified accounting or a protected proof of safe remaining capacity. A lower bound on consumption detects stale history but does not calculate spendable capacity. If old reusable capacity cannot be proven, it is zero usable. New human-governed post-recovery extensions form separate finite capacity tranches and do not reconstruct unknown historical residue.
+## 6. Convergence, review, resources, and effects
 
-## 9. Context and skills
+Each objective lineage has one finite multidimensional `CONVERGENCE_ROOT`.
+Reservations precede commencement. `COMMITTED` and uncertain reservations
+remain charged until a qualifying release or commit; exhaustion requires a
+new human-governed finite extension. After restore or cross-copy recovery,
+unknown reusable capacity is zero; continuity is keyed by convergence root and
+continuity epoch.
 
-Context is routed, not accumulated. Delivery classes: MANDATORY_NOW, AVAILABLE_ON_DEMAND, EXCLUDED. Fidelity classes: EXACT, LOSSLESS_STRUCTURAL, REVERSIBLE_PROJECTION, DERIVED_EXPLORATORY. Mandatory authority/security/ROE/currentness semantics cannot be summarized away. Child/reviewer context is purpose-compiled; no wholesale parent-context inheritance.
+Review requests identify immutable artifact subjects or typed subject records,
+and required evidence is typed. Reviewer independence covers the dimensions
+required by the ReviewPurpose; unknown independence makes a reviewer
+ineligible. Author scratch and unrelated context are excluded.
 
-Skills are procedures, not authority. Load only skills applicable to Task/capability/purpose. A skill cannot expand scope, lower security/review floors, mint convergence, or override STOP.
+Every operation proves its enforcement requirement vector. Evidence is
+deny-only eligibility evidence, not authority. Under `SERIAL_PORTABLE/v1`, a
+serial resource floor needs no artificial resource-fencing assessment; stronger
+or project-specific floors retain their reservation and proof requirements.
+Significant external effects use a write-ahead EffectClaim. Unknown effect
+outcomes remain unknown and are never blindly replayed. Secrets remain external
+references.
 
-## 10. Review independence
+## 7. STOP and recovery
 
-ReviewPurpose selects an IndependenceProfile across authorship, cognitive session, author-private exposure, workspace, tool/cache state, prior remediation exposure, provider/model/endpoint where required. Unknown required independence makes reviewer ineligible. Orchestrator may provision reviewer but cannot manufacture independent judgement.
+STOP denies new substantive work immediately. Graceful STOP permits only safe
+preservation, reconciliation, and recovery; immediate external STOP crosses no
+new intentional external-effect boundary. Recovery-critical records are
+deny-only and preserve uncertainty. Clean closeout requires recoverable
+authority, lifecycle/horizon, capabilities, inbox, Tasks/Attempts,
+convergence, effects/resources, blockers, meaningful transient state, and next
+legal route without prior chat. A clean worktree alone is not closeout proof.
 
-## 11. Enforcement/resources
+## 8. Handoff
 
-Every governing operation must prove the required Enforcement Requirement Vector. Evidence of enforcement is deny-only/eligibility evidence, not positive project authority. Repository prose cannot upgrade mechanical guarantees.
+`HANDOFF.md` is a non-authoritative, one-screen orientation projection. Its
+front matter is exactly `HANDOFF_PROJECTION`, schema version `1`,
+`authoritative: false`, and the fields defined by the governing contract:
+project/head basis, epoch/sequence, origin and manifest refs, STOP state and
+barrier, lifecycle, horizon, selected capabilities, current Tasks, human
+actions, review barriers, remaining convergence, repository-sync class, next
+lawful route, and `generated_at_closeout`. Its body contains no record contents,
+history, task-scope copy, effect/resource lists, or non-derived fields.
 
-Resource observation is not ownership. Operations requiring exclusivity need a real reservation/fence or serialization; otherwise block/handoff.
+The five bounded checks are: the basis head resolves and is durable; no valid
+transition descends from it; STOP reduction matches; the repository commit
+basis is local HEAD or differs only outside the governed namespace; and
+currentness passes the repository rules. Any failure regenerates the
+projection by full recovery. No AuthorityTransition, Task, or Attempt may
+reference a handoff.
 
-## 12. External effects
+## 9. Repository persistence and currentness
 
-Significant external effects use write-ahead EffectClaim identity before commencement. Unknown outcome becomes `EXTERNAL_EFFECT_UNKNOWN`; never blind replay. Secrets remain external references, not Markdown bytes.
+Repository/Git state proves visibility and durability only; it is never
+positive authority. A `REPOSITORY_BINDING` declares provider, identity,
+persistence ref, policy, effect classification, and `writer_model`.
 
-## 13. STOP/recovery
+An authority file absent from the durable persistence-ref commit is an inert
+candidate. Local HEAD detached from or inconsistent with that ref yields
+`AUTHORITY_CURRENTNESS_UNKNOWN`. Structural replay from bootstrap Genesis over
+durable admitted children yields one singleton head, an exact unresolved fork
+set, or no provable lineage. A local-only binding is sufficient with
+`SINGLE_WRITER`.
 
-Human STOP contracts future authority immediately. GRACEFUL STOP begins no new substantive work and permits only safe preservation/reconciliation. IMMEDIATE EXTERNAL STOP crosses no new intentional external-effect boundary. Unproven child/effect state remains explicit uncertainty.
+With `PUSH_ON_BOUNDED_CLOSEOUT`, obtain a fresh session observation before
+substantive work. `REPOSITORY_SYNCED` is current; `LOCAL_AHEAD_REMOTE` is
+current only for `SINGLE_WRITER`; remote-ahead, diverged, unknown, or blocked
+states deny substantive execution. Reconcile without force and re-run
+structural replay; remote-fetched children can therefore expose a fork. A
+failed push leaves the same locally-ahead classification and writes no failure
+record. Fork resolution additionally requires a non-peer enforcement proof of
+canonical single-winner cutover and a fresh synced observation containing the
+resolution record. `LATE_PRE_CUTOVER_BRANCH` evidence cannot revive authority.
 
-Clean continuation means positive authority, lifecycle/horizon, capabilities, Inbox, Tasks/Attempts, convergence, children/effects, partial working state, blockers, and next legal route can all be recovered without prior chat.
+## 10. Migration, history, and adoption
 
-## 14. Authority forks and epochs
+`KERNEL_MIGRATE` is an ordinary single-parent cutover. Stage candidate bytes as
+inert data, recover the old state, exact-bind the candidate Origin and
+KernelManifest, derive a finite complete plan, validate preservation and
+barriers, admit one coherent binding replacement, and then remove obsolete
+current-only bytes. If the exact candidate Origin and Manifest are already
+current with no drift, return `NO_MIGRATION_REQUIRED`.
 
-Ordinary authority is linear within an epoch. A detected unresolved fork blocks positive work. Recovery may use a special multi-parent canonical `AUTHORITY_FORK_RESOLVE` under stronger publication guarantees. Resolution establishes a new authority epoch/cutover. After cutover, later-discovered transitions from an earlier epoch that are not ancestors of the resolution are historical `LATE_PRE_CUTOVER_BRANCH` evidence; they may create effect/reconciliation uncertainty but cannot revive old positive authority.
+At a boundary, compare old and candidate governing maps. Retain only changed or
+removed validation contracts—Record Grammar, Governing Records, Recovery,
+Authority, Genesis, and old selected capability exports—under
+`history/<old-content-set-digest>/`, byte-identically, with a history manifest.
+Narrative, compiler, verification, and other current-only files are not
+retained. Historical closure is non-current and cannot authorize work.
 
-Epoch numbering: ProjectGenesis epoch 0 sequence 0; ordinary successor retains epoch and increments sequence; fork resolution uses `max(parent epochs)+1`, sequence 0; successors then increment within that epoch. Epoch/sequence never select authority by themselves.
+The candidate-shape rule prevents schema evolution from stranding future
+successors. A v0.6 ordinary migration resolves candidate grammar and governing
+registry bytes only from the fixed Origin source paths
+`project-runtime/RECORD-GRAMMAR.md` and
+`project-runtime/GOVERNING-RECORD-CONTRACTS.md`, checks their Origin-bound
+digests and record types, and uses them for candidate shape validation only.
+Every authority, predecessor, human approval, source membership, barrier,
+preservation, and old-current question remains under the old law. A future
+distribution that removes either fixed path rejects on candidate-shape
+resolution and uses governed adoption where eligible.
 
-## 15. Repository persistence and graceful closeout
+Authority dispatch for an existing subject first probes bytes for an own law.
+An own-law singleton tries `KERNEL_MIGRATE`; a shape-only rejection may be
+adoption-eligible with `PROVABLE_UNDER_RETIRED_LAW`, while any barrier,
+authority, structure, trust, approval, preservation, or incompatibility failure
+rejects adoption. A fork is resolved under its own law first. A subject with no
+law is evaluated by the candidate and may yield `NO_PROVABLE_LINEAGE`, allowing
+adoption with `HISTORICAL_UNVERIFIED` status. If the old law can admit the
+candidate, adoption is rejected.
 
-Repository persistence is a universal continuity mechanic, not a capability. When the project has an established canonical repository remote, project-local governance contains an exact RepositoryBinding defining provider/repository identity, governed persistence ref, synchronization policy, remote-currentness method, and known push side effects.
+Adoption creates the sole new epoch-0/sequence-0 Genesis for a new positive
+lineage and binds an `EXTERNAL_SUBJECT` with exact historical identity. It
+retains the entire pre-adoption governance tree byte-identically under
+`history/<identity-digest>/`; the historical Genesis is provenance only. Old
+law evaluators are retained only for `PROVABLE_UNDER_RETIRED_LAW`. Historical
+statements and outcomes are imported as provenance or intent items, never as
+new review results. Open Tasks, convergence, lifecycle, capabilities, and
+repository binding are compiled prospectively and require current human
+confirmation. Adoption never releases STOP, resets review/convergence state, or
+repairs past authority.
 
-For GitHub-backed projects using `PUSH_ON_BOUNDED_CLOSEOUT`, ordinary bounded completion, reaching the requested horizon, handoff/pause, and graceful `Stop` require the intended durable local state to be committed/checkpointed as project policy allows, the canonical remote fetched/read, safe non-force publication of the governed persistence ref performed when needed, and fresh remote-head readback proving exact commit equality before claiming `REPOSITORY_SYNCED`/`STOPPED_SYNCED`. A checkpoint commit does not imply acceptance, integration, or completion.
+## 11. Distribution boundary and recovery
 
-Push does not imply merge. Never force-push or rewrite history merely to satisfy closeout. If the remote is ahead/diverged, credentials are missing, currentness is unknown, or pushing the selected ref would trigger an unauthorized deployment/publication/message/destructive effect, preserve the local state and record the exact sync blocker.
-
-An explicit `Stop immediately. Do not perform another external action.` forbids repository network synchronization performed solely for closeout; project state must record `EXTERNAL_STOP_PROHIBITS_SYNC` or the exact known pending relationship.
-
-Repository synchronization classifications include `REPOSITORY_SYNCED`, `LOCAL_AHEAD_REMOTE`, `REMOTE_AHEAD_LOCAL`, `REMOTE_DIVERGED`, `REMOTE_SYNC_UNKNOWN`, `REMOTE_SYNC_BLOCKED`, `EXTERNAL_STOP_PROHIBITS_SYNC`, and `NO_CANONICAL_REMOTE`. These are evidence/currentness projections, not positive authority.
-
-## 16. External currentness
-
-Mutable external facts are observations with freshness requirements, not project authority. Refresh only facts needed for next governing operation. Old observations remain history, not current truth.
-
-## 17. Handoff
-
-Project exposes one current human-facing handoff projection. A stale/copy handoff must revalidate project identity, authority head, lifecycle/Task/root/currentness before governing action. Handoff is navigation, never authority.
-
-## 18. Migration/origin
-
-Project pins Markdown Machine origin, compatibility family, runtime export, and capability source digests. No auto-sync. New capabilities or semantic expansion may require trusted source reacquisition. Existing self-contained active work does not depend on “latest Markdown Machine.”
+The distribution can be selected as an archive or authenticated Git source;
+both are reduced to the exact ContentSetDigest, with Git additionally pinning
+repository identity, commit, and tree. The child exports only the exact
+contracts, runtime, `COMPILED_MANIFEST` closure, selected capability semantics,
+and actual project state. `COMPILED-MANIFEST.md` is validated under
+`MM-GOVERNING-RECORDS/1#contracts.COMPILED_MANIFEST`; it is compilation metadata, not a
+seventh governing contract or authority source.
+It does not contain distribution, compiler, verification, source, or factory
+roots. Cold recovery uses `.markdown-machine/HANDOFF.md` and exact compiled
+contracts, not prior chat, hidden state, or agent-invented semantics.

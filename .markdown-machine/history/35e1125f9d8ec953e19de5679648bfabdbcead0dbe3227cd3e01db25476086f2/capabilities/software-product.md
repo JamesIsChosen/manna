@@ -2,12 +2,14 @@
 {
   "record_type": "CAPABILITY_RUNTIME_EXPORT",
   "schema_version": 1,
+  "machine_name": "Markdown Machine",
+  "machine_version": "0.5.1",
   "title": "Software / Product Development Runtime Export",
   "project_output_eligible": true,
   "capability_id": "software-product",
   "materialization_rule": "SELECTED_CAPABILITY_ONLY",
-  "operation_contract_schema_ref": "MM-GOVERNING-RECORDS/1#contracts.OPERATION_CONTRACT",
-  "operation_floor_profile_id": "MM-GOVERNING-RECORDS/1#floors",
+  "operation_contract_schema_ref": "GOVERNING-RECORD-CONTRACTS/v2#OPERATION_CONTRACT",
+  "operation_floor_profile_id": "OPERATION-FLOORS/v2",
   "operation_contract_floors": [
     {
       "operation_family": "DISCOVERY",
@@ -101,13 +103,13 @@
       ]
     }
   ],
-  "authoritative_operation_floor_source": "MM-GOVERNING-RECORDS/1#floors",
+  "authoritative_operation_floor_source": "project-runtime/OPERATION-FLOOR-VOCABULARY.md#OPERATION-FLOORS/v2",
   "declared_effect_classes": [
     "DEPLOYMENT",
     "PUBLIC_RELEASE",
     "REPOSITORY_WRITE"
   ],
-  "floor_satisfaction_rule": "EXACT_MATRIX_AND_EFFECT_SET_RELATION_FROM_MM-GOVERNING-RECORDS/1#floors"
+  "floor_satisfaction_rule": "EXACT_MATRIX_AND_EFFECT_SET_RELATION_FROM_OPERATION-FLOORS/v2"
 }
 ---
 # Runtime export rule

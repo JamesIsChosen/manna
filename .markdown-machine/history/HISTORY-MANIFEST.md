@@ -133,6 +133,10 @@
     {
       "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/authority/kernel-manifest-manna.md",
       "sha256": "5f7c47443953d2ee0f3f8169f55f35d7eb35ea63da0e4e29c9fa8b40eb5c5ef6"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/REPOSITORY.md",
+      "sha256": "0a0c6c4cce4968a72d38e8930c467639b4c1f04032764f3d290d56d98bd4c624"
     }
   ]
 }

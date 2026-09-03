@@ -35,6 +35,9 @@ legacy bridge, or fabricated historical Task/Attempt/review was created.
   untouched.
 - Changed v0.6.1 validation contracts are retained byte-identically under
   `.markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/`.
+- The prior Origin and KernelManifest are also retained there because immutable
+  pre-migration authority statements and Genesis references must remain
+  resolvable during source-free recovery.
 - The former root `AGENTS.md` is retained there as historical evidence. The
   active root file is now only a thin MM router and carries no governance state.
 

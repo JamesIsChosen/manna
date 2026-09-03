@@ -125,6 +125,14 @@
     {
       "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/legacy/AGENTS.md",
       "sha256": "1729fb748ba4974be62334af574d64834f573fe09bdaab0de043ca0d265e5ebd"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/ORIGIN.md",
+      "sha256": "d024da6aa0eed41153a71a190012a61139a47c62882dcc797f784e74a8dd0554"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/authority/kernel-manifest-manna.md",
+      "sha256": "5f7c47443953d2ee0f3f8169f55f35d7eb35ea63da0e4e29c9fa8b40eb5c5ef6"
     }
   ]
 }

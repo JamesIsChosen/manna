@@ -109,10 +109,28 @@
     {
       "path": ".markdown-machine/history/2162e3e9e0f4d11c80d553f6bea54207fdaa46116ceff42f9cd5a549c7608a15/tasks/V1-UI-UX-DESIGN.md",
       "sha256": "73ec8ceb0a6ed2c0d1f5babab942a123ec7673be1302b59390d94ab24ff60e57"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/contracts/AUTHORITY-EVALUATOR.md",
+      "sha256": "5567d443ca71dfa2d60df941ab72a57c3273864d24a4a6917dd91b9222dd3b04"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/contracts/GOVERNING-RECORD-CONTRACTS.md",
+      "sha256": "cc4122c8c06157a7f2346c5166a9c3267633368ac1f5a5ce400b266841972118"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/contracts/RECOVERY-CONTRACTS.md",
+      "sha256": "5945ac74c62555e2e52f51e33f66c5b176ba96a8225ebaececa2a1df51e5bf79"
+    },
+    {
+      "path": ".markdown-machine/history/aeacf0faf04cb515acf6c5451f96be381e592bc558ce9bbde17fd88ec4ab8c2c/legacy/AGENTS.md",
+      "sha256": "1729fb748ba4974be62334af574d64834f573fe09bdaab0de043ca0d265e5ebd"
     }
   ]
 }
 ---
 # Manna retained history manifest
 
-This manifest records the exact byte-preserved pre-adoption governance tree.
+This manifest records the exact byte-preserved pre-adoption governance tree and
+the changed v0.6.1 validation contracts plus retired host router retained at
+the v0.7.0 migration boundary.

@@ -5,7 +5,7 @@
   "authoritative": false,
   "project_id": "manna",
   "basis_head_ref": {"ref":"sha256:2d85b5e349ce676fc7c6cbbfe84431b62f05f897280eae0d74501c6734b26e41","path":".markdown-machine/authority/authority-transition-kernel-migrate-v070.md"},
-  "basis_repository_commit": "426acfd0f3bc26ad4846ed78a8296cb5aa0b1310",
+  "basis_repository_commit": "60d10f037704206f6097da24797c43e0e22d275b",
   "authority_epoch": 0,
   "sequence": 6,
   "origin_ref": {"ref":"sha256:4a824f5b1e5b76fd4ea1d29d712db2e82b9a0b80e595b21f9cbe1f88109681bc","path":".markdown-machine/ORIGIN.md"},
@@ -22,7 +22,7 @@
   "convergence_remaining": {"manna-product-work":0,"historical_reusable":0},
   "repository_sync": "REMOTE_SYNC_UNKNOWN",
   "next_lawful": "REPOSITORY_RECOVERY",
-  "generated_at_closeout": "2026-09-03T05:35:52Z",
+  "generated_at_closeout": "2026-09-03T05:39:16Z",
   "lifecycle_node_id": "DESIGN_VERIFICATION"
 }
 ---

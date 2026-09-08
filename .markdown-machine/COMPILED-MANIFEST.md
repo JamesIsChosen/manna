@@ -4,7 +4,7 @@
   "schema_version": 1,
   "project_id": "manna",
   "compiled_manifest_id": "manna-v010-compiled-closure",
-  "distribution_origin_ref": {"ref":"sha256:910fb59e5ef205a9ee16776bb0c02a54e7ef2ccb473a2990171660284215e15b","path":".markdown-machine/authority/distribution-origin-v010.md"},
+  "distribution_origin_ref": {"ref":"sha256:12c3e1c7c5729a34545cea92ed4d92ffbbf74e3f64630e332c6c25be1ddf04db","path":".markdown-machine/authority/distribution-origin-v010.md"},
   "runtime_export": {"path":".markdown-machine/RUNTIME.md","source_path":"project-runtime/RUNTIME.md","source_digest":"b82f830d2cb85c84cb5252c44b6aa85c7e88fb0447ef49ba3e288e044da22533"},
   "contract_exports": [
     {"path":".markdown-machine/contracts/RECORD-GRAMMAR.md","contract_id":"MM-RECORD-GRAMMAR/1","source_path":"project-runtime/RECORD-GRAMMAR.md","source_digest":"47c61d1aa92f492afd0419e961d51777058f9148ff90b2355d7ee57d73e34e3d"},
@@ -21,7 +21,7 @@
   "forbidden_distribution_roots": ["bootstrap","project-compiler","project-runtime","verification","machine-source","record-factory"],
   "closure_status": "COMPLETE",
   "revision": 2,
-  "repository_binding_ref": {"ref":"sha256:0a0c6c4cce4968a72d38e8930c467639b4c1f04032764f3d290d56d98bd4c624","path":".markdown-machine/REPOSITORY.md"}
+  "repository_binding_ref": {"ref":"sha256:2a0a6bc93bc3576cb46b49b36e31b3d4066fc7037da3332cd0f818ad8b20a56e","path":".markdown-machine/REPOSITORY.md"}
 }
 ---
 # Manna v0.10.0 compiled child closure

@@ -5,7 +5,7 @@
   "authoritative": false,
   "project_id": "manna",
   "basis_head_ref": {"ref":"sha256:41700c62ab68d151ed0be5f07f384fef809170a022d1330b72d873ed3c992b2f","path":".markdown-machine/authority/authority-transition-task-v1-ui-ux-r2.md"},
-  "basis_repository_commit": "187cd0a7d4280465a46e4802f944cd27a3a91866",
+  "basis_repository_commit": "c71ec0443ba5a4a3f5d59e383c0e19b03256f374",
   "authority_epoch": 0,
   "sequence": 11,
   "origin_ref": {"ref":"sha256:d6d8502f21500410e8fd694b73ef5c202812b6ab512a448c6aa7bbbbb398dc8d","path":".markdown-machine/ORIGIN.md"},
@@ -19,14 +19,14 @@
   ],
   "review_barrier": [],
   "convergence_remaining": {"manna-product-work":0},
-  "repository_sync": "REMOTE_SYNC_UNKNOWN",
-  "next_lawful": "REPOSITORY_RECOVERY",
-  "generated_at_closeout": "2026-09-26T19:23:40Z",
+  "repository_sync": "REPOSITORY_SYNCED",
+  "next_lawful": "CONVERGENCE_EXHAUSTED",
+  "generated_at_closeout": "2026-09-26T19:40:25Z",
   "lifecycle_node_id": "DESIGN_VERIFICATION"
 }
 ---
 # Manna handoff
 
-The v0.10.2.4 kernel and software-product capability migration are staged as
-one durable successor. Repository readback and final closeout projection remain
-required before this handoff is current.
+The v0.10.2.4 kernel, capability migration, lifecycle rebinding, and replacement
+Task reviews are admitted and synchronized. Product work remains blocked by the
+preserved zero convergence capacity; no earlier upgrade path is current.

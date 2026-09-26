@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manna V1 iPad interactive mock</title>
+<style>
+:root{--ink:#17130f;--paper:#f7f0df;--panel:#fffaf0;--muted:#716653;--rule:#c9baa1;--red:#c83725;--blue:#17558c;--gold:#f1b72c;--shadow:8px 8px 0 rgba(0,0,0,.34);--serif:Georgia,'Times New Roman',serif;--sans:'Arial Narrow',Arial,sans-serif}
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:#d8ccba;color:var(--ink);font-family:var(--serif);background-image:radial-gradient(#aa9d89 1px,transparent 1px);background-size:5px 5px}
+button,select,input,textarea{font:inherit;color:inherit} button,select{min-height:40px}
+.page{max-width:1260px;margin:auto;padding:20px}.label{font:700 11px/1 var(--sans);letter-spacing:.13em;text-transform:uppercase}
+.mast{display:flex;align-items:center;gap:18px;padding:16px 18px;background:var(--ink);color:var(--paper);border:3px solid #000;box-shadow:var(--shadow)}
+.mast h1{margin:0;font:400 24px/1 var(--serif);letter-spacing:.08em}.mast p{margin:0;color:#cabda9}.preview-tools{margin-left:auto;display:flex;gap:7px}.preview-tools button{border:2px solid var(--paper);background:transparent;color:var(--paper);padding:0 12px;cursor:pointer}.preview-tools button[aria-pressed=true]{background:var(--gold);color:var(--ink)}
+.screen-tabs{display:flex;margin-top:18px;border:3px solid var(--ink);background:var(--panel);box-shadow:5px 5px 0 rgba(0,0,0,.3);overflow:auto}.screen-tabs button{border:0;border-right:2px solid var(--ink);background:transparent;padding:0 18px;cursor:pointer}.screen-tabs button[aria-selected=true]{background:var(--red);color:#fff}
+.device-wrap{padding:24px 0 5px;overflow:auto}.device{width:1024px;height:768px;margin:auto;border:14px solid #17130f;border-radius:28px;background:var(--paper);box-shadow:14px 16px 0 rgba(0,0,0,.38);overflow:hidden;display:flex;flex-direction:column;transition:width .2s,height .2s}
+.device.portrait{width:768px;height:1024px}.status{height:25px;display:flex;align-items:center;padding:0 17px;background:#f4e8d2;font:700 10px/1 var(--sans);letter-spacing:.08em}.status span:last-child{margin-left:auto}
+.appbar{display:flex;align-items:center;gap:12px;min-height:55px;padding:7px 12px;background:var(--ink);color:var(--paper);border-bottom:3px solid #000}.brand{font:400 19px/1 var(--serif);letter-spacing:.1em}.reference{display:flex;align-items:center;gap:5px;margin-left:auto}.reference select{height:36px;min-height:36px;border:2px solid var(--paper);background:var(--panel);color:var(--ink);padding:0 7px;font:700 10px var(--sans);letter-spacing:.05em}.reference .active{height:36px;display:flex;align-items:center;padding:0 9px;background:var(--red);border:2px solid #fff;font:700 10px var(--sans);letter-spacing:.08em}
+.workspace{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.95fr);gap:10px;padding:10px;background:var(--paper)}
+.reader,.study-panel,.full-panel{min-height:0;border:3px solid var(--ink);background:var(--panel);box-shadow:4px 4px 0 rgba(0,0,0,.24)}.reader{display:flex;flex-direction:column}.reader-head,.panel-head{display:flex;align-items:center;gap:8px;min-height:43px;padding:6px 10px;background:var(--ink);color:var(--paper)}.reader-head h2,.panel-head h2{margin:0;font:400 17px/1 var(--serif);letter-spacing:.06em}.reader-head .chapter{margin-left:auto;color:#d5c8b5}.reader-scroll{flex:1;overflow:auto;padding:17px 18px 80px;scrollbar-color:var(--red) #e7dac4}.lede{margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--rule);font-style:italic;color:var(--muted)}
+.verse{position:relative;display:grid;grid-template-columns:32px 1fr;gap:5px;margin:0 -7px;padding:8px 9px;border:3px solid transparent;line-height:1.65;font-size:18px;cursor:pointer}.verse:hover{background:#f0e4ce}.verse[aria-pressed=true]{border-color:var(--red);background:#fff7e9;box-shadow:inset 5px 0 0 var(--red)}.verse-num{font:700 11px/1.5 var(--sans);color:var(--muted)}.entity{border:0;border-bottom:2px dotted var(--ink);background:transparent;padding:0;min-height:0;color:inherit;cursor:pointer}.word{border-bottom:4px double var(--red);font-weight:700}.woc{border-bottom:2px solid var(--red)}.note-dot{float:right;margin-left:6px;border:2px solid var(--red);padding:2px 4px;color:var(--red);font:700 8px var(--sans);letter-spacing:.08em}
+.selection-bar{position:absolute;left:18px;bottom:18px;display:none;align-items:center;gap:8px;padding:7px;background:var(--ink);color:var(--paper);border:3px solid #000;box-shadow:4px 4px 0 rgba(0,0,0,.3);z-index:4}.selection-bar.show{display:flex}.selection-bar button{min-height:34px;border:2px solid var(--paper);background:transparent;color:inherit;padding:0 9px;font:700 9px var(--sans);letter-spacing:.08em;cursor:pointer}.selection-bar button:hover{background:var(--gold);color:var(--ink)}
+.study-panel{display:flex;flex-direction:column}.module-tabs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid var(--ink)}.module-tabs button{min-width:0;border:0;border-right:2px solid var(--ink);background:#ede0ca;padding:0 5px;font:700 9px var(--sans);letter-spacing:.06em;cursor:pointer}.module-tabs button:last-child{border-right:0}.module-tabs button[aria-selected=true]{background:var(--red);color:#fff}.module{display:none;flex:1;min-height:0;overflow:auto;padding:14px}.module.active{display:block}.module h3{margin:0 0 7px;font:400 22px var(--serif)}.module .eyebrow{margin:0 0 10px;color:var(--muted);font:700 9px var(--sans);letter-spacing:.11em}.card{margin:0 0 12px;padding:11px;border:2px solid var(--ink);background:#fffdf6}.card a{color:var(--blue);font-weight:bold}.strong{display:inline-block;background:var(--ink);color:#fff;padding:4px 6px;font:700 10px var(--sans);letter-spacing:.08em}.greek{font-size:31px}.note-area{width:100%;min-height:150px;padding:11px;border:2px solid var(--ink);background:#fffdf6;resize:vertical}.save-note{width:100%;border:2px solid var(--ink);background:var(--red);color:#fff;font:700 10px var(--sans);letter-spacing:.1em;cursor:pointer}.toast{position:absolute;right:20px;bottom:20px;display:none;background:var(--ink);color:#fff;border:3px solid var(--gold);padding:11px 15px;z-index:8;font:700 10px var(--sans);letter-spacing:.08em}.toast.show{display:block}
+.full-panel{grid-column:1/-1;display:none;min-height:0;overflow:auto}.full-panel.active{display:flex;flex-direction:column}.full-content{padding:22px;overflow:auto}.search-box{display:flex;gap:8px}.search-box input{flex:1;min-height:44px;border:3px solid var(--ink);background:#fff;padding:0 12px}.search-box button{border:3px solid var(--ink);background:var(--red);color:#fff;padding:0 18px;font:700 10px var(--sans);letter-spacing:.08em}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.setting{padding:14px;border:2px solid var(--ink);background:#fff}.setting label{display:block;margin-bottom:8px}.setting select{width:100%;border:2px solid var(--ink);background:var(--panel);padding:0 8px}
+.bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);min-height:58px;border-top:3px solid #000;background:var(--ink)}.bottom-nav button{border:0;border-right:1px solid #6d6253;background:transparent;color:var(--paper);font:700 10px var(--sans);letter-spacing:.09em;cursor:pointer}.bottom-nav button[aria-current=page]{background:var(--red)}
+.portrait .workspace{grid-template-columns:1fr}.portrait .study-panel{position:absolute;right:10px;top:10px;bottom:10px;width:min(420px,78%);z-index:6}.portrait .reader{grid-column:1}.portrait .verse{font-size:19px}.portrait .selection-bar{bottom:16px}.portrait .module-tabs{grid-template-columns:repeat(2,1fr)}
+@media(max-width:1080px){.page{padding:10px}.device-wrap{margin:0 -10px;padding-left:10px;padding-right:10px}.mast{box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.device{transition:none}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="mast">
+    <div><h1>MANNA · V1 IPAD MOCK</h1><p class="label">Candidate for human review · desktop and mobile remain approved references</p></div>
+    <div class="preview-tools" role="group" aria-label="Preview orientation">
+      <button type="button" data-orientation="landscape" aria-pressed="true">LANDSCAPE</button>
+      <button type="button" data-orientation="portrait" aria-pressed="false">PORTRAIT</button>
+    </div>
+  </header>
+  <nav class="screen-tabs" aria-label="Mock screens">
+    <button type="button" data-screen="read" aria-selected="true">READ + STUDY</button>
+    <button type="button" data-screen="search" aria-selected="false">SEARCH</button>
+    <button type="button" data-screen="notes" aria-selected="false">NOTES</button>
+    <button type="button" data-screen="settings" aria-selected="false">SETTINGS</button>
+  </nav>
+  <div class="device-wrap">
+    <section class="device" aria-label="Manna iPad frame">
+      <div class="status"><span>9:41 · iPad</span><span>Wi‑Fi&nbsp;&nbsp;▮▮▮&nbsp;&nbsp;87%</span></div>
+      <header class="appbar">
+        <div class="brand">MANNA</div>
+        <div class="reference" aria-label="Scripture reference">
+          <select aria-label="Translation"><option>KJV PURE CAMBRIDGE</option><option>WEB</option></select>
+          <select aria-label="Book"><option>MATTHEW</option><option>MARK</option><option>LUKE</option><option>JOHN</option></select>
+          <select aria-label="Chapter"><option>4</option></select>
+          <select aria-label="Verse"><option>16</option><option>17</option></select>
+          <span class="active">ACTIVE · 4:16</span>
+        </div>
+      </header>
+      <div class="workspace">
+        <section class="reader" data-view="read">
+          <div class="reader-head"><h2>MATTHEW</h2><span class="label chapter">CHAPTER 4</span></div>
+          <div class="reader-scroll">
+            <p class="lede">Jesus leaves Nazareth for Capernaum and begins to preach.</p>
+            <p class="verse" data-verse="12" role="button" tabindex="0" aria-pressed="false"><span class="verse-num">12</span><span>Now when Jesus had heard that John was cast into prison, he departed into <button class="entity" type="button">◆ Galilee</button>;</span></p>
+            <p class="verse" data-verse="13" role="button" tabindex="0" aria-pressed="false"><span class="verse-num">13</span><span>And leaving <button class="entity" type="button">◆ Nazareth</button>, he came and dwelt in <button class="entity" type="button">◆ Capernaum</button>, which is upon the sea coast, in the borders of Zabulon and Nephthalim:</span></p>
+            <p class="verse" data-verse="14" role="button" tabindex="0" aria-pressed="false"><span class="verse-num">14</span><span>That it might be fulfilled which was spoken by Esaias the prophet, saying,</span></p>
+            <p class="verse" data-verse="15" role="button" tabindex="0" aria-pressed="false"><span class="verse-num">15</span><span>The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, <button class="entity" type="button">◆ Galilee</button> of the Gentiles;</span></p>
+            <p class="verse" data-verse="16" role="button" tabindex="0" aria-pressed="true"><span class="verse-num">16</span><span><span class="note-dot">NOTE</span>The people which sat in darkness saw great <button class="entity word" type="button">light</button>; and to them which sat in the region and shadow of death light is sprung up.</span></p>
+            <p class="verse" data-verse="17" role="button" tabindex="0" aria-pressed="false"><span class="verse-num">17</span><span><span class="note-dot">NOTE</span>From that time Jesus began to preach, and to say, <span class="woc">✝ Repent: for the kingdom of heaven is at hand.</span></span></p>
+          </div>
+        </section>
+        <aside class="study-panel" data-view="read" aria-label="Study tools">
+          <div class="panel-head"><h2>STUDY</h2><span class="label" style="margin-left:auto">FOLLOWING · MT 4:16</span></div>
+          <div class="module-tabs" role="tablist" aria-label="Study modules">
+            <button type="button" role="tab" data-module="xref" aria-selected="true">CROSS REFS</button>
+            <button type="button" role="tab" data-module="commentary" aria-selected="false">COMMENTARY</button>
+            <button type="button" role="tab" data-module="word" aria-selected="false">WORD</button>
+            <button type="button" role="tab" data-module="people" aria-selected="false">PEOPLE</button>
+          </div>
+          <section class="module active" data-module-panel="xref"><p class="eyebrow">SHOWING FOR MATTHEW 4:16</p><div class="card"><a href="#">Isa 9:2</a><p>The people that walked in darkness have seen a great light.</p></div><div class="card"><a href="#">John 8:12</a><p>I am the light of the world.</p></div><div class="card"><a href="#">Eph 5:14</a><p>Christ shall give thee light.</p></div></section>
+          <section class="module" data-module-panel="commentary"><p class="eyebrow">EDITORIAL NOTE · NOT SCRIPTURE</p><h3>Matthew 4:16</h3><p>The light does not arrive somewhere else and summon the people to it; it rises where they already sit. Isaiah's image of dawn over occupied territory is applied to Galilee.</p></section>
+          <section class="module" data-module-panel="word"><span class="strong">G5457</span> <span class="greek">φῶς</span><p class="eyebrow">PHŌS · NOUN · NEUTER · 73 OCCURRENCES</p><p>Light: the medium by which things are made visible, and by extension revelation, moral clarity, and the presence of God.</p><div class="card"><b>Related</b><p>G5458 φωστήρ<br>G5461 φωτίζω<br>G5462 φωτισμός</p></div></section>
+          <section class="module" data-module-panel="people"><p class="eyebrow">IN MATTHEW 4:16</p><h3>Light &amp; darkness</h3><div class="card"><b>TOPICS</b><p>Isaiah 9 · Galilee · Kingdom of heaven · Prophecy fulfilled</p></div></section>
+        </aside>
+        <section class="full-panel" data-view="search"><div class="panel-head"><h2>SEARCH</h2></div><div class="full-content"><div class="search-box"><input aria-label="Search Scripture" value="great light"><button type="button">SEARCH</button></div><p class="eyebrow" style="margin-top:18px">3 RESULTS · KJV PURE CAMBRIDGE</p><div class="card"><b>Matthew 4:16</b><p>The people which sat in darkness saw great light…</p></div><div class="card"><b>Isaiah 9:2</b><p>The people that walked in darkness have seen a great light…</p></div></div></section>
+        <section class="full-panel" data-view="notes"><div class="panel-head"><h2>NOTES · MATTHEW 4:16</h2></div><div class="full-content"><p class="eyebrow">SELECTION SYNCED ACROSS READ AND STUDY</p><textarea class="note-area" aria-label="Note text">The light rises where the people already sit. Compare Isaiah 9:2 and John 8:12.</textarea><button class="save-note" type="button">SAVE NOTE LOCALLY</button></div></section>
+        <section class="full-panel" data-view="settings"><div class="panel-head"><h2>SETTINGS</h2></div><div class="full-content settings-grid"><div class="setting"><label class="label" for="theme">THEME</label><select id="theme"><option>CLASSIC COMICS</option><option>GOLDEN AGE</option><option>NIGHT STUDY</option></select></div><div class="setting"><label class="label" for="type-size">READING SIZE</label><select id="type-size"><option>COMFORTABLE</option><option>LARGE</option><option>COMPACT</option></select></div><div class="setting"><b>OFFLINE FIRST</b><p>Installed Scripture and study modules remain available without a network connection.</p></div><div class="setting"><b>LOCAL DATA</b><p>Notes, highlights, layouts, and preferences stay on this device unless explicitly exported.</p></div></div></section>
+        <div class="selection-bar show" aria-live="polite"><span class="label" data-selection-label>MATTHEW 4:16</span><button type="button" data-action="highlight">HIGHLIGHT</button><button type="button" data-action="note">NOTE</button></div>
+        <div class="toast" role="status">SAVED LOCALLY</div>
+      </div>
+      <nav class="bottom-nav" aria-label="Primary navigation">
+        <button type="button" data-nav="read" aria-current="page">READ</button><button type="button" data-nav="search">SEARCH</button><button type="button" data-nav="read">STUDY</button><button type="button" data-nav="notes">NOTES</button><button type="button" data-nav="settings">SETTINGS</button>
+      </nav>
+    </section>
+  </div>
+</main>
+<script>
+const device=document.querySelector('.device');
+const showScreen=(name)=>{document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('active',el.dataset.view===name));document.querySelectorAll('.reader,.study-panel').forEach(el=>el.style.display=name==='read'?'flex':'none');document.querySelectorAll('[data-screen]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.screen===name)));document.querySelectorAll('[data-nav]').forEach(b=>b.toggleAttribute('aria-current',b.dataset.nav===name));document.querySelector('.selection-bar').classList.toggle('show',name==='read');};
+document.querySelectorAll('[data-screen],[data-nav]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen||b.dataset.nav)));
+document.querySelectorAll('[data-orientation]').forEach(b=>b.addEventListener('click',()=>{const portrait=b.dataset.orientation==='portrait';device.classList.toggle('portrait',portrait);document.querySelectorAll('[data-orientation]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));
+document.querySelectorAll('[data-module]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-module]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('[data-module-panel]').forEach(x=>x.classList.toggle('active',x.dataset.modulePanel===b.dataset.module));}));
+document.querySelectorAll('.verse').forEach(v=>{const choose=()=>{document.querySelectorAll('.verse').forEach(x=>x.setAttribute('aria-pressed','false'));v.setAttribute('aria-pressed','true');document.querySelector('[data-selection-label]').textContent='MATTHEW 4:'+v.dataset.verse;document.querySelector('.active').textContent='ACTIVE · 4:'+v.dataset.verse;};v.addEventListener('click',e=>{if(!e.target.closest('button'))choose()});v.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}})});
+document.querySelector('[data-action="note"]').addEventListener('click',()=>showScreen('notes'));
+document.querySelector('[data-action="highlight"]').addEventListener('click',e=>{e.currentTarget.textContent=e.currentTarget.textContent==='HIGHLIGHT'?'REMOVE HIGHLIGHT':'HIGHLIGHT';const active=document.querySelector('.verse[aria-pressed="true"]');active.style.background=e.currentTarget.textContent==='REMOVE HIGHLIGHT'?'#ffe58c':'';});
+document.querySelector('.save-note').addEventListener('click',()=>{const t=document.querySelector('.toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400)});
+showScreen('read');
+</script>
+</body>
+</html>

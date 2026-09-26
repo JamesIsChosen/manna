@@ -22,6 +22,20 @@
       ]
     },
     {
+      "operation_family": "DESIGN_REALIZATION",
+      "authority_floor": "CURRENT_ADMITTED_TASK_AUTHORITY",
+      "effect_floor": "REPOSITORY_WRITE",
+      "review_floor": "SELF_CHECK",
+      "resource_floor": "SERIAL",
+      "human_boundary": "HUMAN_IF_INTENT",
+      "allowed_effect_classes": [
+        "REPOSITORY_WRITE"
+      ],
+      "prohibited_effect_classes": [
+        "UNDECLARED_EFFECT"
+      ]
+    },
+    {
       "operation_family": "PRODUCT_FREEZE",
       "authority_floor": "CURRENT_ADMITTED_TASK_AUTHORITY",
       "effect_floor": "NONE",
@@ -50,7 +64,7 @@
       "authority_floor": "CURRENT_ADMITTED_TASK_AUTHORITY",
       "effect_floor": "REPOSITORY_WRITE",
       "review_floor": "SELF_CHECK",
-      "resource_floor": "PROJECT_SPECIFIC",
+      "resource_floor": "SERIAL",
       "human_boundary": "TECHNICAL_AUTONOMY",
       "allowed_effect_classes": [
         "REPOSITORY_WRITE"
@@ -102,12 +116,18 @@
     }
   ],
   "authoritative_operation_floor_source": "MM-GOVERNING-RECORDS/1#floors",
+  "resource_policy": {
+    "IMPLEMENTATION": "SERIAL_IF_NON_CONTENTING",
+    "serial_non_contention_proof": "the current Attempt is the only active Attempt in the project resource scope, its exact operation plan names no shared/project-specific resource, and a qualifying current LOCAL_MECHANICAL_PROOF, REMOTE_MECHANICAL_PROOF, or PROTECTED_ATTESTATION is bound to project, Task, OperationContract, Attempt, and resource scope; a worker declaration alone never qualifies",
+    "unknown_or_conflicting": "require a current PROJECT_SPECIFIC RESOURCE_RESERVATION and its qualifying proof; if neither is present, reject",
+    "reservation_accounting": "a serial proof never removes or reduces convergence reservations and never authorizes an effect"
+  },
   "declared_effect_classes": [
     "DEPLOYMENT",
     "PUBLIC_RELEASE",
     "REPOSITORY_WRITE"
   ],
-  "floor_satisfaction_rule": "EXACT_MATRIX_AND_EFFECT_SET_RELATION_FROM_MM-GOVERNING-RECORDS/1#floors"
+  "floor_satisfaction_rule": "OPERATION_CONTRACT_POLICY_RESOLVER_FROM_MM-GOVERNING-RECORDS/1#floors"
 }
 ---
 # Runtime export rule
@@ -134,6 +154,7 @@ Intent
  -> Product challenge/council
  -> Human product approval when required
  -> Flows/UX
+ -> Design realization (when executable evidence is needed)
  -> Design verification
  -> Product Freeze
  -> Architecture
@@ -144,7 +165,17 @@ Intent
  -> Release readiness
 ```
 
-Production implementation may not precede the capability's valid Product Freeze for the active product slice.
+Production implementation may not precede the capability's valid Product Freeze for the active product slice. `DESIGN_REALIZATION` is the bounded exception for executable design evidence; it is not production implementation and grants no Product Freeze authority.
+
+## Pre-freeze design realization
+
+A current software-product Task may bind `DESIGN_REALIZATION` before Product Freeze only when its admitted lifecycle node is UI/UX design work and the Task's `purpose`, `scope`, `prohibited_scope`, and completion conditions bound the work to a reviewable candidate UI/UX realization. The Task is the authority source. A screenshot, browser state, annotation, worker suggestion, or implemented candidate is evidence/input only and never grants or enlarges authority.
+
+Within that Task, `REPOSITORY_WRITE` may be used to make the review surface faithfully observable and interactive: HTML/CSS/layout, frontend components, visual styling, interaction and navigation behavior needed by the mock, responsive and accessibility states, animation/transitions, representative content, and iterative annotation-driven changes and rebuilds/renders. Every concrete change still must remain inside the exact current Task, accepted intent, Run Horizon, and effect relations.
+
+The Task must exclude unrelated backend implementation, production database/schema or data mutation, unrelated business logic, production integrations, credentials or external irreversible effects, release/publication, silent product-scope expansion, and lifecycle acceptance/freeze. A requested change outside the admitted design-realization Task fails closed or returns to the earliest authority stage that can lawfully decide it.
+
+Implementing, rendering, testing, or resolving annotations on the candidate UI does not admit new intent, advance the lifecycle, satisfy `PRODUCT_FREEZE`, or convert candidate design evidence into accepted product authority. The human may repeatedly inspect and annotate the executable candidate; those annotations are Task input under the already-admitted authority. Product Freeze remains a separate operation and lifecycle decision with its existing review and human-intent boundaries.
 
 ## Change control
 

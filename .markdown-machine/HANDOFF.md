@@ -5,7 +5,7 @@
   "authoritative": false,
   "project_id": "manna",
   "basis_head_ref": {"ref":"sha256:17ed911a90bdbd2d110b9c33ddd897660af5fb91c1188427df13172573e2aa0d","path":".markdown-machine/authority/authority-transition-ipad-feedback-extend.md"},
-  "basis_repository_commit": "e4a4c35720ffcdcfd388e5a61ee30344a5d74e57",
+  "basis_repository_commit": "6efc60c19ad62cbd4b08be8b4d6d9409cc333982",
   "authority_epoch": 0,
   "sequence": 16,
   "origin_ref": {"ref":"sha256:d6d8502f21500410e8fd694b73ef5c202812b6ab512a448c6aa7bbbbb398dc8d","path":".markdown-machine/ORIGIN.md"},
@@ -21,14 +21,18 @@
   "convergence_remaining": {"manna-product-work":0},
   "repository_sync": "REPOSITORY_SYNCED",
   "next_lawful": "HUMAN_DECISION_REQUIRED",
-  "generated_at_closeout": "2026-09-26T21:17:51Z",
+  "generated_at_closeout": "2026-09-27T23:36:58Z",
   "lifecycle_node_id": "DESIGN_VERIFICATION"
 }
 ---
 # Manna handoff
 
 The approved desktop and mobile mocks remain durable, digest-bound repository
-references and were not changed. The bounded iPad feedback revision is complete
-and mechanically verified in landscape and portrait. The next lawful action is
-the human's appearance review of the revised iPad candidate; it is not approved
-and Product Freeze has not advanced.
+references and were not changed. The revised iPad candidate is mechanically
+verified in landscape and portrait, and its direct-session appearance approval
+is durably captured at
+`.markdown-machine/intent/human-statement-ipad-appearance-approval.md`
+(SHA-256 `d96ff73f4718a8956d7078dec273fd62efbca4cc8216b646697debdf8403901a`).
+This approval is limited to appearance. The next lawful action is a separate,
+explicit human Product Freeze decision/request; Product Freeze has not advanced
+and production implementation remains unauthorized.

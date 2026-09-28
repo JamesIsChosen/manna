@@ -18,7 +18,7 @@ approves the appearance and then grants Product Freeze.
 
 Manna opens directly to the Reader at the user's last Scripture location. It does not open to a dashboard or issue-cover Home screen.
 
-The five primary destinations are:
+The five core product destinations are:
 
 - **Read** — the clean Scripture Reader;
 - **Search** — references, exact text, phrases, topics, remembered ideas, and Verse Finder;
@@ -26,7 +26,7 @@ The five primary destinations are:
 - **Notes** — personal study material and sessions;
 - **Library** — bundled and imported resources, importing, and library management.
 
-Settings, appearance, Backup & Restore, Trust/About, diagnostics, storage status, and help live in a secondary menu. Phones use compact bottom navigation. Larger screens use restrained application navigation.
+Settings, appearance, Backup & Restore, Trust/About, diagnostics, storage status, and help live in a secondary menu on larger screens, where Library remains a primary destination. Phones use compact bottom navigation with Read, Search, Study, Notes, and Settings; on phones, Library management is reached through Settings. Larger screens use restrained application navigation.
 
 ## 3. Reader
 

@@ -436,8 +436,10 @@ MIGRATION`, `CONFLICTS FOUND`, `INSUFFICIENT SPACE`, `FAILED CLOSED`,
 
 ## 11. Flow J — Settings, appearance, trust, storage, and diagnostics
 
-1. Open Settings from the secondary menu; it never replaces a primary
-   destination in navigation.
+1. On larger screens, open Settings from the secondary menu; it remains
+   secondary while Library remains a primary destination. On phones, open
+   Settings from the primary bottom-navigation tab; Library management is
+   reached through Settings.
 2. Appearance offers System, Light, Sepia, and Dark. Scripture typeface, size,
    line spacing, and reading width are independent controls with a live Reader
    preview.

@@ -61,7 +61,7 @@ Every flow follows these invariants:
 
 | Surface | Desktop | Tablet | Phone |
 |---|---|---|---|
-| Primary navigation | Restrained application navigation: Read, Search, Study, Notes, Library | Same destinations in a compact bar or menu | Bottom navigation: Read, Search, Study, Notes, More |
+| Primary navigation | Restrained application navigation: Read, Search, Study, Notes, Library | Same destinations in a compact bar or menu | Bottom navigation: Read, Search, Study, Notes, Settings |
 | Study | Scripture with panes beside it; panes can expand | Reader plus one focused, collapsible study pane | Reader plus a swipe-up focused drawer; no compressed columns |
 | Long work | Dismissible progress modal/inspector with persistent status | Full-screen sequence with persistent progress row | One decision per screen; progress pinned above navigation |
 | Lists and detail | List plus preview/inspector | List then focused detail | Full-screen list/detail transitions with Back |

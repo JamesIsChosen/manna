@@ -130,7 +130,7 @@ const showScreen=(name)=>{
   resizeHandle.style.display=isStudy?'block':'none';
   document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('active',el.dataset.view===name));
   document.querySelectorAll('[data-screen]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.screen===name)));
-  document.querySelectorAll('[data-nav]').forEach(b=>b.toggleAttribute('aria-current',b.dataset.nav===name));
+  document.querySelectorAll('[data-nav]').forEach(b=>{if(b.dataset.nav===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   document.querySelector('.selection-bar').classList.toggle('show',isReading);
 };
 let restoreFocus=null;

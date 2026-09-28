@@ -61,16 +61,16 @@ select{font:600 10px/1 var(--fm);letter-spacing:.05em;color:var(--ink);backgroun
 
     <div role="tablist" aria-label="Desktop screens" style="grid-column:2;grid-row:1;justify-self:center;display:flex;flex-wrap:wrap;gap:0;border:2px solid currentColor;border-radius:3px;overflow:hidden">
       <button data-act="screen" data-screen="reading" style="min-height:34px;padding:0 12px;border:0;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">READ</button>
-      <button data-act="screen" data-screen="desk" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">DESK</button>
       <button data-act="screen" data-screen="search" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">SEARCH</button>
+      <button data-act="screen" data-screen="desk" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">STUDY</button>
       <button data-act="screen" data-screen="notes" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">NOTES</button>
       <button data-act="screen" data-screen="library" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">LIBRARY</button>
-      <button data-act="screen" data-screen="settings" style="min-height:34px;padding:0 12px;border:0;border-left:2px solid currentColor;background:transparent;color:inherit;font:600 11px/1 var(--fm);letter-spacing:.1em;cursor:pointer">SETTINGS</button>
     </div>
 
     <div style="flex:1"></div>
 
-    <div role="group" aria-label="Theme" style="grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:6px">
+    <div role="group" aria-label="Theme and settings" style="grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:6px">
+      <button data-act="screen" data-screen="settings" aria-label="Open settings" style="min-height:34px;padding:0 10px;border:2px solid currentColor;background:transparent;color:inherit;font:600 9px/1 var(--fm);letter-spacing:.08em;cursor:pointer">SETTINGS</button>
       <label for="desktop-theme" style="font:600 9px/1 var(--fm);letter-spacing:.08em;opacity:.8">THEME</label>
       <select id="desktop-theme" data-act="themeSelect" aria-label="Theme" onChange="{{ onAct }}">
         <option value="classic">CLASSIC COMICS</option>
@@ -1016,7 +1016,7 @@ select{font:600 10px/1 var(--fm);letter-spacing:.05em;color:var(--ink);backgroun
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:940}}">
 class Component extends DCLogic {
-  state = { screen:'desk', theme:'classic', book:'Matthew', chapter:4, verse:16, selectedVerses:[16], strongs:'G5457', place:'capernaum',
+  state = { screen:'reading', theme:'classic', book:'Matthew', chapter:4, verse:16, selectedVerses:[16], strongs:'G5457', place:'capernaum',
             pins:{}, collapsed:{}, closedPanes:{}, modules:{bible:'kjv',xref:'xref-bundled',people:'people-bundled',harmony:'harmony-bundled',commentary:'mh-concise',word:'strongs-greek',word2:'strongs-greek',atlas:'atlas-bundled'}, enabledModules:{kjv:true,'mh-concise':true,webster:false,'notes-docx':true}, extraPanes:[], notesOpen:false, readNotesPos:null, fullPane:null, woc:'red', mode:'scroll', mpane:'commentary', drawer:true, tabletOpen:true, scale:1, noteDraft:'', userNotes:[], highlights:[], textHighlights:[], activeTextSelection:null,
             free:{xref:{x:24,y:24,w:280,h:190}, bible:{x:316,y:24,w:714,h:866}, commentary:{x:1050,y:24,w:366,h:330}, word:{x:1050,y:366,w:366,h:330}, people:{x:24,y:230,w:280,h:250}, harmony:{x:24,y:490,w:280,h:250}, atlas:{x:1050,y:708,w:366,h:168}, notes:{x:24,y:610,w:330,h:260}, word2:{x:1050,y:708,w:366,h:168}} };
 
@@ -1195,7 +1195,14 @@ class Component extends DCLogic {
       const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
       window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
     };
-    this.keys = () => {};
+    this.keys = (e) => {
+      const target = e.target && e.target.closest && e.target.closest('[role="button"]');
+      if (target && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); target.click(); return; }
+      if (e.key !== 'Escape') return;
+      const s = this.state;
+      if (s.fullPane) { e.preventDefault(); const invoker = this.lastInvoker; this.setState({ fullPane:null }, () => invoker && invoker.focus()); return; }
+      if (s.notesOpen) { e.preventDefault(); const invoker = this.lastInvoker; this.setState({ notesOpen:false, closedPanes:{ ...(s.closedPanes || {}), notes:true } }, () => invoker && invoker.focus()); }
+    };
     this.mouseup = (e) => {
       const pointerDrag = this.textDrag; this.textDrag = null;
       const selection = window.getSelection && window.getSelection();
@@ -1523,7 +1530,7 @@ class Component extends DCLogic {
       return this.setState({ closedPanes:closed, fullPane:s.fullPane === pane ? null : s.fullPane, notesOpen:pane === 'notes' ? false : s.notesOpen });
     }
     if (a==='toggleCollapse'){ const pane = el.dataset.pane; return this.setState({ collapsed:{ ...(s.collapsed || {}), [pane]:!(s.collapsed && s.collapsed[pane]) } }); }
-    if (a==='fullPane'){ const pane = el.dataset.pane; if (pane === 'bible') return this.setState({ screen:'reading', fullPane:null }); return this.setState({ fullPane:s.fullPane === pane ? null : pane, notesOpen:pane === 'notes' ? true : s.notesOpen }); }
+    if (a==='fullPane'){ this.lastInvoker = el; const pane = el.dataset.pane; if (pane === 'bible') return this.setState({ screen:'reading', fullPane:null }); return this.setState({ fullPane:s.fullPane === pane ? null : pane, notesOpen:pane === 'notes' ? true : s.notesOpen }); }
     if (a==='word') return this.setState({ strongs: el.dataset.strongs, mpane:'word', drawer:true });
     if (a==='place') return this.setState({ place: el.dataset.place, mpane:'atlas', drawer:true });
     if (a==='next'){ const v = Math.min(17, s.verse+1); return this.setState({ verse:v, selectedVerses:[v], notesOpen:true }); }

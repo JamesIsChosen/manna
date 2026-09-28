@@ -30,7 +30,7 @@ button,select,input,textarea{font:inherit;color:inherit} button,select{min-heigh
 <body>
 <main class="page">
   <header class="mast">
-    <div><h1>MANNA · V1 IPAD MOCK</h1><p class="label">Candidate for human review · desktop and mobile remain approved references</p></div>
+    <div><h1>MANNA · V1 IPAD MOCK</h1><p class="label">Approved appearance reference · Product Freeze candidate</p></div>
     <div class="preview-tools" role="group" aria-label="Preview orientation">
       <button type="button" data-orientation="landscape" aria-pressed="true">LANDSCAPE</button>
       <button type="button" data-orientation="portrait" aria-pressed="false">PORTRAIT</button>
@@ -38,10 +38,10 @@ button,select,input,textarea{font:inherit;color:inherit} button,select{min-heigh
   </header>
   <nav class="screen-tabs" aria-label="Mock screens">
     <button type="button" data-screen="read" aria-selected="true">READ</button>
-    <button type="button" data-screen="study" aria-selected="false">STUDY</button>
     <button type="button" data-screen="search" aria-selected="false">SEARCH</button>
+    <button type="button" data-screen="study" aria-selected="false">STUDY</button>
     <button type="button" data-screen="notes" aria-selected="false">NOTES</button>
-    <button type="button" data-screen="settings" aria-selected="false">SETTINGS</button>
+    <button type="button" data-screen="library" aria-selected="false">LIBRARY</button>
   </nav>
   <div class="device-wrap">
     <section class="device" aria-label="Manna iPad frame">
@@ -90,6 +90,7 @@ button,select,input,textarea{font:inherit;color:inherit} button,select{min-heigh
         </aside>
         <section class="full-panel" data-view="search"><div class="panel-head"><h2>SEARCH</h2></div><div class="full-content"><div class="search-box"><input aria-label="Search Scripture" value="great light"><button type="button">SEARCH</button></div><p class="eyebrow" style="margin-top:18px">3 RESULTS · KJV PURE CAMBRIDGE</p><div class="card"><b>Matthew 4:16</b><p>The people which sat in darkness saw great light…</p></div><div class="card"><b>Isaiah 9:2</b><p>The people that walked in darkness have seen a great light…</p></div></div></section>
         <section class="full-panel" data-view="notes"><div class="panel-head"><h2>NOTES · MATTHEW 4:16</h2></div><div class="full-content"><p class="eyebrow">SELECTION SYNCED ACROSS READ AND STUDY</p><textarea class="note-area" aria-label="Note text">The light rises where the people already sit. Compare Isaiah 9:2 and John 8:12.</textarea><button class="save-note" type="button">SAVE NOTE LOCALLY</button></div></section>
+        <section class="full-panel" data-view="library"><div class="panel-head"><h2>LIBRARY</h2></div><div class="full-content"><p class="eyebrow">INSTALLED ON THIS DEVICE</p><div class="card"><b>KJV PURE CAMBRIDGE</b><p>Scripture · installed</p></div><div class="card"><b>STUDY MODULES</b><p>Cross references, commentary, word study, and people &amp; topics.</p></div></div></section>
         <section class="full-panel" data-view="settings"><div class="panel-head"><h2>SETTINGS</h2></div><div class="settings-shell"><nav class="settings-nav" aria-label="Settings categories"><button type="button" data-settings-page="appearance" aria-selected="true">APPEARANCE</button><button type="button" data-settings-page="reading" aria-selected="false">SCRIPTURE READING</button><button type="button" data-settings-page="backup" aria-selected="false">BACKUP &amp; RESTORE</button><button type="button" data-settings-page="trust" aria-selected="false">TRUST / ABOUT</button><button type="button" data-settings-page="storage" aria-selected="false">STORAGE &amp; DIAGNOSTICS</button><button type="button" data-settings-page="help" aria-selected="false">HELP</button></nav><div class="settings-content">
           <section class="settings-page active" data-settings-panel="appearance"><h3>Appearance</h3><div class="settings-grid"><div class="setting settings-wide"><label class="label">THEME</label><div class="choice-row"><button type="button" aria-pressed="true">SYSTEM</button><button type="button" aria-pressed="false">LIGHT</button><button type="button" aria-pressed="false">SEPIA</button><button type="button" aria-pressed="false">DARK</button></div></div><div class="setting"><label class="label" for="typeface">TYPEFACE</label><select id="typeface"><option>READER SERIF</option><option>SYSTEM SANS</option><option>OPEN DYSLEXIC</option></select></div><div class="setting"><label class="label" for="type-size">READING SIZE</label><select id="type-size"><option>COMFORTABLE</option><option>LARGE</option><option>COMPACT</option></select></div><div class="setting"><label class="label" for="line-spacing">LINE SPACING</label><select id="line-spacing"><option>COMFORTABLE</option><option>OPEN</option><option>TIGHT</option></select></div><div class="setting"><label class="label" for="reading-width">READING WIDTH</label><select id="reading-width"><option>STANDARD</option><option>WIDE</option><option>NARROW</option></select></div><div class="setting settings-wide"><label class="label">WORDS OF CHRIST</label><div class="choice-row"><button type="button" aria-pressed="true">RED + MARK</button><button type="button" aria-pressed="false">MARK ONLY</button><button type="button" aria-pressed="false">OFF</button></div></div></div></section>
           <section class="settings-page" data-settings-panel="reading"><h3>Scripture Reading</h3><div class="settings-grid"><div class="setting"><label class="label" for="default-translation">DEFAULT TRANSLATION</label><select id="default-translation"><option>KJV PURE CAMBRIDGE</option><option>WEB</option></select></div><div class="setting"><label class="label" for="reading-mode">NAVIGATION</label><select id="reading-mode"><option>CONTINUOUS SCROLL</option><option>PAGE BY CHAPTER</option></select></div><div class="setting settings-wide"><label class="label">VERSE SELECTION</label><div class="choice-row"><button type="button" aria-pressed="true">FOLLOW IN STUDY</button><button type="button" aria-pressed="false">LOCK STUDY</button></div></div></div></section>
@@ -102,7 +103,7 @@ button,select,input,textarea{font:inherit;color:inherit} button,select{min-heigh
         <div class="toast" role="status">SAVED LOCALLY</div>
       </div>
       <nav class="bottom-nav" aria-label="Primary navigation">
-        <button type="button" data-nav="read" aria-current="page">READ</button><button type="button" data-nav="search">SEARCH</button><button type="button" data-nav="study">STUDY</button><button type="button" data-nav="notes">NOTES</button><button type="button" data-nav="settings">SETTINGS</button>
+        <button type="button" data-nav="read" aria-current="page">READ</button><button type="button" data-nav="search">SEARCH</button><button type="button" data-nav="study">STUDY</button><button type="button" data-nav="notes">NOTES</button><button type="button" data-nav="library">LIBRARY</button>
       </nav>
     </section>
   </div>
@@ -132,7 +133,11 @@ const showScreen=(name)=>{
   document.querySelectorAll('[data-nav]').forEach(b=>b.toggleAttribute('aria-current',b.dataset.nav===name));
   document.querySelector('.selection-bar').classList.toggle('show',isReading);
 };
-document.querySelectorAll('[data-screen],[data-nav]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen||b.dataset.nav)));
+let restoreFocus=null;
+const openRoute=e=>{restoreFocus=e.currentTarget;showScreen(e.currentTarget.dataset.screen||e.currentTarget.dataset.nav)};
+document.querySelectorAll('[data-screen],[data-nav]').forEach(b=>b.addEventListener('click',openRoute));
+document.querySelector('.appbar').insertAdjacentHTML('beforeend','<button type="button" data-nav="settings" aria-label="Open settings">SETTINGS</button>');
+document.querySelector('.appbar [data-nav="settings"]').addEventListener('click',openRoute);
 document.querySelectorAll('[data-orientation]').forEach(b=>b.addEventListener('click',()=>{const portrait=b.dataset.orientation==='portrait';device.classList.toggle('portrait',portrait);resizeHandle.setAttribute('aria-orientation',portrait?'horizontal':'vertical');document.querySelectorAll('[data-orientation]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));showScreen(currentScreen)}));
 const selectModule=(name)=>{
   activeModule=name;
@@ -159,12 +164,13 @@ resizeHandle.addEventListener('pointerdown',e=>{resizeHandle.setPointerCapture(e
 resizeHandle.addEventListener('pointermove',e=>{if(resizeHandle.hasPointerCapture(e.pointerId))setSplitFromPointer(e.clientX,e.clientY)});
 resizeHandle.addEventListener('keydown',e=>{const portrait=device.classList.contains('portrait');const relevant=portrait?['ArrowUp','ArrowDown']:['ArrowLeft','ArrowRight'];if(!relevant.includes(e.key))return;e.preventDefault();const property=portrait?'--portrait-split':'--landscape-split';const current=parseFloat(getComputedStyle(workspace).getPropertyValue(property));const decrease=e.key==='ArrowUp'||e.key==='ArrowLeft';workspace.style.setProperty(property,Math.max(35,Math.min(portrait?72:75,current+(decrease?-2:2)))+'%')});
 document.querySelectorAll('.verse').forEach(v=>{const choose=()=>{document.querySelectorAll('.verse').forEach(x=>x.setAttribute('aria-pressed','false'));v.setAttribute('aria-pressed','true');document.querySelector('[data-selection-label]').textContent='MATTHEW 4:'+v.dataset.verse;document.querySelector('.reference .active').textContent='ACTIVE · 4:'+v.dataset.verse;};v.addEventListener('click',e=>{if(!e.target.closest('button'))choose()});v.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}})});
-document.querySelector('[data-action="note"]').addEventListener('click',()=>showScreen('notes'));
+document.querySelector('[data-action="note"]').addEventListener('click',e=>{restoreFocus=e.currentTarget;showScreen('notes')});
 document.querySelector('[data-action="highlight"]').addEventListener('click',e=>{e.currentTarget.textContent=e.currentTarget.textContent==='HIGHLIGHT'?'REMOVE HIGHLIGHT':'HIGHLIGHT';const active=document.querySelector('.verse[aria-pressed="true"]');active.style.background=e.currentTarget.textContent==='REMOVE HIGHLIGHT'?'#ffe58c':'';});
 document.querySelector('.save-note').addEventListener('click',()=>flash('SAVED LOCALLY'));
 document.querySelectorAll('[data-settings-page]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-settings-page]').forEach(x=>x.setAttribute('aria-selected',String(x===button)));document.querySelectorAll('[data-settings-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.settingsPanel===button.dataset.settingsPage))}));
 document.querySelectorAll('.choice-row').forEach(row=>row.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{row.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));flash(button.textContent+' SELECTED')})));
 document.querySelectorAll('.setting button:not(.choice-row button)').forEach(button=>button.addEventListener('click',()=>flash(button.textContent+' READY')));
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const active=document.querySelector('.full-panel.active');if(!active)return;e.preventDefault();showScreen('read');if(restoreFocus){restoreFocus.focus();restoreFocus=null;}});
 syncModules();
 showScreen('read');
 </script>
